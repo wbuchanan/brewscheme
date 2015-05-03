@@ -525,13 +525,13 @@ prog def brewscheme, rclass
 			file write scheme `"system naturally_white 1"' _n
 
 			file write scheme `"graphsize 5"' _n
-			file write scheme `"graphsize x 9"' _n
-			file write scheme `"graphsize y 6"' _n
+			file write scheme `"graphsize x 5.5"' _n
+			file write scheme `"graphsize y 4"' _n
 
 			file write scheme `"numstyle 1"' _n
 			file write scheme `"numstyle grid_outer_tol 0.23"' _n
-			file write scheme `"numstyle legend_rows 1"' _n
-			file write scheme `"numstyle legend_cols 0"' _n
+			file write scheme `"numstyle legend_rows 0"' _n
+			file write scheme `"numstyle legend_cols 2"' _n
 			file write scheme `"numstyle zyx2rows 0"' _n
 			file write scheme `"numstyle zyx2cols 1"' _n
 			file write scheme `"numstyle graph_aspect 0"' _n
@@ -545,30 +545,30 @@ prog def brewscheme, rclass
 			file write scheme `"numstyle contours `pcycles'"' _n
 
 			file write scheme `"gsize medium"' _n
-			file write scheme `"gsize gap vsmall"' _n
+			file write scheme `"gsize gap tiny"' _n
 			file write scheme `"gsize text medsmall"' _n
 			file write scheme `"gsize body small"' _n
 			file write scheme `"gsize small_body vsmall"' _n
 			file write scheme `"gsize heading medlarge"' _n
 			file write scheme `"gsize subheading medium"' _n
-			file write scheme `"gsize axis_title medsmall"' _n
+			file write scheme `"gsize axis_title small"' _n
 			file write scheme `"gsize matrix_label medium"' _n
 			file write scheme `"gsize label medsmall"' _n
 			file write scheme `"gsize small_label small"' _n
-			file write scheme `"gsize matrix_marklbl vsmall"' _n
-			file write scheme `"gsize key_label medsmall"' _n
+			file write scheme `"gsize matrix_marklbl medsmall"' _n
+			file write scheme `"gsize key_label small"' _n
 			file write scheme `"gsize note vsmall"' _n
 			file write scheme `"gsize star small"' _n
 			file write scheme `"gsize text_option small"' _n
 			file write scheme `"gsize dot_rectangle third_tiny"' _n
 			file write scheme `"gsize axis_space half_tiny"' _n
-			file write scheme `"gsize axis_title_gap medsmall"' _n
+			file write scheme `"gsize axis_title_gap minuscule"' _n
 			file write scheme `"gsize tick tiny"' _n
 			file write scheme `"gsize minortick third_tiny"' _n
 			file write scheme `"gsize tickgap half_tiny"' _n
 			file write scheme `"gsize notickgap tiny"' _n
 			file write scheme `"gsize tick_label small"' _n
-			file write scheme `"gsize tick_biglabel medsmall"' _n
+			file write scheme `"gsize tick_biglabel small"' _n
 			file write scheme `"gsize minortick_label vsmall"' _n
 			file write scheme `"gsize filled_text medsmall"' _n
 			file write scheme `"gsize reverse_big large"' _n
@@ -576,15 +576,15 @@ prog def brewscheme, rclass
 			file write scheme `"gsize title_gap small"' _n
 			file write scheme `"gsize key_gap small"' _n
 			file write scheme `"gsize key_linespace small"' _n
-			file write scheme `"gsize star_gap tiny"' _n
+			file write scheme `"gsize star_gap minuscule"' _n
 			file write scheme `"gsize legend_colgap medium"' _n
-			file write scheme `"gsize label_gap tiny"' _n
-			file write scheme `"gsize matrix_mlblgap tiny"' _n
+			file write scheme `"gsize label_gap half_tiny"' _n
+			file write scheme `"gsize matrix_mlblgap half_tiny"' _n
 			file write scheme `"gsize barlabel_gap tiny"' _n
-			file write scheme `"gsize legend_row_gap small"' _n
+			file write scheme `"gsize legend_row_gap tiny"' _n
 			file write scheme `"gsize legend_col_gap large"' _n
-			file write scheme `"gsize legend_key_gap small"' _n
-			file write scheme `"gsize legend_key_xsize medsmall"' _n
+			file write scheme `"gsize legend_key_gap vsmall"' _n
+			file write scheme `"gsize legend_key_xsize 13"' _n
 			file write scheme `"gsize legend_key_ysize medsmall"' _n
 			file write scheme `"gsize zyx2legend_key_gap tiny"' _n
 			file write scheme `"gsize zyx2legend_key_xsize vhuge"' _n
@@ -655,15 +655,15 @@ prog def brewscheme, rclass
 			
 			// Number of ticks
 			file write scheme `"numticks_g 0"' _n
-			file write scheme `"numticks_g horizontal_major 10"' _n
-			file write scheme `"numticks_g vertical_major 10"' _n
+			file write scheme `"numticks_g major 5"' _n
+			file write scheme `"numticks_g horizontal_major 5"' _n
+			file write scheme `"numticks_g vertical_major 5"' _n
 			file write scheme `"numticks_g horizontal_minor 0"' _n
 			file write scheme `"numticks_g vertical_minor 0"' _n
 			file write scheme `"numticks_g horizontal_tmajor 0"' _n
 			file write scheme `"numticks_g vertical_tmajor 0"' _n
 			file write scheme `"numticks_g horizontal_tminor 0"' _n
 			file write scheme `"numticks_g vertical_tminor 0"' _n
-			file write scheme `"numticks_g major 10"' _n
 
 			file write scheme `"color black"' _n
 			file write scheme `"color background white"' _n
@@ -834,13 +834,14 @@ prog def brewscheme, rclass
 			file write scheme `"margin by_indiv small"' _n
 			file write scheme `"margin text vsmall"' _n
 			file write scheme `"margin textbox zero"' _n
-			file write scheme `"margin body small"' _n
-			file write scheme `"margin small_body small"' _n
-			file write scheme `"margin heading medium"' _n
-			file write scheme `"margin subheading medsmall"' _n
+			file write scheme `"margin body vsmall"' _n
+			file write scheme `"margin small_body vsmall"' _n
+			file write scheme `"margin heading vsmall"' _n
+			file write scheme `"* margin heading ".6 .6 .6 .6""' _n
+			file write scheme `"margin subheading vsmall"' _n
 			file write scheme `"margin axis_title zero"' _n
 			file write scheme `"margin label zero"' _n
-			file write scheme `"margin key_label small"' _n
+			file write scheme `"margin key_label zero"' _n
 			file write scheme `"margin text_option zero"' _n
 			file write scheme `"margin plotregion medsmall"' _n
 			file write scheme `"margin star tiny"' _n
@@ -850,12 +851,12 @@ prog def brewscheme, rclass
 			file write scheme `"margin hbargraph bargraph"' _n
 			file write scheme `"margin hboxgraph bargraph"' _n
 			file write scheme `"margin hdotgraph bargraph"' _n
-			file write scheme `"margin legend zero"' _n
-			file write scheme `"margin legend_key_region zero"' _n
-			file write scheme `"margin legend_boxmargin zero"' _n
+			file write scheme `"margin legend small"' _n
+			file write scheme `"margin legend_key_region tiny"' _n
+			file write scheme `"margin legend_boxmargin small"' _n
 			file write scheme `"margin clegend medium"' _n
-			file write scheme `"margin cleg_title medium"' _n
-			file write scheme `"margin clegend_boxmargin medium"' _n
+			file write scheme `"margin cleg_title medsmall"' _n
+			file write scheme `"margin clegend_boxmargin small"' _n
 			file write scheme `"margin key_label zero"' _n
 			file write scheme `"margin filled_textbox small"' _n
 			file write scheme `"margin filled_box zero"' _n
@@ -946,7 +947,7 @@ prog def brewscheme, rclass
 			file write scheme `"linestyle pboxlabel foreground"' _n
 			file write scheme `"linewidth thin thin"' _n
 			file write scheme `"linewidth medium medium"' _n
-			file write scheme `"linewidth p vvthin"' _n
+			file write scheme `"linewidth p vthin"' _n
 			file write scheme `"linewidth foreground none"' _n
 			file write scheme `"linewidth background none"' _n
 			file write scheme `"linewidth grid none"' _n
@@ -960,26 +961,26 @@ prog def brewscheme, rclass
 			file write scheme `"linewidth ci_area medthin"' _n
 			file write scheme `"linewidth ci2 medium"' _n
 			file write scheme `"linewidth ci2_area medthin"' _n
-			file write scheme `"linewidth histogram vvthin"' _n
+			file write scheme `"linewidth histogram vthin"' _n
 			file write scheme `"linewidth dendrogram medium"' _n
 			file write scheme `"linewidth xyline medthin"' _n
 			file write scheme `"linewidth refline medium"' _n
 			file write scheme `"linewidth refmarker medthin"' _n
 			file write scheme `"linewidth matrixmark vvthin"' _n
-			file write scheme `"linewidth dots vvthin"' _n
+			file write scheme `"linewidth dots vthin"' _n
 			file write scheme `"linewidth dot_line medthick"' _n
 			file write scheme `"linewidth dot_area medthin"' _n
-			file write scheme `"linewidth dotmark vvthin"' _n
+			file write scheme `"linewidth dotmark vthin"' _n
 			file write scheme `"linewidth plotregion vthin"' _n
 			file write scheme `"linewidth legend none"' _n
 			file write scheme `"linewidth clegend none"' _n
-			file write scheme `"linewidth pie vvthin"' _n
+			file write scheme `"linewidth pie vthin"' _n
 			file write scheme `"linewidth reverse_big thin"' _n
 			file write scheme `"linewidth sunflower thin"' _n
 			file write scheme `"linewidth matrix_plotregion thin"' _n
 			file write scheme `"linewidth text_option none"' _n
 			file write scheme `"linewidth zyx2 medium"' _n
-			file write scheme `"linewidth pbar vvvthin"' _n
+			file write scheme `"linewidth pbar vthin"' _n
 			
 			file write scheme `"connectstyle direct"' _n
 			file write scheme `"connectstyle p direct"' _n
@@ -1233,18 +1234,18 @@ prog def brewscheme, rclass
 			file write scheme `"relative_posn clegend_axispos right"' _n
 			file write scheme `"gridringstyle spacers_ring 11"' _n
 			file write scheme `"gridringstyle title_ring 7"' _n
-			file write scheme `"gridringstyle subtitle_ring 5.5"' _n
-			file write scheme `"gridringstyle caption_ring 3.5"' _n
-			file write scheme `"gridringstyle note_ring 3.5"' _n
-			file write scheme `"gridringstyle legend_ring 4"' _n
+			file write scheme `"gridringstyle subtitle_ring 6"' _n
+			file write scheme `"gridringstyle caption_ring 5"' _n
+			file write scheme `"gridringstyle note_ring 4"' _n
+			file write scheme `"gridringstyle legend_ring 3"' _n
 			file write scheme `"gridringstyle zyx2legend_ring 4"' _n
 			file write scheme `"gridringstyle clegend_ring 3"' _n
-			file write scheme `"gridringstyle by_legend_ring 4"' _n
+			file write scheme `"gridringstyle by_legend_ring 3"' _n
 			file write scheme `"gridringstyle legend_title_ring 7"' _n
-			file write scheme `"gridringstyle legend_subtitle_ring 5.5"' _n
-			file write scheme `"gridringstyle legend_caption_ring 3.5"' _n
-			file write scheme `"gridringstyle legend_note_ring 3.5"' _n
-			file write scheme `"gridringstyle clegend_title_ring 4"' _n
+			file write scheme `"gridringstyle legend_subtitle_ring 6"' _n
+			file write scheme `"gridringstyle legend_caption_ring 5"' _n
+			file write scheme `"gridringstyle legend_note_ring 3"' _n
+			file write scheme `"gridringstyle clegend_title_ring 7"' _n
 			file write scheme `"anglestyle horizontal"' _n
 			file write scheme `"anglestyle horizontal_tick horizontal"' _n
 			file write scheme `"anglestyle vertical_tick horizontal"' _n
@@ -1295,8 +1296,8 @@ prog def brewscheme, rclass
 			file write scheme `"yesno connect_missings yes"' _n
 			file write scheme `"yesno cmissings yes"' _n
 			file write scheme `"yesno pcmissings yes"' _n
-			file write scheme `"yesno extend_axes_low no"' _n
-			file write scheme `"yesno extend_axes_high no"' _n
+			file write scheme `"yesno extend_axes_low yes"' _n
+			file write scheme `"yesno extend_axes_high yes"' _n
 			file write scheme `"yesno extend_axes_full_low yes"' _n
 			file write scheme `"yesno extend_axes_full_high yes"' _n
 			file write scheme `"yesno draw_major_grid no"' _n
@@ -1515,7 +1516,6 @@ prog def brewscheme, rclass
 
 			} // End Area Graphs
 
-				
 			// Write the Bar Graph characteristics for the number of colors chosen
 			forv i = 1/`barcolors' {
 
@@ -1543,13 +1543,13 @@ prog def brewscheme, rclass
 				// Primary box plot entries
 				file write scheme `"color p`i'box "`boxcolor'""' _n
 				file write scheme `"intensity box inten`boxsaturation'"' _n
-				file write scheme `"linewidth p`i'box thin"' _n
+				file write scheme `"linewidth p`i'box medthin"' _n
 				file write scheme `"linepattern p`i'box solid"' _n
 				file write scheme `"color p`i'boxline black"' _n
 				file write scheme `"intensity box_line full"' _n
 				file write scheme `"symbol p`i'box circle"' _n
 				file write scheme `"symbolsize p`i'box medium"' _n
-				file write scheme `"linewidth p`i'boxmark vvthin"' _n
+				file write scheme `"linewidth p`i'boxmark vthin"' _n
 				// file write scheme `"color p`i'boxmarkfill "`scatcolor'""' _n
 				file write scheme `"color p`i'boxmarkline	black"' _n
 				file write scheme `"gsize p`i'boxlabel vsmall"' _n
@@ -1582,7 +1582,7 @@ prog def brewscheme, rclass
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'line `concolor'"' _n
-				file write scheme `"linewidth p`i' vvthin"' _n
+				file write scheme `"linewidth p`i' medthin"' _n
 				file write scheme `"linepattern p`i'line solid"' _n
 				file write scheme `"yesno pcmissings yes"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
@@ -1605,7 +1605,7 @@ prog def brewscheme, rclass
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'dotmarkfill "`dotcolor'""' _n
-				file write scheme `"linewidth p`i'dotmark vvthin"' _n
+				file write scheme `"linewidth p`i'dotmark vthin"' _n
 				file write scheme `"symbol p`i'dot diamond"' _n
 				file write scheme `"symbolsize p`i'dot medium"' _n
 
@@ -1658,7 +1658,7 @@ prog def brewscheme, rclass
 				file write scheme `"symbol p`i' circle"' _n
 				file write scheme `"symbolsize p`i' medium"' _n
 				file write scheme `"color p`i'markline black"' _n
-				file write scheme `"linewidth p`i'mark vvthin"' _n
+				file write scheme `"linewidth p`i'mark vthin"' _n
 				file write scheme `"color p`i'markfill "`scatcolor'""' _n
 				file write scheme `"color p`i'label black"' _n
 				file write scheme `"clockdir p`i' 0"' _n
@@ -1666,7 +1666,7 @@ prog def brewscheme, rclass
 				// Secondary entries for scatter plots
 				file write scheme `"color p`i'shade "`scatcolor'""' _n
 				file write scheme `"intensity p`i'shade inten`scatsaturation'"' _n
-				file write scheme `"linewidth p`i'other vvthin"' _n
+				file write scheme `"linewidth p`i'other vthin"' _n
 				file write scheme `"linepattern p`i'other solid"' _n
 				file write scheme `"color p`i'otherline "`scatcolor'""' _n 
 
