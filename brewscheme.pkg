@@ -2,19 +2,20 @@ d 'BREWSCHEME': a program for generating customize graph scheme files
 d
 d brewscheme is a program to facilitate Stata users developing graph schemes    
 d using research-based color palettes.  Unlike other uses of the color 		   
-d palettes developed by Brewer (see References below), this program allows 	   
-d users to specify the number of colors from any of the 35 color palettes they 
-d would like to use and allows users to mix/combine different palettes for the  
-d various graph types. 
+d palettes developed by Brewer, this program allows users to specify the number 
+d of colors from any of the 35 color palettes they would like to use and allows 
+d users to mix/combine different palettes for the various graph types.  
+d Additionally, the program also contains color palettes from other researchers 
+d as well as color palettes commonly used in graphs in the education community.
 d
-d KW: Data visualization
+d KW: Data Visualization
 d KW: Graphs
 d KW: Scheme files
-d KW: Color Theory
+d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20150428
+d Distribution-Date: 20150503
 d
 d Author: Billy Buchanan, Strategic Data Fellow, Mississippi Department of Education
 d Support: email BBuchanan@@mde.k12.ms.us

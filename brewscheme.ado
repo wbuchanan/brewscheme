@@ -4,7 +4,7 @@
 * using research-based color palettes.  Unlike other uses of the color 		   *
 * palettes developed by Brewer (see References below), this program allows 	   *
 * users to specify the number of colors from any of the 35 color palettes they *
-* would like to use and allows users to mix/combine different palettes for the  *
+* would like to use and allows users to mix/combine different palettes for the *
 * various graph types.														   *
 *                                                                              *
 * Data Requirements -														   *
@@ -17,12 +17,12 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2152                                                                     *
+*     2368                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.4
+*! v 0.0.1
 *! 03MAY2015
 
 // Drop the program from memory if loaded
@@ -67,9 +67,9 @@ prog def brewscheme, rclass
 		local ylgnbuc = 9; local ylorbrc = 9; local ylorrdc = 8; 
 		loc tableauc 20; loc fruitec 7; loc fruitac 7; loc veggiesac 7; 
 		loc veggiesec 7; loc drinksac 7; loc drinksec 7; loc brandsac 7; 
-		loc brandsec 7; loc foodec 7; loc foodac 7; loc carsac 6; loc carsec 6; 
-		loc featuresac 5; loc featuresec 5; loc activitiesac 5; 
-		loc activitiesec 5
+		loc brandsec 7; loc foodtc 7; loc foodac 7; loc carsac 6; loc carstc 6; 
+		loc featuresac 5; loc featurestc 5; loc activitiesac 5; 
+		loc activitiestc 5; loc mdebar 5; loc mdepoint 3;
 		#d cr
 		
 		// Set local macro with the acceptable palette names
@@ -2281,13 +2281,13 @@ prog def colorfile, rclass
 		char _dta[fooda7]"214 39 40"
 		
 		// Foods export selected
-		char _dta[foode1]"199 199 199"
-		char _dta[foode2]"31 119 180"
-		char _dta[foode3]"140 86 75"
-		char _dta[foode4]"152 223 138"
-		char _dta[foode5]"219 219 141"
-		char _dta[foode6]"196 156 148"
-		char _dta[foode7]"214 39 40"
+		char _dta[foodt1]"199 199 199"
+		char _dta[foodt2]"31 119 180"
+		char _dta[foodt3]"140 86 75"
+		char _dta[foodt4]"152 223 138"
+		char _dta[foodt5]"219 219 141"
+		char _dta[foodt6]"196 156 148"
+		char _dta[foodt7]"214 39 40"
 		
 		// Car Colors corresponding to brand palettes
 		char _dta[cars]"Red, Silver, Black, Green, Brown, Blue"
@@ -2301,12 +2301,12 @@ prog def colorfile, rclass
 		char _dta[carsa6]"31 119 180"
 		
 		// Car Colors export selected
-		char _dta[carse1]"214 39 40"
-		char _dta[carse2]"199 199 199"
-		char _dta[carse3]"127 127 127"
-		char _dta[carse4]"44 160 44"
-		char _dta[carse5]"140 86 75"
-		char _dta[carse6]"31 119 180"
+		char _dta[carst1]"214 39 40"
+		char _dta[carst2]"199 199 199"
+		char _dta[carst3]"127 127 127"
+		char _dta[carst4]"44 160 44"
+		char _dta[carst5]"140 86 75"
+		char _dta[carst6]"31 119 180"
 		
 		// Features corresponding to brand palettes
 		char _dta[features]"Speed, Reliability, Comfort, Safety, Efficiency"
@@ -2319,11 +2319,11 @@ prog def colorfile, rclass
 		char _dta[featuresa5]"44 160 44"
 		
 		// Features export selected
-		char _dta[featurese1]"214 39 40"
-		char _dta[featurese2]"31 119 180"
-		char _dta[featurese3]"174 119 232"
-		char _dta[featurese4]"44 160 44"
-		char _dta[featurese5]"152 223 138"
+		char _dta[featurest1]"214 39 40"
+		char _dta[featurest2]"31 119 180"
+		char _dta[featurest3]"174 119 232"
+		char _dta[featurest4]"44 160 44"
+		char _dta[featurest5]"152 223 138"
 		
 		// Activities corresponding to brand palettes
 		char _dta[activities]"Sleeping, Working, Leisure, Eating, Driving"
@@ -2336,11 +2336,11 @@ prog def colorfile, rclass
 		char _dta[activitiesa5]"214 39 40"
 		
 		// Activities export selected
-		char _dta[activitiese1]"31 119 180"
-		char _dta[activitiese2]"214 39 40"
-		char _dta[activitiese3]"152 223 138"
-		char _dta[activitiese4]"44 160 44"
-		char _dta[activitiese5]"127 127 127"
+		char _dta[activitiest1]"31 119 180"
+		char _dta[activitiest2]"214 39 40"
+		char _dta[activitiest3]"152 223 138"
+		char _dta[activitiest4]"44 160 44"
+		char _dta[activitiest5]"127 127 127"
 		
 
 		// Create values returned in macros
