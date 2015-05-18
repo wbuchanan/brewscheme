@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.1 03MAY2015}{...}
+{* *! version 0.0.1 09MAY2015}{...}
 {cmd:help brewscheme}
 {hline}
 

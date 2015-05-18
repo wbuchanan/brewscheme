@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2368                                                                     *
+*     2372                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
 *! v 0.0.1
-*! 03MAY2015
+*! 09MAY2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -525,12 +525,12 @@ prog def brewscheme, rclass
 			file write scheme `"system naturally_white 1"' _n
 
 			file write scheme `"graphsize 5"' _n
-			file write scheme `"graphsize x 5.5"' _n
-			file write scheme `"graphsize y 4"' _n
+			file write scheme `"graphsize x 9"' _n
+			file write scheme `"graphsize y 6"' _n
 
 			file write scheme `"numstyle 1"' _n
 			file write scheme `"numstyle grid_outer_tol 0.23"' _n
-			file write scheme `"numstyle legend_rows 0"' _n
+			file write scheme `"numstyle legend_rows 1"' _n
 			file write scheme `"numstyle legend_cols 2"' _n
 			file write scheme `"numstyle zyx2rows 0"' _n
 			file write scheme `"numstyle zyx2cols 1"' _n
@@ -1441,6 +1441,13 @@ prog def brewscheme, rclass
 			
 				// Define generics for contour plots
 				file write scheme `"zyx2style p`i' default"' _n
+				
+				// Define generic shade styles
+				file write scheme `"shadestyle p`i' p`i'"' _n
+				file write scheme `"shadestyle p`i'area p`i'area"' _n
+				file write scheme `"shadestyle p`i'bar p`i'bar"' _n
+				file write scheme `"shadestyle p`i'box p`i'box"' _n
+				file write scheme `"shadestyle p`i'pie p`i'pie"' _n
 			
 				// Define generic marker styles
 				file write scheme `"markerstyle p`i' p`i'"' _n
@@ -1504,14 +1511,15 @@ prog def brewscheme, rclass
 			forv i = 1/`areacolors' {
 
 				/* Area Graph Styles */
-				loc areacolor "`: char _dta[`areastyle'`i']'"
-
+				loc areacolor : char _dta[`areastyle'`i']
+				// loc linecolor : char _dta[`linestyle'`i']
+				
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'area "`areacolor'""' _n
-				file write scheme `"linewidth p`i'area medthin"' _n
+				file write scheme `"linewidth p`i'area vvthin"' _n
 				file write scheme `"linepattern p`i'area solid"' _n
-				file write scheme `"color p`i'arealine black"' _n
+				file write scheme `"color p`i'arealine "`areacolor'""' _n
 				file write scheme `"intensity p`i'area inten`areasaturation'"' _n
 
 			} // End Area Graphs
@@ -1526,7 +1534,6 @@ prog def brewscheme, rclass
 				file write scheme `"color p`i' "`barcolor'""' _n
 				file write scheme `"color p`i'bar "`barcolor'""' _n
 				file write scheme `"intensity p`i'bar inten`barsaturation'"' _n
-				file write scheme `"shadestyle p`i'bar p`i'bar"' _n
 				file write scheme `"areatyle p`i'bar p`i'bar"' _n
 				file write scheme `"seriesstyle p`i'bar p`i'bar"' _n
 				file write scheme `"color p`i'barline black"' _n
@@ -1560,7 +1567,6 @@ prog def brewscheme, rclass
 				
 				file write scheme `"linestyle p`i'box p`i'box"' _n
 				file write scheme `"linestyle p`i'boxmark p`i'boxmark"' _n
-				file write scheme `"shadestyle p`i'box p`i'box"' _n
 				file write scheme `"markerstyle p`i'box p`i'box"' _n
 				file write scheme `"seriesstyle p`i'box p`i'box"' _n
 
@@ -1574,25 +1580,28 @@ prog def brewscheme, rclass
 			} // End of Box Plots
 
 			// Write the Connected Line Plot characteristics for the number of colors chosen
-			forv i = 1/`concolors' {
+			forv i = 1/`scatcolors' {
 
 				/* Connected Line Plot Styles */
-				loc concolor black
+				loc concolor : char _dta[`linestyle'`i']
+
+				/* Scatterplots Styles */
+				loc scatcolor : char _dta[`scatstyle'`i']
 
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'line `concolor'"' _n
-				file write scheme `"linewidth p`i' medthin"' _n
-				file write scheme `"linepattern p`i'line solid"' _n
+				file write scheme `"color p`i'line "`scatcolor'""' _n
 				file write scheme `"yesno pcmissings yes"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
 
 				// Composite entries for connected plots
-				file write scheme `"linestyle p`i'connect p`i'"' _n
-				file write scheme `"linestyle p`i'mark p`i'line"' _n
 				file write scheme `"markerstyle p`i' p`i'"' _n
 				file write scheme `"seriesstyle p`i' p`i'"' _n
+				file write scheme `"linestyle p`i'connect p`i'"' _n
+				file write scheme `"linestyle p`i'mark p`i'line"' _n
+				file write scheme `"linewidth p`i' medium"' _n
+				file write scheme `"linepattern p`i'line solid"' _n
 
 			} // End Connected Graphs
 
@@ -1625,7 +1634,7 @@ prog def brewscheme, rclass
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'lineplot "`linecolor'""' _n
-				file write scheme `"linewidth p`i'lineplot medthin"' _n
+				file write scheme `"linewidth p`i'lineplot medium"' _n
 				file write scheme `"linepattern p`i'lineplot solid"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
@@ -1642,7 +1651,6 @@ prog def brewscheme, rclass
 				file write scheme `"color p`i'pie "`piecolor'""' _n
 				file write scheme `"color p`i'pieline black"' _n
 				file write scheme `"intensity pie inten`piesaturation'"' _n
-				file write scheme `"shadestyle p`i'pie p`i'pie"' _n
 				file write scheme `"areastyle p`i'pie p`i'pie"' _n
 				file write scheme `"seriesstyle p`i'pie p`i'pie"' _n
 					

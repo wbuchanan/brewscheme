@@ -15,11 +15,12 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20150503
+d Distribution-Date: 20150518
 d
 d Author: Billy Buchanan, Strategic Data Fellow, Mississippi Department of Education
 d Support: email BBuchanan@@mde.k12.ms.us
 d
+f brewcolors.ado
 f brewmeta.ado
 f brewmeta.sthlp
 f brewscheme.ado
