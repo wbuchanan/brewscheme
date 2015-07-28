@@ -1,4 +1,4 @@
-d 'BREWSCHEME': a program for generating customize graph scheme files
+d 'BREWSCHEME': a program for generating customized graph scheme files
 d
 d brewscheme is a program to facilitate Stata users developing graph schemes    
 d using research-based color palettes.  Unlike other uses of the color 		   
@@ -15,12 +15,16 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20150518
+d Distribution-Date: 20150728
 d
-d Author: Billy Buchanan, Strategic Data Fellow, Mississippi Department of Education
-d Support: email BBuchanan@@mde.k12.ms.us
+d Author: Billy Buchanan 
+d		  Data Scientist
+d		  Office of Research, Evaluation, and Assessment
+d		  Minneapolis Public Schools
+d Notes:  Originally developed as Strategic Data Fellow at the 
+d		  Mississippi Department of Education
+d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
-f brewcolors.ado
 f brewmeta.ado
 f brewmeta.sthlp
 f brewscheme.ado

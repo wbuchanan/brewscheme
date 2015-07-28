@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewmeta
-*! v 0.0.1
-*! 03MAY2015
+*! v 0.0.3
+*! 28JUL2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -35,20 +35,20 @@ prog def brewmeta, rclass
 	version 13.1
 
 	// Define the syntax structure of the program
-	syntax anything(name=palette id="palette name"), Colors(integer)		 ///   
+	syntax anything(name = palette id = "palette name"), Colors(integer)	 ///   
 		[ PROPerties PROPerties2(string asis) ]
 			
 	// Preserve the data in memory
 	preserve
 	
 		// Check for a b subdirectory in personal
-		cap confirm file `"`c(sysdir_personal)'/b"'
+		cap confirm new file `"`c(sysdir_personal)'b"'
 		
-		// If it doesn't exist create it for the user
-		if _rc != 0 {
+		// If it would be a new directory
+		if _rc == 0 {
 		
 			// Create the subdirectory
-			qui: mkdir `"`c(sysdir_personal)'/b"'
+			qui: mkdir `"`c(sysdir_personal)'b"'
 		
 		} // End IF Block for b subdirectory of personal
 		
@@ -66,7 +66,7 @@ prog def brewmeta, rclass
 			loc time `"`c(current_time)'"'
 			
 			// Read the javascript into memory
-			copy "http://www.colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
+			qui: copy "http://www.colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
 			`brewjs'.js
 			
 			// Read the data into memory
@@ -106,7 +106,7 @@ prog def brewmeta, rclass
 			drop y*
 			
 			// Restructure the data
-			reshape long colorblind print photocopy lcd, i(palette) j(colors)
+			qui: reshape long colorblind print photocopy lcd, i(palette) j(colors)
 
 			// Convert indicators to numeric values
 			qui: destring colorblind print photocopy lcd, replace
@@ -148,10 +148,10 @@ prog def brewmeta, rclass
 				tempvar `v'miss
 				
 				// Create a temporary variable to use as a marker for logic check
-				bys palette (colors): g ``v'miss' = cond(!mi(`v'), 1, 0)
+				qui: bys palette (colors): g ``v'miss' = cond(!mi(`v'), 1, 0)
 				
 				// Fill in missing values for cases where the value is constant
-				bys palette (colors): replace `v' = `v'[1] if mi(`v') &  ///   
+				qui: bys palette (colors): replace `v' = `v'[1] if mi(`v') &  ///   
 				``v'miss'[2] == 0
 			
 			} // End Loop to fill in constant missing values
@@ -243,7 +243,7 @@ prog def brewmeta, rclass
 		else {
 			
 			// Load the dataset 
-			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"'
+			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 			
 		} // End ELSE Block for existing meta file
 			
