@@ -1,11 +1,7 @@
 ********************************************************************************
 * Description of the Program -												   *
-* This program is a tool to facilitate Stata users developing graph schemes    *
-* using research-based color palettes.  Unlike other uses of the color 		   *
-* palettes developed by Brewer (see References below), this program allows 	   *
-* users to specify the number of colors from any of the 35 color palettes they *
-* would like to use and allows users to mix/combine different palettes for the *
-* various graph types.														   *
+* This program is used to check the meta data available on different visual    *
+* properties of a given color palette for a specified number of colors.		   *
 *                                                                              *
 * Data Requirements -														   *
 *     none                                                                     *
@@ -14,16 +10,19 @@
 *     none                                                                     *
 *                                                                              *
 * Program Output -                                                             *
-*     scheme-`schemename'.scheme                                               *
+*     r(paletteName[#Colors]_print) - Print friendliness indicator             *
+*     r(paletteName[#Colors]_photocopy) - Photocopier friendliness indicator   *
+*     r(paletteName[#Colors]_lcd) - LCD Viewing friendliness indicator         *
+*     r(paletteName[#Colors]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     1556                                                                     *
+*     324                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewmeta
-*! v 0.0.3
-*! 28JUL2015
+*! v 0.0.4
+*! 30JUL2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -37,6 +36,31 @@ prog def brewmeta, rclass
 	// Define the syntax structure of the program
 	syntax anything(name = palette id = "palette name"), Colors(integer)	 ///   
 		[ PROPerties PROPerties2(string asis) ]
+		
+	// Define maximum number of colors for each of the palettes
+	#d ;
+	local accentc = 8; local bluesc = 9; local brbgc = 11; local bugnc = 9; 
+	local bupuc = 9; local dark2c = 8; local gnbuc = 9; local greensc = 9; 
+	local greysc = 9; local orrdc = 9; local orangesc = 9; local prgnc = 11;
+	local pairedc = 12; local pastel1c = 9; local pastel2c = 8; local piygc = 11;
+	local pubuc = 9; local pubugnc = 9; local puorc = 11; local purdc = 9;
+	local purplesc = 9; local rdbuc = 11; local rdgyc = 11; local rdpuc = 9;
+	local rdylbuc = 11; local rdylgnc = 11; local redsc = 9; local set1c = 9;
+	local set2c = 8; local set3c = 12; local spectralc = 11; local ylgnc = 9;
+	local ylgnbuc = 9; local ylorbrc = 9; local ylorrdc = 8; 
+	#d cr
+	
+	// Make sure the number of colors specified by the user is <= maximum # of 
+	// colors available for the palette
+	if `colors' > ``palette'c' {
+	
+		// Tell the user the maximum number of colors available
+		di as err `"Only ``palette'c' colors are supported for the palette `palette'"'
+		
+		// Exit the program
+		exit
+		
+	} // End IF Block to check whether or not the number of colors are supported
 			
 	// Preserve the data in memory
 	preserve
@@ -248,7 +272,7 @@ prog def brewmeta, rclass
 		} // End ELSE Block for existing meta file
 			
 		// If all/no option specified	
-		if "`properties'" == "" | (inlist("`properties2'", "all", "")) {
+		if inlist("`properties2'", "all", "") {
 		
 			// Loop over the property types
 			foreach x in colorblind lcd photocopy print {
@@ -270,13 +294,13 @@ prog def brewmeta, rclass
 		else {
 		
 			// Count the number of words in the string
-			loc prps : word count `properties'
+			loc prps : word count `properties2'
 			
 			// Set up loop to allow the command to generalize to multiple properties
 			forv i = 1/`prps' {
 			
 				// Get the specific property value
-				loc pr`i' : word `i' of `properties'
+				loc pr`i' : word `i' of `properties2'
 				
 				// Get the characteristics
 				loc prop : char _dta[`palette'`colors'_`pr`i'']
@@ -296,7 +320,4 @@ prog def brewmeta, rclass
 		
 // End of Program
 end 		
-
-
-
 

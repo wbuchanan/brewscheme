@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.1
-*! 27JUL2015
+*! v 0.0.2
+*! 30JUL2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -69,7 +69,7 @@ prog def brewscheme, rclass
 		loc veggiesec 7; loc drinksac 7; loc drinksec 7; loc brandsac 7; 
 		loc brandsec 7; loc foodtc 7; loc foodac 7; loc carsac 6; loc carstc 6; 
 		loc featuresac 5; loc featurestc 5; loc activitiesac 5; 
-		loc activitiestc 5; loc mdebar 5; loc mdepoint 3;
+		loc activitiestc 5; loc mdebarc 5; loc mdepointc 3;
 		#d cr
 		
 		// Set local macro with the acceptable palette names
@@ -176,7 +176,8 @@ prog def brewscheme, rclass
 			"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
 			"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
 			"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 	 ///   
-			"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" == "" {
+			"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
+			"`somestyle'" == "" {
 			
 			// If missing some graph type styles must include defaults in some
 			di as err "Must include arguments for somestyle if missing graph types"
@@ -202,10 +203,10 @@ prog def brewscheme, rclass
 				!inlist("`somestyle'", `pal4') 	&							 ///   
 				!inlist("`somestyle'", `pal5') 	&							 /// 	
 				!inlist("`somestyle'", `pal6') 	&							 /// 	
-				!inlist("`allstyle'", `pal7') 	&							 /// 	
-				!inlist("`allstyle'", `pal8') 	&							 /// 	
-				!inlist("`allstyle'", `pal9') 	&							 /// 	
-				!inlist("`allstyle'", `pal10')) {
+				!inlist("`somestyle'", `pal7') 	&							 /// 	
+				!inlist("`somestyle'", `pal8') 	&							 /// 	
+				!inlist("`somestyle'", `pal9') 	&							 /// 	
+				!inlist("`somestyle'", `pal10')) {
 											
 				// Let user know valid values
 				di as err "Styles arguments must be one of: " _n `"`palettes'"'
@@ -832,11 +833,11 @@ prog def brewscheme, rclass
 			// Set the number of colors based on color parameter
 
 			// Find maximum number of colors to set the recycle parameter
-			loc pcycles = max(	`allcolors', `barcolors', `scatcolors', 	 ///   
-								`areacolors',`linecolors', `concolors', 	 ///   
-								`boxcolors', `dotcolors', `piecolors', 		 ///   
-								`suncolors', `histcolors', `cicolors', 		 ///   
-								`matcolors', `reflcolors', `refmcolors')
+			loc pcycles = max(	`barcolors', `scatcolors', `areacolors',	 ///   
+								`linecolors', `boxcolors', `dotcolors', 	 ///   
+								`piecolors', `suncolors', `histcolors', 	 ///   
+								`cicolors', `matcolors', `reflcolors', 		 ///   
+								`refmcolors')
 							  
 			file write scheme `"sequence 1210"' _n
 			file write scheme `"label "`style' `colors'""' _n
