@@ -10,19 +10,19 @@
 *     none                                                                     *
 *                                                                              *
 * Program Output -                                                             *
-*     r(paletteName[#Colors]_print) - Print friendliness indicator             *
-*     r(paletteName[#Colors]_photocopy) - Photocopier friendliness indicator   *
-*     r(paletteName[#Colors]_lcd) - LCD Viewing friendliness indicator         *
-*     r(paletteName[#Colors]_colorblind) - Colorblindness friendliness		   *
+*     r(paletteName[#Max][#C]_print) - Print friendliness indicator     	   *
+*     r(paletteName[#Max][#C]_photocopy) - Photocopier friendliness indicator  *
+*     r(paletteName[#Max][#C]_lcd) - LCD Viewing friendliness indicator        *
+*     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     483                                                                      *
+*     517                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewmeta
 *! v 0.0.4
-*! 01AUG2015
+*! 02AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -35,7 +35,7 @@ prog def brewmeta, rclass
 
 	// Define the syntax structure of the program
 	syntax anything(name = palette id = "palette name"), colorid(integer) ///   
-		[Colors(integer -12) PROPerties PROPerties2(string asis) REFresh ]
+		[Colors(integer -12) PROPerties PROPerties2(string asis) REFresh EXTras]
 	
 	// Preserve the data in memory
 	preserve
@@ -52,7 +52,7 @@ prog def brewmeta, rclass
 		} // End IF Block for b subdirectory of personal
 		
 		// Check for the metadata dataset
-		cap confirm file `"`c(sysdir_personal)'/b/brewmeta.dta"'
+		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
 		if _rc != 0 | `"`refresh'"' != "" {
@@ -257,20 +257,18 @@ prog def brewmeta, rclass
 			la def print	 	0 "Not print friendly" 						 ///
 								1 "Print friendly"  						 ///
 								2 "Possibly print friendly"					 ///   
-								.n "Missing Data on Colorblind Friendliness", ///   
-								modify
+								.n "Missing Data on Print Friendliness", modify
 
 			la def photocopy 	0 "Not photocopy friendly" 					 ///
 								1 "Photocopy friendly" 						 ///   
 								2 "Possibly photocopy friendly"				 ///   
-								.n "Missing Data on Colorblind Friendliness", ///   
+								.n "Missing Data on Photocopier Friendliness", ///   
 								modify
 
 			la def lcd			0 "Not LCD friendly" 						 ///   
 								1 "LCD friendly" 							 ///   
 								2 "Possibly LCD friendly"					 ///   
-								.n "Missing Data on Colorblind Friendliness", ///   
-								modify
+								.n "Missing Data on LCD Friendliness", modify
 								
 			// Apply the value labels to the metadata properties
 			la val colorblind colorblind
@@ -279,7 +277,7 @@ prog def brewmeta, rclass
 			la val lcd lcd
 	
 			// Create a sequence ID for the Data set 
-			qui: egen seqid = concat(palette colorid)
+			qui: egen seqid = concat(palette pcolor colorid)
 			
 			// Get number of records
 			qui: count
@@ -294,7 +292,7 @@ prog def brewmeta, rclass
 				loc stem "`: di seqid[`i']'"
 			
 				// Loop over the property variables
-				foreach v of var colorblind lcd photocopy print {
+				foreach v of var colorblind lcd photocopy print meta {
 				
 					// Get the characteristic for the observation
 					loc theproperty : label(`v') `: di `v'[`i']'
@@ -305,7 +303,31 @@ prog def brewmeta, rclass
 				} // End Loop over variables for characteristics
 				
 			} // End Loop over observations
-						
+			
+			// Create local macros to store palettes based on scale types
+			loc qual "accent, dark2, paired, pastel1, pastel2, set1, set2, set3"
+			loc seq1 "blues, bugn, bupu, gnbu, greens, greys, oranges, orrd, pubu"
+			loc seq2 "pubugn, purd, purples, rdpu, reds, ylgn, ylgnbu, ylorbr, ylorrd"
+			loc div "brbg, piyg, prgn, puor, rdbu, rdgy, rdylbu, rdylgn, spectral"
+
+			// Create a meta variable for use with the extra color palettes
+			qui: g meta = cond(inlist(palette, `qual'), "Qualitative", 		 ///   
+						  cond(inlist(palette, `seq1'), "Sequential",		 ///   
+						  cond(inlist(palette, `seq2'), "Sequential",		 ///   
+						  cond(inlist(palette, `div'), "Divergent", ""))))
+			
+			// Define Qualitative Palettes
+			char _dta[qualitative] `"`qual'"'
+
+			// Define Divergent Palettes
+			char _dta[divergent] `"`div'"'
+
+			// Define Sequential/Continuous Palettes
+			char _dta[sequential] `"`seq1' `seq2'"'
+			
+			// Add characteristic to the dataset for the palettes available
+			char _dta[palettes] `"`qual', `seq1', `seq2', `div'"'
+
 			// Create variable labels
 			la var palette "Name of Color Palette"
 			la var pcolor "Palette by Colors Selected ID"
@@ -317,6 +339,12 @@ prog def brewmeta, rclass
 			la var colorid "Within pcolor ID for individual color look ups"
 			la var rgb "Red-Green-Blue Values to Build Scheme Files"
 			la var maxcolors "Maximum number of colors allowed for the palette"
+			la var meta "Meta-Data Palette Characteristics (see char _meta[*] for more info)"
+			
+			// Add additional meta data characteristics to explain meta properties
+			char _meta[Qualitative] "ColorBrewer Palettes Designed for Nominal/Ordinal Scale Variables"
+			char _meta[Sequential] "ColorBrewer Palettes Designed for Intervallic/Ratio Scale Variables"
+			char _meta[Divergent] "ColorBrewer Palettes Designed for Variables Encoding Deviances"
 			
 			// Define locals to store end of processing time data
 			loc pdate `"`c(current_date)'"'
@@ -340,6 +368,12 @@ prog def brewmeta, rclass
 			
 			// Save the dataset
 			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"'
+			
+			// Call brewextras to add additional color palettes to the data set
+			brewextra, ref union
+			
+			// Reload the newly saved data set
+			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 			
 			/* This block shows up after the file is saved to speed up the next 
 			run for the user since the data set won't have to be rebuilt. */
@@ -434,16 +468,16 @@ prog def brewmeta, rclass
 		if inlist("`properties2'", "all", "") {
 		
 			// Loop over the property types
-			foreach x in colorblind lcd photocopy print {
+			foreach x in colorblind lcd photocopy print meta {
 			
 				// Get the characteristics
-				loc prop : char _dta[`palette'`colors'_`x']
+				loc prop : char _dta[`palette'`colors'`colorid'_`x']
 				
 				// Print to the screen
-				di as res `"The color palette `palette' with `colors' colors is `prop'"'
+				di as res `"The color `colorid' of palette `palette' with `colors' colors is `prop'"'
 				
 				// Return the value
-				ret local `palette'`colors'_`x' `"`prop'"'
+				ret local `palette'`colors'`colorid'_`x' `"`prop'"'
 				
 			} // End Loop over variables for characteristics
 			
@@ -462,13 +496,13 @@ prog def brewmeta, rclass
 				loc pr`i' : word `i' of `properties2'
 				
 				// Get the characteristics
-				loc prop : char _dta[`palette'`colors'_`pr`i'']
+				loc prop : char _dta[`palette'`colors'`colorid'_`pr`i'']
 				
 				// Print to the screen
-				di as res `"The color palette `palette' with `colors' colors is `prop'"'
+				di as res `"The color `colorid' of palette `palette' with `colors' colors is `prop'"'
 				
 				// Return the value
-				ret local `palette'`colors'_`pr`i'' `"`prop'"'
+				ret local `palette'`colors'`colorid'_`pr`i'' `"`prop'"'
 				
 			} // End Loop to get properties
 			
