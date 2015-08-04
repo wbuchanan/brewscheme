@@ -23,7 +23,7 @@
 		
 *! brewextra
 *! v 0.0.1
-*! 02AUG2015
+*! 04AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -80,7 +80,7 @@ prog def brewextra, rclass
 			qui: replace palette = "activitiesa" in 121/125
 			qui: replace palette = "activitiest" in 126/130
 			bys palette: g colorid = _n
-			bys palette: g colors = _N
+			bys palette: g pcolor = _N
 
 			// Mississippi Department of Education specific colors for bar graphs
 			qui: replace rgb = "255 0 0" if palette == "mdebar" & colorid == 1
@@ -378,33 +378,9 @@ prog def brewextra, rclass
 			qui: replace rgb = "127 127 127" if palette == "activitiest"	 ///   
 														& colorid == 5
 
+														
 			// Create a sequence ID for the Data set 
 			qui: egen seqid = concat(palette pcolor colorid)
-			
-			// Get number of records
-			qui: count
-			
-			// Store in local macro
-			loc N = r(N)
-			
-			// Loop across observations
-			forv i = 1/`N' {
-			
-				// Create stem for characteristics
-				loc stem "`: di seqid[`i']'"
-			
-				// Loop over the property variables
-				foreach v of var colorblind lcd photocopy print meta {
-				
-					// Get the characteristic for the observation
-					loc theproperty : label(`v') `: di `v'[`i']'
-
-					// Set the characteristic
-					char def _dta[`stem'_`v'] `"`theproperty'"'
-					
-				} // End Loop over variables for characteristics
-				
-			} // End Loop over observations
 			
 			// Local macros w/palette names
 			loc sem1 "carsa, carse, foodsa, foodse, featuresa, featurese"
@@ -420,7 +396,7 @@ prog def brewextra, rclass
 			ret loc brewextras = `"`c(sysdir_personal)'brewuser/extras.dta"'
 			
 			// Check for brewuser directory
-			if `: dir `"`c(sysdir_personal)'"' dirs brewuser, nofail respect' == "" {
+			if `"`: dir `"`c(sysdir_personal)'"' dirs brewuser, nofail respect'"' == "" {
 			
 				// Make directory
 				qui: mkdir `"`c(sysdir_personal)'brewuser"'
@@ -473,6 +449,9 @@ prog def brewextra, rclass
 			
 			} // End Loop over files
 			
+			// Optimize storage format of data set
+			qui: compress
+			
 			// Save file
 			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"', replace
 		
@@ -484,4 +463,17 @@ prog def brewextra, rclass
 // End of Subroutine definition
 end
 
-	
+
+// Define subroutine to check the additional incoming files
+// prog def checkfilespec
+
+		// Syntax structure for subroutine
+// 		syntax anything[name = "infiles"]
+		
+		// Load the data file into memory
+		
+		
+		
+		
+// End Subroutine
+// end		
