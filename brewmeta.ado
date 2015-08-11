@@ -22,7 +22,7 @@
 		
 *! brewmeta
 *! v 0.0.4
-*! 04AUG2015
+*! 11AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -94,7 +94,7 @@ prog def brewmeta, rclass
 				
 					// Return only the rgb values for the # of colors
 					qui: g v`i' = regexs(1) if regexm(w2,					 ///   
-											 `"([`i']: \[.*\], [`= `i' + 1'])"')
+											 `"([`i']: \[.*\], `= `i' + 1')"')
 					
 				} // End IF Block for # of colors within subpalette
 				

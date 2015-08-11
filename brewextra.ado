@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.1
-*! 04AUG2015
+*! v 0.0.2
+*! 11AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -81,6 +81,7 @@ prog def brewextra, rclass
 			qui: replace palette = "activitiest" in 126/130
 			bys palette: g colorid = _n
 			bys palette: g pcolor = _N
+			qui: g maxcolors = pcolor
 
 			// Mississippi Department of Education specific colors for bar graphs
 			qui: replace rgb = "255 0 0" if palette == "mdebar" & colorid == 1
@@ -416,24 +417,26 @@ prog def brewextra, rclass
 			loc existpalettes : char _dta[palettes]
 			
 			// Define meta data characteristics with available palettes
-			char _dta[palettes] `"`existpalettes', `extrapalettes'"'			
+			char _dta[palettes] `"`existpalettes', `extrapalettes'"'	
+			
+			// Set the display order of the variables to match brewmeta.dta
+			order palette colorblind print photocopy lcd colorid pcolor rgb  ///   
+			maxcolors seqid meta
 			
 			// Save the new file
 			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"', replace
 				
 		} // End IF Block for refresh/no extras file
 									
+		
 		// If the files parameter contains an argument 								
 		if `"`files'"' != "" {
 		
-			// Load the master dataset
-			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-					
 			// Loop over the individual files listed in the argument
 			forv i = 1/`: word count `files'' {
 			
-				// Get existing palettes characteristics
-				loc existpalettes : char _dta[palettes]
+				// Check the individual files
+				checkfilespec `"`: word `i' of `files''"'
 			
 				// Get name of file
 				loc filenm `"`: word `i' of `files''"'
@@ -441,11 +444,8 @@ prog def brewextra, rclass
 				// Append the file to the existing data set
 				qui: append using `"`filenm'""
 			
-				// Define meta data characteristics with available palettes
-				char _dta[palettes] `"`existpalettes', `newpalettes'"'	
-				
 				// Return name of file with palettes added
-				ret loc brewextrafile`i' = `"`filenm'"'
+				ret loc brewextrafile`i' = `"`r(filenm)'"'
 			
 			} // End Loop over files
 			
@@ -465,15 +465,101 @@ end
 
 
 // Define subroutine to check the additional incoming files
-// prog def checkfilespec
+prog def checkfilespec, rclass
 
 		// Syntax structure for subroutine
-// 		syntax anything[name = "infiles"]
+ 		syntax anything[name = "infiles"]
 		
-		// Load the data file into memory
+		// Preserve state of data currently in memory
+		preserve
 		
+			// Load the data file into memory
+			qui: use `"`infiles'"', clear
+			
+			// Loop over required variables to make sure all necessary data is 
+			// available
+			foreach v in palette rgb seqid meta {
+			
+				// Confirm variable exists
+				cap confirm variable `v'
+				
+				// If variable doesn't exist
+				if _rc != 0 {
+				
+					// Display error message
+					di as err "Variable `v' does not exist in the file."
+					
+					// Return code of 1
+					ret sca code = 1
+
+				} // End IF Block for variable existence
+				
+				// If variable exists check type
+				else {
+				
+					// Check to make sure the variable is a string
+					if regexm("`: type `v''", "str*") != 1 {
+					
+						// Print error message to console
+						di as err "Variable `v' must be a string variable."
+						
+						// Return code of 1
+						ret sca code = 1
+						
+					} // End IF Block for type cast checking
+				
+				} // End ELSE Block for type checking
+				
+			} // End Loop over string variables
+			
+			// Loop over numeric variables
+			foreach v of colorblind print photocopy lcd colorid pcolor {
+			
+				// Confirm variable exists
+				cap confirm variable `v'
+				
+				// If variable doesn't exist
+				if _rc != 0 {
+				
+					// Display error message
+					di as err "Variable `v' does not exist in the file."
+					
+					// Return code of 1
+					ret sca code = 1
+
+				} // End IF Block for variable existence
+				
+			} // End Loop over numeric variables
+			
+			// Get the names of the palettes to add to the brewmeta data file
+			qui: levelsof palette, loc(newpalettes)
+
+			// If the file checks out thus far save it to the extras directory
+			qui: save `"`c(sysdir_personal)'brewuser/`infiles'"', replace
+						
+			// Load brewmeta file
+			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+			
+			// Get existing palettes characteristics
+			loc existpalettes : char _dta[palettes]
 		
+			// Append new colors
+			qui: append using `"`c(sysdir_personal)'brewuser/`infiles'"'
+			
+			// Define meta data characteristics with available palettes
+			char _dta[palettes] `"`existpalettes', `newpalettes'"'	
+			
+			// Save over old file
+			qui: save, replace
 		
+		// Restore to original state of data in memory
+		restore
+		
+		// Return a code of 0
+		ret sca code = 0
+		
+		// Return file name
+		ret loc filenm = `"`c(sysdir_personal)'brewuser/`infiles'"'
 		
 // End Subroutine
-// end		
+end		
