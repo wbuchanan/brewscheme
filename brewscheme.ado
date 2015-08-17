@@ -53,233 +53,233 @@ prog def brewscheme, rclass
 		CONSTart(string asis) CONEnd(string asis) CONSATuration(real 100)	 ///   
 		SOMESTyle(string asis) SOMEColors(real 3) SOMESATuration(real 100)	 ///   
 		REFResh ]
-	
-		// Define maximum number of colors for each of the palettes
-		#d ;
-		local accentc = 8; local bluesc = 9; local brbgc = 11; local bugnc = 9; 
-		local bupuc = 9; local dark2c = 8; local gnbuc = 9; local greensc = 9; 
-		local greysc = 9; local orrdc = 9; local orangesc = 9; local prgnc = 11;
-		local pairedc = 12; local pastel1c = 9; local pastel2c = 8; local piygc = 11;
-		local pubuc = 9; local pubugnc = 9; local puorc = 11; local purdc = 9;
-		local purplesc = 9; local rdbuc = 11; local rdgyc = 11; local rdpuc = 9;
-		local rdylbuc = 11; local rdylgnc = 11; local redsc = 9; local set1c = 9;
-		local set2c = 8; local set3c = 12; local spectralc = 11; local ylgnc = 9;
-		local ylgnbuc = 9; local ylorbrc = 9; local ylorrdc = 8; 
-		loc tableauc 20; loc fruitec 7; loc fruitac 7; loc veggiesac 7; 
-		loc veggiesec 7; loc drinksac 7; loc drinksec 7; loc brandsac 7; 
-		loc brandsec 7; loc foodtc 7; loc foodac 7; loc carsac 6; loc carstc 6; 
-		loc featuresac 5; loc featurestc 5; loc activitiesac 5; 
-		loc activitiestc 5; loc mdebarc 5; loc mdepointc 3;
-		#d cr
-		
-		// Set local macro with the acceptable palette names
-		loc pal1 `""accent", "blues", "brbg", "bugn", "bupu", "dark2""' 
-		loc pal2 `""greens", "greys", "orrd", "oranges", "prgn", "paired""'
-		loc pal3 `""pastel1", "pastel2", "piyg", "pubu", "pubugn", "puor""'
-		loc pal4 `""purd", "purples", "rdbu", "rdgy", "rdpu", "rdylbu""'
-		loc pal5 `""reds", "set1", "set2", "set3", "spectral", "ylgn""'
-		loc pal6 `""ylorbr", "ylorrd", "ylgnbu", "rdylgn", "gnbu""'
-		loc pal7 `""mdebar", "mdepoint", "tableau", "fruita", "fruite""'
-		loc pal8 `""veggiesa", "veggiese", "drinksa", "drinkse", "brandsa", "brandse""'
-		loc pal9 `""fooda", "foode", "carsa", "carse", "featuresa", "featurese""'
-		loc pal10 `""activitiesa", "activitiese""'
-		loc firsthalf `pal1' `pal2' `pal3' `pal4' `pal5' 
-		loc secondhalf `pal6' `pal7' `pal8' `pal9' `pal10'
-		
-		// Set local with the graph type stub names
-		loc gr1 bar scat area line con box dot pie
-		loc gr2 sun hist ci mat refl refm
-		loc grstyles `gr1' `gr2'
-		
-		/* Validate arguments (if all graph types are null, an all parameter 
-		must be specified */
-		if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 		 ///   
-		mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 			 ///  
-		mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 			 ///   
-		mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 			 ///   
-		mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") {
-		
-			// Print error message to the screen
-			di as err "Must include either arguments for the all "			 ///   
-			"parameters or use a combination of graph type arguments and "	 ///   
-			"some arguments to provide default colors to the other graph types"
-			
-			// Kill the program
-			exit	
-			
-		} // End IF Block for valid arguments
-		
-		// If all the graph styles are missing and an all style is specified
-		else if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
-		mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 			 ///   
-		mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 			 ///   
-		mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 			 ///   
-		mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
 
-			// Set the style parameters for all graph types to the values in the 
-			// all parameters
-			if `allcolors' <= ``allstyle'c' {
+		// Preserve data currently loaded in memory
+		preserve
+		
+			// Check for the metadata dataset
+			cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
+
+			// If file doesn't exist
+			if _rc != 0 {
 			
-				// Check to see if all style was an available palette
-				if 	(!inlist("`allstyle'", `pal1') & 						 ///   
-					!inlist("`allstyle'", `pal2') &							 ///   
-					!inlist("`allstyle'", `pal3') &							 ///   
-					!inlist("`allstyle'", `pal4') &							 ///   
-					!inlist("`allstyle'", `pal5') &							 /// 	
-					!inlist("`allstyle'", `pal6') &							 /// 	
-					!inlist("`allstyle'", `pal7') &							 /// 	
-					!inlist("`allstyle'", `pal8') &							 /// 	
-					!inlist("`allstyle'", `pal9') &							 /// 	
-					!inlist("`allstyle'", `pal10')) {
+				// Call brewmeta to build lookup data set
+				qui: brewmeta "mdebar", colorid(1)
 				
+			} // End IF Block to build look up data set
+				
+			// If the file exists load it
+			else {
+			
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+				
+			} // End ELSE Block to load brewmeta file
+			
+			// Get acceptable palette names
+			qui: levelsof palette, loc(palettes)
+			
+			// Loop over the palette names
+			foreach v of loc palettes {
+			
+				// Get the maximum number of colors available in the palette
+				qui: su maxcolors if palette == `"`v'"', meanonly
+				
+				// Store in the macro with the name of the palette followed by c
+				loc `v'c = `r(mean)'
+				
+			} // End Loop to get maximum number of colors per palette
+			
+			// Set local with the graph type stub names
+			loc gr1 bar scat area line con box dot pie
+			loc gr2 sun hist ci mat refl refm
+			loc grstyles `gr1' `gr2'
+			
+			/* Validate arguments (if all graph types are null, an all parameter 
+			must be specified */
+			if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 		 ///   
+			mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 			 ///  
+			mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 			 ///   
+			mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 			 ///   
+			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") {
+			
+				// Print error message to the screen
+				di as err "Must include either arguments for the all "			 ///   
+				"parameters or use a combination of graph type arguments and "	 ///   
+				"some arguments to provide default colors to the other graph types"
+				
+				// Kill the program
+				exit	
+				
+			} // End IF Block for valid arguments
+			
+			// If all the graph styles are missing and an all style is specified
+			else if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
+			mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 			 ///   
+			mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 			 ///   
+			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 			 ///   
+			mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
+
+				// Set the style parameters for all graph types to the values in the 
+				// all parameters
+				if `allcolors' <= ``allstyle'c' {
+				
+					// Check to see if all style was an available palette
+					if 	(!inlist("`allstyle'", `pal1') & 						 ///   
+						!inlist("`allstyle'", `pal2') &							 ///   
+						!inlist("`allstyle'", `pal3') &							 ///   
+						!inlist("`allstyle'", `pal4') &							 ///   
+						!inlist("`allstyle'", `pal5') &							 /// 	
+						!inlist("`allstyle'", `pal6') &							 /// 	
+						!inlist("`allstyle'", `pal7') &							 /// 	
+						!inlist("`allstyle'", `pal8') &							 /// 	
+						!inlist("`allstyle'", `pal9') &							 /// 	
+						!inlist("`allstyle'", `pal10')) {
+					
+						// Let user know valid values
+						di as err "Styles arguments must be one of: " _n		 ///   
+						`"`palettes'"'
+						
+						// Exit program
+						exit
+						
+					} // End IF Block to check for valid color palette
+					
+					// Loop over graph types and assign the all styles to them
+					foreach stile in "bar" "scat" "area" "line" "box" 			 ///   
+						"dot" "pie" "sun" "hist" "ci" "mat" "con" "refl" "refm" {
+						
+						/* Assign the all style, color, and saturation levels to the 
+						individual graph types. */
+						loc `stile'style `allstyle'
+						loc `stile'colors  `allcolors'
+						loc `stile'saturation  `allsaturation'
+
+					} // End Loop over graph types
+					
+				} // End IF Block to check if the # of colors is valid for the style
+
+				// If the user selected more colors than available in the palette
+				else {
+				
+					// Print error message to the screen
+					di as err `"More colors (`allcolors') than "'				 ///   
+					`"available (``allstyle'c') in the palette `allstyle'"'
+					
+					// Kill the program
+					exit
+					
+				} // End ELSE Block for # colors > available colors
+				
+			} // End ELSEIF Block for missing graph styles with nonmissing all style
+			
+			// If missing some arguments make sure some parameters have values
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		    	 ///   
+				"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
+				"`boxstyle'" == "" |  "`dotstyle'" == "" |						 ///
+				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
+				"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 	 ///   
+				"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
+				"`somestyle'" == "" {
+				
+				// If missing some graph type styles must include defaults in some
+				di as err "Must include arguments for somestyle if missing graph types"
+				
+				// Kill program
+				exit	
+				
+			} // End ELSEIF Block for missing types w/o some argument
+			
+			// If missing some graph types and defaults provided
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   		 ///   
+				"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
+				"`dotstyle'" == "" |  "`boxstyle'" == "" |  					 ///
+				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
+				"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 	 ///   
+				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
+				
+				// Check to see if all style was an available palette
+				if 	(!inlist("`somestyle'", `pal1') & 							 ///   
+					!inlist("`somestyle'", `pal2') 	&							 ///   
+					!inlist("`somestyle'", `pal3') 	&							 ///   
+					!inlist("`somestyle'", `pal4') 	&							 ///   
+					!inlist("`somestyle'", `pal5') 	&							 /// 	
+					!inlist("`somestyle'", `pal6') 	&							 /// 	
+					!inlist("`somestyle'", `pal7') 	&							 /// 	
+					!inlist("`somestyle'", `pal8') 	&							 /// 	
+					!inlist("`somestyle'", `pal9') 	&							 /// 	
+					!inlist("`somestyle'", `pal10')) {
+												
 					// Let user know valid values
-					di as err "Styles arguments must be one of: " _n		 ///   
-					`"`palettes'"'
+					di as err "Styles arguments must be one of: " _n `"`palettes'"'
 					
 					// Exit program
 					exit
 					
 				} // End IF Block to check for valid color palette
 				
-				// Loop over graph types and assign the all styles to them
-				foreach stile in "bar" "scat" "area" "line" "box" 			 ///   
-					"dot" "pie" "sun" "hist" "ci" "mat" "con" "refl" "refm" {
+				// Loop over # available colors per graph
+				foreach stile in "`grstyles'" {
+				
+					// If the style is missing and valid # colors for default
+					if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
 					
-					/* Assign the all style, color, and saturation levels to the 
-					individual graph types. */
-					loc `stile'style `allstyle'
-					loc `stile'colors  `allcolors'
-					loc `stile'saturation  `allsaturation'
-
-				} // End Loop over graph types
-				
-			} // End IF Block to check if the # of colors is valid for the style
-
-			// If the user selected more colors than available in the palette
-			else {
-			
-				// Print error message to the screen
-				di as err `"More colors (`allcolors') than "'				 ///   
-				`"available (``allstyle'c') in the palette `allstyle'"'
-				
-				// Kill the program
-				exit
-				
-			} // End ELSE Block for # colors > available colors
-			
-		} // End ELSEIF Block for missing graph styles with nonmissing all style
-		
-		// If missing some arguments make sure some parameters have values
-		else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		    	 ///   
-			"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
-			"`boxstyle'" == "" |  "`dotstyle'" == "" |						 ///
-			"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
-			"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
-			"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 	 ///   
-			"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
-			"`somestyle'" == "" {
-			
-			// If missing some graph type styles must include defaults in some
-			di as err "Must include arguments for somestyle if missing graph types"
-			
-			// Kill program
-			exit	
-			
-		} // End ELSEIF Block for missing types w/o some argument
-		
-		// If missing some graph types and defaults provided
-		else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   		 ///   
-			"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
-			"`dotstyle'" == "" |  "`boxstyle'" == "" |  					 ///
-			"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
-			"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
-			"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 	 ///   
-			"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
-			
-			// Check to see if all style was an available palette
-			if 	(!inlist("`somestyle'", `pal1') & 							 ///   
-				!inlist("`somestyle'", `pal2') 	&							 ///   
-				!inlist("`somestyle'", `pal3') 	&							 ///   
-				!inlist("`somestyle'", `pal4') 	&							 ///   
-				!inlist("`somestyle'", `pal5') 	&							 /// 	
-				!inlist("`somestyle'", `pal6') 	&							 /// 	
-				!inlist("`somestyle'", `pal7') 	&							 /// 	
-				!inlist("`somestyle'", `pal8') 	&							 /// 	
-				!inlist("`somestyle'", `pal9') 	&							 /// 	
-				!inlist("`somestyle'", `pal10')) {
-											
-				// Let user know valid values
-				di as err "Styles arguments must be one of: " _n `"`palettes'"'
-				
-				// Exit program
-				exit
-				
-			} // End IF Block to check for valid color palette
-			
-			// Loop over # available colors per graph
-			foreach stile in "`grstyles'" {
-			
-				// If the style is missing and valid # colors for default
-				if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
-				
-					// Loop over the individual graph types
-					foreach x in "bar" "scat" "area" "line" "box" "dot" 	 ///   
-					"pie" "sun" "hist" "ci" "mat" "refl" "con" "refm" {
-					
-						// If the graph type does not have a style specified
-						if "``x'style'" == "" {
+						// Loop over the individual graph types
+						foreach x in "bar" "scat" "area" "line" "box" "dot" 	 ///   
+						"pie" "sun" "hist" "ci" "mat" "refl" "con" "refm" {
 						
-							// Assign the default styles to the graph type
-							loc `x'style "`somestyle'"
-							loc `x'colors `somecolors'
-							loc `x'saturation `somesaturation'
+							// If the graph type does not have a style specified
+							if "``x'style'" == "" {
 							
-						} // End IF Block for unspecified graphs
-						
-						// If the graph type has a style specified
-						else {
-						
-							// Continue on to next graph type
-							continue
+								// Assign the default styles to the graph type
+								loc `x'style "`somestyle'"
+								loc `x'colors `somecolors'
+								loc `x'saturation `somesaturation'
+								
+							} // End IF Block for unspecified graphs
 							
-						} // End ELSE Block for graphs with specified colors
+							// If the graph type has a style specified
+							else {
+							
+								// Continue on to next graph type
+								continue
+								
+							} // End ELSE Block for graphs with specified colors
+							
+						} // End Loop over graph types
 						
-					} // End Loop over graph types
+					} // End IF Block checking # colors available for default
 					
-				} // End IF Block checking # colors available for default
+					// If more colors specified for default than available
+					else if "``stile'style'" == "" & `somecolors' > ``somestyle'c' {
+					
+						// Print error message to screen
+						di as err `"More colors (``stile'colors') than "'		 ///   
+						`"available (``stile'style') in the palette "`stile'style""'
+						
+						// Kill the program
+						exit
+						
+					} // End ELSEIF Block for # colors > available for defaults
+					
+					// Check for # colors available for specific graph types
+					else if "``stile'style'" != "" &							 ///   
+						``stile'colors' > ```stile'style'c' {
+						
+						// Print error message to the screen
+						di as err `"More colors (``stile'colors') than "'		 ///   
+						`"available (``stile'style') in the palette "`stile'style""'
+						
+						// Kill the program
+						exit
+						
+					} // End ELSEIF Block for # colors > available for graph types
+					
+				} // End Loop over # colors for specified styles
 				
-				// If more colors specified for default than available
-				else if "``stile'style'" == "" & `somecolors' > ``somestyle'c' {
+			} // End ELSE Block for valid parameters
 				
-					// Print error message to screen
-					di as err `"More colors (``stile'colors') than "'		 ///   
-					`"available (``stile'style') in the palette "`stile'style""'
-					
-					// Kill the program
-					exit
-					
-				} // End ELSEIF Block for # colors > available for defaults
-				
-				// Check for # colors available for specific graph types
-				else if "``stile'style'" != "" &							 ///   
-					``stile'colors' > ```stile'style'c' {
-					
-					// Print error message to the screen
-					di as err `"More colors (``stile'colors') than "'		 ///   
-					`"available (``stile'style') in the palette "`stile'style""'
-					
-					// Kill the program
-					exit
-					
-				} // End ELSEIF Block for # colors > available for graph types
-				
-			} // End Loop over # colors for specified styles
-			
-		} // End ELSE Block for valid parameters
-				
-		// Preserve existing data in memory
-		preserve
-		
 			// Check for data set containing the color attributes
 			cap confirm file `"`c(sysdir_plus)'/b/brew.dta"'
 			
