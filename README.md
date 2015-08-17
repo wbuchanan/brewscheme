@@ -24,4 +24,8 @@ Lin, S., Fortuna, J., Kulkarni, C., Stone, M., & Heer, J. (2013). Selecting Sema
     Data Visualization. In _Computer Graphics Forum_ (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.
 
 ## License Information
-Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.
+Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.  
+
+## Additional Info
+For additional information/examples about the brewscheme package see [Buchanan, W. R. (2015). Brewing color schemes in Stata: Making it easier for end users to customize Stata graphs.  Presented 31jul2015 at the  2015 Stata North American Users' Group Meeting.  Columbus, OH.](http://www.stata.com/meeting/columbus15/abstracts/materials/columbus15_buchanan.pdf)
+
