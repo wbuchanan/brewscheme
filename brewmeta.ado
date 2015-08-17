@@ -7,22 +7,22 @@
 *     none                                                                     *
 *																			   *
 * System Requirements -														   *
-*     none                                                                     *
+*     Active Internet Connection											   *
 *                                                                              *
 * Program Output -                                                             *
-*     r(paletteName[#Colors]_print) - Print friendliness indicator             *
-*     r(paletteName[#Colors]_photocopy) - Photocopier friendliness indicator   *
-*     r(paletteName[#Colors]_lcd) - LCD Viewing friendliness indicator         *
-*     r(paletteName[#Colors]_colorblind) - Colorblindness friendliness		   *
+*     r(paletteName[#Max][#C]_print) - Print friendliness indicator     	   *
+*     r(paletteName[#Max][#C]_photocopy) - Photocopier friendliness indicator  *
+*     r(paletteName[#Max][#C]_lcd) - LCD Viewing friendliness indicator        *
+*     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     324                                                                      *
+*     543                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewmeta
 *! v 0.0.4
-*! 30JUL2015
+*! 11AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -34,34 +34,12 @@ prog def brewmeta, rclass
 	version 13.1
 
 	// Define the syntax structure of the program
-	syntax anything(name = palette id = "palette name"), Colors(integer)	 ///   
-		[ PROPerties PROPerties2(string asis) ]
+	syntax anything(name = palette id = "palette name"), colorid(integer) ///   
+		[colors(integer -12) PROPerties PROPerties2(string asis) REFresh]
 		
-	// Define maximum number of colors for each of the palettes
-	#d ;
-	local accentc = 8; local bluesc = 9; local brbgc = 11; local bugnc = 9; 
-	local bupuc = 9; local dark2c = 8; local gnbuc = 9; local greensc = 9; 
-	local greysc = 9; local orrdc = 9; local orangesc = 9; local prgnc = 11;
-	local pairedc = 12; local pastel1c = 9; local pastel2c = 8; local piygc = 11;
-	local pubuc = 9; local pubugnc = 9; local puorc = 11; local purdc = 9;
-	local purplesc = 9; local rdbuc = 11; local rdgyc = 11; local rdpuc = 9;
-	local rdylbuc = 11; local rdylgnc = 11; local redsc = 9; local set1c = 9;
-	local set2c = 8; local set3c = 12; local spectralc = 11; local ylgnc = 9;
-	local ylgnbuc = 9; local ylorbrc = 9; local ylorrdc = 8; 
-	#d cr
+	// Strip any quation marks from the palette name
+	loc palette : subinstr loc palette `"""' "", all
 	
-	// Make sure the number of colors specified by the user is <= maximum # of 
-	// colors available for the palette
-	if `colors' > ``palette'c' {
-	
-		// Tell the user the maximum number of colors available
-		di as err `"Only ``palette'c' colors are supported for the palette `palette'"'
-		
-		// Exit the program
-		exit
-		
-	} // End IF Block to check whether or not the number of colors are supported
-			
 	// Preserve the data in memory
 	preserve
 	
@@ -77,10 +55,10 @@ prog def brewmeta, rclass
 		} // End IF Block for b subdirectory of personal
 		
 		// Check for the metadata dataset
-		cap confirm file `"`c(sysdir_personal)'/b/brewmeta.dta"'
+		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
-		if _rc != 0 {
+		if _rc != 0 | `"`refresh'"' != "" {
 			
 			// Create a tempfile to read the JS into
 			tempfile brewjs
@@ -88,133 +66,258 @@ prog def brewmeta, rclass
 			// Get the current date/time
 			loc date `"`c(current_date)'"'
 			loc time `"`c(current_time)'"'
-			
+						
 			// Read the javascript into memory
 			qui: copy "http://www.colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
 			`brewjs'.js
 			
 			// Read the data into memory
-			qui: insheet using `brewjs'.js
+			qui: insheet using `brewjs'.js, clear
 			
+			// Force the erasing of the temp file
+			qui: erase `brewjs'.js
+						
+			// Remove extraneous metadata from the javascript file
+			qui: drop in 1/7
+			
+			// Parse the string into colors and meta-data properties
+			qui: split v1, g(z) p(`"'], 'properties'"')
+			
+			// This parses the data into the individual sets of colors
+			qui: split z1, g(w) parse(`":  {"')
+			
+			// Loop over the maximum colors for each subpalette
+			forv i = 3/12 {
+				
+				// Value of 9 requires special handling
+				if !inlist(`i', 9, 12) {
+				
+					// Return only the rgb values for the # of colors
+					qui: g v`i' = regexs(1) if regexm(w2,					 ///   
+											 `"([`i']: \[.*\], `= `i' + 1')"')
+					
+				} // End IF Block for # of colors within subpalette
+				
+				// For the case of the value of 9
+				else if `i' == 9 {
+				
+					// Parse the string, hardcoding the next value
+					qui: g v9 = regexs(1) if regexm(w2, `"([`i']: \[.*\],.*10:)"')
+					
+					// Get rid of left overs from regex
+					qui: replace v9 = subinstr(v9, "0:", "", .)
+					
+				} // End ELSE Block for the special case for value 9
+				
+				// Need to handle case of 12 color palettes since the end differs
+				else {
+				
+					// This regex makes sure the 12th color element isn't dropped
+					qui: g v12 = regexs(1) if regexm(w2, `"(12: \[.*)"')
+
+				} // End ELSE Block for parsing the RGB strings by # colors 
+				
+				// Parse out only the rgb parts of the strings
+				qui: replace v`i' = ustrregexra(v`i', "([`i']: \[')|('\], [0-9])", "")
+
+				// Split the string to create a single variable for each color
+				qui: split v`i', g(v`i'color) parse(`"', '"')
+				
+				// Get the variable by color combinations for each value 3-12
+				qui: ds v`i'color*
+				
+				// Loop over the returned list of variables
+				foreach x in `r(varlist)' {
+				
+					// Remove any extra space in the variables
+					qui: replace `x' = trim(itrim(`x'))
+					
+					// Remove punctuation and 'rgb(' from the start of the value string
+					qui: replace `x' = ustrregexra(`x', "(rgb\()|(\))", "")
+					
+					// Remove the commas between the values
+					qui: replace `x' = subinstr(`x', ",", " ", .)
+				
+				} // End Loop over individual color variables
+				
+				// Drop the variable with the full set of color values for that sub palette
+				qui: drop v`i'
+				
+			} // End Loop over possible number of colors within palettes
+
+			// Parse the string to get the palette names
+			qui: split v1, gen(palette) parse(":  {")
+
+			// Clean up the string 
+			qui: g palette = ustrregexra(palette1, ".* [DQS][a-z].* */", "")
+
+			// Drop records if missing a value for palette
+			qui: drop if mi(palette)
+
+			// Keep only the variables needed to build out the RGB values or properties
+			qui: keep palette v*color* v1
+
 			// Parse the JS
 			qui: g x = regexs(0) if regexm(v1, 								 ///   
 			`"'blind':\[[0-2].*\],'print':\[[0-2].*\],'copy':\[[0-2].*\],'screen':\[[0-2].*\]"')
 
 			// Drop observations without data
 			qui: drop if mi(x)
-			
+
 			// Parse the returned substring from the regular expression
 			qui: split x, gen(y) parse("],")
 
-			// Parse the text from the fields containing the meta data
+			// Parse the colorblind friendliness indicator from the JS
 			qui: replace y1 = regexr(y1, "('blind':\[)", "")
+			
+			// Parse the print friendliness indicator from the JS
 			qui: replace y2 = regexr(y2, "('print':\[)", "")
+			
+			// Parse the copy friendliness indicator from the JS
 			qui: replace y3 = regexr(y3, "('copy':\[)", "")
+			
+			// Parse the LCD view friendliness indicator from the JS
 			qui: replace y4 = regexr(y4, "('screen':\[)", "")
+			
+			// Clean up how the LCD property is parsed
 			qui: replace y4 = regexr(y4, "(\])", "")
-			
-			// Create variable with name of color palette in lower case letters
-			qui: g palette = regexr(regexs(0), ":  {", "") if 			 ///   
-							 regexm(lower(v1), "^[a-z].*:  {")
 
-			// Keep only essential variables
-			qui: keep palette y*
-			
-			// Split the numbers
+			// Split colorblind indicator string into element/color wise indicators
 			qui: split y1, gen(colorblind) parse(",")
-			qui: split y2, gen(print) parse(",")
-			qui: split y3, gen(photocopy) parse(",")
-			qui: split y4, gen(lcd) parse(",")
-			
-			// Drop the raw text
-			drop y*
-			
-			// Restructure the data
-			qui: reshape long colorblind print photocopy lcd, i(palette) j(colors)
 
-			// Convert indicators to numeric values
+			// Split print indicator string into element/color wise indicators
+			qui: split y2, gen(print) parse(",")
+
+			// Split photocopy indicator string into element/color wise indicators
+			qui: split y3, gen(photocopy) parse(",")
+
+			// Split lcd indicator string into element/color wise indicators
+			qui: split y4, gen(lcd) parse(",")
+
+			// Drop some unnecessary junk to reduce memory usage
+			qui: drop x y1 y2 y3 y4 
+			
+			/* Brewer only created palettes with 3 - 12 colors, but the JS is 
+			stored in such a way as to only include a maximum of 10 elements.  
+			In order to align the indicators with the colors, we need to make 
+			sure that the highest value indicator is numbered the same as the 
+			corresponding color to which it references.  This takes the variables
+			for each of the indicators and alters the number that appears as a 
+			suffix from the split command and adds the appropriate number to it 
+			to align the characteristics with the colors. */
+			forv i = 10(-1)1 {
+				
+				// Use the group rename command to batch rename the indicators
+				rename (colorblind`i' print`i' photocopy`i' lcd`i')			 ///   
+				(colorblind`= `i' + 2' print`= `i' + 2' photocopy`= `i' + 2' ///   
+				lcd`= `i' + 2')
+				
+			} // End Loop over the color metadata properties
+			
+			// Additional garbage collection to reduce memory usage
+			qui: keep palette v*color* colorblind* print* photocopy* lcd*
+			
+			// Start imposing a higher order normalized form on the data structure
+			qui: reshape long v3color v4color v5color v6color v7color v8color ///   
+			v9color v10color v11color v12color colorblind print photocopy 	 ///   
+			lcd, i(palette) j(colorid)
+			
+			// Rename the remaining variables to normalize the data again
+			qui: rename v#color v#
+			
+			// Structure data in first normalized form:
+			// Primary key = palette, pcolor, colorid
+			qui: reshape long v, i(palette colorblind print photocopy lcd 	 ///   
+			colorid) j(pcolor)
+
+			// Drop the record if no RGB value exists for it to save memory
+			qui: drop if mi(v)
+			
+			// Rename the generic variable 
+			qui: rename v rgb
+			
+			// Make all palette names lower cased
+			qui: replace palette = lower(palette)
+
+			// Recast the numeric indicators into true numeric values
 			qui: destring colorblind print photocopy lcd, replace
 
-			// Define maximum number of colors for each of the palettes
-			#d ;
-			local accent = 8; local blues = 9; local brbg = 11; local bugn = 9; 
-			local bupu = 9; local dark2 = 8; local gnbu = 9; local greens = 9; 
-			local greys = 9; local orrd = 9; local oranges = 9; local prgn = 11;
-			local paired = 12; local pastel1 = 9; local pastel2 = 8; local piyg = 11;
-			local pubu = 9; local pubugn = 9; local puor = 11; local purd = 9;
-			local purples = 9; local rdbu = 11; local rdgy = 11; local rdpu = 9;
-			local rdylbu = 11; local rdylgn = 11; local reds = 9; local set1 = 9;
-			local set2 = 8; local set3 = 12; local spectral = 11; local ylgn = 9;
-			local ylgnbu = 9; local ylorbr = 9; local ylorrd = 8; 
-			#d cr
-			
-			// Create variable to store total number of colors in palette
-			qui: g maxcol = .
-			
-			// Get the names of all the palettes
-			qui: levelsof palette, loc(pals)
-			
-			// Loop over the palettes
-			foreach color of loc pals { 
-			
-				// Set the maximum number of colors per palette
-				qui: replace maxcol = ``color'' if palette == "`color'"
+			// Get maximum number of values allowable
+			qui: bys palette (pcolor colorid): egen maxcolors = max(pcolor)
 
-			} // End Loop over palettes
-
-			// Drop any records outside of the valid range
-			qui: drop if colors > maxcol
-			
-			// Loop over the indicators
+			// Loop over the properties
 			foreach v of var colorblind print photocopy lcd {
-			
-				// Reserve namespace for temporary variable
-				tempvar `v'miss
+
+				// Replace with extended missing
+				qui: replace `v' = .n if mi(`v')
 				
-				// Create a temporary variable to use as a marker for logic check
-				qui: bys palette (colors): g ``v'miss' = cond(!mi(`v'), 1, 0)
-				
-				// Fill in missing values for cases where the value is constant
-				qui: bys palette (colors): replace `v' = `v'[1] if mi(`v') &  ///   
-				``v'miss'[2] == 0
-			
-			} // End Loop to fill in constant missing values
-				
-			
-			// Drop auxilary and tempvars
-			qui: drop maxcol `colorblindmiss' `printmiss' `photocopymiss' 	 ///  
-			`lcdmiss'
-			
+			} // End Loop over properties
+
 			// Define value labels for the meta variables
 			la def colorblind 	0 "Not color blind friendly" 				 ///
 								1 "Color blind friendly"  					 ///
 								2 "Possibly color blind friendly"			 ///   
-								.n "Data Unavailable"
+								.n "Missing Data on Colorblind Friendliness", ///   
+								modify
 
 			la def print	 	0 "Not print friendly" 						 ///
 								1 "Print friendly"  						 ///
 								2 "Possibly print friendly"					 ///   
-								.n "Data Unavailable"
+								.n "Missing Data on Print Friendliness", modify
 
 			la def photocopy 	0 "Not photocopy friendly" 					 ///
 								1 "Photocopy friendly" 						 ///   
 								2 "Possibly photocopy friendly"				 ///   
-								.n "Data Unavailable"
+								.n "Missing Data on Photocopier Friendliness", ///   
+								modify
 
 			la def lcd			0 "Not LCD friendly" 						 ///   
 								1 "LCD friendly" 							 ///   
 								2 "Possibly LCD friendly"					 ///   
-								.n "Data Unavailable"
+								.n "Missing Data on LCD Friendliness", modify
 								
-			// Apply the value labels
+			// Apply the value labels to the metadata properties
 			la val colorblind colorblind
 			la val print print
 			la val photocopy photocopy
 			la val lcd lcd
-				
+	
 			// Create a sequence ID for the Data set 
-			qui: egen seqid = concat(palette colors)
+			qui: egen seqid = concat(palette pcolor colorid)
 			
+			// Create local macros to store palettes based on scale types
+			loc qual1 `""accent", "dark2", "paired", "pastel1", "pastel2""'
+			loc qual2 `""set1", "set2", "set3""'
+			loc seq1 `""blues", "bugn", "bupu", "gnbu", "greens", "greys""'
+			loc seq2 `""oranges", "orrd", "pubu", "pubugn", "purd", "purples""' 
+			loc seq3 `""rdpu", "reds", "ylgn", "ylgnbu", "ylorbr", "ylorrd""'
+			loc div1 `""brbg", "piyg", "prgn", "puor", "rdbu", "rdgy""' 
+			loc div2 `""rdylbu", "rdylgn", "spectral""'
+			loc qual `"`qual1', `qual2'"'
+			loc seq `"`seq1', `seq2', `seq3'"'
+			loc div `"`div1', `div2'"'
+			
+			// Create a meta variable for use with the extra color palettes
+			qui: g meta = cond(inlist(palette, `qual1'), "Qualitative", 	 ///
+						  cond(inlist(palette, `qual2'), "Qualitative",		 ///   
+						  cond(inlist(palette, `seq1'), "Sequential",		 ///   
+						  cond(inlist(palette, `seq2'), "Sequential",		 ///   
+						  cond(inlist(palette, `seq3'), "Sequential",		 ///   
+						  cond(inlist(palette, `div1'), "Divergent", 		 ///   
+						  cond(inlist(palette, `div2'), "Divergent",   "")))))))
+			
+			// Define Qualitative Palettes
+			char _dta[qualitative] `"`qual'"'
+
+			// Define Divergent Palettes
+			char _dta[divergent] `"`div'"'
+
+			// Define Sequential/Continuous Palettes
+			char _dta[sequential] `"`seq'"'
+			
+			// Add characteristic to the dataset for the palettes available
+			char _dta[palettes] `"`qual', `seq', `div'"'
+
 			// Get number of records
 			qui: count
 			
@@ -228,39 +331,117 @@ prog def brewmeta, rclass
 				loc stem "`: di seqid[`i']'"
 			
 				// Loop over the property variables
-				foreach v of var colorblind lcd photocopy print {
+				foreach v of var colorblind lcd photocopy print meta {
 				
-					// Get the characteristic for the observation
-					loc theproperty : label(`v') `: di `v'[`i']'
+					// Check type casting of variable
+					if substr(`"`: type `v''"', 1, 3) != "str" {
+				
+						// Get the characteristic for the observation
+						loc theproperty : label(`v') `: di `v'[`i']'
+						
+					} // End IF Block for numeric variables
+					
+					// For string/character variables
+					else {
+					
+						// Store the string value of the data instead
+						loc theproperty : di `v'[`i']
 
-					// Set the characteristic
-					char def _dta[`stem'_`v'] `"`theproperty'"'
+					} // End ELSE Block for string variables
+					
+					// Set the characteristic for the variable/value
+					qui: char def _dta[`stem'_`v'] `"`theproperty'"'
 					
 				} // End Loop over variables for characteristics
 				
 			} // End Loop over observations
-						
+			
 			// Create variable labels
-			la var palette "Name of ColorBrewer2 Color Palette"
-			la var colors "Order of Colors in the Palette"
+			la var palette "Name of Color Palette"
+			la var pcolor "Palette by Colors Selected ID"
 			la var colorblind "Colorblind Indicator"
 			la var photocopy "Photocopy Indicator"
 			la var print "Print Indicator"
 			la var lcd "LCD/Laptop Indicator"
 			la var seqid "Sequential ID for property lookups"
+			la var colorid "Within pcolor ID for individual color look ups"
+			la var rgb "Red-Green-Blue Values to Build Scheme Files"
+			la var maxcolors "Maximum number of colors allowed for the palette"
+			la var meta "Meta-Data Palette Characteristics (see char _meta[*] for more info)"
 			
-			// Add characteristics to the dataset
-			char def _dta[timestamp] `"Data Retrieved on `date' at `time'"'
-			char def _dta[rooturl] "http://www.colorbrewer2.org/"
-			char def _dta[filename] "colorbrewer_schemes.js"
-			char def _dta[citation] `"Brewer, C. A. (200x). http://www.ColorBrewer.org. Retrieved on `date'"'
-							
+			// Add additional meta data characteristics to explain meta properties
+			qui: char meta[Qualitative] "ColorBrewer Palettes Designed for Nominal/Ordinal Scale Variables"
+			qui: char meta[Sequential] "ColorBrewer Palettes Designed for Intervallic/Ratio Scale Variables"
+			qui: char meta[Divergent] "ColorBrewer Palettes Designed for Variables Encoding Deviances"
+			
+			// Optimize the data set storage
+			qui: compress
+			
+			// Define locals to store end of processing time data
+			loc pdate `"`c(current_date)'"'
+			loc ptime `"`c(current_time)'"'
+			
+			/* Add characteristics to the dataset detailing the retrieval and 
+			clean up process. */
+			qui: char def _dta[timestamp] `"Data Retrieved on `date' at `time'"'
+			qui: char def _dta[rooturl] "http://www.colorbrewer2.org/"
+			qui: char def _dta[filename] "colorbrewer_schemes.js"
+			qui: char def _dta[citation] `"Brewer, C. A. (200x). http://www.ColorBrewer.org. Retrieved on `date'"'
+			qui: char def _dta[processtime] `"Finished processing at `ptime' on `pdate'"'		
+			qui: char def _dta[munged] "JavaScript Munged by brewmeta"
+			qui: char def _dta[brew] "brewmeta is available from the SSC Archives."
+			qui: char def _dta[brew2] `"Use: "ssc inst brewscheme" to install"'
+			qui: char def _dta[brew3] "Development version available at: "
+			qui: char def _dta[brew4] "https://github.com/wbuchanan/brewscheme"
+			
 			// Attach a checksum to the file
 			qui: datasignature set 
 			
 			// Save the dataset
-			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"'
+			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"', replace
+			
+			// Call brewextras to add additional color palettes to the data set
+			qui: brewextra, ref 
+			
+			// Reload the newly saved data set
+			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+			
+			/* This block shows up after the file is saved to speed up the next 
+			run for the user since the data set won't have to be rebuilt. */
 
+			// Check the colors option
+			if `colors' < 2 {
+			
+				// Get the maximum value of colors for the given palette
+				qui: su maxcolors if palette == "`palette'", meanonly
+				
+				// Get maximum value for the palette
+				loc colors = `r(mean)'
+				
+			} // End IF Block if max colors parameter is missing or invalid
+			
+			// Check to make sure colors value is <= max colors for the palette
+			else {
+				
+				// Get the maximum colors value for the palette
+				qui: su maxcolors if palette == "`palette'", meanonly
+				
+				// Store max colors in local
+				loc colormax = `r(mean)'
+				
+				// Check the values
+				if `colors' > `colormax' {
+				
+					// Error out of the program
+					di as err "Colors argument cannot exceed the max # of colors for the palette"
+					
+					// Exit program
+					exit
+					
+				} // End IF Block for validation check
+			
+			} // End ELSE Block for the colors -> max colors validation
+			
 		} // End IF Block for non-existent meta file
 		
 		// If the file exists
@@ -269,22 +450,60 @@ prog def brewmeta, rclass
 			// Load the dataset 
 			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 			
+			// Check the colors option
+			if `colors' < 2 {
+			
+				// Get the maximum value of colors for the given palette
+				qui: su maxcolors if palette == "`palette'", meanonly
+				
+				// Get maximum value for the palette
+				loc colors = `r(mean)'
+				
+			} // End IF Block if max colors parameter is missing or invalid
+			
+			// Validate the color ID parameter
+			if `colorid' > `colors' {
+			
+				// Error out
+				di as err "Color ID cannot exceed the maximum number of colors in the palette"
+				
+			} // End IF Block for color ID validation check
+			
+			// Check to make sure colors value is <= max colors for the palette
+			else {
+				
+				// Get the maximum colors value for the palette
+				qui: su maxcolors if palette == "`palette'", meanonly
+				
+				// Check the values
+				if `colors' > `r(mean)' {
+				
+					// Error out of the program
+					di as err "Colors argument cannot exceed the max # of colors for the palette"
+					
+					// Exit program
+					exit
+					
+				} // End IF Block for validation check
+			
+			} // End ELSE Block for the colors -> max colors validation
+			
 		} // End ELSE Block for existing meta file
 			
 		// If all/no option specified	
 		if inlist("`properties2'", "all", "") {
 		
 			// Loop over the property types
-			foreach x in colorblind lcd photocopy print {
+			foreach x in colorblind lcd photocopy print meta {
 			
 				// Get the characteristics
-				loc prop : char _dta[`palette'`colors'_`x']
+				loc prop `: char _dta[`palette'`colors'`colorid'_`x']'
 				
 				// Print to the screen
-				di as res `"The color palette `palette' with `colors' colors is `prop'"'
+				di as res `"The color `colorid' of palette `palette' with `colors' colors is `prop'"'
 				
 				// Return the value
-				ret local `palette'`colors'_`x' `"`prop'"'
+				ret local `palette'`colors'`colorid'_`x' `"`prop'"'
 				
 			} // End Loop over variables for characteristics
 			
@@ -294,22 +513,22 @@ prog def brewmeta, rclass
 		else {
 		
 			// Count the number of words in the string
-			loc prps : word count `properties2'
+			loc prps `: word count `properties2''
 			
 			// Set up loop to allow the command to generalize to multiple properties
 			forv i = 1/`prps' {
 			
 				// Get the specific property value
-				loc pr`i' : word `i' of `properties2'
+				loc pr`i' `: word `i' of `properties2''
 				
 				// Get the characteristics
-				loc prop : char _dta[`palette'`colors'_`pr`i'']
+				loc prop `: char _dta[`palette'`colors'`colorid'_`pr`i'']'
 				
 				// Print to the screen
-				di as res `"The color palette `palette' with `colors' colors is `prop'"'
+				di as res `"The color `colorid' of palette `palette' with `colors' colors is `prop'"'
 				
 				// Return the value
-				ret local `palette'`colors'_`pr`i'' `"`prop'"'
+				ret local `palette'`colors'`colorid'_`pr`i'' `"`prop'"'
 				
 			} // End Loop to get properties
 			
@@ -319,5 +538,5 @@ prog def brewmeta, rclass
 	restore
 		
 // End of Program
-end 		
+end 
 
