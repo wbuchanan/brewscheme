@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2694                                                                     *
+*     2677                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.2
-*! 30JUL2015
+*! v 0.0.3
+*! 18AUG2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -124,16 +124,7 @@ prog def brewscheme, rclass
 				if `allcolors' <= ``allstyle'c' {
 				
 					// Check to see if all style was an available palette
-					if 	(!inlist("`allstyle'", `pal1') & 						 ///   
-						!inlist("`allstyle'", `pal2') &							 ///   
-						!inlist("`allstyle'", `pal3') &							 ///   
-						!inlist("`allstyle'", `pal4') &							 ///   
-						!inlist("`allstyle'", `pal5') &							 /// 	
-						!inlist("`allstyle'", `pal6') &							 /// 	
-						!inlist("`allstyle'", `pal7') &							 /// 	
-						!inlist("`allstyle'", `pal8') &							 /// 	
-						!inlist("`allstyle'", `pal9') &							 /// 	
-						!inlist("`allstyle'", `pal10')) {
+					if `: list allstyle in palettes' != 1 {
 					
 						// Let user know valid values
 						di as err "Styles arguments must be one of: " _n		 ///   
@@ -200,16 +191,7 @@ prog def brewscheme, rclass
 				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
 				
 				// Check to see if all style was an available palette
-				if 	(!inlist("`somestyle'", `pal1') & 							 ///   
-					!inlist("`somestyle'", `pal2') 	&							 ///   
-					!inlist("`somestyle'", `pal3') 	&							 ///   
-					!inlist("`somestyle'", `pal4') 	&							 ///   
-					!inlist("`somestyle'", `pal5') 	&							 /// 	
-					!inlist("`somestyle'", `pal6') 	&							 /// 	
-					!inlist("`somestyle'", `pal7') 	&							 /// 	
-					!inlist("`somestyle'", `pal8') 	&							 /// 	
-					!inlist("`somestyle'", `pal9') 	&							 /// 	
-					!inlist("`somestyle'", `pal10')) {
+				if `: list somestyle in palettes' != 1 {
 												
 					// Let user know valid values
 					di as err "Styles arguments must be one of: " _n `"`palettes'"'
