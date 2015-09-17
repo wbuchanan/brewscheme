@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.3
-*! 18AUG2015
+*! v 0.0.4
+*! 08SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -52,25 +52,29 @@ prog def brewscheme, rclass
 		REFMSTyle(string asis) REFMColors(real 3) REFMSATuration(real 100) 	 ///   
 		CONSTart(string asis) CONEnd(string asis) CONSATuration(real 100)	 ///   
 		SOMESTyle(string asis) SOMEColors(real 3) SOMESATuration(real 100)	 ///   
-		REFResh ]
+		REFResh DBug ]
 
 		// Preserve data currently loaded in memory
 		preserve
 		
 			// Check for the metadata dataset
-			cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
+			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 			// If file doesn't exist
-			if _rc != 0 {
+			if _rc == 0 {
 			
 				// Call brewmeta to build lookup data set
-				qui: brewmeta "mdebar", colorid(1)
+				qui: brewdb, `refresh'
+				
+				// Load the lookup table
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 				
 			} // End IF Block to build look up data set
 				
 			// If the file exists load it
 			else {
-			
+				
+				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 				
 			} // End ELSE Block to load brewmeta file
@@ -263,12 +267,15 @@ prog def brewscheme, rclass
 			} // End ELSE Block for valid parameters
 				
 			// Check for data set containing the color attributes
-			cap confirm file `"`c(sysdir_plus)'/b/brew.dta"'
+			cap confirm file `"`c(sysdir_plus)'/b/brewmeta.dta"'
 			
 			// If data set doesn't exist or user wants to recreate it
 			if _rc != 0 | "`refresh'" != "" {
 			
-				qui: colorfile
+				// Create the dataset
+				qui: brewdb, `refresh'
+				
+				// Load the dataset
 				qui: use `"`c(sysdir_plus)'/b/brew.dta"', clear
 
 			} // End IF Block for checking for brewscheme dataset
@@ -276,6 +283,7 @@ prog def brewscheme, rclass
 			// Otherwise load the metadata file
 			else {
 			
+				// Load the dataset
 				qui: use `"`c(sysdir_plus)'/b/brew.dta"', clear
 				
 			} // End ELSE Block to load the metadata file
@@ -347,39 +355,6 @@ prog def brewscheme, rclass
 			} // End IF Block for barsaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`scatsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `scatsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc scatsaturation = round(`scatsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `scatsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc scatsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For scat other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting scat graph saturation to 100"
-					
-					// Set value to full saturation
-					loc scatsaturation 100
-					
-				} // End ELSE Block for scat other values of saturation
-				
-			} // End IF Block for scatsaturation value validation
-			
-			// If color intensity is not a valid value
 			if !inlist(`areasaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
 				90, 100, 200) {
 				
@@ -411,39 +386,6 @@ prog def brewscheme, rclass
 				} // End ELSE Block for area other values of saturation
 				
 			} // End IF Block for areasaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`linesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `linesaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc linesaturation = round(`linesaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `linesaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc linesaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For line other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting line graph saturation to 100"
-					
-					// Set value to full saturation
-					loc linesaturation 100
-					
-				} // End ELSE Block for line other values of saturation
-				
-			} // End IF Block for linesaturation value validation
 			
 			// If color intensity is not a valid value
 			if !inlist(`consaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
@@ -510,39 +452,6 @@ prog def brewscheme, rclass
 				} // End ELSE Block for box other values of saturation
 				
 			} // End IF Block for boxsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`dotsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `dotsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc dotsaturation = round(`dotsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `dotsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc dotsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For dot other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting dot plot saturation to 100"
-					
-					// Set value to full saturation
-					loc dotsaturation 100
-					
-				} // End ELSE Block for dot other values of saturation
-				
-			} // End IF Block for dotsaturation value validation
 			
 			// If color intensity is not a valid value
 			if !inlist(`piesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
@@ -808,6 +717,16 @@ prog def brewscheme, rclass
 				
 			} // End IF Block for somesaturation value validation
 			
+
+			// Line saturation gets defined as a color multiplier
+			loc linesaturation = `linesaturation'/100
+			
+			// Dot plot saturation is defined as a color multiplier
+			loc dotsaturation = `dotsaturation'/100
+								
+			// Scatterplot saturation gets defined as a color multiplier
+			loc scatsaturation = `scatsaturation'/100
+					
 			// Write the scheme file to a location on the path
 			qui: file open scheme using ///
 				`"`c(sysdir_plus)'/s/scheme-`schemename'.scheme"', w replace
@@ -820,6 +739,28 @@ prog def brewscheme, rclass
 								`piecolors', `suncolors', `histcolors', 	 ///   
 								`cicolors', `matcolors', `reflcolors', 		 ///   
 								`refmcolors')
+			
+			// Loop over color macros
+			foreach color in barcolors scatcolors areacolors linecolors		 ///   
+			boxcolors dotcolors piecolors histcolors cicolors matcolors		 ///   
+			reflcolors refmcolors {
+			
+				/* Create the sequence of color ids for each graph type based on 
+				the maximum number of colors in any listed color argument. */
+				qui: mata: recycle(``color'', `pcycles')
+				
+				// Assign the id sequence to a local with seq as suffix
+				loc `color'seq = `"`sequence'"'
+				
+				// Check for debug option
+				if "`dbug'" != "" {
+				
+					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
+					`"Color sequence: ``color'seq'"'
+					
+				} // End debug option
+				
+			} // End Loop over number of colors for graph types					
 							  
 			file write scheme `"sequence 1210"' _n
 			file write scheme `"label "`style' `colors'""' _n
@@ -1809,27 +1750,71 @@ prog def brewscheme, rclass
 			} // End Generic parameters
 				
 			// Write the Area Graph characteristics for the number of colors chosen
-			forv i = 1/`areacolors' {
+			forv i = 1/`pcycles' {
 
-				/* Area Graph Styles */
-				loc areacolor : char _dta[`areastyle'`i']
-				// loc linecolor : char _dta[`linestyle'`i']
+				// Get area color index value
+				loc areaid `: word `i' of `areacolorsseq''
+			
+				// Get bar color index value
+				loc barid `: word `i' of `barcolorsseq''
+			
+				// Get box plot color index value
+				loc boxid `: word `i' of `boxcolorsseq''
+
+				// Get dot plot color index value
+				loc dotid `: word `i' of `dotcolorsseq''
+
+				// Get line plot color index value
+				loc lineid `: word `i' of `linecolorsseq''
+
+				// Get pie color index value
+				loc pieid `: word `i' of `piecolorsseq''
+
+				// Get scatterplot color index value
+				loc scatid `: word `i' of `scatcolorsseq''
+				
+				// Get the area color RGB code
+				loc areacolor "`: char _dta[`areastyle'`areaid']'"
+
+				// Get the bar color RGB code
+				loc barcolor "`: char _dta[`barstyle'`barid']'"
+				
+				// Get the box plot color RGB code
+				loc boxcolor "`: char _dta[`boxstyle'`boxid']'"
+
+				// Get the dot color RGB code
+				loc dotcolor "`: char _dta[`dotstyle'`dotid']'"
+
+				// Get the line color RGB code
+				loc linecolor "`: char _dta[`linestyle'`lineid']'"
+				
+				// Get the pie slice color RGB code
+				loc piecolor "`: char _dta[`piestyle'`pieid']'"
+
+				// Get the scatterplot color RGB code
+				loc scatcolor "`: char _dta[`scatstyle'`scatid']'"
+				
+				// Check debug option
+				if "`dbug'" != "" {
+				
+					di as res `"Color Sequence `i'"' _n						 ///   
+					`"Area `i' RGB `areacolor'"' _n							 ///
+					`"Bar `i' RGB `barcolor'"' _n							 ///   
+					`"Box `i' RGB `boxcolor'"' _n							 ///
+					`"Dot `i' RGB `dotcolor'"' _n							 ///   
+					`"Line `i' RGB `linecolor'"' _n							 ///
+					`"Pie Slice `i' RGB `piecolor'"' _n						 /// 
+					`"Scatter `i' RGB `scatcolor'"'
+
+				} // End IF Block for debugging option
 				
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'area "`areacolor'""' _n
 				file write scheme `"linewidth p`i'area vvthin"' _n
 				file write scheme `"linepattern p`i'area solid"' _n
-				file write scheme `"color p`i'arealine "`areacolor'""' _n
+				file write scheme `"color p`i'arealine "`linecolor'*`linesaturation'""' _n
 				file write scheme `"intensity p`i'area inten`areasaturation'"' _n
-
-			} // End Area Graphs
-
-			// Write the Bar Graph characteristics for the number of colors chosen
-			forv i = 1/`barcolors' {
-
-				// Get the style/color parameters for the specified bar graph
-				loc barcolor "`: char _dta[`barstyle'`i']'"
 
 				// Define scheme colors for bar graphs
 				file write scheme `"color p`i' "`barcolor'""' _n
@@ -1838,14 +1823,6 @@ prog def brewscheme, rclass
 				file write scheme `"areatyle p`i'bar p`i'bar"' _n
 				file write scheme `"seriesstyle p`i'bar p`i'bar"' _n
 				file write scheme `"color p`i'barline black"' _n
-
-			} // End of Bar Graphs
-			
-			// Write the Box Plot characteristics for the number of colors chosen
-			forv i = 1/`boxcolors' {
-
-				/* Boxplots Styles */
-				loc boxcolor "`: char _dta[`boxstyle'`i']'"
 
 				/* Box Plot Styles */
 				// Primary box plot entries
@@ -1858,14 +1835,13 @@ prog def brewscheme, rclass
 				file write scheme `"symbol p`i'box circle"' _n
 				file write scheme `"symbolsize p`i'box medium"' _n
 				file write scheme `"linewidth p`i'boxmark vthin"' _n
-				// file write scheme `"color p`i'boxmarkfill "`scatcolor'""' _n
+				file write scheme `"color p`i'boxmarkfill "`scatcolor'*`scatsaturation'""' _n
 				file write scheme `"color p`i'boxmarkline	black"' _n
 				file write scheme `"gsize p`i'boxlabel vsmall"' _n
 				file write scheme `"color p`i'boxlabel black"' _n
 				file write scheme `"clockdir p`i'box 0"' _n
 
 				// Composite entries for box plots
-				
 				file write scheme `"linestyle p`i'box p`i'box"' _n
 				file write scheme `"linestyle p`i'boxmark p`i'boxmark"' _n
 				file write scheme `"markerstyle p`i'box p`i'box"' _n
@@ -1878,20 +1854,9 @@ prog def brewscheme, rclass
 				file write scheme `"linestyle box_median refline"' _n
 				file write scheme `"markerstyle box_marker p`i'box"' _n
 				
-			} // End of Box Plots
-
-			// Write the Connected Line Plot characteristics for the number of colors chosen
-			forv i = 1/`scatcolors' {
-
-				/* Connected Line Plot Styles */
-				loc concolor : char _dta[`linestyle'`i']
-
-				/* Scatterplots Styles */
-				loc scatcolor : char _dta[`scatstyle'`i']
-
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'line "`scatcolor'""' _n
+				file write scheme `"color p`i'line "`linecolor'""' _n
 				file write scheme `"yesno pcmissings yes"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
@@ -1904,17 +1869,9 @@ prog def brewscheme, rclass
 				file write scheme `"linewidth p`i' medium"' _n
 				file write scheme `"linepattern p`i'line solid"' _n
 
-			} // End Connected Graphs
-
-			// Write the Dot Plot characteristics for the number of colors chosen
-			forv i = 1/`dotcolors' {
-
-				/* Connected Line Plot Styles */
-				loc dotcolor "`: char _dta[`dotstyle'`i']'"
-
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'dotmarkfill "`dotcolor'""' _n
+				file write scheme `"color p`i'dotmarkfill "`dotcolor'*`dotsaturation'""' _n
 				file write scheme `"linewidth p`i'dotmark vthin"' _n
 				file write scheme `"symbol p`i'dot diamond"' _n
 				file write scheme `"symbolsize p`i'dot medium"' _n
@@ -1924,29 +1881,13 @@ prog def brewscheme, rclass
 				file write scheme `"markerstyle p`i'dot p`i'dot"' _n
 				file write scheme `"seriesstyle p`i'dot p`i'dot"' _n
 
-			} // End Connected Graphs
-
-			// Write the Line Graph characteristics for the number of colors chosen
-			forv i = 1/`linecolors' {
-
-				/* Connected Line Plot Styles */
-				loc linecolor "`: char _dta[`linestyle'`i']'"
-
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'lineplot "`linecolor'""' _n
+				file write scheme `"color p`i'lineplot "`linecolor'*`linesaturation'""' _n
 				file write scheme `"linewidth p`i'lineplot medium"' _n
 				file write scheme `"linepattern p`i'lineplot solid"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
-
-			} // End Line Graphs
-
-			// Write the Pie Graph characteristics for the number of colors chosen
-			forv i = 1/`piecolors' {
-
-				/* Pie Graph Styles */
-				loc piecolor "`: char _dta[`piestyle'`i']'"
 
 				// Primary entries for scatter plots
 				file write scheme `"color p`i'pie "`piecolor'""' _n
@@ -1955,29 +1896,21 @@ prog def brewscheme, rclass
 				file write scheme `"areastyle p`i'pie p`i'pie"' _n
 				file write scheme `"seriesstyle p`i'pie p`i'pie"' _n
 					
-			} // End Pie Graph
-			
-			// Write the Scatterplot characteristics for the number of colors chosen
-			forv i = 1/`scatcolors' {
-
-				/* Scatterplots Styles */
-				loc scatcolor : char _dta[`scatstyle'`i']
-
 				// Primary entries for scatter plots
 				file write scheme `"symbol p`i' circle"' _n
 				file write scheme `"symbolsize p`i' medium"' _n
 				file write scheme `"color p`i'markline black"' _n
 				file write scheme `"linewidth p`i'mark vthin"' _n
-				file write scheme `"color p`i'markfill "`scatcolor'""' _n
+				file write scheme `"color p`i'markfill "`scatcolor'*`scatsaturation'""' _n
 				file write scheme `"color p`i'label black"' _n
 				file write scheme `"clockdir p`i' 0"' _n
 					
 				// Secondary entries for scatter plots
-				file write scheme `"color p`i'shade "`scatcolor'""' _n
+				file write scheme `"color p`i'shade "`scatcolor'*`scatsaturation'""' _n
 				file write scheme `"intensity p`i'shade inten`scatsaturation'"' _n
 				file write scheme `"linewidth p`i'other vthin"' _n
 				file write scheme `"linepattern p`i'other solid"' _n
-				file write scheme `"color p`i'otherline "`scatcolor'""' _n 
+				file write scheme `"color p`i'otherline "`linecolor'""' _n 
 
 				// Composite entries for scatter plots
 				file write scheme `"linestyle p`i'mark p`i'mark"' _n

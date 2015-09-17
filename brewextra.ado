@@ -17,13 +17,13 @@
 *     r(brewextras) - File path/name where extras dataset is located		   *
 *                                                                              *
 * Lines -                                                                      *
-*     591                                                                      *
+*     607                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.3
-*! 18AUG2015
+*! v 0.0.4
+*! 08SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -40,6 +40,21 @@ prog def brewextra, rclass
 	// Preserve pre-existing state of the data
 	preserve
 	
+		// Check for a b subdirectory in personal
+		cap confirm new file `"`c(sysdir_personal)'brewuser"'
+		
+		// If it would be a new directory
+		if _rc == 0 {
+		
+			// Create the subdirectory
+			qui: mkdir `"`c(sysdir_personal)'brewuser"'
+			
+			// Print status message to console
+			di as res `"Creating directory `c(sysdir_personal)'brewuser "'	 ///   
+			`"to store user defined palette files."'
+		
+		} // End IF Block for b subdirectory of personal
+		
 		// Check for refresh option
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
 		
@@ -588,3 +603,4 @@ prog def checkfilespec, rclass
 		
 // End Subroutine
 end		
+

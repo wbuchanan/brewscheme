@@ -410,9 +410,7 @@ prog def brewdb
 			`"already exists and will not be rebuilt."'
 			
 			// Print help message to screen
-			di `"To rebuild the database, use "'							 ///   
-			in smcl {stata brewdb, refresh} as text "or pass the refresh "	 ///   
-			"option to brewscheme."
+			di `"To rebuild the database pass the refresh option to brewscheme."'
 			
 		} // End ELSE Block for non over write
 		
