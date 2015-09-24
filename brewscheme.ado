@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2677                                                                     *
+*     1962                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.4
-*! 08SEP2015
+*! v 0.0.5
+*! 24SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -69,6 +69,8 @@ prog def brewscheme, rclass
 				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 				
+				
+				
 			} // End IF Block to build look up data set
 				
 			// If the file exists load it
@@ -76,6 +78,8 @@ prog def brewscheme, rclass
 				
 				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+
+				char li
 				
 			} // End ELSE Block to load brewmeta file
 			
@@ -100,14 +104,14 @@ prog def brewscheme, rclass
 			
 			/* Validate arguments (if all graph types are null, an all parameter 
 			must be specified */
-			if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 		 ///   
-			mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 			 ///  
-			mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 			 ///   
-			mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 			 ///   
+			if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
+			mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 		 ///  
+			mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 		 ///   
+			mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 		 ///   
 			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") {
 			
 				// Print error message to the screen
-				di as err "Must include either arguments for the all "			 ///   
+				di as err "Must include either arguments for the all "		 ///   
 				"parameters or use a combination of graph type arguments and "	 ///   
 				"some arguments to provide default colors to the other graph types"
 				
@@ -118,9 +122,9 @@ prog def brewscheme, rclass
 			
 			// If all the graph styles are missing and an all style is specified
 			else if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
-			mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 			 ///   
-			mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 			 ///   
-			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 			 ///   
+			mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 		 ///   
+			mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 		 ///   
+			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 		 ///   
 			mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
 
 				// Set the style parameters for all graph types to the values in the 
@@ -131,8 +135,7 @@ prog def brewscheme, rclass
 					if `: list allstyle in palettes' != 1 {
 					
 						// Let user know valid values
-						di as err "Styles arguments must be one of: " _n		 ///   
-						`"`palettes'"'
+						di as err `"Styles arguments must be one of: `palettes'"'
 						
 						// Exit program
 						exit
@@ -140,7 +143,7 @@ prog def brewscheme, rclass
 					} // End IF Block to check for valid color palette
 					
 					// Loop over graph types and assign the all styles to them
-					foreach stile in "bar" "scat" "area" "line" "box" 			 ///   
+					foreach stile in "bar" "scat" "area" "line" "box" 		 ///   
 						"dot" "pie" "sun" "hist" "ci" "mat" "con" "refl" "refm" {
 						
 						/* Assign the all style, color, and saturation levels to the 
@@ -157,7 +160,7 @@ prog def brewscheme, rclass
 				else {
 				
 					// Print error message to the screen
-					di as err `"More colors (`allcolors') than "'				 ///   
+					di as err `"More colors (`allcolors') than "'			 ///   
 					`"available (``allstyle'c') in the palette `allstyle'"'
 					
 					// Kill the program
@@ -168,12 +171,12 @@ prog def brewscheme, rclass
 			} // End ELSEIF Block for missing graph styles with nonmissing all style
 			
 			// If missing some arguments make sure some parameters have values
-			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		    	 ///   
-				"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
-				"`boxstyle'" == "" |  "`dotstyle'" == "" |						 ///
-				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
-				"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
-				"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 	 ///   
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		     ///   
+				"`areastyle'" == "" |  "`linestyle'" == "" |  		    	 ///   
+				"`boxstyle'" == "" |  "`dotstyle'" == "" |					 ///
+				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    	 ///   
+				"`histstyle'" == "" |  "`cistyle'" == "" |  		    	 ///   
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 ///   
 				"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
 				"`somestyle'" == "" {
 				
@@ -186,12 +189,12 @@ prog def brewscheme, rclass
 			} // End ELSEIF Block for missing types w/o some argument
 			
 			// If missing some graph types and defaults provided
-			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   		 ///   
-				"`areastyle'" == "" |  "`linestyle'" == "" |  		    		 ///   
-				"`dotstyle'" == "" |  "`boxstyle'" == "" |  					 ///
-				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    		 ///   
-				"`histstyle'" == "" |  "`cistyle'" == "" |  		    		 ///   
-				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 	 ///   
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   	 ///   
+				"`areastyle'" == "" |  "`linestyle'" == "" |  		    	 ///   
+				"`dotstyle'" == "" |  "`boxstyle'" == "" |  				 ///
+				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    	 ///   
+				"`histstyle'" == "" |  "`cistyle'" == "" |  		    	 ///   
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 ///   
 				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
 				
 				// Check to see if all style was an available palette
@@ -212,7 +215,7 @@ prog def brewscheme, rclass
 					if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
 					
 						// Loop over the individual graph types
-						foreach x in "bar" "scat" "area" "line" "box" "dot" 	 ///   
+						foreach x in "bar" "scat" "area" "line" "box" "dot"  ///   
 						"pie" "sun" "hist" "ci" "mat" "refl" "con" "refm" {
 						
 							// If the graph type does not have a style specified
@@ -241,7 +244,7 @@ prog def brewscheme, rclass
 					else if "``stile'style'" == "" & `somecolors' > ``somestyle'c' {
 					
 						// Print error message to screen
-						di as err `"More colors (``stile'colors') than "'		 ///   
+						di as err `"More colors (``stile'colors') than "'	 ///   
 						`"available (``stile'style') in the palette "`stile'style""'
 						
 						// Kill the program
@@ -250,11 +253,11 @@ prog def brewscheme, rclass
 					} // End ELSEIF Block for # colors > available for defaults
 					
 					// Check for # colors available for specific graph types
-					else if "``stile'style'" != "" &							 ///   
+					else if "``stile'style'" != "" &						 ///   
 						``stile'colors' > ```stile'style'c' {
 						
 						// Print error message to the screen
-						di as err `"More colors (``stile'colors') than "'		 ///   
+						di as err `"More colors (``stile'colors') than "'	 ///   
 						`"available (``stile'style') in the palette "`stile'style""'
 						
 						// Kill the program
@@ -267,7 +270,7 @@ prog def brewscheme, rclass
 			} // End ELSE Block for valid parameters
 				
 			// Check for data set containing the color attributes
-			cap confirm file `"`c(sysdir_plus)'/b/brewmeta.dta"'
+			cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 			
 			// If data set doesn't exist or user wants to recreate it
 			if _rc != 0 | "`refresh'" != "" {
@@ -276,7 +279,7 @@ prog def brewscheme, rclass
 				qui: brewdb, `refresh'
 				
 				// Load the dataset
-				qui: use `"`c(sysdir_plus)'/b/brew.dta"', clear
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 
 			} // End IF Block for checking for brewscheme dataset
 			
@@ -284,7 +287,7 @@ prog def brewscheme, rclass
 			else {
 			
 				// Load the dataset
-				qui: use `"`c(sysdir_plus)'/b/brew.dta"', clear
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 				
 			} // End ELSE Block to load the metadata file
 
@@ -322,7 +325,7 @@ prog def brewscheme, rclass
 			} // End IF Block for allsaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`barsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`barsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -388,7 +391,7 @@ prog def brewscheme, rclass
 			} // End IF Block for areasaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`consaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`consaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -421,7 +424,7 @@ prog def brewscheme, rclass
 			} // End IF Block for consaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`boxsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`boxsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -487,7 +490,7 @@ prog def brewscheme, rclass
 			} // End IF Block for piesaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`sunsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`sunsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -553,7 +556,7 @@ prog def brewscheme, rclass
 			} // End IF Block for histsaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`cisaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`cisaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,    ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -586,7 +589,7 @@ prog def brewscheme, rclass
 			} // End IF Block for cisaturation value validation
 			
 			// If color intensity is not a valid value
-			if !inlist(`matsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+			if !inlist(`matsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
 				90, 100, 200) {
 				
 				// If if invalid value is <= 104
@@ -731,8 +734,6 @@ prog def brewscheme, rclass
 			qui: file open scheme using ///
 				`"`c(sysdir_plus)'/s/scheme-`schemename'.scheme"', w replace
 
-			// Set the number of colors based on color parameter
-
 			// Find maximum number of colors to set the recycle parameter
 			loc pcycles = max(	`barcolors', `scatcolors', `areacolors',	 ///   
 								`linecolors', `boxcolors', `dotcolors', 	 ///   
@@ -741,23 +742,39 @@ prog def brewscheme, rclass
 								`refmcolors')
 			
 			// Loop over color macros
-			foreach color in barcolors scatcolors areacolors linecolors		 ///   
-			boxcolors dotcolors piecolors histcolors cicolors matcolors		 ///   
-			reflcolors refmcolors {
+			foreach color in bar scat area line box dot pie hist ci mat		 ///   
+			refl refm {
 			
 				/* Create the sequence of color ids for each graph type based on 
 				the maximum number of colors in any listed color argument. */
-				qui: mata: recycle(``color'', `pcycles')
+				qui: mata: recycle(``color'colors', `pcycles')
 				
 				// Assign the id sequence to a local with seq as suffix
 				loc `color'seq = `"`sequence'"'
 				
+				// Get RGB values for a given palette and max colors
+				qui: levelsof rgb if palette == "``color'style'" & 			 ///   
+				pcolor == ``color'colors', loc(rgbs)
+				
+				// Loop over the rgb values to construct the graph specific  
+				// rgb values
+				foreach c of loc `color'seq {
+				
+					// Construct macro with RGB values for lookup
+					loc `color'rgb `"``color'rgb' "`: word `c' of `rgbs''" "'
+					
+				} // End Loop
+				
 				// Check for debug option
 				if "`dbug'" != "" {
 				
+					// Print debugging message
 					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
 					`"Color sequence: ``color'seq'"'
 					
+					// Print the RGB color string to screen
+					di `"``color'rgb'"'
+				
 				} // End debug option
 				
 			} // End Loop over number of colors for graph types					
@@ -1774,25 +1791,25 @@ prog def brewscheme, rclass
 				loc scatid `: word `i' of `scatcolorsseq''
 				
 				// Get the area color RGB code
-				loc areacolor "`: char _dta[`areastyle'`areaid']'"
+				loc areacolor "`: word `i' of `areargb''"
 
 				// Get the bar color RGB code
-				loc barcolor "`: char _dta[`barstyle'`barid']'"
+				loc barcolor "`: word `i' of `barrgb''"
 				
 				// Get the box plot color RGB code
-				loc boxcolor "`: char _dta[`boxstyle'`boxid']'"
+				loc boxcolor "`: word `i' of `boxrgb''"
 
 				// Get the dot color RGB code
-				loc dotcolor "`: char _dta[`dotstyle'`dotid']'"
+				loc dotcolor "`: word `i' of `dotrgb''"
 
 				// Get the line color RGB code
-				loc linecolor "`: char _dta[`linestyle'`lineid']'"
+				loc linecolor "`: word `i' of `linergb''"
 				
 				// Get the pie slice color RGB code
-				loc piecolor "`: char _dta[`piestyle'`pieid']'"
+				loc piecolor "`: word `i' of `piergb''"
 
 				// Get the scatterplot color RGB code
-				loc scatcolor "`: char _dta[`scatstyle'`scatid']'"
+				loc scatcolor "`: word `i' of `scatrgb''"
 				
 				// Check debug option
 				if "`dbug'" != "" {
@@ -1813,7 +1830,7 @@ prog def brewscheme, rclass
 				file write scheme `"color p`i'area "`areacolor'""' _n
 				file write scheme `"linewidth p`i'area vvthin"' _n
 				file write scheme `"linepattern p`i'area solid"' _n
-				file write scheme `"color p`i'arealine "`linecolor'*`linesaturation'""' _n
+				file write scheme `"color p`i'arealine "`linecolor'""' _n
 				file write scheme `"intensity p`i'area inten`areasaturation'"' _n
 
 				// Define scheme colors for bar graphs
@@ -1835,7 +1852,7 @@ prog def brewscheme, rclass
 				file write scheme `"symbol p`i'box circle"' _n
 				file write scheme `"symbolsize p`i'box medium"' _n
 				file write scheme `"linewidth p`i'boxmark vthin"' _n
-				file write scheme `"color p`i'boxmarkfill "`scatcolor'*`scatsaturation'""' _n
+				file write scheme `"color p`i'boxmarkfill "`scatcolor'""' _n
 				file write scheme `"color p`i'boxmarkline	black"' _n
 				file write scheme `"gsize p`i'boxlabel vsmall"' _n
 				file write scheme `"color p`i'boxlabel black"' _n
@@ -1871,7 +1888,7 @@ prog def brewscheme, rclass
 
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'dotmarkfill "`dotcolor'*`dotsaturation'""' _n
+				file write scheme `"color p`i'dotmarkfill "`dotcolor'"' _n
 				file write scheme `"linewidth p`i'dotmark vthin"' _n
 				file write scheme `"symbol p`i'dot diamond"' _n
 				file write scheme `"symbolsize p`i'dot medium"' _n
@@ -1883,7 +1900,7 @@ prog def brewscheme, rclass
 
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'lineplot "`linecolor'*`linesaturation'""' _n
+				file write scheme `"color p`i'lineplot "`linecolor'""' _n
 				file write scheme `"linewidth p`i'lineplot medium"' _n
 				file write scheme `"linepattern p`i'lineplot solid"' _n
 				file write scheme `"yesno p`i'cmissings yes"' _n
@@ -1901,12 +1918,12 @@ prog def brewscheme, rclass
 				file write scheme `"symbolsize p`i' medium"' _n
 				file write scheme `"color p`i'markline black"' _n
 				file write scheme `"linewidth p`i'mark vthin"' _n
-				file write scheme `"color p`i'markfill "`scatcolor'*`scatsaturation'""' _n
+				file write scheme `"color p`i'markfill "`scatcolor'""' _n
 				file write scheme `"color p`i'label black"' _n
 				file write scheme `"clockdir p`i' 0"' _n
 					
 				// Secondary entries for scatter plots
-				file write scheme `"color p`i'shade "`scatcolor'*`scatsaturation'""' _n
+				file write scheme `"color p`i'shade "`scatcolor'""' _n
 				file write scheme `"intensity p`i'shade inten`scatsaturation'"' _n
 				file write scheme `"linewidth p`i'other vthin"' _n
 				file write scheme `"linepattern p`i'other solid"' _n
@@ -1927,7 +1944,7 @@ prog def brewscheme, rclass
 		foreach metachar in `: char _dta[]' {
 		
 			// Return the characteristics in self names locals
-			ret loc `metachar' `: char _dta[`metachar']'
+			ret loc `metachar' = `"`: char _dta[`metachar']'"'
 			
 		} // End Loop to build returned macros
 		
@@ -1940,670 +1957,5 @@ prog def brewscheme, rclass
 	"http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf"
 	
 // End of Program		
-end
-
-// Declare program
-prog def colorfile, rclass
-
-	// Set version
-	version 13.1
-
-	// Specify syntax tree
-	syntax 
-	
-	// Create local macros to store palettes based on scale types
-	loc qual "accent, dark2, paired, pastel1, pastel2, set1, set2, set3"
-	loc seq1 "blues, bugn, bupu, gnbu, greens, greys, oranges, orrd, pubu"
-	loc seq2 "pubugn, purd, purples, rdpu, reds, ylgn, ylgnbu, ylorbr, ylorrd"
-	loc div "brbg, piyg, prgn, puor, rdbu, rdgy, rdylbu, rdylgn, spectral"
-	loc sem1 "carsa, carse, foodsa, foodse, featuresa, featurese, activitiesa, "
-	loc sem2 "activitiese, fruita, fruite, veggiesa, veggiese, brandsa, "
-	loc sem3 "brandse, drinksa, drinkse"
-	loc specials "mdebar, mdepoint, tableau"
-	
-	// Preserve any data in memory
-	preserve
-	
-		// Clear any data currently in memory
-		clear
-		
-		// Set data set to hold 1 observation per palette
-		set obs 1
-		
-		// Add a README as the sole observation
-		qui: g palette = "This file contains metadata for color palettes" 
-		
-		// Mississippi Department of Education specific colors for bar graphs
-		char _dta[mdebar1] "255 0 0"
-		char _dta[mdebar2] "255 127 0"
-		char _dta[mdebar3] "255 255 0"
-		char _dta[mdebar4] "0 128 0"
-		char _dta[mdebar5] "0 0 255"
-		
-		// Mississippi Department of Education specific colors for scatter plots
-		char _dta[mdepoint1] "0 0 255"
-		char _dta[mdepoint2] "255 127 0"
-		char _dta[mdepoint3] "0 128 0"
-		
-		// Define Qualitative Palettes
-		char _dta[qualitative] `"`qual'"'
-		
-		// Define Divergent Palettes
-		char _dta[divergent] `"`div'"'
-		
-		// Define Sequential/Continuous Palettes
-		char _dta[sequential] `"`seq1' `seq2'"'
-		
-		// Define Semantic Palettes
-		char _dta[semantic] `"`sem1' `sem2' `sem3'"'
-		
-		// Define custom/special Palettes
-		char _dta[custom] `"`specials'"'
-		
-		// Color Brewer Palette - Pastel into Dark/Vivid Colors G, Pu, O, Y, etc...
-		char _dta[accent1]"127 201 127"
-		char _dta[accent2]"190 174 212"
-		char _dta[accent3]"253 192 134"
-		char _dta[accent4]"255 255 153"
-		char _dta[accent5]"56 108 176"
-		char _dta[accent6]"240 2 127"
-		char _dta[accent7]"191 91 23"
-		char _dta[accent8]"102 102 102"
-
-		// Color Brewer Palette - Light to Dark Blues
-		char _dta[blues1]"247 251 255"
-		char _dta[blues2]"222 235 247"
-		char _dta[blues3]"198 219 239"
-		char _dta[blues4]"158 202 225"
-		char _dta[blues5]"107 174 214"
-		char _dta[blues6]"66 146 198"
-		char _dta[blues7]"33 113 181"
-		char _dta[blues8]"8 81 156"
-		char _dta[blues9]"8 48 107"
-
-		// Color Brewer Palette - Browns to Blue-Greens 
-		char _dta[brbg1]"84 48 5"
-		char _dta[brbg2]"140 81 10"
-		char _dta[brbg3]"191 129 45"
-		char _dta[brbg4]"223 194 125"
-		char _dta[brbg5]"246 232 195"
-		char _dta[brbg6]"245 245 245"
-		char _dta[brbg7]"199 234 229"
-		char _dta[brbg8]"128 205 193"
-		char _dta[brbg9]"53 151 143"
-		char _dta[brbg10]"1 102 94"
-		char _dta[brbg11]"0 60 48"
-
-		// Color Brewer Palette - Light Blues to Dark Greens
-		char _dta[bugn1]"247 252 253"
-		char _dta[bugn2]"229 245 249"
-		char _dta[bugn3]"204 236 230"
-		char _dta[bugn4]"153 216 201"
-		char _dta[bugn5]"102 194 164"
-		char _dta[bugn6]"65 174 118"
-		char _dta[bugn7]"35 139 69"
-		char _dta[bugn8]"0 109 44"
-		char _dta[bugn9]"0 68 27"
-
-		// Color Brewer Palette - Light Blues to Dark Purples
-		char _dta[bupu1]"247 252 253"
-		char _dta[bupu2]"224 236 244"
-		char _dta[bupu3]"191 211 230"
-		char _dta[bupu4]"158 188 218"
-		char _dta[bupu5]"140 150 198"
-		char _dta[bupu6]"140 107 177"
-		char _dta[bupu7]"136 65 157"
-		char _dta[bupu8]"129 15 124"
-		char _dta[bupu9]"77 0 75"
-
-		// Color Brewer Palette - Vivid Dark Colors G, O, Pu, Pi, Lt Gn, etc...
-		char _dta[dark21]"27 158 119"
-		char _dta[dark22]"217 95 2"
-		char _dta[dark23]"117 112 179"
-		char _dta[dark24]"231 41 138"
-		char _dta[dark25]"102 166 30"
-		char _dta[dark26]"230 171 2"
-		char _dta[dark27]"166 118 29"
-		char _dta[dark28]"102 102 102"
-
-		// Color Brewer Palette - Green to Blue
-		char _dta[gnbu1]"247 252 240"
-		char _dta[gnbu2]"224 243 219"
-		char _dta[gnbu3]"204 235 197"
-		char _dta[gnbu4]"168 221 181"
-		char _dta[gnbu5]"123 204 196"
-		char _dta[gnbu6]"78 179 211"
-		char _dta[gnbu7]"43 140 190"
-		char _dta[gnbu8]"8 104 172"
-		char _dta[gnbu9]"8 64 129"
-
-		// Color Brewer Palette - Light to Dark Greens
-		char _dta[greens1]"247 252 245"
-		char _dta[greens2]"229 245 224"
-		char _dta[greens3]"199 233 192"
-		char _dta[greens4]"161 217 155"
-		char _dta[greens5]"116 196 118"
-		char _dta[greens6]"65 171 93"
-		char _dta[greens7]"35 139 69"
-		char _dta[greens8]"0 109 44"
-		char _dta[greens9]"0 68 27"
-
-		// Color Brewer Palette - Light to Dark Greys
-		char _dta[greys1]"255 255 255"
-		char _dta[greys2]"240 240 240"
-		char _dta[greys3]"217 217 217"
-		char _dta[greys4]"189 189 189"
-		char _dta[greys5]"150 150 150"
-		char _dta[greys6]"115 115 115"
-		char _dta[greys7]"82 82 82"
-		char _dta[greys8]"37 37 37"
-		char _dta[greys9]"0 0 0"
-
-		// Color Brewer Palette - Light Oranges to Dark Reds
-		char _dta[orrd1]"255 247 236"
-		char _dta[orrd2]"254 232 200"
-		char _dta[orrd3]"253 212 158"
-		char _dta[orrd4]"253 187 132"
-		char _dta[orrd5]"252 141 89"
-		char _dta[orrd6]"239 101 72"
-		char _dta[orrd7]"215 48 31"
-		char _dta[orrd8]"179 0 0"
-		char _dta[orrd9]"127 0 0"
-
-		// Color Brewer Palette - Light to Dark Oranges
-		char _dta[oranges1]"255 245 235"
-		char _dta[oranges2]"254 230 206"
-		char _dta[oranges3]"253 208 162"
-		char _dta[oranges4]"253 174 107"
-		char _dta[oranges5]"253 141 60"
-		char _dta[oranges6]"241 105 19"
-		char _dta[oranges7]"217 72 1"
-		char _dta[oranges8]"166 54 3"
-		char _dta[oranges9]"127 39 4"
-
-		// Color Brewer Palette - Purples to Greens
-		char _dta[prgn1]"64 0 75"
-		char _dta[prgn2]"118 42 131"
-		char _dta[prgn3]"153 112 171"
-		char _dta[prgn4]"194 165 207"
-		char _dta[prgn5]"231 212 232"
-		char _dta[prgn6]"247 247 247"
-		char _dta[prgn7]"217 240 211"
-		char _dta[prgn8]"166 219 160"
-		char _dta[prgn9]"90 174 97"
-		char _dta[prgn10]"27 120 55"
-		char _dta[prgn11]"0 68 27"
-
-		// Color Brewer Palette - Lt/Dk Sets of B, G, R, O, etc...
-		char _dta[paired1]"166 206 227"
-		char _dta[paired2]"31 120 180"
-		char _dta[paired3]"178 223 138"
-		char _dta[paired4]"51 160 44"
-		char _dta[paired5]"251 154 153"
-		char _dta[paired6]"227 26 28"
-		char _dta[paired7]"253 191 111"
-		char _dta[paired8]"255 127 0"
-		char _dta[paired9]"202 178 214"
-		char _dta[paired10]"106 61 154"
-		char _dta[paired11]"255 255 153"
-		char _dta[paired12]"177 89 40"
-
-		// Color Brewer Palette - Pastels starting with R, B, G, Pu, Or, etc...
-		char _dta[pastel11]"251 180 174"
-		char _dta[pastel12]"179 205 227"
-		char _dta[pastel13]"204 235 197"
-		char _dta[pastel14]"222 203 228"
-		char _dta[pastel15]"254 217 166"
-		char _dta[pastel16]"255 255 204"
-		char _dta[pastel17]"229 216 189"
-		char _dta[pastel18]"253 218 236"
-		char _dta[pastel19]"242 242 242"
-
-		// Color Brewer Palette - Pastels starting with lt Gn, O, P, Pi, etc...
-		char _dta[pastel21]"179 226 205"
-		char _dta[pastel22]"253 205 172"
-		char _dta[pastel23]"203 213 232"
-		char _dta[pastel24]"244 202 228"
-		char _dta[pastel25]"230 245 201"
-		char _dta[pastel26]"255 242 174"
-		char _dta[pastel27]"241 226 204"
-		char _dta[pastel28]"204 204 204"
-
-		// Color Brewer Palette - Pinks to Yellow Greens
-		char _dta[piyg1]"142 1 82"
-		char _dta[piyg2]"197 27 125"
-		char _dta[piyg3]"222 119 174"
-		char _dta[piyg4]"241 182 218"
-		char _dta[piyg5]"253 224 239"
-		char _dta[piyg6]"247 247 247"
-		char _dta[piyg7]"230 245 208"
-		char _dta[piyg8]"184 225 134"
-		char _dta[piyg9]"127 188 65"
-		char _dta[piyg10]"77 146 33"
-		char _dta[piyg11]"39 100 25"
-
-		// Color Brewer Palette - Light Purple to Dark Blues
-		char _dta[pubu1]"255 247 251"
-		char _dta[pubu2]"236 231 242"
-		char _dta[pubu3]"208 209 230"
-		char _dta[pubu4]"166 189 219"
-		char _dta[pubu5]"116 169 207"
-		char _dta[pubu6]"54 144 192"
-		char _dta[pubu7]"5 112 176"
-		char _dta[pubu8]"4 90 141"
-		char _dta[pubu9]"2 56 88"
-
-		// Color Brewer Palette - Light Purple to Blue-Green to Dark Green
-		char _dta[pubugn1]"255 247 251"
-		char _dta[pubugn2]"236 226 240"
-		char _dta[pubugn3]"208 209 230"
-		char _dta[pubugn4]"166 189 219"
-		char _dta[pubugn5]"103 169 207"
-		char _dta[pubugn6]"54 144 192"
-		char _dta[pubugn7]"2 129 138"
-		char _dta[pubugn8]"1 108 89"
-		char _dta[pubugn9]"1 70 54"
-
-		// Color Brewer Palette - Purples to Oranges
-		char _dta[puor1]"127 59 8"
-		char _dta[puor2]"179 88 6"
-		char _dta[puor3]"224 130 20"
-		char _dta[puor4]"253 184 99"
-		char _dta[puor5]"254 224 182"
-		char _dta[puor6]"247 247 247"
-		char _dta[puor7]"216 218 235"
-		char _dta[puor8]"178 171 210"
-		char _dta[puor9]"128 115 172"
-		char _dta[puor10]"84 39 136"
-		char _dta[puor11]"45 0 75"
-
-		// Color Brewer Palette - Light Purples to Dark Red
-		char _dta[purd1]"247 244 249"
-		char _dta[purd2]"231 225 239"
-		char _dta[purd3]"212 185 218"
-		char _dta[purd4]"201 148 199"
-		char _dta[purd5]"223 101 176"
-		char _dta[purd6]"231 41 138"
-		char _dta[purd7]"206 18 86"
-		char _dta[purd8]"152 0 67"
-		char _dta[purd9]"103 0 31"
-
-		// Color Brewer Palette - Light to Dark Purples
-		char _dta[purples1]"252 251 253"
-		char _dta[purples2]"239 237 245"
-		char _dta[purples3]"218 218 235"
-		char _dta[purples4]"188 189 220"
-		char _dta[purples5]"158 154 200"
-		char _dta[purples6]"128 125 186"
-		char _dta[purples7]"106 81 163"
-		char _dta[purples8]"84 39 143"
-		char _dta[purples9]"63 0 125"
-
-		// Color Brewer Palette - Reds to Blues
-		char _dta[rdbu1]"103 0 31"
-		char _dta[rdbu2]"178 24 43"
-		char _dta[rdbu3]"214 96 77"
-		char _dta[rdbu4]"244 165 130"
-		char _dta[rdbu5]"253 219 199"
-		char _dta[rdbu6]"247 247 247"
-		char _dta[rdbu7]"209 229 240"
-		char _dta[rdbu8]"146 197 222"
-		char _dta[rdbu9]"67 147 195"
-		char _dta[rdbu10]"33 102 172"
-		char _dta[rdbu11]"5 48 97"
-
-		// Color Brewer Palette - Reds to Greys
-		char _dta[rdgy1]"103 0 31"
-		char _dta[rdgy2]"178 24 43"
-		char _dta[rdgy3]"214 96 77"
-		char _dta[rdgy4]"244 165 130"
-		char _dta[rdgy5]"253 219 199"
-		char _dta[rdgy6]"255 255 255"
-		char _dta[rdgy7]"224 224 224"
-		char _dta[rdgy8]"186 186 186"
-		char _dta[rdgy9]"135 135 135"
-		char _dta[rdgy10]"77 77 77"
-		char _dta[rdgy11]"26 26 26"
-
-		// Color Brewer Palette - Light Reds to Dark Purples
-		char _dta[rdpu1]"255 247 243"
-		char _dta[rdpu2]"253 224 221"
-		char _dta[rdpu3]"252 197 192"
-		char _dta[rdpu4]"250 159 181"
-		char _dta[rdpu5]"247 104 161"
-		char _dta[rdpu6]"221 52 151"
-		char _dta[rdpu7]"174 1 126"
-		char _dta[rdpu8]"122 1 119"
-		char _dta[rdpu9]"73 0 106"
-
-		// Color Brewer Palette - Reds to Yellows to Blues
-		char _dta[rdylbu1]"165 0 38"
-		char _dta[rdylbu2]"215 48 39"
-		char _dta[rdylbu3]"244 109 67"
-		char _dta[rdylbu4]"253 174 97"
-		char _dta[rdylbu5]"254 224 144"
-		char _dta[rdylbu6]"255 255 191"
-		char _dta[rdylbu7]"224 243 248"
-		char _dta[rdylbu8]"171 217 233"
-		char _dta[rdylbu9]"116 173 209"
-		char _dta[rdylbu10]"69 117 180"
-		char _dta[rdylbu11]"49 54 149"
-
-		// Color Brewer Palette - Reds to Yellows to Greens
-		char _dta[rdylgn1]"165 0 38"
-		char _dta[rdylgn2]"215 48 39"
-		char _dta[rdylgn3]"244 109 67"
-		char _dta[rdylgn4]"253 174 97"
-		char _dta[rdylgn5]"254 224 139"
-		char _dta[rdylgn6]"255 255 191"
-		char _dta[rdylgn7]"217 239 139"
-		char _dta[rdylgn8]"166 217 106"
-		char _dta[rdylgn9]"102 189 99"
-		char _dta[rdylgn10]"26 152 80"
-		char _dta[rdylgn11]"0 104 55"
-
-		// Color Brewer Palette - Light to Dark Reds
-		char _dta[reds1]"255 245 240"
-		char _dta[reds2]"254 224 210"
-		char _dta[reds3]"252 187 161"
-		char _dta[reds4]"252 146 114"
-		char _dta[reds5]"251 106 74"
-		char _dta[reds6]"239 59 44"
-		char _dta[reds7]"203 24 29"
-		char _dta[reds8]"165 15 21"
-		char _dta[reds9]"103 0 13"
-
-		// Color Brewer Palette - Vivid/High Saturation R, B, G, P, O, etc...
-		char _dta[set11]"228 26 28"
-		char _dta[set12]"55 126 184"
-		char _dta[set13]"77 175 74"
-		char _dta[set14]"152 78 163"
-		char _dta[set15]"255 127 0"
-		char _dta[set16]"255 255 51"
-		char _dta[set17]"166 86 40"
-		char _dta[set18]"247 129 191"
-		char _dta[set19]"153 153 153"
-
-		// Color Brewer Palette - Saturation between sets1 & 3, G, O, B, Pu, etc...
-		char _dta[set21]"102 194 165"
-		char _dta[set22]"252 141 98"
-		char _dta[set23]"141 160 203"
-		char _dta[set24]"231 138 195"
-		char _dta[set25]"166 216 84"
-		char _dta[set26]"255 217 47"
-		char _dta[set27]"229 196 148"
-		char _dta[set28]"179 179 179"
-
-		// Color Brewer Palette - Pastel Gr, Yl, Pu, Rd, Bu, Or, Lt Gn, etc...
-		char _dta[set31]"141 211 199"
-		char _dta[set32]"255 255 179"
-		char _dta[set33]"190 186 218"
-		char _dta[set34]"251 128 114"
-		char _dta[set35]"128 177 211"
-		char _dta[set36]"253 180 98"
-		char _dta[set37]"179 222 105"
-		char _dta[set38]"252 205 229"
-		char _dta[set39]"217 217 217"
-		char _dta[set310]"188 128 189"
-		char _dta[set311]"204 235 197"
-		char _dta[set312]"255 237 111"
-
-		// Color Brewer Palette - Reds to Oranges to Yellows to Greens to Blues
-		char _dta[spectral1]"158 1 66"
-		char _dta[spectral2]"213 62 79"
-		char _dta[spectral3]"244 109 67"
-		char _dta[spectral4]"253 174 97"
-		char _dta[spectral5]"254 224 139"
-		char _dta[spectral6]"255 255 191"
-		char _dta[spectral7]"230 245 152"
-		char _dta[spectral8]"171 221 164"
-		char _dta[spectral9]"102 194 165"
-		char _dta[spectral10]"50 136 189"
-		char _dta[spectral11]"94 79 162"
-
-		// Color Brewer Palette - Yellow to Green
-		char _dta[ylgn1]"255 255 229"
-		char _dta[ylgn2]"247 252 185"
-		char _dta[ylgn3]"217 240 163"
-		char _dta[ylgn4]"173 221 142"
-		char _dta[ylgn5]"120 198 121"
-		char _dta[ylgn6]"65 171 93"
-		char _dta[ylgn7]"35 132 67"
-		char _dta[ylgn8]"0 104 55"
-		char _dta[ylgn9]"0 69 41"
-
-		// Color Brewer Palette - Yellow to Green to Blue
-		char _dta[ylgnbu1]"255 255 217"
-		char _dta[ylgnbu2]"237 248 177"
-		char _dta[ylgnbu3]"199 233 180"
-		char _dta[ylgnbu4]"127 205 187"
-		char _dta[ylgnbu5]"65 182 196"
-		char _dta[ylgnbu6]"29 145 192"
-		char _dta[ylgnbu7]"34 94 168"
-		char _dta[ylgnbu8]"37 52 148"
-		char _dta[ylgnbu9]"8 29 88"
-
-		// Color Brewer Palette - Yellows to Oranges to Browns
-		char _dta[ylorbr1]"255 255 229"
-		char _dta[ylorbr2]"255 247 188"
-		char _dta[ylorbr3]"254 227 145"
-		char _dta[ylorbr4]"254 196 79"
-		char _dta[ylorbr5]"254 153 41"
-		char _dta[ylorbr6]"236 112 20"
-		char _dta[ylorbr7]"204 76 2"
-		char _dta[ylorbr8]"153 52 4"
-		char _dta[ylorbr9]"102 37 6"
-
-		// Color Brewer Palette - Yellows to Oranges to Reds
-		char _dta[ylorrd1]"255 255 204"
-		char _dta[ylorrd2]"255 237 160"
-		char _dta[ylorrd3]"254 217 118"
-		char _dta[ylorrd4]"254 178 76"
-		char _dta[ylorrd5]"253 141 60"
-		char _dta[ylorrd6]"252 78 42"
-		char _dta[ylorrd7]"227 26 28"
-		char _dta[ylorrd8]"177 0 38"
-		
-		// Tableau Color Palette
-		char _dta[tableau1]"31 119 180"
-		char _dta[tableau2]"255 127 14"
-		char _dta[tableau3]"44 160 44"
-		char _dta[tableau4]"214 39 40"
-		char _dta[tableau5]"148 103 189"
-		char _dta[tableau6]"140 86 75"
-		char _dta[tableau7]"227 119 194"
-		char _dta[tableau8]"127 127 127"
-		char _dta[tableau9]"188 189 34"
-		char _dta[tableau10]"23 190 207"
-		char _dta[tableau11]"174 119 232"
-		char _dta[tableau12]"255 187 120"
-		char _dta[tableau13]"152 223 138"
-		char _dta[tableau14]"255 152 150"
-		char _dta[tableau15]"197 176 213"
-		char _dta[tableau16]"196 156 148"
-		char _dta[tableau17]"247 182 210"
-		char _dta[tableau18]"199 199 199"
-		char _dta[tableau19]"219 219 141"
-		char _dta[tableau20]"158 218 229"
-		
-		// Fruits corresponding to fruit palettes
-		char _dta[fruits]"Apple, Banana, Blueberry, Cherry, Grape, Peach, Tangerine"
-		
-		// Fruit expert selected palette
-		char _dta[fruite1]"146 195 51"
-		char _dta[fruite2]"251 222 6"
-		char _dta[fruite3]"64 105 166"
-		char _dta[fruite4]"200 0 0"
-		char _dta[fruite5]"127 34 147"
-		char _dta[fruite6]"251 162 127"
-		char _dta[fruite7]"255 86 29"
-		
-		// Fruit algorithm selected palette
-		char _dta[fruita1]"44 160 44"
-		char _dta[fruita2]"188 189 34"
-		char _dta[fruita3]"31 119 180"
-		char _dta[fruita4]"214 39 40"
-		char _dta[fruita5]"148 103 189"
-		char _dta[fruita6]"255 187 120"
-		char _dta[fruita7]"255 127 14"
-		
-		// Vegetables corresponding to veggies palettes
-		char _dta[veggies]"Carrot, Celery, Corn, Eggplant, Mushroom, Olive, Tomato"
-		
-		// Vegetable algorithm selected
-		char _dta[veggiesa1]"255 127 14"
-		char _dta[veggiesa2]"44 160 44"
-		char _dta[veggiesa3]"188 189 34"
-		char _dta[veggiesa4]"148 103 189"
-		char _dta[veggiesa5]"140 86 75"
-		char _dta[veggiesa6]"152 223 138"
-		char _dta[veggiesa7]"214 39 40"
-		
-		// Vegetable export selected
-		char _dta[veggiese1]"255 141 61"
-		char _dta[veggiese2]"157 212 105"
-		char _dta[veggiese3]"245 208 64"
-		char _dta[veggiese4]"104 59 101"
-		char _dta[veggiese5]"239 197 143"
-		char _dta[veggiese6]"139 129 57"
-		char _dta[veggiese7]"255 26 34"
-		
-		// Brands corresponding to brand palettes
-		char _dta[brands]"Apple, AT&T, Home Depot, Kodak, Starbucks, Target, Yahoo!"
-		
-		// Brands algorithm selected
-		char _dta[brandsa1]"152 223 138"
-		char _dta[brandsa2]"31 119 180"
-		char _dta[brandsa3]"255 127 14"
-		char _dta[brandsa4]"140 86 75"
-		char _dta[brandsa5]"44 160 44"
-		char _dta[brandsa6]"214 39 40"
-		char _dta[brandsa7]"148 103 189"
-		
-		// Brands export selected
-		char _dta[brandse1]"161 165 169"
-		char _dta[brandse2]"44 163 218"
-		char _dta[brandse3]"242 99 33"
-		char _dta[brandse4]"255 183 0"
-		char _dta[brandse5]"0 112 66"
-		char _dta[brandse6]"204 0 0"
-		char _dta[brandse7]"123 0 153"
-		
-		// Drinks corresponding to brand palettes
-		char _dta[drinks]"A&W Root Beer, Coca-Cola, Dr. Pepper, Pepsi, Sprite, Sunkist, Welch's Grape"
-		
-		// Drinks algorithm selected
-		char _dta[drinksa1]"140 86 75"
-		char _dta[drinksa2]"214 39 40"
-		char _dta[drinksa3]"227 119 194"
-		char _dta[drinksa4]"31 119 180"
-		char _dta[drinksa5]"44 160 44"
-		char _dta[drinksa6]"255 127 14"
-		char _dta[drinksa7]"148 103 189"
-		
-		// Drinks export selected
-		char _dta[drinkse1]"119 67 6"
-		char _dta[drinkse2]"254 0 0"
-		char _dta[drinkse3]"151 37 63"
-		char _dta[drinkse4]"1 106 171"
-		char _dta[drinkse5]"1 159 76"
-		char _dta[drinkse6]"254 115 20"
-		char _dta[drinkse7]"104 105 169"
-		
-		// Foods corresponding to brand palettes
-		char _dta[food]"Sour Cream, Blue Cheese Dressing, Porterhouse Steak, Iceberg Letuce, Onions (Raw), Potato (Baked), Tomato"
-		
-		// Foods algorithm selected
-		char _dta[fooda1]"31 119 180"
-		char _dta[fooda2]"255 127 14"
-		char _dta[fooda3]"140 86 75"
-		char _dta[fooda4]"44 160 44"
-		char _dta[fooda5]"255 187 120"
-		char _dta[fooda6]"219 219 141"
-		char _dta[fooda7]"214 39 40"
-		
-		// Foods export selected
-		char _dta[foodt1]"199 199 199"
-		char _dta[foodt2]"31 119 180"
-		char _dta[foodt3]"140 86 75"
-		char _dta[foodt4]"152 223 138"
-		char _dta[foodt5]"219 219 141"
-		char _dta[foodt6]"196 156 148"
-		char _dta[foodt7]"214 39 40"
-		
-		// Car Colors corresponding to brand palettes
-		char _dta[cars]"Red, Silver, Black, Green, Brown, Blue"
-		
-		// Car Colors algorithm selected
-		char _dta[carsa1]"214 39 40"
-		char _dta[carsa2]"199 199 199"
-		char _dta[carsa3]"127 127 127"
-		char _dta[carsa4]"44 160 44"
-		char _dta[carsa5]"140 86 75"
-		char _dta[carsa6]"31 119 180"
-		
-		// Car Colors export selected
-		char _dta[carst1]"214 39 40"
-		char _dta[carst2]"199 199 199"
-		char _dta[carst3]"127 127 127"
-		char _dta[carst4]"44 160 44"
-		char _dta[carst5]"140 86 75"
-		char _dta[carst6]"31 119 180"
-		
-		// Features corresponding to brand palettes
-		char _dta[features]"Speed, Reliability, Comfort, Safety, Efficiency"
-		
-		// Features algorithm selected
-		char _dta[featuresa1]"214 39 40"
-		char _dta[featuresa2]"31 119 180"
-		char _dta[featuresa3]"140 86 75"
-		char _dta[featuresa4]"255 127 14"
-		char _dta[featuresa5]"44 160 44"
-		
-		// Features export selected
-		char _dta[featurest1]"214 39 40"
-		char _dta[featurest2]"31 119 180"
-		char _dta[featurest3]"174 119 232"
-		char _dta[featurest4]"44 160 44"
-		char _dta[featurest5]"152 223 138"
-		
-		// Activities corresponding to brand palettes
-		char _dta[activities]"Sleeping, Working, Leisure, Eating, Driving"
-		
-		// Activities algorithm selected
-		char _dta[activitiesa1]"140 86 75"
-		char _dta[activitiesa2]"255 127 14"
-		char _dta[activitiesa3]"31 119 180"
-		char _dta[activitiesa4]"227 119 194"
-		char _dta[activitiesa5]"214 39 40"
-		
-		// Activities export selected
-		char _dta[activitiest1]"31 119 180"
-		char _dta[activitiest2]"214 39 40"
-		char _dta[activitiest3]"152 223 138"
-		char _dta[activitiest4]"44 160 44"
-		char _dta[activitiest5]"127 127 127"
-		
-
-		// Create values returned in macros
-		foreach metachar in `: char _dta[]' {
-		
-			// Return the characteristics in self names locals
-			ret loc `metachar' `: char _dta[`metachar']'
-			
-		} // End Loop to build returned macros
-		
-		// Add notes with sources to the data set
-		note : ColorBrewer palettes from http://www.colorbrewer2.org
-		note : Tableau and Semantic color palettes from http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf
-		
-			
-		// Save the file for use by the scheme generation file	
-		qui: save `"`c(sysdir_plus)'/b/brew.dta"', replace
-
-	// Bring original data back into memory
-	restore
-	
-// End of program
 end
 
