@@ -16,13 +16,13 @@
 *     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     428                                                                      *
+*     412                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.1
-*! 08SEP2015
+*! v 0.0.2
+*! 25SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -38,18 +38,7 @@ prog def brewdb
 		
 	// Preserve the data in memory
 	preserve
-	
-		// Check for a b subdirectory in personal
-		cap confirm new file `"`c(sysdir_personal)'b"'
-		
-		// If it would be a new directory
-		if _rc == 0 {
-		
-			// Create the subdirectory
-			qui: mkdir `"`c(sysdir_personal)'b"'
-		
-		} // End IF Block for b subdirectory of personal
-		
+			
 		// Check for the metadata dataset
 		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 

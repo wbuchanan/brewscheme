@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1962                                                                     *
+*     1980                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.5
-*! 24SEP2015
+*! v 0.0.6
+*! 25SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -58,10 +58,13 @@ prog def brewscheme, rclass
 		preserve
 		
 			// Check for the metadata dataset
-			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
+			cap confirm new file `"`c(sysdir_personal)'b/"'
 
-			// If file doesn't exist
-			if _rc == 0 {
+			// If directory doesn't exist
+			if inlist(_rc, 0, 603) {
+
+				// Create the directory 
+				mkdir `"`c(sysdir_personal)'b/"'
 			
 				// Call brewmeta to build lookup data set
 				qui: brewdb, `refresh'
@@ -69,17 +72,32 @@ prog def brewscheme, rclass
 				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
 				
-				
-				
 			} // End IF Block to build look up data set
 				
-			// If the file exists load it
+			// If there is a b subdirectory on the PERSONAL ADOPATH
 			else {
 				
-				// Load the lookup table
-				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-
-				char li
+				// Check for existence of the brewmeta.dta file
+				cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
+				
+				// If file exists and the refresh option was not specified
+				if inlist(_rc, 0, 603) & "`refresh'" == "" {
+				
+					// Load the lookup table that already exists
+					qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+				
+				} // End IF Block to build new lookup file 
+				
+				// If the file doesn't exist
+				else {
+				
+					// Call brewdb to build the dataset
+					qui: brewdb, `refresh'
+				
+					// Load the dataset in memory
+					qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+					
+				} // End ELSE Block for non-existent brewmeta.dta file
 				
 			} // End ELSE Block to load brewmeta file
 			

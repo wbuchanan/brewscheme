@@ -17,13 +17,9 @@ by Cynthia Brewer ({browse "http://colorbrewer.org/": Color Brewer}).
 
 {title:Description}
 
-{p 4 4 4}{cmd:brewmeta} is used to build a look-up table of RGB values for 
-palettes as part of the {browse "http://www.ColorBrewer2.org":Color Brewer} 
-research.  Additionally, the program also parses the available meta data on the 
+{p 4 4 4}{cmd:brewmeta} is used to look-up the available meta data on the 
 "friendliness" properties of the various color palettes and includes an option 
-to look up those meta data on the fly.  Additionally, the program will 
-automatically call the {help brewextra} program to add the other available 
-research-based color palettes to the file when constructed. {p_end}
+to look up those meta data on the fly.   {p_end}
 
 {title:Options}
 {p 4 4 8}{cmd:colors} is a required argument indicating the number of the colors  
@@ -51,14 +47,6 @@ types of results that can be expected to be retrieved from this functionality: {
 {col 10}{hi:photocopy}{col 35}{Displays indicator of Photocopying friendliness - if available}
 {col 10}{hi:meta}{col 35}{Provides information about the scale type for the palette (e.g., qualitative, sequential, divergent) or provides labelling/other miscellaneous data from the published research}
 {col 10}{hline 70}{break}
-
-
-{p 4 4 8}{cmdab:ref:resh} is an optional argument used to override the default 
-behavior of the program once the lookup file is built.  This will force the 
-program to download a fresh copy of the color palettes from the 
-{browse "http://www.ColorBrewer2.org":Color Brewer} website, parse the javascript 
-file, and rebuild the brewmeta.dta dataset. {p_end}
-
 
 {marker examples}{title:Examples}{break}
 

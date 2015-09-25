@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.4
-*! 08SEP2015
+*! v 0.0.5
+*! 25SEP2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -59,7 +59,7 @@ prog def brewextra, rclass
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
 		
 		// Check for existing extras file or refresh option
-		if _rc == 0 | "`refresh'" != "" {
+		if inlist(_rc, 0, 603) | "`refresh'" != "" {
 		
 			// Clear existing data from memory
 			clear
@@ -420,11 +420,11 @@ prog def brewextra, rclass
 				// Save the brew extras data set
 				qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
 				
-			} // End IF Block to save the extra color palettes
-		
-			// Push the extras file through check file spec sub routine
-			checkfilespec `"`c(sysdir_personal)'brewuser/extras.dta"'
+				// Push the extras file through check file spec sub routine
+				checkfilespec `"`c(sysdir_personal)'brewuser/extras.dta"'
 			
+			} // End IF Block to save the extra color palettes
+					
 		} // End IF Block for refresh/no extras file
 									
 		// If the files parameter contains an argument 								
