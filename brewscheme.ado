@@ -22,7 +22,7 @@
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.7
+*! v 0.0.8
 *! 13OCT2015
 
 // Drop the program from memory if loaded
@@ -61,7 +61,7 @@ prog def brewscheme, rclass
 			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 			// If file doesn't exist
-			if _rc == 0 {
+			if inlist(_rc, 0, 603) | "`refresh'" != "" { {
 			
 				// Call brewmeta to build lookup data set
 				qui: brewdb, `refresh'
