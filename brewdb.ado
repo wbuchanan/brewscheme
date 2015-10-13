@@ -16,13 +16,13 @@
 *     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     412                                                                      *
+*     432                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewdb
 *! v 0.0.2
-*! 25SEP2015
+*! 12OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -220,6 +220,15 @@ prog def brewdb
 			
 			// Rename the generic variable 
 			qui: rename v rgb
+			
+			/* This patches a bug with parsing the JavaScript when the array 
+			contains > 10 elements.  This only affected the paired and set3 
+			colorbrewer palettesand trims the extra character added to the 
+			start and/or end of the string. */
+			qui: replace rgb = cond(regexm(rgb, "([0-9][0-9][0-9][0-9]$)"),  ///   
+								substr(rgb, 1, 11), 						 ///   
+						  cond(regexm(rgb, "(^[0-9][0-9][0-9][0-9])"), 		 ///   
+						  substr(rgb, 2, 12), rgb))
 			
 			// Make all palette names lower cased
 			qui: replace palette = lower(palette)

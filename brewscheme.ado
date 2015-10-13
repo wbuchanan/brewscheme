@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1980                                                                     *
+*     1964                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.6
-*! 25SEP2015
+*! v 0.0.7
+*! 13OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -70,35 +70,16 @@ prog def brewscheme, rclass
 				qui: brewdb, `refresh'
 				
 				// Load the lookup table
-				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear			
 				
 			} // End IF Block to build look up data set
 				
 			// If there is a b subdirectory on the PERSONAL ADOPATH
 			else {
 				
-				// Check for existence of the brewmeta.dta file
-				cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
-				
-				// If file exists and the refresh option was not specified
-				if inlist(_rc, 0, 603) & "`refresh'" == "" {
-				
-					// Load the lookup table that already exists
-					qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-				
-				} // End IF Block to build new lookup file 
-				
-				// If the file doesn't exist
-				else {
-				
-					// Call brewdb to build the dataset
-					qui: brewdb, `refresh'
-				
-					// Load the dataset in memory
-					qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-					
-				} // End ELSE Block for non-existent brewmeta.dta file
-				
+				// Load the lookup table
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+
 			} // End ELSE Block to load brewmeta file
 			
 			// Get acceptable palette names
@@ -215,7 +196,7 @@ prog def brewscheme, rclass
 				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 ///   
 				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
 				
-				// Check to see if all style was an available palette
+				// Check to see if some style was an available palette
 				if `: list somestyle in palettes' != 1 {
 												
 					// Let user know valid values
@@ -227,7 +208,7 @@ prog def brewscheme, rclass
 				} // End IF Block to check for valid color palette
 				
 				// Loop over # available colors per graph
-				foreach stile in "`grstyles'" {
+				foreach stile in `grstyles' {
 				
 					// If the style is missing and valid # colors for default
 					if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
@@ -244,6 +225,7 @@ prog def brewscheme, rclass
 								loc `x'colors `somecolors'
 								loc `x'saturation `somesaturation'
 								
+								
 							} // End IF Block for unspecified graphs
 							
 							// If the graph type has a style specified
@@ -256,6 +238,8 @@ prog def brewscheme, rclass
 							
 						} // End Loop over graph types
 						
+						exit
+						
 					} // End IF Block checking # colors available for default
 					
 					// If more colors specified for default than available
@@ -266,7 +250,7 @@ prog def brewscheme, rclass
 						`"available (``stile'style') in the palette "`stile'style""'
 						
 						// Kill the program
-						exit
+						err 198
 						
 					} // End ELSEIF Block for # colors > available for defaults
 					
@@ -279,7 +263,7 @@ prog def brewscheme, rclass
 						`"available (``stile'style') in the palette "`stile'style""'
 						
 						// Kill the program
-						exit
+						err 198
 						
 					} // End ELSEIF Block for # colors > available for graph types
 					
@@ -737,16 +721,15 @@ prog def brewscheme, rclass
 				} // End ELSE Block for some other values of saturation
 				
 			} // End IF Block for somesaturation value validation
-			
 
 			// Line saturation gets defined as a color multiplier
-			loc linesaturation = `linesaturation'/100
+			// loc linesaturation = `linesaturation'/100
 			
 			// Dot plot saturation is defined as a color multiplier
-			loc dotsaturation = `dotsaturation'/100
+			// loc dotsaturation = `dotsaturation'/100
 								
 			// Scatterplot saturation gets defined as a color multiplier
-			loc scatsaturation = `scatsaturation'/100
+			// loc scatsaturation = `scatsaturation'/100
 					
 			// Write the scheme file to a location on the path
 			qui: file open scheme using ///
@@ -761,7 +744,7 @@ prog def brewscheme, rclass
 			
 			// Loop over color macros
 			foreach color in bar scat area line box dot pie hist ci mat		 ///   
-			refl refm {
+			refl refm sun {
 			
 				/* Create the sequence of color ids for each graph type based on 
 				the maximum number of colors in any listed color argument. */
@@ -774,6 +757,14 @@ prog def brewscheme, rclass
 				qui: levelsof rgb if palette == "``color'style'" & 			 ///   
 				pcolor == ``color'colors', loc(rgbs)
 				
+				if "`dbug'" != "" {
+					levelsof rgb if palette == "``color'style'" & pcolor == ``color'colors'
+					di "Graph type = `color'"
+					// Print debugging message
+					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
+					`"Color sequence: ``color'seq'"'
+				}
+				
 				// Loop over the rgb values to construct the graph specific  
 				// rgb values
 				foreach c of loc `color'seq {
@@ -785,11 +776,7 @@ prog def brewscheme, rclass
 				
 				// Check for debug option
 				if "`dbug'" != "" {
-				
-					// Print debugging message
-					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
-					`"Color sequence: ``color'seq'"'
-					
+									
 					// Print the RGB color string to screen
 					di `"``color'rgb'"'
 				
@@ -981,23 +968,23 @@ prog def brewscheme, rclass
 			file write scheme `"color minortick black"' _n
 			file write scheme `"color ci_line black"' _n
 			file write scheme `"color ci_arealine black"' _n
-			file write scheme `"color ci_area "`: char _dta[`cistyle'1]'" "' _n
-			file write scheme `"color ci_symbol "`: char _dta[`cistyle'1]'" "' _n
+			file write scheme `"color ci_area "`: word 1 of `areargb''" "' _n
+			file write scheme `"color ci_symbol "`: word 1 of `cirgb''" "' _n
 			file write scheme `"color ci2_line black"' _n
 			file write scheme `"color ci2_arealine black"' _n
-			file write scheme `"color ci2_area "`: char _dta[`cistyle'2]'" "' _n
-			file write scheme `"color ci2_symbol "`: char _dta[`cistyle'2]'" "' _n
+			file write scheme `"color ci2_area "`: word 2 of `areargb''" "' _n
+			file write scheme `"color ci2_symbol "`: word 2 of `cirgb''" "' _n
 			file write scheme `"color pieline black"' _n
 			file write scheme `"color matrix white"' _n
 			file write scheme `"color matrixmarkline black"' _n
 			file write scheme `"color refmarker black"' _n
 			file write scheme `"color refmarkline black"' _n
-			file write scheme `"color histogram "`: char _dta[`histstyle'1]'" "' _n
+			file write scheme `"color histogram "`: word 1 of `histrgb''" "' _n
 			file write scheme `"color histback white"' _n
 			file write scheme `"color histogram_line black"' _n
 			file write scheme `"color dot_line black"' _n
 			file write scheme `"color dot_arealine black"' _n
-			file write scheme `"color dot_area "`: char _dta[`dotstyle'1]'" "' _n
+			file write scheme `"color dot_area "`: word 1 of `areargb''" "' _n
 			file write scheme `"color dotmarkline black"' _n
 			file write scheme `"color xyline black"' _n
 			file write scheme `"color refline black"' _n
@@ -1024,11 +1011,11 @@ prog def brewscheme, rclass
 			file write scheme `"color contour_begin `constart'"' _n
 			file write scheme `"color contour_end `conend'"' _n
 			file write scheme `"color zyx2 black"' _n
-			file write scheme `"color sunflower "`: char _dta[`sunstyle'1]'""' _n
+			file write scheme `"color sunflower "`: word 1 of `sunrgb''""' _n
 			file write scheme `"color sunflowerlb black"' _n
-			file write scheme `"color sunflowerlf "`: char _dta[`sunstyle'1]'""' _n
+			file write scheme `"color sunflowerlf "`: word 2 of `sunrgb''""' _n
 			file write scheme `"color sunflowerdb black"' _n
-			file write scheme `"color sunflowerdf "`: char _dta[`sunstyle'2]'""' _n
+			file write scheme `"color sunflowerdf "`: word 3 of `sunrgb''""' _n
 			file write scheme `"color pboxlabelfill white"' _n
 			file write scheme `"color plabelfill white"' _n
 			file write scheme `"color pmarkback white"' _n
