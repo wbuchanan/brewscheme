@@ -58,7 +58,7 @@ prog def brewscheme, rclass
 		preserve
 		
 			// Check for the metadata dataset
-			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
+			cap confirm new file `"`c(sysdir_personal)'b/"'
 
 			// If file doesn't exist
 			if inlist(_rc, 0, 603) | "`refresh'" != "" { {
@@ -71,7 +71,7 @@ prog def brewscheme, rclass
 				
 			} // End IF Block to build look up data set
 				
-			// If the file exists load it
+			// If there is a b subdirectory on the PERSONAL ADOPATH
 			else {
 				
 				// Load the lookup table

@@ -262,6 +262,9 @@ of the ColorBrewer copyright notice for additional information pertaining to the
 
 {marker contact}{p 4 4 4}{title:{ul:Author}}{p_end}{break}
 {p 4 4 4}William R. Buchanan, Ph.D. {p_end}
-{p 4 4 4}Strategic Data Fellow {p_end}
-{p 4 4 4}{browse "http://mde.k12.ms.us":Mississippi Department of Education}{p_end}
-{p 4 4 4}BBuchanan at mde [dot] k12 [dot] ms [dot] us{p_end}{break}
+{p 4 4 4}Data Scientist{p_end}
+{p 4 4 4}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+
+{marker notes}{p 4 4 4}{title:{ul:Notes}}{p_end}{break}
+{p 4 4 4}Development of this program began while I was a Strategic Data Fellow at the {browse "http://mde.k12.ms.us":Mississippi Department of Education}.{p_end}
+

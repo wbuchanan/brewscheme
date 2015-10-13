@@ -5,9 +5,12 @@ brewscheme is a tool to facilitate Stata users developing graph schemes using re
 24sep2015 - Program should now automatically recycle rgb values to make the scheme file produce the same number of color values across all graph types (e.g., if the maximum value supplied to any of the colors parameters is 8 all other types with color parameters < 8 will be recycled until there are 8 values.  The creation of the lookup table is now pushed to a subroutine called ```brewdb.ado``` that has no required arguments, but includes an optional argument to rebuild the database.  
 
 ## TODO
-1.) Add submodule brewtheme to allow users to manipulate background settings to mirror layouts like [ggplot2](https://github.com/hadley/ggplot2) and/or others.
-2.) Build named color installer to add named colors from [xkcd](http://xkcd.com/color/rgb.txt) and [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) sites.
-3.) Build proofer to show same graph under each of the three colorblindness conditions described on [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) website; replay the graphs, but translate the RGB valuess for each of the three conditions, then have options to either ``gr combine``` or produce separate graph images to show how the graph would look to individuals with different forms of colorblindness.
+
+1.  Add submodule brewtheme to allow users to manipulate background settings to mirror layouts like [ggplot2](https://github.com/hadley/ggplot2) and/or others.
+
+2.  Build named color installer to add named colors from [xkcd](http://xkcd.com/color/rgb.txt) and [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) sites.
+
+3.  Build proofer to show same graph under each of the three colorblindness conditions described on [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) website; replay the graphs, but translate the RGB valuess for each of the three conditions, then have options to either ``gr combine``` or produce separate graph images to show how the graph would look to individuals with different forms of colorblindness.
 
 ## Examples
 Generate a graph scheme using the set1 color brewer palette for all graphs.  Use the first five colors of the palette and set the color intensity to 80 for each of the graphs.
@@ -36,4 +39,8 @@ Lin, S., Fortuna, J., Kulkarni, C., Stone, M., & Heer, J. (2013). Selecting Sema
     Data Visualization. In _Computer Graphics Forum_ (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.
 
 ## License Information
-Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.
+Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.  
+
+## Additional Info
+For additional information/examples about the brewscheme package see [Buchanan, W. R. (2015). Brewing color schemes in Stata: Making it easier for end users to customize Stata graphs.  Presented 31jul2015 at the  2015 Stata North American Users' Group Meeting.  Columbus, OH.](http://www.stata.com/meeting/columbus15/abstracts/materials/columbus15_buchanan.pdf)
+

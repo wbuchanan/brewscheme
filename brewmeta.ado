@@ -35,7 +35,7 @@ prog def brewmeta, rclass
 
 	// Define the syntax structure of the program
 	syntax anything(name = palette id = "palette name"), colorid(integer) ///   
-		[colors(integer -12) PROPerties PROPerties2(string asis) REFresh]
+		[colors(integer -12) PROPerties PROPerties2(string asis) ]
 		
 	// Strip any quation marks from the palette name
 	loc palette : subinstr loc palette `"""' "", all
