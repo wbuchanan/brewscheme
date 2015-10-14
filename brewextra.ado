@@ -22,7 +22,7 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.5
+*! v 0.0.6
 *! 14OCT2015
 
 // Drop the program from memory if loaded
@@ -40,26 +40,14 @@ prog def brewextra, rclass
 	// Preserve pre-existing state of the data
 	preserve
 	
-		// Check for a b subdirectory in personal
-		cap confirm new file `"`c(sysdir_personal)'brewuser"'
-		
-		// If it would be a new directory
-		if inlist(_rc, 0, 603) | "`refresh'" != "" {
-		
-			// Create the subdirectory
-			qui: mkdir `"`c(sysdir_personal)'brewuser"'
-			
-			// Print status message to console
-			di as res `"Creating directory `c(sysdir_personal)'brewuser "'	 ///   
-			`"to store user defined palette files."'
-		
-		} // End IF Block for b subdirectory of personal
+		// Check for/build directory
+		dirfile, p(`"`c(sysdir_personal)'brewuser"')
 		
 		// Check for refresh option
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
 		
 		// Check for existing extras file or refresh option
-		if inlist(_rc, 0, 603) | "`refresh'" != "" {
+		if _rc == 0 | "`refresh'" != "" {
 		
 			// Clear existing data from memory
 			clear
@@ -410,20 +398,12 @@ prog def brewextra, rclass
 			
 			// Return file path/name for file created
 			ret loc brewextras = `"`c(sysdir_personal)'brewuser/extras.dta"'
-			
-			// Check for brewuser directory
-			if `"`: dir `"`c(sysdir_personal)'"' dirs brewuser, nofail respect'"' == "" {
-			
-				// Make directory
-				qui: mkdir `"`c(sysdir_personal)'brewuser"'
+							
+			// Save the brew extras data set
+			qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
 				
-				// Save the brew extras data set
-				qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
-				
-			} // End IF Block to save the extra color palettes
-		
 			// Push the extras file through check file spec sub routine
-			checkfilespec `"`c(sysdir_personal)'brewuser/extras.dta"'
+			checkfilespec 
 			
 		} // End IF Block for refresh/no extras file
 									
@@ -453,153 +433,188 @@ end
 // Define subroutine to check the additional incoming files
 prog def checkfilespec, rclass
 
-		// Syntax structure for subroutine
- 		syntax anything(name = infiles id = "Palette file")
-		
-		// Preserve state of data currently in memory
-		preserve
+	// Syntax structure for subroutine
+	syntax [anything(name = infiles id = "Palette file")]
+	
+	// Preserve state of data currently in memory
+	preserve
+	
+		// Onload load file if not null
+		if `"`infiles'"' != "" {
 		
 			// Load the data file into memory
 			qui: use `infiles', clear
+
+		} // End IF Block for checking of file specifications
+		
+		// Loop over required variables to make sure all necessary data is 
+		// available
+		foreach v in palette rgb seqid meta {
+		
+			// Confirm variable exists
+			cap confirm variable `v'
 			
-			// Loop over required variables to make sure all necessary data is 
-			// available
-			foreach v in palette rgb seqid meta {
+			// If variable doesn't exist
+			if _rc != 0 {
 			
-				// Confirm variable exists
-				cap confirm variable `v'
+				// Display error message
+				di as err "Variable `v' does not exist in the file."
 				
-				// If variable doesn't exist
-				if _rc != 0 {
+				// Return code of 1
+				ret sca code = 1
+
+			} // End IF Block for variable existence
+			
+			// If variable exists check type
+			else {
+			
+				// Check to make sure the variable is a string
+				if regexm("`: type `v''", "str*") != 1 {
 				
-					// Display error message
-					di as err "Variable `v' does not exist in the file."
+					// Print error message to console
+					di as err "Variable `v' must be a string variable."
 					
 					// Return code of 1
 					ret sca code = 1
-
-				} // End IF Block for variable existence
+					
+				} // End IF Block for type cast checking
+			
+			} // End ELSE Block for type checking
+			
+		} // End Loop over string variables
+		
+		// Loop over numeric variables
+		foreach v in colorblind print photocopy lcd colorid pcolor {
+		
+			// Confirm variable exists
+			cap confirm variable `v'
+			
+			// If variable doesn't exist
+			if _rc != 0 & inlist("`v'", "colorid", "pcolor") == 1 {
+			
+				// Display error message
+				di as err "Variable `v' does not exist in the file."
 				
-				// If variable exists check type
+				// Return code of 1
+				ret sca code = 1
+
+			} // End IF Block for variable existence
+			
+			// For the meta data variables create them if they don't exist
+			else if _rc != 0 & !inlist("`v'", "colorid", "pcolor") == 1 {
+			
+				// Populate the meta data variables with missing codes for 
+				// information not available
+				qui: g `v' = .n
+				
+			} // End ELSEIF Block 
+			
+			// Otherwise secondary checks
+			else {
+			
+				// For id variables they must be non-null
+				if inlist("`v'", "colorid", "pcolor") == 1  {
+				
+					// See if any values are missing 
+					qui: count if mi(`v')
+					
+					// Exit if missing values
+					if `= r(N)' != 0 {
+					
+						// Print error message
+						di as err `"Missing values encountered in `v'"'
+						
+						// Exit program
+						exit
+						
+					} // End IF Block for no null value ids
+					
+				} // End IF Block for ID Variable additional validation
+				
+				// Otherwise
 				else {
 				
-					// Check to make sure the variable is a string
-					if regexm("`: type `v''", "str*") != 1 {
+					// Replace missing values with coded missing values
+					qui: replace `v' = .n if mi(`v')
 					
-						// Print error message to console
-						di as err "Variable `v' must be a string variable."
-						
-						// Return code of 1
-						ret sca code = 1
-						
-					} // End IF Block for type cast checking
+				} // End ELSE Block for metadata variables
 				
-				} // End ELSE Block for type checking
-				
-			} // End Loop over string variables
+			} // End ELSE Block
 			
-			// Loop over numeric variables
-			foreach v in colorblind print photocopy lcd colorid pcolor {
-			
-				// Confirm variable exists
-				cap confirm variable `v'
-				
-				// If variable doesn't exist
-				if _rc != 0 & inlist("`v'", "colorid", "pcolor") == 1 {
-				
-					// Display error message
-					di as err "Variable `v' does not exist in the file."
-					
-					// Return code of 1
-					ret sca code = 1
+		} // End Loop over numeric variables
+		
+		// Get the names of the palettes to add to the brewmeta data file
+		qui: levelsof palette, loc(newpalettes)
 
-				} // End IF Block for variable existence
-				
-				// For the meta data variables create them if they don't exist
-				else if _rc != 0 & !inlist("`v'", "colorid", "pcolor") == 1 {
-				
-					// Populate the meta data variables with missing codes for 
-					// information not available
-					qui: g `v' = .n
-					
-				} // End ELSEIF Block 
-				
-				// Otherwise secondary checks
-				else {
-				
-					// For id variables they must be non-null
-					if inlist("`v'", "colorid", "pcolor") == 1  {
-					
-						// See if any values are missing 
-						qui: count if mi(`v')
-						
-						// Exit if missing values
-						if `= r(N)' != 0 {
-						
-							// Print error message
-							di as err `"Missing values encountered in `v'"'
-							
-							// Exit program
-							exit
-							
-						} // End IF Block for no null value ids
-						
-					} // End IF Block for ID Variable additional validation
-					
-					// Otherwise
-					else {
-					
-						// Replace missing values with coded missing values
-						qui: replace `v' = .n if mi(`v')
-						
-					} // End ELSE Block for metadata variables
-					
-				} // End ELSE Block
-				
-			} // End Loop over numeric variables
-			
-			// Get the names of the palettes to add to the brewmeta data file
-			qui: levelsof palette, loc(newpalettes)
+		// Set the display order of the variables to match brewmeta.dta
+		order palette colorblind print photocopy lcd colorid pcolor rgb 	 ///   
+		maxcolors seqid meta
 
-			// Set the display order of the variables to match brewmeta.dta
-			order palette colorblind print photocopy lcd colorid pcolor rgb  ///   
-			maxcolors seqid meta
+		// Compress dataset before saving
+		qui: compress
+		
+		// Check for path delimiters in the file name
+		loc fnm = regexm(`"`infiles'"', "(\/)")
+		
+		// If filename includes path delimiters
+		if `fnm' == 1 & `"`infiles'"' != "" {
+		
+			// Get new file name from user
+			di as res "Enter a short file name for this palette" _request(_nfnm)
 
-			// Compress dataset before saving
-			qui: compress
+			// Save file to user directory
+			qui: save `"`c(sysdir_personal)'brewuser/`nfnm'.dta"'
 			
-			// Parse the file path/name passed to the function and store the file name
-			loc fnm `"`: di regexr(`infiles', ".*/", "")'"'
-			
+		} // End IF Block for filename with file path
+		
+		// If no path delimiters in name
+		else if `fnm' == 0 & `"`infiles'"' != "" {
+		
+			// Set local macro for later reference
+			loc nfnm `"`infiles'"'
+		
 			// If the file checks out thus far save it to the extras directory
-			qui: save `"`c(sysdir_personal)'brewuser/`fnm'"', replace
-						
-			// Load brewmeta file
-			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-			
-			// Get existing palettes characteristics
-			loc existpalettes : char _dta[palettes]
+			qui: save `"`c(sysdir_personal)'brewuser/`infiles'"'
+					
+		} // End ELSEIF Block for fileonly file name
 		
-			// Append new colors
-			qui: append using `"`c(sysdir_personal)'brewuser/`fnm'"'
-			
-			// Drop any duplicates
-			qui: duplicates drop
-			
-			// Define meta data characteristics with available palettes
-			char _dta[palettes] `"`existpalettes', `newpalettes'"'	
-			
-			// Save over old file
-			qui: save, replace
+		// For all other cases (e.g., null) save default file name
+		else {
 		
-		// Restore to original state of data in memory
-		restore
+			// Default file built with program
+			loc nfnm "extras.dta"
 		
-		// Return a code of 0
-		ret sca code = 0
+			// If the file checks out thus far save it to the extras directory
+			qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
 		
-		// Return file name
-		ret loc filenm = `"`c(sysdir_personal)'brewuser/`infiles'"'
+		} // End ELSE Block for default file name
+		
+		// Load brewmeta file
+		qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+		
+		// Get existing palettes characteristics
+		loc existpalettes : char _dta[palettes]
+	
+		// Append new colors
+		qui: append using `"`c(sysdir_personal)'brewuser/`nfnm'"'
+		
+		// Drop any duplicates
+		qui: duplicates drop
+		
+		// Define meta data characteristics with available palettes
+		char _dta[palettes] `"`existpalettes', `newpalettes'"'	
+		
+		// Save over old file
+		qui: save, replace
+	
+	// Restore to original state of data in memory
+	restore
+	
+	// Return a code of 0
+	ret sca code = 0
+	
+	// Return file name
+	ret loc filenm = `"`c(sysdir_personal)'brewuser/`infiles'"'
 		
 // End Subroutine
 end		

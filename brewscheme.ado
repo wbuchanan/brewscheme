@@ -61,6 +61,20 @@ prog def brewscheme, rclass
 			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 			// If file doesn't exist
+			if inlist(_rc, 0, 603) {
+			
+				// Call brewmeta to build lookup data set
+				qui: brewdb, `refresh'
+				
+				// Load the lookup table
+				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear			
+				
+			} // End IF Block to build look up data set
+			
+			// Check for file
+			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
+				
+			// If file doesn't exist
 			if inlist(_rc, 0, 603) | "`refresh'" != "" {
 			
 				// Call brewmeta to build lookup data set
@@ -70,7 +84,7 @@ prog def brewscheme, rclass
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear			
 				
 			} // End IF Block to build look up data set
-				
+			
 			// If the file exists load it
 			else {
 				

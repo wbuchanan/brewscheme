@@ -15,7 +15,7 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20151013
+d Distribution-Date: 20151014
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -35,3 +35,4 @@ f brewextra.sthlp
 f recycle.mata
 f recycle.mo
 f librecycle.mlib
+f dirfile.ado

@@ -39,11 +39,14 @@ prog def brewdb
 	// Preserve the data in memory
 	preserve
 			
+		// Check for directory and if not build it	
+		dirfile, p(`"`c(sysdir_personal)'b"') rebuild
+
 		// Check for the metadata dataset
-		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
+		cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
-		if _rc != 0 | _rc == 603 | `"`refresh'"' != "" {
+		if _rc == 0 | `"`refresh'"' != "" {
 			
 			// Create a tempfile to read the JS into
 			tempfile brewjs
