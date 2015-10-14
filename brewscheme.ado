@@ -23,7 +23,7 @@
 		
 *! brewscheme
 *! v 0.0.8
-*! 13OCT2015
+*! 14OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -58,10 +58,10 @@ prog def brewscheme, rclass
 		preserve
 		
 			// Check for the metadata dataset
-			cap confirm new file `"`c(sysdir_personal)'b/"'
+			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 			// If file doesn't exist
-			if inlist(_rc, 0, 603) | "`refresh'" != "" { {
+			if inlist(_rc, 0, 603) | "`refresh'" != "" {
 			
 				// Call brewmeta to build lookup data set
 				qui: brewdb, `refresh'
@@ -71,7 +71,7 @@ prog def brewscheme, rclass
 				
 			} // End IF Block to build look up data set
 				
-			// If there is a b subdirectory on the PERSONAL ADOPATH
+			// If the file exists load it
 			else {
 				
 				// Load the lookup table
@@ -272,7 +272,7 @@ prog def brewscheme, rclass
 			cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 			
 			// If data set doesn't exist or user wants to recreate it
-			if _rc != 0 | "`refresh'" != "" {
+			if _rc != 0 | _rc == 603 | "`refresh'" != "" {
 			
 				// Create the dataset
 				qui: brewdb, `refresh'

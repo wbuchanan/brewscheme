@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.2
-*! 12OCT2015
+*! v 0.0.3
+*! 14OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -43,7 +43,7 @@ prog def brewdb
 		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
-		if _rc != 0 | `"`refresh'"' != "" {
+		if _rc != 0 | _rc == 603 | `"`refresh'"' != "" {
 			
 			// Create a tempfile to read the JS into
 			tempfile brewjs

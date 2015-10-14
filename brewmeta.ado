@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewmeta
-*! v 0.0.5
-*! 08SEP2015
+*! v 0.0.6
+*! 14OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta
@@ -47,7 +47,7 @@ prog def brewmeta, rclass
 		cap confirm file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file does not exist 
-		if _rc != 0 {
+		if _rc != 0 | _rc == 603 {
 		
 			// Print error message
 			di as err "Must first build the brewscheme database." _n		 ///   
