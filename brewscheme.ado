@@ -1196,7 +1196,7 @@ prog def brewscheme, rclass
 			file write scheme `"linestyle dotmark dotmark"' _n
 			file write scheme `"linestyle box_whiskers ci"' _n
 			file write scheme `"linestyle box_median refline"' _n
-			file write scheme `"linestyle pie_line pie"' _n
+			file write scheme `"linestyle pie_lines pie"' _n
 			file write scheme `"linestyle legend none"' _n
 			file write scheme `"linestyle clegend clegend"' _n
 			file write scheme `"linestyle clegend_outer none"' _n
