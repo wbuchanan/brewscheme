@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1964                                                                     *
+*     2403                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.8
-*! 14OCT2015
+*! v 0.0.9
+*! 26OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -785,6 +785,14 @@ prog def brewscheme, rclass
 					
 				} // End Loop
 				
+				// Create marker for graph type with maximum number of colors
+				if ``color'colors' == `pcycles' {
+				
+					// Set the generic color macro to reference macro w/max colors
+					loc gencolor `color'rgb
+					
+				} // End of IF Block to define generic color macro	
+			
 				// Check for debug option
 				if "`dbug'" != "" {
 									
@@ -794,139 +802,178 @@ prog def brewscheme, rclass
 				} // End debug option
 				
 			} // End Loop over number of colors for graph types					
-							  
-			file write scheme `"sequence 1210"' _n
-			file write scheme `"label "`style' `colors'""' _n
-			file write scheme `"system naturally_white 1"' _n
-
-			file write scheme `"graphsize 5"' _n
-			file write scheme `"graphsize x 9"' _n
-			file write scheme `"graphsize y 6"' _n
-
-			file write scheme `"numstyle 1"' _n
-			file write scheme `"numstyle grid_outer_tol 0.23"' _n
-			file write scheme `"numstyle legend_rows 1"' _n
-			file write scheme `"numstyle legend_cols 2"' _n
-			file write scheme `"numstyle zyx2rows 0"' _n
-			file write scheme `"numstyle zyx2cols 1"' _n
-			file write scheme `"numstyle graph_aspect 0"' _n
-			file write scheme `"numstyle pcycle `pcycles'"' _n
-			file write scheme `"numstyle max_wted_symsize 10"' _n
-			file write scheme `"numstyle bar_num_dots 100"' _n
-			file write scheme `"numstyle dot_num_dots 100"' _n
+			
+			
+			file write scheme `"*                                    s2color.scheme"' _n
+			file write scheme `""' _n
+			file write scheme `"* s2 scheme family with a naturally white background (white plotregions and"' _n
+			file write scheme `"* lightly colored background) and color foreground (lines, symbols, text, etc)."' _n
+			file write scheme `""' _n
+			file write scheme `"*  For p[#][stub] scheme references the corresponding style is resolved by"' _n
+			file write scheme `"*  searching the scheme ids with the following preference ordering:"' _n
+			file write scheme `"*"' _n
+			file write scheme `"*                p#stub"' _n
+			file write scheme `"*                pstub"' _n
+			file write scheme `"*                p#"' _n
+			file write scheme `"*                p"' _n
+			file write scheme `"*"' _n
+			file write scheme `"*  Thus it is possible to control the selected style to great detail, or let it"' _n
+			file write scheme `"*  default to common defaults.  In particular -p- or -pstub- without"' _n
+			file write scheme `"*  # can be used to designate a common plotting symbol, or back plotting"' _n
+			file write scheme `"*  symbol, or for that matter common color or sizes."' _n
+			file write scheme `"*"' _n
+			file write scheme `"*  "style"s designated "special" are not styles at all, but direct signals to"' _n
+			file write scheme `"*  graphs, plots, or other classes and their parsers.  Their contents are"' _n
+			file write scheme `"*  specific to the use and may only be understood by the caller."' _n
+			file write scheme `""' _n
+			file write scheme `"*!  version 1.2.5   16jun2011"' _n(2)
+			file write scheme `"sequence 1299"' _n
+			file write scheme `"label "`schemename'""' _n(2)
+			file write scheme `"system naturally_white  1"' _n(3)
+			file write scheme `"graphsize             5"' _n
+			file write scheme `"graphsize x           9"' _n
+			file write scheme `"graphsize y           6"' _n(3)
+			file write scheme `"numstyle                  1"' _n
+			file write scheme `"numstyle grid_outer_tol   0.23"' _n
+			file write scheme `"numstyle legend_rows      0"' _n
+			file write scheme `"numstyle legend_cols      5"' _n
+			file write scheme `"numstyle zyx2rows         0"' _n
+			file write scheme `"numstyle zyx2cols         1"' _n(2)
+			
+			file write scheme `"numstyle graph_aspect     0"' _n(2)
+			
+			file write scheme `"numstyle pcycle           `pcycles'"' _n(2)
+			
+			file write scheme `"numstyle max_wted_symsize 10"' _n(2)
+			
+			file write scheme `"numstyle bar_num_dots    100"' _n
+			file write scheme `"numstyle dot_num_dots    100"' _n
 			file write scheme `"numstyle dot_extend_high 0"' _n
-			file write scheme `"numstyle dot_extend_low 0"' _n
-			file write scheme `"numstyle pie_angle 90"' _n
-			file write scheme `"numstyle contours `pcycles'"' _n
+			file write scheme `"numstyle dot_extend_low  0"' _n(2)
+			file write scheme `"numstyle pie_angle       90"' _n(2)
+			file write scheme `"numstyle contours         `pcycles'"' _n(2)
 
-			file write scheme `"gsize medium"' _n
-			file write scheme `"gsize gap tiny"' _n
-			file write scheme `"gsize text medsmall"' _n
-			file write scheme `"gsize body small"' _n
-			file write scheme `"gsize small_body vsmall"' _n
-			file write scheme `"gsize heading medlarge"' _n
-			file write scheme `"gsize subheading medium"' _n
-			file write scheme `"gsize axis_title small"' _n
-			file write scheme `"gsize matrix_label medium"' _n
-			file write scheme `"gsize label medsmall"' _n
-			file write scheme `"gsize small_label small"' _n
-			file write scheme `"gsize matrix_marklbl medsmall"' _n
-			file write scheme `"gsize key_label small"' _n
-			file write scheme `"gsize note vsmall"' _n
-			file write scheme `"gsize star small"' _n
-			file write scheme `"gsize text_option small"' _n
-			file write scheme `"gsize dot_rectangle third_tiny"' _n
-			file write scheme `"gsize axis_space half_tiny"' _n
-			file write scheme `"gsize axis_title_gap minuscule"' _n
-			file write scheme `"gsize tick tiny"' _n
-			file write scheme `"gsize minortick third_tiny"' _n
-			file write scheme `"gsize tickgap half_tiny"' _n
-			file write scheme `"gsize notickgap tiny"' _n
-			file write scheme `"gsize tick_label small"' _n
-			file write scheme `"gsize tick_biglabel small"' _n
+			file write scheme `"special default_slope1  .3"' _n
+			file write scheme `"special default_knot1    4"' _n
+			file write scheme `"special default_slope2   1"' _n(2)
+			file write scheme `"special by_slope1       .3"' _n
+			file write scheme `"special by_knot1         3"' _n
+			file write scheme `"special by_slope2        1"' _n(2)
+			file write scheme `"special combine_slope1  .5"' _n
+			file write scheme `"special combine_knot1    3"' _n
+			file write scheme `"special combine_slope2   1"' _n(2)
+			file write scheme `"special matrix_slope1   .3"' _n
+			file write scheme `"special matrix_knot1     4"' _n
+			file write scheme `"special matrix_slope2    1"' _n
+			file write scheme `"special matrix_yaxis   "ylabels(#3, angle(horizontal) axis(Y))""' _n
+			file write scheme `"special matrix_xaxis   "xlabels(#3, axis(X))""' _n(2)
+
+			file write scheme `"gsize                 medium"' _n
+			file write scheme `"gsize gap             tiny"' _n
+			file write scheme `"gsize text            medsmall"' _n
+			file write scheme `"gsize body            small"' _n
+			file write scheme `"gsize small_body      vsmall"' _n
+			file write scheme `"gsize heading         medlarge"' _n
+			file write scheme `"gsize subheading      medium"' _n
+			file write scheme `"gsize axis_title      small"' _n
+			file write scheme `"gsize matrix_label    medium"' _n
+			file write scheme `"gsize label           medsmall"' _n
+			file write scheme `"gsize small_label     small"' _n
+			file write scheme `"gsize matrix_marklbl  medsmall"' _n
+			file write scheme `"gsize key_label       small"' _n
+			file write scheme `"gsize note            vsmall"' _n
+			file write scheme `"gsize star            small"' _n
+			file write scheme `"gsize text_option     small"' _n
+			file write scheme `"gsize dot_rectangle   third_tiny"' _n
+			file write scheme `"gsize axis_space      half_tiny"' _n
+			file write scheme `"gsize axis_title_gap  minuscule"' _n
+			file write scheme `"gsize tick            tiny"' _n
+			file write scheme `"gsize minortick       third_tiny"' _n
+			file write scheme `"* gsize minortick       .55"' _n
+			file write scheme `"gsize tickgap         half_tiny"' _n
+			file write scheme `"gsize notickgap       tiny"' _n
+			file write scheme `"gsize tick_label      small"' _n
+			file write scheme `"gsize tick_biglabel   small"' _n
 			file write scheme `"gsize minortick_label vsmall"' _n
-			file write scheme `"gsize filled_text medsmall"' _n
-			file write scheme `"gsize reverse_big large"' _n
-			file write scheme `"gsize alternate_gap zero"' _n
-			file write scheme `"gsize title_gap small"' _n
-			file write scheme `"gsize key_gap small"' _n
-			file write scheme `"gsize key_linespace small"' _n
-			file write scheme `"gsize star_gap minuscule"' _n
-			file write scheme `"gsize legend_colgap medium"' _n
-			file write scheme `"gsize label_gap half_tiny"' _n
-			file write scheme `"gsize matrix_mlblgap half_tiny"' _n
-			file write scheme `"gsize barlabel_gap tiny"' _n
-			file write scheme `"gsize legend_row_gap tiny"' _n
-			file write scheme `"gsize legend_col_gap large"' _n
-			file write scheme `"gsize legend_key_gap vsmall"' _n
-			file write scheme `"gsize legend_key_xsize 13"' _n
-			file write scheme `"gsize legend_key_ysize medsmall"' _n
-			file write scheme `"gsize zyx2legend_key_gap tiny"' _n
-			file write scheme `"gsize zyx2legend_key_xsize vhuge"' _n
-			file write scheme `"gsize zyx2legend_key_ysize medium"' _n
-			file write scheme `"gsize zyx2rowgap zero"' _n
-			file write scheme `"gsize zyx2colgap large"' _n
-			file write scheme `"gsize clegend_width medsmall"' _n
-			file write scheme `"gsize clegend_height zero"' _n
-			file write scheme `"gsize pie_explode medsmall"' _n
-			file write scheme `"gsize pielabel_gap medsmall"' _n
-			file write scheme `"gsize plabel vsmall"' _n
-			file write scheme `"gsize pboxlabel vsmall"' _n
+			file write scheme `"gsize filled_text     medsmall"' _n
+			file write scheme `"gsize reverse_big     large"' _n
+			file write scheme `"gsize alternate_gap   zero"' _n
+			file write scheme `"gsize title_gap       small"' _n
+			file write scheme `"gsize key_gap         small"' _n
+			file write scheme `"gsize key_linespace   small"' _n
+			file write scheme `"gsize star_gap        minuscule"' _n
+			file write scheme `"gsize legend_colgap   medium"' _n
+			file write scheme `"gsize label_gap       half_tiny"' _n
+			file write scheme `"gsize matrix_mlblgap  half_tiny"' _n
+			file write scheme `"gsize barlabel_gap    tiny"' _n(2)
+			file write scheme `"gsize legend_row_gap    tiny"' _n
+			file write scheme `"gsize legend_col_gap    large"' _n
+			file write scheme `"gsize legend_key_gap    vsmall"' _n
+			file write scheme `"gsize legend_key_xsize  small"' _n
+			file write scheme `"gsize legend_key_ysize  small"' _n(2)
+			file write scheme `"gsize zyx2legend_key_gap    tiny"' _n
+			file write scheme `"gsize zyx2legend_key_xsize  vhuge"' _n
+			file write scheme `"gsize zyx2legend_key_ysize  medium"' _n
+			file write scheme `"gsize zyx2rowgap            zero"' _n
+			file write scheme `"gsize zyx2colgap            large"' _n(2)
+			file write scheme `"gsize clegend_width     medsmall"' _n
+			file write scheme `"gsize clegend_height    zero"' _n(2)
+			file write scheme `"gsize pie_explode       medsmall"' _n
+			file write scheme `"gsize pielabel_gap      medsmall"' _n(2)
+			file write scheme `"gsize plabel            vsmall"' _n
+			file write scheme `"gsize pboxlabel         vsmall"' _n(2)
+			file write scheme `"* gsize p#label           small"' _n
+			file write scheme `"* gsize p#boxlabel        small"' _n(2)
 			file write scheme `"gsize sts_risktable_space tiny"' _n
-			file write scheme `"gsize sts_risktable_tgap tiny"' _n
-			file write scheme `"gsize sts_risktable_lgap tiny"' _n
-			file write scheme `"gsize sts_risk_label medsmall"' _n
-			file write scheme `"gsize sts_risk_title medsmall"' _n
-			file write scheme `"gsize sts_risk_tick zero"' _n
+			file write scheme `"gsize sts_risktable_tgap  tiny"' _n
+			file write scheme `"gsize sts_risktable_lgap  tiny"' _n
+			file write scheme `"gsize sts_risk_label      medsmall"' _n
+			file write scheme `"gsize sts_risk_title      medsmall"' _n
+			file write scheme `"gsize sts_risk_tick       zero"' _n(2)
 			
-			file write scheme `"special default_slope1 .3"' _n
-			file write scheme `"special default_knot1 4"' _n
-			file write scheme `"special default_slope2 1"' _n
-			file write scheme `"special by_slope1 .3"' _n
-			file write scheme `"special by_knot1 3"' _n
-			file write scheme `"special by_slope2 1"' _n
-			file write scheme `"special combine_slope1 .5"' _n
-			file write scheme `"special combine_knot1 3"' _n
-			file write scheme `"special combine_slope2 1"' _n
-			file write scheme `"special matrix_slope1 .3"' _n
-			file write scheme `"special matrix_knot1 4"' _n
-			file write scheme `"special matrix_slope2 1"' _n
-			file write scheme `"special matrix_yaxis "ylabels(#3, angle(horizontal) axis(Y))""' _n
-			file write scheme `"special matrix_xaxis "xlabels(#3, axis(X))""' _n
+			file write scheme `"relsize bar_gap            0pct"' _n
+			file write scheme `"relsize bar_groupgap      80pct"' _n
+			file write scheme `"relsize bar_supgroupgap  200pct"' _n
+			file write scheme `"relsize bar_outergap      20pct"' _n(2)
+			file write scheme `"relsize dot_gap       neg100pct"' _n
+			file write scheme `"relsize dot_groupgap       0pct"' _n
+			file write scheme `"relsize dot_supgroupgap   75pct"' _n
+			file write scheme `"relsize dot_outergap       0pct"' _n(2)
+			file write scheme `"relsize box_gap           50pct"' _n
+			file write scheme `"relsize box_groupgap     100pct"' _n
+			file write scheme `"relsize box_supgroupgap  150pct"' _n
+			file write scheme `"relsize box_outergap      25pct"' _n
+			file write scheme `"relsize box_fence         75pct"' _n
+			file write scheme `"relsize box_fencecap       0pct"' _n(3)
+			
+			file write scheme `"symbolsize              medium"' _n
+			file write scheme `"symbolsize symbol       medium"' _n
+			file write scheme `"symbolsize smallsymbol  medsmall"' _n(2)
+			file write scheme `"symbolsize star         vlarge"' _n
+			file write scheme `"symbolsize histogram    medium"' _n
+			file write scheme `"symbolsize histback     vlarge"' _n
+			file write scheme `"symbolsize dots         vtiny"' _n
+			file write scheme `"symbolsize ci           medlarge"' _n
+			file write scheme `"symbolsize ci2          medlarge"' _n
+			file write scheme `"symbolsize matrix       medsmall"' _n
+			file write scheme `"symbolsize refmarker    medium"' _n
+			file write scheme `"symbolsize sunflower    medium"' _n(2)
 
-			file write scheme `"relsize bar_gap 40pct"' _n
-			file write scheme `"relsize bar_groupgap 80pct"' _n
-			file write scheme `"relsize bar_supgroupgap 200pct"' _n
-			file write scheme `"relsize bar_outergap 20pct"' _n
-			file write scheme `"relsize dot_gap neg100pct"' _n
-			file write scheme `"relsize dot_groupgap 0pct"' _n
-			file write scheme `"relsize dot_supgroupgap 75pct"' _n
-			file write scheme `"relsize dot_outergap 0pct"' _n
-			file write scheme `"relsize box_gap 50pct"' _n
-			file write scheme `"relsize box_groupgap 100pct"' _n
-			file write scheme `"relsize box_supgroupgap 150pct"' _n
-			file write scheme `"relsize box_outergap 25pct"' _n
-			file write scheme `"relsize box_fence 75pct"' _n
-			file write scheme `"relsize box_fencecap 0pct"' _n
-			
-			file write scheme `"symbolsize medium"' _n
-			file write scheme `"symbolsize symbol medium"' _n
-			file write scheme `"symbolsize smallsymbol medsmall"' _n
-			file write scheme `"symbolsize star vlarge"' _n
-			file write scheme `"symbolsize histogram medium"' _n
-			file write scheme `"symbolsize histback vlarge"' _n
-			file write scheme `"symbolsize dots vtiny"' _n
-			file write scheme `"symbolsize ci medlarge"' _n
-			file write scheme `"symbolsize ci2 medlarge"' _n
-			file write scheme `"symbolsize matrix medsmall"' _n
-			file write scheme `"symbolsize refmarker medium"' _n
-			file write scheme `"symbolsize sunflower medium"' _n
-			file write scheme `"symbolsize backsymbol large"' _n
+			file write scheme `"symbolsize backsymbol   large"' _n
 			file write scheme `"symbolsize backsymspace large"' _n
-			file write scheme `"symbolsize p medium"' _n
-			file write scheme `"symbolsize pback zero"' _n
-			file write scheme `"symbolsize parrow medium"' _n
-			file write scheme `"symbolsize parrowbarb medsmall"' _n
+			file write scheme `"symbolsize p            medium"' _n
+			file write scheme `"symbolsize pback        zero"' _n
+			file write scheme `"symbolsize parrow       medium"' _n
+			file write scheme `"symbolsize parrowbarb  medsmall"' _n
+			
+			file write scheme `"* symbolsize p#         large"' _n
+			file write scheme `"* symbolsize p#back     large"' _n
+			file write scheme `"* symbolsize p#box      large"' _n
+			file write scheme `"* symbolsize p#boxback  large"' _n
+			file write scheme `"* symbolsize p#dot      large"' _n
+			file write scheme `"* symbolsize p#dotback  large"' _n
+			file write scheme `"* symbolsize p#arrow     large"' _n
+			file write scheme `"* symbolsize p#arrowbarb large"' _n(3)
 			
 			// Number of ticks
 			file write scheme `"numticks_g 0"' _n
@@ -938,78 +985,90 @@ prog def brewscheme, rclass
 			file write scheme `"numticks_g horizontal_tmajor 0"' _n
 			file write scheme `"numticks_g vertical_tmajor 0"' _n
 			file write scheme `"numticks_g horizontal_tminor 0"' _n
-			file write scheme `"numticks_g vertical_tminor 0"' _n
+			file write scheme `"numticks_g vertical_tminor 0"' _n(3)
 
-			file write scheme `"color black"' _n
-			file write scheme `"color background white"' _n
-			file write scheme `"color foreground white"' _n
-			file write scheme `"color symbol black"' _n
-			file write scheme `"color backsymbol none"' _n
-			file write scheme `"color text black"' _n
-			file write scheme `"color body black"' _n
-			file write scheme `"color small_body black"' _n
-			file write scheme `"color heading black"' _n
-			file write scheme `"color subheading black"' _n
-			file write scheme `"color axis_title black"' _n
-			file write scheme `"color matrix_label black"' _n
-			file write scheme `"color label black"' _n
-			file write scheme `"color key_label black"' _n
-			file write scheme `"color tick_label black"' _n
-			file write scheme `"color tick_biglabel black"' _n
+			file write scheme `"color                black"' _n
+			file write scheme `"color background     white"' _n
+			file write scheme `"color foreground     white"' _n(2)
+			
+			file write scheme `"color symbol         black"' _n
+			file write scheme `"color backsymbol     none"' _n(2)
+			
+			file write scheme `"color text           black"' _n
+			file write scheme `"color body           black"' _n
+			file write scheme `"color small_body     black"' _n
+			file write scheme `"color heading        black"' _n
+			file write scheme `"color subheading     black"' _n
+			file write scheme `"color axis_title     black"' _n
+			file write scheme `"color matrix_label   black"' _n
+			file write scheme `"color label          black"' _n
+			file write scheme `"color key_label      black"' _n
+			file write scheme `"color tick_label     black"' _n
+			file write scheme `"color tick_biglabel  black"' _n
 			file write scheme `"color matrix_marklbl black"' _n
 			file write scheme `"color sts_risk_label black"' _n
-			file write scheme `"color sts_risk_title black"' _n
-			file write scheme `"color box none"' _n
-			file write scheme `"color textbox white"' _n
-			file write scheme `"color mat_label_box white"' _n
-			file write scheme `"color text_option black"' _n
+			file write scheme `"color sts_risk_title black"' _n(2)
+			
+			file write scheme `"color box              none"' _n
+			file write scheme `"color textbox          white"' _n
+			file write scheme `"color mat_label_box    white"' _n(2)
+			file write scheme `"color text_option      black"' _n
 			file write scheme `"color text_option_line white"' _n
-			file write scheme `"color text_option_fill white"' _n
-			file write scheme `"color filled_text black"' _n
-			file write scheme `"color filled white"' _n
-			file write scheme `"color bylabel_outline white"' _n
-			file write scheme `"color reverse_big none"' _n
+			file write scheme `"color text_option_fill white"' _n(2)
+			
+			file write scheme `"color filled_text    black"' _n
+			file write scheme `"color filled          white"' _n
+			file write scheme `"color bylabel_outline white"' _n(2)
+			
+			file write scheme `"color reverse_big      none"' _n
 			file write scheme `"color reverse_big_line black"' _n
-			file write scheme `"color reverse_big_text white"' _n
-			file write scheme `"color grid white"' _n
-			file write scheme `"color major_grid white"' _n
-			file write scheme `"color minor_grid white"' _n
-			file write scheme `"color axisline black"' _n
-			file write scheme `"color tick black"' _n
-			file write scheme `"color minortick black"' _n
-			file write scheme `"color ci_line black"' _n
-			file write scheme `"color ci_arealine black"' _n
-			file write scheme `"color ci_area "`: word 1 of `areargb''" "' _n
-			file write scheme `"color ci_symbol "`: word 1 of `cirgb''" "' _n
-			file write scheme `"color ci2_line black"' _n
-			file write scheme `"color ci2_arealine black"' _n
-			file write scheme `"color ci2_area "`: word 2 of `areargb''" "' _n
-			file write scheme `"color ci2_symbol "`: word 2 of `cirgb''" "' _n
-			file write scheme `"color pieline black"' _n
-			file write scheme `"color matrix white"' _n
+			file write scheme `"color reverse_big_text white"' _n(2)
+			
+			file write scheme `"color grid           white"' _n
+			file write scheme `"color major_grid     white"' _n
+			file write scheme `"color minor_grid     white"' _n(2)
+			
+			file write scheme `"color axisline       black"' _n
+			file write scheme `"color tick           black"' _n
+			file write scheme `"color minortick      black"' _n(2)
+			
+			file write scheme `"color ci_line        black"' _n
+			file write scheme `"color ci_arealine    black"' _n
+			file write scheme `"color ci_area        "`: word 1 of `areargb''" "' _n
+			file write scheme `"color ci_symbol      "`: word 1 of `cirgb''" "' _n
+			file write scheme `"color ci2_line       black"' _n
+			file write scheme `"color ci2_arealine   black"' _n
+			file write scheme `"color ci2_area       "`: word 2 of `areargb''" "' _n
+			file write scheme `"color ci2_symbol     "`: word 2 of `cirgb''" "' _n(2)
+			
+			file write scheme `"color pieline        black"' _n(2)
+			
+			file write scheme `"color matrix         white"' _n
 			file write scheme `"color matrixmarkline black"' _n
-			file write scheme `"color refmarker black"' _n
-			file write scheme `"color refmarkline black"' _n
-			file write scheme `"color histogram "`: word 1 of `histrgb''" "' _n
-			file write scheme `"color histback white"' _n
+			file write scheme `"color refmarker      black"' _n
+			file write scheme `"color refmarkline    black"' _n
+			file write scheme `"color histogram      "`: word 1 of `histrgb''" "' _n
+			file write scheme `"color histback       white"' _n
 			file write scheme `"color histogram_line black"' _n
-			file write scheme `"color dot_line black"' _n
-			file write scheme `"color dot_arealine black"' _n
-			file write scheme `"color dot_area "`: word 1 of `areargb''" "' _n
-			file write scheme `"color dotmarkline black"' _n
-			file write scheme `"color xyline black"' _n
-			file write scheme `"color refline black"' _n
-			file write scheme `"color dots black"' _n
-			file write scheme `"color plotregion white"' _n
-			file write scheme `"color plotregion_line white"' _n
-			file write scheme `"color matrix_plotregion white"' _n
+			file write scheme `"color dot_line       black"' _n
+			file write scheme `"color dot_arealine   black"' _n
+			file write scheme `"color dot_area       "`: word 1 of `areargb''" "' _n
+			file write scheme `"color dotmarkline    black"' _n(2)
+			
+			file write scheme `"color xyline         black"' _n
+			file write scheme `"color refline        black"' _n
+			file write scheme `"color dots           black"' _n(2)
+			
+			file write scheme `"color plotregion         white"' _n
+			file write scheme `"color plotregion_line    white"' _n
+			file write scheme `"color matrix_plotregion  white"' _n
 			file write scheme `"color matplotregion_line black"' _n
-			file write scheme `"color legend white"' _n
-			file write scheme `"color legend_line white"' _n
-			file write scheme `"color clegend none"' _n
-			file write scheme `"color clegend_outer none"' _n
-			file write scheme `"color clegend_inner none"' _n
-			file write scheme `"color clegend_line none"' _n
+			file write scheme `"color legend             white"' _n
+			file write scheme `"color legend_line        white"' _n
+			file write scheme `"color clegend            none"' _n
+			file write scheme `"color clegend_outer      none"' _n
+			file write scheme `"color clegend_inner      none"' _n
+			file write scheme `"color clegend_line       none"' _n(2)
 			
 			// Check for values for starting/ending contour plots
 			if "`constart'" == "" {
@@ -1021,19 +1080,78 @@ prog def brewscheme, rclass
 			
 			file write scheme `"color contour_begin `constart'"' _n
 			file write scheme `"color contour_end `conend'"' _n
-			file write scheme `"color zyx2 black"' _n
+			file write scheme `"color zyx2 black"' _n(2)
+			
 			file write scheme `"color sunflower "`: word 1 of `sunrgb''""' _n
 			file write scheme `"color sunflowerlb black"' _n
 			file write scheme `"color sunflowerlf "`: word 2 of `sunrgb''""' _n
 			file write scheme `"color sunflowerdb black"' _n
-			file write scheme `"color sunflowerdf "`: word 3 of `sunrgb''""' _n
+			file write scheme `"color sunflowerdf "`: word 3 of `sunrgb''""' _n(2)
+			
+			/* Add generic color loop here */
+			forv i = 1/`pcycles' {
+			
+				file write scheme `"color p`i' "``: word `i' of `gencolor'''""' _n
+			
+			} // End Loop for generic colors
+			
+			file write scheme `""' _n
+			
 			file write scheme `"color pboxlabelfill white"' _n
-			file write scheme `"color plabelfill white"' _n
+			file write scheme `"color plabelfill white"' _n(2)
 			file write scheme `"color pmarkback white"' _n
-			file write scheme `"color pmarkbkfill white"' _n
+			file write scheme `"color pmarkbkfill white"' _n(2)
+			
+			file write scheme `"* color p#              yellow"' _n
+			file write scheme `"* color p#line          yellow"' _n
+			file write scheme `"* color p#lineplot      yellow"' _n
+			file write scheme `"* color p#bar           yellow"' _n
+			file write scheme `"* color p#barline       yellow"' _n
+			file write scheme `"* color p#box           yellow"' _n
+			file write scheme `"* color p#boxline       yellow"' _n
+			file write scheme `"* color p#pie           yellow"' _n
+			file write scheme `"* color p#area          yellow"' _n
+			file write scheme `"* color p#arealine      yellow"' _n
+			file write scheme `"* color p#other         yellow"' _n
+			file write scheme `"* color p#otherline     yellow"' _n
+			file write scheme `"* color p#mark          yellow"' _n
+			file write scheme `"* color p#markfill      none"' _n
+			file write scheme `"* color p#markline      yellow"' _n
+			file write scheme `"* color p#markback      yellow"' _n
+			file write scheme `"* color p#markbkfill    yellow"' _n
+			file write scheme `"* color p#boxmarkfill   yellow"' _n
+			file write scheme `"* color p#boxmarkbkfill yellow"' _n
+			file write scheme `"* color p#boxmarkline   yellow"' _n
+			file write scheme `"* color p#dotmarkfill   yellow"' _n
+			file write scheme `"* color p#dotmarkbkfill yellow"' _n
+			file write scheme `"* color p#dotmarkline   yellow"' _n
+			file write scheme `"* color p#arrow         yellow"' _n
+			file write scheme `"* color p#arrowline     yellow"' _n
+			file write scheme `"* color p#arrowfill     yellow"' _n
+			file write scheme `"* color p#label         white"' _n
+			file write scheme `"* color p#boxlabel      yellow"' _n
+			file write scheme `"* color p#boxlabelfill  yellow"' _n
+			file write scheme `"* color p#labelfill     yellow"' _n
+			file write scheme `"* color p#shade         yellow"' _n(2)
+
+			file write scheme `"* color p1markfill     light_xyz"' _n
+			file write scheme `"* color p2markfill     light_xyz"' _n
+			file write scheme `"* color p3markfill     light_xyz"' _n
+			file write scheme `"* color p4markfill     light_xyz"' _n
+			file write scheme `"* color p5markfill     light_xyz"' _n
+			file write scheme `"* color p6markfill     light_xyz"' _n
+			file write scheme `"* color p1markfill     none"' _n
+			file write scheme `"* color p2markfill     none"' _n
+			file write scheme `"* color p3markfill     none"' _n
+			file write scheme `"* color p4markfill     none"' _n
+			file write scheme `"* color p5markfill     none"' _n
+			file write scheme `"* color p6markfill     none"' _n
+			file write scheme `"* color p1mark         yellow"' _n
+			file write scheme `"* color p2mark         red"' _n
+			file write scheme `"* color p3mark         blue"' _n(3)
 			
 			file write scheme `"symbol circle"' _n
-			file write scheme `"symbol sunflower circle_hollow"' _n
+			file write scheme `"symbol sunflower circle_hollow"' _n(2)
 			file write scheme `"symbol none none"' _n
 			file write scheme `"symbol histogram circle"' _n
 			file write scheme `"symbol histback none"' _n
@@ -1042,12 +1160,36 @@ prog def brewscheme, rclass
 			file write scheme `"symbol ci2 circle"' _n
 			file write scheme `"symbol ilabel none"' _n
 			file write scheme `"symbol matrix circle"' _n
-			file write scheme `"symbol refmarker circle"' _n
+			file write scheme `"symbol refmarker circle"' _n(2)
 			file write scheme `"symbol p circle"' _n
 			file write scheme `"symbol pback none"' _n
 			file write scheme `"symbol pbarback none"' _n
-			file write scheme `"symbol pdotback none"' _n
+			file write scheme `"symbol pdotback none"' _n(2)
 			
+			file write scheme `"* symbol p#         circle"' _n
+			file write scheme `"* symbol p#back     none"' _n
+			file write scheme `"* symbol p#box      circle"' _n
+			file write scheme `"* symbol p#boxback  circle"' _n
+			file write scheme `"* symbol p#dot      circle"' _n
+			file write scheme `"* symbol p#dotback  circle"' _n
+			file write scheme `"* symbol p#arrow    circle"' _n(2)
+
+			file write scheme `"* symbol p1     circle"' _n
+			file write scheme `"* symbol p2     diamond"' _n
+			file write scheme `"* symbol p3     square"' _n
+			file write scheme `"* symbol p4     triangle"' _n
+			file write scheme `"* symbol p5     x"' _n
+			file write scheme `"* symbol p6     plus"' _n
+			file write scheme `"* symbol p7     circle_hollow"' _n
+			file write scheme `"* symbol p8     diamond_hollow"' _n
+			file write scheme `"* symbol p9     square_hollow"' _n
+			file write scheme `"* symbol p10    triangle_hollow"' _n
+			file write scheme `"* symbol p11    smcircle"' _n
+			file write scheme `"* symbol p12    smdiamond"' _n
+			file write scheme `"* symbol p13    smsquare"' _n
+			file write scheme `"* symbol p14    smtriangle"' _n
+			file write scheme `"* symbol p15    smx"' _n(3)
+
 			file write scheme `"linepattern solid"' _n
 			file write scheme `"linepattern foreground blank"' _n
 			file write scheme `"linepattern background blank"' _n
@@ -1076,10 +1218,33 @@ prog def brewscheme, rclass
 			file write scheme `"linepattern sunflower solid"' _n
 			file write scheme `"linepattern matrix_plotregion solid"' _n
 			file write scheme `"linepattern text_option blank"' _n
-			file write scheme `"linepattern zyx2 solid"' _n
+			file write scheme `"linepattern zyx2 solid"' _n(2)
 			file write scheme `"linepattern p solid"' _n
-			file write scheme `"linepattern pmark solid"' _n
+			file write scheme `"linepattern pmark solid"' _n(2)
 			
+			file write scheme `"* linepattern p#         dash"' _n
+			file write scheme `"* linepattern p#line     dash"' _n
+			file write scheme `"* linepattern p#lineplot dash"' _n
+			file write scheme `"* linepattern p#bar      dash"' _n
+			file write scheme `"* linepattern p#box      dash"' _n
+			file write scheme `"* linepattern p#pie      dash"' _n
+			file write scheme `"* linepattern p#area     dash"' _n
+			file write scheme `"* linepattern p#other    dash"' _n
+			file write scheme `"* linepattern p#mark     solid"' _n
+			file write scheme `"* linepattern p#boxmark  solid"' _n
+			file write scheme `"* linepattern p#dotmark  solid"' _n
+			file write scheme `"* linepattern p#arrow    solid"' _n
+			file write scheme `"* linepattern p#arrowline solid"' _n(2)
+
+			file write scheme `"* linepattern p1line  solid"' _n
+			file write scheme `"* linepattern p2line  dash"' _n
+			file write scheme `"* linepattern p3line  longdash"' _n
+			file write scheme `"* linepattern p4line  dot"' _n
+			file write scheme `"* linepattern p5line  longdash_dot"' _n
+			file write scheme `"* linepattern p6line  dash_dot"' _n
+			file write scheme `"* linepattern p8line  shortdash"' _n
+			file write scheme `"* linepattern p9line  shortdash_dot"' _n(3)
+
 			file write scheme `"markerstyle p1"' _n
 			file write scheme `"markerstyle dots dots"' _n
 			file write scheme `"markerstyle star star"' _n
@@ -1091,8 +1256,27 @@ prog def brewscheme, rclass
 			file write scheme `"markerstyle box_marker refmarker"' _n
 			file write scheme `"markerstyle editor editor"' _n
 			file write scheme `"markerstyle editor_arrow ed_arrow"' _n
-			file write scheme `"markerstyle sunflower sunflower"' _n
+			file write scheme `"markerstyle sunflower sunflower"' _n(2)
+			
+			// Write generic marker styles
+			foreach i in "" "box" "dot" "arrow" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+				
+					// Add entry to scheme file
+					file write scheme `"markerstyle p`v'`i'  p`v'`i'"' _n
+				
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+			
+			} // End Loop over marker style generic types
 
+			// Add extra space after p#arrow
+			file write scheme `""' _n
+			
 			// Settings for Margins
 			file write scheme `"margin zero"' _n
 			file write scheme `"margin graph medium"' _n
@@ -1135,16 +1319,22 @@ prog def brewscheme, rclass
 			file write scheme `"margin key_label zero"' _n
 			file write scheme `"margin filled_textbox small"' _n
 			file write scheme `"margin filled_box zero"' _n
-			file write scheme `"margin editor zero"' _n
+			file write scheme `"margin editor zero"' _n(2)
 			file write scheme `"margin plabel zero"' _n
 			file write scheme `"margin plabelbox zero"' _n
 			file write scheme `"margin pboxlabel zero"' _n
-			file write scheme `"margin pboxlabelbox zero"' _n
+			file write scheme `"margin pboxlabelbox zero"' _n(2)
+			
+			file write scheme `"* margin p#label           zero"' _n
+			file write scheme `"* margin p#labelbox        zero"' _n
+			file write scheme `"* margin p#boxlabel        zero"' _n
+			file write scheme `"* margin p#boxlabelbox     zero"' _n
+			file write scheme `""' _n(4)
 			
 			// Shade/fill settings
 			file write scheme `"shadestyle foreground"' _n
 			file write scheme `"shadestyle background background"' _n
-			file write scheme `"shadestyle foreground foreground"' _n
+			file write scheme `"shadestyle foreground foreground"' _n(2)
 			file write scheme `"shadestyle ci ci"' _n
 			file write scheme `"shadestyle ci2 ci2"' _n
 			file write scheme `"shadestyle histogram histogram"' _n
@@ -1160,13 +1350,43 @@ prog def brewscheme, rclass
 			file write scheme `"shadestyle sunflowerlb sunflowerlb"' _n
 			file write scheme `"shadestyle sunflowerdb sunflowerdb"' _n
 			file write scheme `"shadestyle contour_begin contour_begin"' _n
-			file write scheme `"shadestyle contour_end contour_end"' _n
-			file write scheme `"shadestyle p foreground"' _n
+			file write scheme `"shadestyle contour_end contour_end"' _n(2)
+			file write scheme `"shadestyle p foreground"' _n(2)
 			
+			// Write generic marker styles
+			foreach i in "" "bar" "box" "pie" "area" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+				
+					// Add entry to scheme file
+					file write scheme `"shadestyle p`v'`i'  p`v'`i'"' _n
+				
+				} // End Loop over cycle number
+				
+				// Spaces between graph types
+				if "`i'" != "area" {
+				
+					// Write blank line between each of the types
+					file write scheme `""' _n
+
+				} // End IF Block for other graphtypes
+				
+				// For area shade styles
+				else {
+				
+					// This line files final area entry
+					file write scheme `"* shadestyle p#other  p1"' _n(3)
+					
+				} // End Else Block for area shade styles
+					
+			} // End Loop over marker style generic types
+
+	
 			// Settings for graph lines
 			file write scheme `"linestyle foreground"' _n
 			file write scheme `"linestyle background background"' _n
-			file write scheme `"linestyle foreground foreground"' _n
+			file write scheme `"linestyle foreground foreground"' _n(2)
 			file write scheme `"linestyle symbol symbol"' _n
 			file write scheme `"linestyle boxline foreground"' _n
 			file write scheme `"linestyle textbox none"' _n
@@ -1215,11 +1435,51 @@ prog def brewscheme, rclass
 			file write scheme `"linestyle sunflowerdf sunflowerdf"' _n
 			file write scheme `"linestyle text_option text_option"' _n
 			file write scheme `"linestyle sts_risktable none"' _n
-			file write scheme `"linestyle zyx2 zyx2"' _n
+			file write scheme `"linestyle zyx2 zyx2"' _n(2)
+			
+			// Write generic marker styles
+			foreach i in "" "bar" "box" "area" "line" "other" "mark" 		 ///   
+			"boxmark" "dotmark" "arrow" "arrowline" "sunflowerlight" 		 ///   
+			"sunflowerdark" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+
+					// Check for sunflower cases
+					if !inlist(`"`i'"', "sunflowerlight", "sunflowerdark") {
+
+						// Add entry to scheme file
+						file write scheme `"linestyle p`v'`i'  p`v'`i'"' _n
+					
+					} // End If Block for non sunflower plots
+					
+					// For the sunflower caes
+					else {
+					
+						// Use the generic line style for the sunflower plots
+						file write scheme `"linestyle p`v'`i' p`v'"' _n
+					
+					} // End ELSE Block for sunflower plots
+					
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+
+			} // End Loop over marker style generic types
+			
 			file write scheme `"linestyle pmarkback background"' _n
-			file write scheme `"linestyle pboxmarkback background"' _n
+			file write scheme `"linestyle pboxmarkback background"' _n(2)
 			file write scheme `"linestyle plabel foreground"' _n
-			file write scheme `"linestyle pboxlabel foreground"' _n
+			file write scheme `"linestyle pboxlabel foreground"' _n(2)
+			
+			file write scheme `"* linestyle p#connect     foreground"' _n
+			file write scheme `"* linestyle p#markback    foreground"' _n
+			file write scheme `"* linestyle p#boxmarkback foreground"' _n
+			file write scheme `"* linestyle p#dotmarkback foreground"' _n
+			file write scheme `"* linestyle p#label       xyz"' _n
+			file write scheme `"* linestyle p#boxlabel    xyz"' _n(3)
+			
 			file write scheme `"linewidth thin thin"' _n
 			file write scheme `"linewidth medium medium"' _n
 			file write scheme `"linewidth p vthin"' _n
@@ -1254,43 +1514,64 @@ prog def brewscheme, rclass
 			file write scheme `"linewidth sunflower thin"' _n
 			file write scheme `"linewidth matrix_plotregion thin"' _n
 			file write scheme `"linewidth text_option none"' _n
-			file write scheme `"linewidth zyx2 medium"' _n
-			file write scheme `"linewidth pbar vthin"' _n
+			file write scheme `"linewidth zyx2 medium"' _n(2)
+			file write scheme `"linewidth pbar vthin"' _n(2)
 			
+			file write scheme `"* linewidth p#         medium"' _n
+			file write scheme `"* linewidth p#solid    thin"' _n
+			file write scheme `"* linewidth p#lineplot thin"' _n
+			file write scheme `"* linewidth p#bar      thin"' _n
+			file write scheme `"* linewidth p#box      thin"' _n
+			file write scheme `"* linewidth p#area     thin"' _n
+			file write scheme `"* linewidth p#other    thin"' _n
+			file write scheme `"* linewidth p#mark     thin"' _n
+			file write scheme `"* linewidth p#boxmark  thin"' _n
+			file write scheme `"* linewidth p#dotmark  thin"' _n
+			file write scheme `"* linewidth p#arrow    thin"' _n
+			file write scheme `"* linewidth p#arrowline thin"' _n(3)
+
 			file write scheme `"connectstyle direct"' _n
 			file write scheme `"connectstyle p direct"' _n
+			file write scheme `"* connectstyle p#   direct"' _n(3)
 
 			// Settings for color saturation
-			file write scheme `"intensity full"' _n
-			file write scheme `"intensity foreground full"' _n
-			file write scheme `"intensity background full"' _n
-			file write scheme `"intensity symbol inten`scatsaturation'"' _n
-			file write scheme `"intensity ci_area inten`cisaturation'"' _n
-			file write scheme `"intensity histogram inten`histsaturation'"' _n
+			file write scheme `"intensity            full"' _n
+			file write scheme `"intensity foreground inten100"' _n
+			file write scheme `"intensity background inten100"' _n(2)
+			file write scheme `"intensity symbol     inten`scatsaturation'"' _n
+			file write scheme `"intensity ci_area    inten`cisaturation'"' _n
+			file write scheme `"intensity histogram  inten`histsaturation'"' _n
 			file write scheme `"intensity dendrogram inten`linesaturation'"' _n
-			file write scheme `"intensity dot_area inten`dotsaturation'"' _n
-			file write scheme `"intensity sunflower inten`sunsaturation'"' _n
-			file write scheme `"intensity bar inten`barsaturation'"' _n
-			file write scheme `"intensity bar_line full"' _n
-			file write scheme `"intensity box inten`boxsaturation'"' _n
-			file write scheme `"intensity box_line full"' _n
-			file write scheme `"intensity pie inten`piesaturation'"' _n
-			file write scheme `"intensity legend full"' _n
-			file write scheme `"intensity plotregion full"' _n
-			file write scheme `"intensity matrix_plotregion inten`matsaturation'"' _n
-			file write scheme `"intensity clegend full"' _n
-			file write scheme `"intensity clegend_outer full"' _n
-			file write scheme `"intensity clegend_inner full"' _n
-			file write scheme `"intensity p inten`scatsaturation'"' _n
+			file write scheme `"intensity dot_area   inten`dotsaturation'"' _n
+			file write scheme `"intensity sunflower  inten`sunsaturation'"' _n(2)
+			file write scheme `"intensity bar        inten`barsaturation'"' _n
+			file write scheme `"intensity bar_line   inten`linesaturation'"' _n
+			file write scheme `"intensity box        inten`boxsaturation'"' _n
+			file write scheme `"intensity box_line   inten`linesaturation'"' _n
+			file write scheme `"intensity pie        inten`piesaturation'"' _n(2)
+			file write scheme `"intensity legend     inten100"' _n
+			file write scheme `"intensity plotregion inten100"' _n
+			file write scheme `"intensity matrix_plotregion inten`matsaturation'"' _n(2)
+			file write scheme `"intensity clegend       inten100"' _n
+			file write scheme `"intensity clegend_outer inten100"' _n
+			file write scheme `"intensity clegend_inner inten100"' _n(3)
+			file write scheme `"intensity p          inten`scatsaturation'"' _n
 
+			file write scheme `"* intensity p#        inten80"' _n
+			file write scheme `"* intensity p#shade   inten80"' _n
+			file write scheme `"* intensity p#bar     inten80	   // twoway bar only, graph bar overall"' _n
+			file write scheme `"* intensity p#box     inten80	   // unused, overall only, control w/ color"' _n
+			file write scheme `"* intensity p#pie     inten80	   // unused, overall only, control w/ color"' _n
+			file write scheme `"* intensity p#area    inten80"' _n(3)
+			
 			file write scheme `"fillpattern pattern10"' _n
 			file write scheme `"fillpattern foreground pattern10"' _n
-			file write scheme `"fillpattern background pattern10"' _n
+			file write scheme `"fillpattern background pattern10"' _n(3)
 			file write scheme `"textboxstyle body"' _n
 			file write scheme `"textboxstyle title heading"' _n
 			file write scheme `"textboxstyle subtitle subheading"' _n
 			file write scheme `"textboxstyle caption body"' _n
-			file write scheme `"textboxstyle note body"' _n
+			file write scheme `"textboxstyle note body"' _n(2)
 			file write scheme `"textboxstyle leg_title heading"' _n
 			file write scheme `"textboxstyle leg_subtitle subheading"' _n
 			file write scheme `"textboxstyle leg_caption small_body"' _n
@@ -1298,7 +1579,7 @@ prog def brewscheme, rclass
 			file write scheme `"textboxstyle cleg_title clegend"' _n
 			file write scheme `"textboxstyle cleg_subtitle subheading"' _n
 			file write scheme `"textboxstyle cleg_caption body"' _n
-			file write scheme `"textboxstyle cleg_note small_body"' _n
+			file write scheme `"textboxstyle cleg_note small_body"' _n(2)
 			file write scheme `"textboxstyle t1title subheading"' _n
 			file write scheme `"textboxstyle t2title body"' _n
 			file write scheme `"textboxstyle b1title subheading"' _n
@@ -1306,10 +1587,10 @@ prog def brewscheme, rclass
 			file write scheme `"textboxstyle r1title subheading"' _n
 			file write scheme `"textboxstyle r2title body"' _n
 			file write scheme `"textboxstyle l1title subheading"' _n
-			file write scheme `"textboxstyle l2title body"' _n
+			file write scheme `"textboxstyle l2title body"' _n(2)
 			file write scheme `"textboxstyle heading heading"' _n
 			file write scheme `"textboxstyle subheading subheading"' _n
-			file write scheme `"textboxstyle body body"' _n
+			file write scheme `"textboxstyle body body"' _n(2)
 			file write scheme `"textboxstyle text_option text_option"' _n
 			file write scheme `"textboxstyle legend_key legend_key"' _n
 			file write scheme `"textboxstyle barlabel small_label"' _n
@@ -1319,19 +1600,37 @@ prog def brewscheme, rclass
 			file write scheme `"textboxstyle tick tick_label"' _n
 			file write scheme `"textboxstyle minortick minortick_label"' _n
 			file write scheme `"textboxstyle bigtick tick_biglabel"' _n
-			file write scheme `"textboxstyle sts_risktable sts_risktable"' _n
+			file write scheme `"textboxstyle sts_risktable sts_risktable"' _n(2)
 			file write scheme `"textboxstyle label label"' _n
 			file write scheme `"textboxstyle ilabel small_label"' _n
 			file write scheme `"textboxstyle key_label key_label"' _n
 			file write scheme `"textboxstyle small_label small_label"' _n
-			file write scheme `"textboxstyle matrix_marklbl matrix_marklbl"' _n
+			file write scheme `"textboxstyle matrix_marklbl matrix_marklbl"' _n(2)
 			file write scheme `"textboxstyle star star_label"' _n
-			file write scheme `"textboxstyle bytitle bytitle"' _n
-			file write scheme `"textboxstyle editor editor"' _n
+			file write scheme `"textboxstyle bytitle bytitle"' _n(2)
+			file write scheme `"textboxstyle editor editor"' _n(2)
+			
+			// Write generic marker styles
+			foreach i in "" "boxlabel" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+
+					// Add entry to scheme file
+					file write scheme `"textboxstyle p`v'`i'  p`v'`i'"' _n
+					
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+
+			} // End Loop over marker style generic types
+			
+			file write scheme `"* textboxstyle p15label     xyz"' _n(3)
 
 			file write scheme `"areastyle background"' _n
 			file write scheme `"areastyle foreground foreground"' _n
-			file write scheme `"areastyle background background"' _n
+			file write scheme `"areastyle background background"' _n(2)
 			file write scheme `"areastyle plotregion plotregion"' _n
 			file write scheme `"areastyle inner_plotregion none"' _n
 			file write scheme `"areastyle twoway_plotregion plotregion"' _n
@@ -1351,9 +1650,9 @@ prog def brewscheme, rclass
 			file write scheme `"areastyle bygraph_plotregion none"' _n
 			file write scheme `"areastyle bygraph_iplotregion none"' _n
 			file write scheme `"areastyle matrixgraph_plotregion none"' _n
-			file write scheme `"areastyle matrixgraph_iplotregion none"' _n
+			file write scheme `"areastyle matrixgraph_iplotregion none"' _n(2)
 			file write scheme `"areastyle matrix_plotregion matrix_plotregion"' _n
-			file write scheme `"areastyle matrix_iplotregion none"' _n
+			file write scheme `"areastyle matrix_iplotregion none"' _n(2)
 			file write scheme `"areastyle legend legend"' _n
 			file write scheme `"areastyle legend_key_region none"' _n
 			file write scheme `"areastyle legend_inkey_region none"' _n
@@ -1362,7 +1661,7 @@ prog def brewscheme, rclass
 			file write scheme `"areastyle clegend_preg none"' _n
 			file write scheme `"areastyle clegend_inpreg none"' _n
 			file write scheme `"areastyle clegend_outer clegend_outer"' _n
-			file write scheme `"areastyle clegend_inner clegend_inner"' _n
+			file write scheme `"areastyle clegend_inner clegend_inner"' _n(2)
 			file write scheme `"areastyle graph background"' _n
 			file write scheme `"areastyle inner_graph none"' _n
 			file write scheme `"areastyle bygraph background"' _n
@@ -1372,18 +1671,48 @@ prog def brewscheme, rclass
 			file write scheme `"areastyle inner_pieregion none"' _n
 			file write scheme `"areastyle inner_piegraph none"' _n
 			file write scheme `"areastyle combinegraph background"' _n
-			file write scheme `"areastyle combinegraph_inner none"' _n
+			file write scheme `"areastyle combinegraph_inner none"' _n(2)
 			file write scheme `"areastyle matrix_label background"' _n
-			file write scheme `"areastyle matrix_ilabel none"' _n
+			file write scheme `"areastyle matrix_ilabel none"' _n(2)
 			file write scheme `"areastyle ci ci"' _n
 			file write scheme `"areastyle ci2 ci2"' _n
 			file write scheme `"areastyle histogram histogram"' _n
 			file write scheme `"areastyle dendrogram dendrogram"' _n
-			file write scheme `"areastyle dotchart dotchart"' _n
+			file write scheme `"areastyle dotchart dotchart"' _n(2)
 			file write scheme `"areastyle sunflower sunflower"' _n
 			file write scheme `"areastyle sunflowerlb sunflowerlb"' _n
-			file write scheme `"areastyle sunflowerdb sunflowerdb"' _n
+			file write scheme `"areastyle sunflowerdb sunflowerdb"' _n(2)
 
+			// Write generic marker styles
+			foreach i in "" "bar" "box" "pie" "area" "sunflowerlight" 		 ///   
+			"sunflowerdark" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+
+					// Check for sunflower cases
+					if !inlist(`"`i'"', "sunflowerlight", "sunflowerdark") {
+
+						// Add entry to scheme file
+						file write scheme `"areastyle p`v'`i'  p`v'`i'"' _n
+					
+					} // End If Block for non sunflower plots
+					
+					// For the sunflower caes
+					else {
+					
+						// Use the generic line style for the sunflower plots
+						file write scheme `"areastyle p`v'`i' p`v'"' _n
+					
+					} // End ELSE Block for sunflower plots
+					
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+
+			} // End Loop over marker style generic types
+			
 			// Horizontal Text Alignment
 			file write scheme `"horizontal center"' _n
 			file write scheme `"horizontal heading center"' _n
@@ -1398,7 +1727,7 @@ prog def brewscheme, rclass
 			file write scheme `"horizontal text_option center"' _n
 			file write scheme `"horizontal editor left"' _n
 			file write scheme `"horizontal sts_risk_label default"' _n
-			file write scheme `"horizontal sts_risk_title right"' _n
+			file write scheme `"horizontal sts_risk_title right"' _n(3)
 
 			// Vertical Text Alignment
 			file write scheme `"vertical bottom"' _n
@@ -1413,39 +1742,39 @@ prog def brewscheme, rclass
 			file write scheme `"vertical_text matrix_label middle"' _n
 			file write scheme `"vertical_text legend bottom"' _n
 			file write scheme `"vertical_text text_option middle"' _n
-			file write scheme `"vertical_text filled middle"' _n
+			file write scheme `"vertical_text filled middle"' _n(2)
 
 			// Orientation
-			file write scheme `"tb_orientstyle horizontal"' _n
+			file write scheme `"tb_orientstyle horizontal"' _n(2)
 
 			// Axis Styling Text Alignment
 			file write scheme `"axisstyle horizontal_default"' _n
 			file write scheme `"axisstyle horizontal_default horizontal_default"' _n
-			file write scheme `"axisstyle vertical_default vertical_default"' _n
-			file write scheme `"axisstyle horizontal_nogrid horizontal_nogrid"' _n
-			file write scheme `"axisstyle vertical_nogrid vertical_nogrid"' _n
-			file write scheme `"axisstyle bar_super horizontal_nogrid"' _n
-			file write scheme `"axisstyle dot_super horizontal_nogrid"' _n
-			file write scheme `"axisstyle bar_group horizontal_notick"' _n
-			file write scheme `"axisstyle dot_group horizontal_notick"' _n
-			file write scheme `"axisstyle bar_var horizontal_notick"' _n
-			file write scheme `"axisstyle dot_var horizontal_notick"' _n
-			file write scheme `"axisstyle bar_scale_horiz horizontal_nogrid"' _n
-			file write scheme `"axisstyle bar_scale_vert vertical_nogrid"' _n
-			file write scheme `"axisstyle dot_scale_horiz horizontal_nogrid"' _n
-			file write scheme `"axisstyle dot_scale_vert vertical_nogrid"' _n
-			file write scheme `"axisstyle box_scale_horiz horizontal_nogrid"' _n
-			file write scheme `"axisstyle box_scale_vert vertical_nogrid"' _n
-			file write scheme `"axisstyle matrix_horiz horizontal_nogrid"' _n
-			file write scheme `"axisstyle matrix_vert vertical_nogrid"' _n
-			file write scheme `"axisstyle sts_risktable sts_risktable"' _n
-			file write scheme `"axisstyle clegend clegend"' _n
+			file write scheme `"axisstyle vertical_default   vertical_default"' _n
+			file write scheme `"axisstyle horizontal_nogrid  horizontal_nogrid"' _n
+			file write scheme `"axisstyle vertical_nogrid    vertical_nogrid"' _n
+			file write scheme `"axisstyle bar_super          horizontal_nogrid"' _n
+			file write scheme `"axisstyle dot_super          horizontal_nogrid"' _n
+			file write scheme `"axisstyle bar_group          horizontal_notick"' _n
+			file write scheme `"axisstyle dot_group          horizontal_notick"' _n
+			file write scheme `"axisstyle bar_var            horizontal_notick"' _n
+			file write scheme `"axisstyle dot_var            horizontal_notick"' _n
+			file write scheme `"axisstyle bar_scale_horiz    horizontal_nogrid"' _n
+			file write scheme `"axisstyle bar_scale_vert     vertical_nogrid"' _n
+			file write scheme `"axisstyle dot_scale_horiz    horizontal_nogrid"' _n
+			file write scheme `"axisstyle dot_scale_vert     vertical_nogrid"' _n
+			file write scheme `"axisstyle box_scale_horiz    horizontal_nogrid"' _n
+			file write scheme `"axisstyle box_scale_vert     vertical_nogrid"' _n
+			file write scheme `"axisstyle matrix_horiz       horizontal_nogrid"' _n
+			file write scheme `"axisstyle matrix_vert        vertical_nogrid"' _n
+			file write scheme `"axisstyle sts_risktable      sts_risktable"' _n
+			file write scheme `"axisstyle clegend            clegend"' _n(3)
 
 			file write scheme `"gridstyle default"' _n
 			file write scheme `"gridstyle major major"' _n
-			file write scheme `"gridstyle minor major"' _n
+			file write scheme `"gridstyle minor major"' _n(3)
 			file write scheme `"gridlinestyle default"' _n
-			file write scheme `"gridlinestyle default default"' _n
+			file write scheme `"gridlinestyle default default"' _n(3)
 			file write scheme `"tickstyle default"' _n
 			file write scheme `"tickstyle default default"' _n
 			file write scheme `"tickstyle major major"' _n
@@ -1456,7 +1785,7 @@ prog def brewscheme, rclass
 			file write scheme `"tickstyle minor_notick minor_notick"' _n
 			file write scheme `"tickstyle major_notickbig major_notickbig"' _n
 			file write scheme `"tickstyle minor_notickbig minor_notickbig"' _n
-			file write scheme `"tickstyle sts_risktable sts_risktable"' _n
+			file write scheme `"tickstyle sts_risktable sts_risktable"' _n(3)
 			file write scheme `"ticksetstyle major_horiz_default"' _n
 			file write scheme `"ticksetstyle major_horiz_default major_horiz_default"' _n
 			file write scheme `"ticksetstyle major_vert_default major_vert_default"' _n
@@ -1475,9 +1804,9 @@ prog def brewscheme, rclass
 			file write scheme `"ticksetstyle major_horiz_notickbig major_horiz_notickbig"' _n
 			file write scheme `"ticksetstyle major_vert_notickbig major_vert_notickbig"' _n
 			file write scheme `"ticksetstyle sts_risktable sts_risktable"' _n
-			file write scheme `"ticksetstyle major_clegend major_clegend"' _n
-			file write scheme `"tickposition axis_tick outside"' _n
-			file write scheme `"barlabelpos bar outside"' _n
+			file write scheme `"ticksetstyle major_clegend major_clegend"' _n(2)
+			file write scheme `"tickposition axis_tick outside"' _n(2)
+			file write scheme `"barlabelpos bar outside"' _n(2)
 			file write scheme `"compass2dir east"' _n
 			file write scheme `"compass2dir p east"' _n
 			file write scheme `"compass2dir key_label west"' _n
@@ -1486,8 +1815,10 @@ prog def brewscheme, rclass
 			file write scheme `"compass2dir text_option center"' _n
 			file write scheme `"compass2dir graph_aspect center"' _n
 			file write scheme `"compass2dir editor east"' _n
+			file write scheme `"* compass2dir p#"' _n(3)
 			file write scheme `"compass3dir east"' _n
 			file write scheme `"compass3dir p east"' _n
+			file write scheme `"* compass3dir p#"' _n(3)
 			file write scheme `"clockdir 12"' _n
 			file write scheme `"clockdir title_position 12"' _n
 			file write scheme `"clockdir subtitle_position 12"' _n
@@ -1497,16 +1828,18 @@ prog def brewscheme, rclass
 			file write scheme `"clockdir zyx2legend_position 3"' _n
 			file write scheme `"clockdir by_legend_position 12"' _n
 			file write scheme `"clockdir ilabel 3"' _n
-			file write scheme `"clockdir matrix_marklbl 12"' _n
+			file write scheme `"clockdir matrix_marklbl 12"' _n(2)
 			file write scheme `"clockdir p 0"' _n
+			file write scheme `"* clockdir p#                   3"' _n
+			file write scheme `"* clockdir p#box                3"' _n(2)
 			file write scheme `"clockdir legend_title_position 12"' _n
 			file write scheme `"clockdir legend_subtitle_position 12"' _n
 			file write scheme `"clockdir legend_caption_position 4"' _n
 			file write scheme `"clockdir legend_note_position 7"' _n
-			file write scheme `"clockdir clegend_title_position 12"' _n
+			file write scheme `"clockdir clegend_title_position 12"' _n(2)
 			file write scheme `"relative_posn zyx2legend_pos right"' _n
 			file write scheme `"relative_posn clegend_pos right"' _n
-			file write scheme `"relative_posn clegend_axispos right"' _n
+			file write scheme `"relative_posn clegend_axispos right"' _n(2)
 			file write scheme `"gridringstyle spacers_ring 11"' _n
 			file write scheme `"gridringstyle title_ring 7"' _n
 			file write scheme `"gridringstyle subtitle_ring 6"' _n
@@ -1515,12 +1848,12 @@ prog def brewscheme, rclass
 			file write scheme `"gridringstyle legend_ring 3"' _n
 			file write scheme `"gridringstyle zyx2legend_ring 4"' _n
 			file write scheme `"gridringstyle clegend_ring 3"' _n
-			file write scheme `"gridringstyle by_legend_ring 3"' _n
+			file write scheme `"gridringstyle by_legend_ring 3"' _n(2)
 			file write scheme `"gridringstyle legend_title_ring 7"' _n
 			file write scheme `"gridringstyle legend_subtitle_ring 6"' _n
 			file write scheme `"gridringstyle legend_caption_ring 5"' _n
 			file write scheme `"gridringstyle legend_note_ring 3"' _n
-			file write scheme `"gridringstyle clegend_title_ring 7"' _n
+			file write scheme `"gridringstyle clegend_title_ring 7"' _n(3)
 			file write scheme `"anglestyle horizontal"' _n
 			file write scheme `"anglestyle horizontal_tick horizontal"' _n
 			file write scheme `"anglestyle vertical_tick horizontal"' _n
@@ -1528,6 +1861,10 @@ prog def brewscheme, rclass
 			file write scheme `"anglestyle p stdarrow"' _n
 			file write scheme `"anglestyle parrow stdarrow"' _n
 			file write scheme `"anglestyle parrowbarb zero"' _n
+			file write scheme `"* anglestyle p#mark"' _n
+			file write scheme `"* anglestyle p#backmark"' _n
+			file write scheme `"* anglestyle p#arrow"' _n
+			file write scheme `"* anglestyle p#arrowbarb"' _n(3)			
 			
 			file write scheme `"plotregionstyle default"' _n
 			file write scheme `"plotregionstyle graph graph"' _n
@@ -1544,37 +1881,59 @@ prog def brewscheme, rclass
 			file write scheme `"plotregionstyle matrix matrix"' _n
 			file write scheme `"plotregionstyle matrix_label matrix_label"' _n
 			file write scheme `"plotregionstyle legend_key_region legend_key_region"' _n
-			file write scheme `"plotregionstyle clegend clegend"' _n
+			file write scheme `"plotregionstyle clegend clegend"' _n(3)
 			file write scheme `"graphstyle default"' _n
 			file write scheme `"graphstyle default default"' _n
 			file write scheme `"graphstyle graph default"' _n
-			file write scheme `"graphstyle matrixgraph matrixgraph"' _n
+			file write scheme `"graphstyle matrixgraph matrixgraph"' _n(3)
 			file write scheme `"bygraphstyle default"' _n
 			file write scheme `"bygraphstyle default default"' _n
 			file write scheme `"bygraphstyle bygraph default"' _n
-			file write scheme `"bygraphstyle combine combine"' _n
+			file write scheme `"bygraphstyle combine combine"' _n(2)
 			file write scheme `"piegraphstyle default"' _n
-			file write scheme `"piegraphstyle piegraph default"' _n
+			file write scheme `"piegraphstyle piegraph default"' _n(3)
 			file write scheme `"legendstyle default"' _n
 			file write scheme `"legendstyle default default"' _n
-			file write scheme `"legendstyle zyx2 zyx2"' _n
+			file write scheme `"legendstyle zyx2 zyx2"' _n(2)
 			file write scheme `"clegendstyle default"' _n
-			file write scheme `"clegendstyle default default"' _n
+			file write scheme `"clegendstyle default default"' _n(3)
 			file write scheme `"labelstyle default"' _n
 			file write scheme `"labelstyle ilabel ilabel"' _n 
 			file write scheme `"labelstyle matrix matrix"' _n 
 			file write scheme `"labelstyle editor editor"' _n 
-			file write scheme `"labelstyle sunflower default"' _n
+			file write scheme `"labelstyle sunflower default"' _n(2)
+			
+			// Write generic marker styles
+			foreach i in "" "box" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+
+					// Add entry to scheme file
+					file write scheme `"labelstyle p`v'`i'  p`v'`i'"' _n
+					
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+
+			} // End Loop over marker style generic types
+			
+			file write scheme `""' _n
 			
 			file write scheme `"yesno textbox no"' _n
-			file write scheme `"yesno text_option no"' _n
+			file write scheme `"yesno text_option no"' _n(2)
+			
 			file write scheme `"yesno connect_missings yes"' _n
 			file write scheme `"yesno cmissings yes"' _n
 			file write scheme `"yesno pcmissings yes"' _n
+			file write scheme `"* yesno p#cmissings       no"' _n(2)
+			
 			file write scheme `"yesno extend_axes_low yes"' _n
 			file write scheme `"yesno extend_axes_high yes"' _n
 			file write scheme `"yesno extend_axes_full_low yes"' _n
-			file write scheme `"yesno extend_axes_full_high yes"' _n
+			file write scheme `"yesno extend_axes_full_high yes"' _n(2)
+			
 			file write scheme `"yesno draw_major_grid no"' _n
 			file write scheme `"yesno draw_minor_grid no"' _n
 			file write scheme `"yesno draw_majornl_grid no"' _n
@@ -1620,14 +1979,18 @@ prog def brewscheme, rclass
 			file write scheme `"yesno grid_draw_min no"' _n
 			file write scheme `"yesno grid_draw_max no"' _n
 			file write scheme `"yesno grid_force_nomin no"' _n
-			file write scheme `"yesno grid_force_nomax no"' _n
+			file write scheme `"yesno grid_force_nomax no"' _n(2)
+			
 			file write scheme `"yesno xyline_extend_low yes"' _n
-			file write scheme `"yesno xyline_extend_high yes"' _n
+			file write scheme `"yesno xyline_extend_high yes"' _n(2)
+			
 			file write scheme `"yesno alt_xaxes no"' _n
 			file write scheme `"yesno alt_yaxes no"' _n
 			file write scheme `"yesno x2axis_ontop yes"' _n
-			file write scheme `"yesno y2axis_onright yes"' _n
-			file write scheme `"yesno use_labels_on_ticks no"' _n
+			file write scheme `"yesno y2axis_onright yes"' _n(2)
+			
+			file write scheme `"yesno use_labels_on_ticks no"' _n(2)
+			
 			file write scheme `"yesno alternate_labels no"' _n
 			file write scheme `"yesno swap_bar_scaleaxis no"' _n
 			file write scheme `"yesno swap_bar_groupaxis no"' _n
@@ -1638,10 +2001,13 @@ prog def brewscheme, rclass
 			file write scheme `"yesno extend_dots yes"' _n
 			file write scheme `"yesno bar_reverse_scale no"' _n
 			file write scheme `"yesno dot_reverse_scale no"' _n
-			file write scheme `"yesno box_reverse_scale no"' _n
+			file write scheme `"yesno box_reverse_scale no"' _n(2)
+			
 			file write scheme `"yesno box_hollow no"' _n
-			file write scheme `"yesno box_custom_whiskers no"' _n
-			file write scheme `"yesno pie_clockwise yes"' _n
+			file write scheme `"yesno box_custom_whiskers no"' _n(2)
+			
+			file write scheme `"yesno pie_clockwise yes"' _n(2)
+			
 			file write scheme `"yesno by_edgelabel yes"' _n
 			file write scheme `"yesno by_alternate_xaxes no"' _n
 			file write scheme `"yesno by_alternate_yaxes no"' _n
@@ -1663,115 +2029,176 @@ prog def brewscheme, rclass
 			file write scheme `"yesno by_indiv_yrescale no"' _n
 			file write scheme `"yesno by_indiv_as_whole no"' _n
 			file write scheme `"yesno by_shrink_plotregion no"' _n
-			file write scheme `"yesno by_shrink_indiv no"' _n
+			file write scheme `"yesno by_shrink_indiv no"' _n(2)
+			
 			file write scheme `"yesno mat_label_box yes"' _n
-			file write scheme `"yesno mat_label_as_textbox yes"' _n
+			file write scheme `"yesno mat_label_as_textbox yes"' _n(2)
+			
 			file write scheme `"yesno legend_col_first no"' _n
 			file write scheme `"yesno legend_text_first no"' _n
 			file write scheme `"yesno legend_stacked no"' _n
 			file write scheme `"yesno legend_force_keysz no"' _n
 			file write scheme `"yesno legend_force_draw no"' _n
-			file write scheme `"yesno legend_force_nodraw no"' _n
+			file write scheme `"yesno legend_force_nodraw no"' _n(2)
+			
 			file write scheme `"yesno title_span no"' _n
 			file write scheme `"yesno subtitle_span no"' _n
 			file write scheme `"yesno caption_span no"' _n
 			file write scheme `"yesno note_span no"' _n
 			file write scheme `"yesno legend_span no"' _n
 			file write scheme `"yesno zyx2legend_span no"' _n
-			file write scheme `"yesno clegend_title_span yes"' _n
+			file write scheme `"yesno clegend_title_span yes"' _n(2)
+			
 			file write scheme `"yesno adj_xmargins no"' _n
-			file write scheme `"yesno adj_ymargins no"' _n
+			file write scheme `"yesno adj_ymargins no"' _n(2)
+			
 			file write scheme `"yesno plabelboxed no"' _n
-			file write scheme `"yesno pboxlabelboxed no"' _n
+			file write scheme `"yesno pboxlabelboxed no"' _n(2)
+			
 			file write scheme `"yesno contours_outline no"' _n
 			file write scheme `"yesno contours_reversekey no"' _n
-			file write scheme `"yesno contours_colorlines no"' _n
+			file write scheme `"yesno contours_colorlines no"' _n(2)
+			
+			file write scheme `"* yesno p#labelboxed           no"'
+			file write scheme `"* yesno p#boxlabelboxed        no"' _n(3)
 
 			file write scheme `"barstyle default"' _n
 			file write scheme `"barstyle default default"' _n
 			file write scheme `"barstyle dot dotdefault"' _n
-			file write scheme `"barstyle box boxdefault"' _n
-			file write scheme `"barlabelstyle bar bar"' _n
-			file write scheme `"dottypestyle dot dot"' _n
-			file write scheme `"medtypestyle boxplot line"' _n
-			file write scheme `"pielabelstyle default none"' _n
+			file write scheme `"barstyle box boxdefault"' _n(2)
+			
+			file write scheme `"barlabelstyle      none"' _n
+			file write scheme `"barlabelstyle bar bar"' _n(2)
+			
+			file write scheme `"dottypestyle dot dot"' _n(2)
+			
+			file write scheme `"medtypestyle boxplot line"' _n(2)
+			
+			file write scheme `"pielabelstyle default none"' _n(2)
+			
 			file write scheme `"arrowstyle default editor"' _n
-			file write scheme `"arrowstyle editor editor"' _n
+			file write scheme `"arrowstyle editor editor"' _n(2)
+			
 			file write scheme `"starstyle default"' _n
-			file write scheme `"starstyle default default"' _n
-			file write scheme `"above_below star below"' _n
+			file write scheme `"starstyle default default"' _n(2)
+			
+			file write scheme `"above_below star below"' _n(2)
+			
 			file write scheme `"zyx2rule contour intensity"' _n
-			file write scheme `"zyx2rule contour hue"' _n
+			file write scheme `"zyx2rule contour hue"' _n(2)
+			
 			file write scheme `"zyx2style default"' _n
 			file write scheme `"zyx2style default default"' _n
-			file write scheme `"seriesstyle p1"' _n
-			file write scheme `"seriesstyle dendrogram dendrogram"' _n
-			file write scheme `"seriesstyle ilabel ilabel"' _n
-			file write scheme `"seriesstyle matrix matrix"' _n
+			
+			// Loop over color cycles
+			forv i = 1/`pcycles' {
 
+				// Add default entry for each color cycle
+				file write scheme `"zyx2style p`i' default"' _n
+				
+			} // End Loop over number of color cycles
+			
+			file write scheme `"seriesstyle p1"' _n(2)
+			
+			file write scheme `"seriesstyle dendrogram dendrogram"' _n(2)
+			
+			file write scheme `"seriesstyle ilabel ilabel"' _n
+			file write scheme `"seriesstyle matrix matrix"' _n(2)
+			
+			// Write generic marker styles
+			foreach i in "" "bar" "box" "pie" "area" "line" "dot" "arrow" {
+			
+				// Loop over cycle numbers
+				forv v = 1/`pcycles' {
+
+					// Add entry to scheme file
+					file write scheme `"seriesstyle p`v'`i'  p`v'`i'"' _n
+										
+				} // End Loop over cycle number
+				
+				// Write blank line between each of the types
+				file write scheme `""' _n
+
+			} // End Loop over marker style generic types
+
+			file write scheme `"* seriesstyle p1  line_circle"' _n
+			file write scheme `"* seriesstyle p2  line_square"' _n
+			file write scheme `"* seriesstyle p3  line_diamond"' _n
+			file write scheme `"* seriesstyle p4  line_x"' _n
+			file write scheme `"* seriesstyle p5  line_plus"' _n
+			file write scheme `"* seriesstyle p6  line_triangle"' _n
+			file write scheme `"* seriesstyle p7  line_smcircle"' _n(2)
+
+			file write scheme `"* seriesstyle pa  line_xcircle"' _n
+			file write scheme `"* seriesstyle pb  line_xsquare"' _n
+			file write scheme `"* seriesstyle pc  line_xdiamond"' _n
+			file write scheme `"* seriesstyle pd  line_xx"' _n
+			file write scheme `"* seriesstyle pe  line_xplus"' _n
+			file write scheme `"* seriesstyle pf  line_xtriangle"' _n
+			file write scheme `"* seriesstyle pg  line_xsmcircle"' _n(2)
+
+			file write scheme `"* seriesstyle ph  line_pcircle"' _n
+			file write scheme `"* seriesstyle pi  line_psquare"' _n
+			file write scheme `"* seriesstyle pj  line_pdiamond"' _n
+			file write scheme `"* seriesstyle pk  line_px"' _n
+			file write scheme `"* seriesstyle pl  line_pplus"' _n
+			file write scheme `"* seriesstyle pm  line_ptriangle"' _n
+			file write scheme `"* seriesstyle pn  line_psmcircle"' _n(2)
+
+			file write scheme `"* seriesstyle po  line_dblcircle"' _n
+			file write scheme `"* seriesstyle pp  line_dblsquare"' _n
+			file write scheme `"* seriesstyle pq  line_dbldiamond"' _n
+			file write scheme `"* seriesstyle pr  line_dblx"' _n
+			file write scheme `"* seriesstyle ps  line_dblplus"' _n
+			file write scheme `"* seriesstyle pt  line_dbltriangle"' _n
+			file write scheme `"* seriesstyle pu  line_dblsmcircle"' _n(2)
+
+			file write scheme `"* seriesstyle pv  wideline_circle"' _n
+			file write scheme `"* seriesstyle pw  wideline_square"' _n
+			file write scheme `"* seriesstyle px  wideline_diamond"' _n
+			file write scheme `"* seriesstyle py  wideline_x"' _n
+			file write scheme `"* seriesstyle pz  wideline_plus"' _n
+			file write scheme `"* seriesstyle paa wideline_triangle"' _n
+			file write scheme `"* seriesstyle pab wideline_smcircle"' _n(2)
+
+			file write scheme `"* seriesstyle pac line_spcircle"' _n
+			file write scheme `"* seriesstyle pad line_spsquare"' _n
+			file write scheme `"* seriesstyle pae line_spdiamond"' _n
+			file write scheme `"* seriesstyle paf line_spx"' _n
+			file write scheme `"* seriesstyle pag line_spplus"' _n
+			file write scheme `"* seriesstyle pah line_sptriangle"' _n
+			file write scheme `"* seriesstyle pai line_spsmcircle"' _n
+			file write scheme `"* seriesstyle paj line_sppoint"' _n(2)
+
+			file write scheme `"* seriesstyle pak line"' _n
+			file write scheme `"* seriesstyle pal dash"' _n
+			file write scheme `"* seriesstyle pam dash_dot"' _n
+			file write scheme `"* seriesstyle pan longdash"' _n
+			file write scheme `"* seriesstyle pao dash_dotdot"' _n
+			file write scheme `"* seriesstyle pap longshort"' _n
+			file write scheme `"* seriesstyle paq shortdash"' _n(2)
+
+			file write scheme `"* seriesstyle px wideline"' _n
+			file write scheme `"* seriesstyle px  widedash"' _n
+			file write scheme `"* seriesstyle px  widedash_dot"' _n
+			file write scheme `"* seriesstyle px  widelongdash"' _n
+			file write scheme `"* seriesstyle px  widedash_dotdot"' _n
+			file write scheme `"* seriesstyle px  widelongshort"' _n
+			file write scheme `"* seriesstyle px  wideshortdash"' _n(2)
+			
+			file write scheme `"* seriesstyle px  thinline"' _n
+			file write scheme `"* seriesstyle px  thindash"' _n
+			file write scheme `"* seriesstyle px  thindash_dot"' _n
+			file write scheme `"* seriesstyle px  thinlongdash"' _n
+			file write scheme `"* seriesstyle px  thindash_dotdot"' _n
+			file write scheme `"* seriesstyle px  thinlongshort"' _n
+			file write scheme `"* seriesstyle px  thinshortdash"' _n(2)			
+			
 			file write scheme `"sunflowerstyle sunflower sunflower"' _n
 			
 			// Set generic parameters
 			forv i = 1/`pcycles' {
-			
-				// Define generics for contour plots
-				file write scheme `"zyx2style p`i' default"' _n
-				
-				// Define generic shade styles
-				file write scheme `"shadestyle p`i' p`i'"' _n
-				file write scheme `"shadestyle p`i'area p`i'area"' _n
-				file write scheme `"shadestyle p`i'bar p`i'bar"' _n
-				file write scheme `"shadestyle p`i'box p`i'box"' _n
-				file write scheme `"shadestyle p`i'pie p`i'pie"' _n
-			
-				// Define generic marker styles
-				file write scheme `"markerstyle p`i' p`i'"' _n
-				file write scheme `"markerstyle p`i'box p`i'box"' _n
-				file write scheme `"markerstyle p`i'dot p`i'dot"' _n
-				file write scheme `"markerstyle p`i'arrow p`i'arrow"' _n
-
-				// Generic Series Styles
-				file write scheme `"seriesstyle p`i' p`i'"' _n
-				file write scheme `"seriesstyle p`i'area p`i'area"' _n
-				file write scheme `"seriesstyle p`i'arrow p`i'arrow"' _n
-				file write scheme `"seriesstyle p`i'bar p`i'bar"' _n
-				file write scheme `"seriesstyle p`i'box p`i'box"' _n
-				file write scheme `"seriesstyle p`i'dot p`i'dot"' _n
-				file write scheme `"seriesstyle p`i'line p`i'line"' _n
-
-				// Define generic linee styles
-				file write scheme `"linestyle p`i' p`i'"' _n
-				file write scheme `"linestyle p`i'area p`i'area"' _n
-				file write scheme `"linestyle p`i'arrow p`i'arrow"' _n
-				file write scheme `"linestyle p`i'arrowline p`i'arrowline"' _n
-				file write scheme `"linestyle p`i'bar p`i'bar"' _n
-				file write scheme `"linestyle p`i'box p`i'box"' _n
-				file write scheme `"linestyle p`i'boxmark p`i'boxmark"' _n
-				file write scheme `"linestyle p`i'dotmark p`i'dotmark"' _n
-				file write scheme `"linestyle p`i'line p`i'line"' _n
-				file write scheme `"linestyle p`i'mark p`i'mark"' _n
-				file write scheme `"linestyle p`i'pie p`i'pie"' _n
-				file write scheme `"linestyle p`i'other p`i'other"' _n
-				file write scheme `"linestyle p`i'sunflowerdark p`i'sunflowerdark"' _n
-				file write scheme `"linestyle p`i'sunflowerlight p`i'sunflowerlight"' _n
-				
-				// Generic Text Box Styles
-				file write scheme `"textboxstyle p`i' p`i'"' _n
-				file write scheme `"textboxstyle p`i'boxlabel p`i'boxlabel"' _n
-				
-				// Generic Area Styles
-				file write scheme `"areastyle p`i' p`i'"' _n
-				file write scheme `"areastyle p`i'area p`i'area"' _n
-				file write scheme `"areastyle p`i'bar p`i'bar"' _n
-				file write scheme `"areastyle p`i'box p`i'box"' _n
-				file write scheme `"areastyle p`i'pie p`i'pie"' _n
-				file write scheme `"areastyle p`i'sunflowerdark p`i'sunflowerdark"' _n
-				file write scheme `"areastyle p`i'sunflowerlight p`i'sunflowerlight"' _n
-
-				// Generic Label Styles
-				file write scheme `"labelstyle p`i' p`i'"' _n
-				file write scheme `"labelstyle p`i'box p`i'box"' _n
-							
+										
 				// Generic Sunflower plot styles
 				if `i' == 1 {
 					file write scheme `"sunflowerstyle p1 sunflower"' _n
@@ -1853,7 +2280,7 @@ prog def brewscheme, rclass
 				file write scheme `"color p`i' "`barcolor'""' _n
 				file write scheme `"color p`i'bar "`barcolor'""' _n
 				file write scheme `"intensity p`i'bar inten`barsaturation'"' _n
-				file write scheme `"areatyle p`i'bar p`i'bar"' _n
+				// file write scheme `"areastyle p`i'bar p`i'bar"' _n
 				file write scheme `"seriesstyle p`i'bar p`i'bar"' _n
 				file write scheme `"color p`i'barline black"' _n
 
@@ -1890,8 +2317,7 @@ prog def brewscheme, rclass
 				/* Connected Plots */
 				// Primary connected plot entries
 				file write scheme `"color p`i'line "`linecolor'""' _n
-				file write scheme `"yesno pcmissings yes"' _n
-				file write scheme `"yesno p`i'cmissings yes"' _n
+				file write scheme `"yesno p`i'cmissings no"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
 
 				// Composite entries for connected plots
@@ -1919,7 +2345,6 @@ prog def brewscheme, rclass
 				file write scheme `"color p`i'lineplot "`linecolor'""' _n
 				file write scheme `"linewidth p`i'lineplot medium"' _n
 				file write scheme `"linepattern p`i'lineplot solid"' _n
-				file write scheme `"yesno p`i'cmissings yes"' _n
 				file write scheme `"connectstyle p`i' direct"' _n
 
 				// Primary entries for scatter plots
