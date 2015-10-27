@@ -23,7 +23,7 @@
 		
 *! brewscheme
 *! v 0.0.9
-*! 26OCT2015
+*! 27OCT2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -769,11 +769,15 @@ prog def brewscheme, rclass
 				pcolor == ``color'colors', loc(rgbs)
 				
 				if "`dbug'" != "" {
+					
 					levelsof rgb if palette == "``color'style'" & pcolor == ``color'colors'
+					
 					di "Graph type = `color'"
+					
 					// Print debugging message
 					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
 					`"Color sequence: ``color'seq'"'
+				
 				}
 				
 				// Loop over the rgb values to construct the graph specific  
@@ -789,7 +793,7 @@ prog def brewscheme, rclass
 				if ``color'colors' == `pcycles' {
 				
 					// Set the generic color macro to reference macro w/max colors
-					loc gencolor `color'rgb
+					loc gencolor `"``color'rgb'"'
 					
 				} // End of IF Block to define generic color macro	
 			
@@ -1089,9 +1093,9 @@ prog def brewscheme, rclass
 			file write scheme `"color sunflowerdf "`: word 3 of `sunrgb''""' _n(2)
 			
 			/* Add generic color loop here */
-			forv i = 1/`pcycles' {
+			forv i = 1/`: word count `gencolor'' {
 			
-				file write scheme `"color p`i' "``: word `i' of `gencolor'''""' _n
+				file write scheme `"color p`i' "`: word `i' of `gencolor''""' _n
 			
 			} // End Loop for generic colors
 			
@@ -1822,7 +1826,7 @@ prog def brewscheme, rclass
 			file write scheme `"clockdir 12"' _n
 			file write scheme `"clockdir title_position 12"' _n
 			file write scheme `"clockdir subtitle_position 12"' _n
-			file write scheme `"clockdir caption_position 4"' _n
+			file write scheme `"clockdir caption_position 5"' _n
 			file write scheme `"clockdir note_position 7"' _n
 			file write scheme `"clockdir legend_position 12"' _n
 			file write scheme `"clockdir zyx2legend_position 3"' _n
@@ -1834,7 +1838,7 @@ prog def brewscheme, rclass
 			file write scheme `"* clockdir p#box                3"' _n(2)
 			file write scheme `"clockdir legend_title_position 12"' _n
 			file write scheme `"clockdir legend_subtitle_position 12"' _n
-			file write scheme `"clockdir legend_caption_position 4"' _n
+			file write scheme `"clockdir legend_caption_position 5"' _n
 			file write scheme `"clockdir legend_note_position 7"' _n
 			file write scheme `"clockdir clegend_title_position 12"' _n(2)
 			file write scheme `"relative_posn zyx2legend_pos right"' _n
@@ -1843,7 +1847,7 @@ prog def brewscheme, rclass
 			file write scheme `"gridringstyle spacers_ring 11"' _n
 			file write scheme `"gridringstyle title_ring 7"' _n
 			file write scheme `"gridringstyle subtitle_ring 6"' _n
-			file write scheme `"gridringstyle caption_ring 5"' _n
+			file write scheme `"gridringstyle caption_ring 4"' _n
 			file write scheme `"gridringstyle note_ring 4"' _n
 			file write scheme `"gridringstyle legend_ring 3"' _n
 			file write scheme `"gridringstyle zyx2legend_ring 4"' _n
@@ -1851,7 +1855,7 @@ prog def brewscheme, rclass
 			file write scheme `"gridringstyle by_legend_ring 3"' _n(2)
 			file write scheme `"gridringstyle legend_title_ring 7"' _n
 			file write scheme `"gridringstyle legend_subtitle_ring 6"' _n
-			file write scheme `"gridringstyle legend_caption_ring 5"' _n
+			file write scheme `"gridringstyle legend_caption_ring 3"' _n
 			file write scheme `"gridringstyle legend_note_ring 3"' _n
 			file write scheme `"gridringstyle clegend_title_ring 7"' _n(3)
 			file write scheme `"anglestyle horizontal"' _n
@@ -2041,11 +2045,11 @@ prog def brewscheme, rclass
 			file write scheme `"yesno legend_force_draw no"' _n
 			file write scheme `"yesno legend_force_nodraw no"' _n(2)
 			
-			file write scheme `"yesno title_span no"' _n
-			file write scheme `"yesno subtitle_span no"' _n
-			file write scheme `"yesno caption_span no"' _n
-			file write scheme `"yesno note_span no"' _n
-			file write scheme `"yesno legend_span no"' _n
+			file write scheme `"yesno title_span yes"' _n
+			file write scheme `"yesno subtitle_span yes"' _n
+			file write scheme `"yesno caption_span yes"' _n
+			file write scheme `"yesno note_span yes"' _n
+			file write scheme `"yesno legend_span yes"' _n
 			file write scheme `"yesno zyx2legend_span no"' _n
 			file write scheme `"yesno clegend_title_span yes"' _n(2)
 			
