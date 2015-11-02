@@ -23,8 +23,8 @@
 ********************************************************************************
 		
 *! brewterpolate
-*! v 0.0.1
-*! 26OCT2015
+*! v 0.0.2
+*! 02NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewterpolate
@@ -164,13 +164,13 @@ prog def brewterpolate, rclass
 		javacall org.paces.Stata.ColorTerp.ColorTerp interpcolors, args()
 
 		// Macro to store all colors in single string
-		loc scolorstring "`scolor'"
+		loc scolorstring `""`scolor'" "'
 
 		// Loop over the returned results
 		forv i = 1/`colors' {
 
 			// Set the return macros
-			ret loc terpcolor`i' `color`i''
+			ret loc terpcolor`i' "`color`i''"
 
 			// Add each of the colors to the same macro
 			loc scolorstring `"`scolorstring' "`color`i''""'

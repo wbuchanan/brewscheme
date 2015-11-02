@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.3
-*! 14OCT2015
+*! v 0.0.4
+*! 02NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -82,7 +82,7 @@ prog def brewdb
 				
 					// Return only the rgb values for the # of colors
 					qui: g v`i' = regexs(1) if regexm(w2,					 ///   
-											 `"([`i']: \[.*\], `= `i' + 1')"')
+											 `"(`i': \[.*\], `= `i' + 1')"')
 					
 				} // End IF Block for # of colors within subpalette
 				
@@ -90,10 +90,41 @@ prog def brewdb
 				else if `i' == 9 {
 				
 					// Parse the string, hardcoding the next value
-					qui: g v9 = regexs(1) if regexm(w2, `"([`i']: \[.*\],.*10:)"')
+					qui: g v9 = regexs(1) if regexm(w2, `"(9: \[.*\'], 10:)"')
 					
 					// Get rid of left overs from regex
-					qui: replace v9 = subinstr(v9, "0:", "", .)
+					qui: replace v9 = subinstr(v9, "9:", "", .)
+					
+					// Get rid of left overs from regex
+					qui: replace v9 = subinstr(v9, "10:", "", .)
+					
+				} // End ELSE Block for the special case for value 9
+				
+				// For the case of the value of 10
+				else if `i' == 10 {
+				
+					// Parse the string, hardcoding the next value
+					qui: g v10 = regexs(1) if regexm(w2, `"(10: \[.*\'], 11:)"')
+					
+					// Get rid of left overs from regex
+					qui: replace v10 = subinstr(v10, "10:", "", .)
+					
+					// Get rid of left overs from regex
+					qui: replace v10 = subinstr(v10, "11:", "", .)
+					
+				} // End ELSE Block for the special case for value 9
+				
+				// For the case of the value of 11
+				else if `i' == 11 {
+				
+					// Parse the string, hardcoding the next value
+					qui: g v11 = regexs(1) if regexm(w2, `"(11: \[.*\'], 12:)"')
+					
+					// Get rid of left overs from regex
+					qui: replace v11 = subinstr(v11, "11:", "", .)
+					
+					// Get rid of left overs from regex
+					qui: replace v11 = subinstr(v11, "12:", "", .)
 					
 				} // End ELSE Block for the special case for value 9
 				
@@ -106,7 +137,7 @@ prog def brewdb
 				} // End ELSE Block for parsing the RGB strings by # colors 
 				
 				// Parse out only the rgb parts of the strings
-				qui: replace v`i' = ustrregexra(v`i', "([`i']: \[')|('\], [0-9])", "")
+				qui: replace v`i' = regexr(v`i', "(`i': \[')|(, [0-9])|(  [0-9])", "")
 
 				// Split the string to create a single variable for each color
 				qui: split v`i', g(v`i'color) parse(`"', '"')
@@ -121,11 +152,23 @@ prog def brewdb
 					qui: replace `x' = trim(itrim(`x'))
 					
 					// Remove punctuation and 'rgb(' from the start of the value string
-					qui: replace `x' = ustrregexra(`x', "(rgb\()|(\))", "")
+					qui: replace `x' = regexr(`x', "(rgb\()|(\))", "")
 					
 					// Remove the commas between the values
 					qui: replace `x' = subinstr(`x', ",", " ", .)
-				
+
+					// Remove any trailing/closing parenthesis
+					qui: replace `x' = subinstr(`x', `")"', "", .)
+
+					// Remove any trailing/closing square brackets
+					qui: replace `x' = subinstr(`x', `"]"', "", .)
+
+					// Remove any remaining apostrophes 
+					qui: replace `x' = subinstr(`x', `"'"', "", .)
+
+					// Remove IDs for next color/palette combination
+					qui: replace `x' = regexr(`x', "(  [0-9])", "")
+
 				} // End Loop over individual color variables
 				
 				// Drop the variable with the full set of color values for that sub palette
@@ -137,7 +180,7 @@ prog def brewdb
 			qui: split v1, gen(palette) parse(":  {")
 
 			// Clean up the string 
-			qui: g palette = ustrregexra(palette1, ".* [DQS][a-z].* */", "")
+			qui: g palette = regexr(palette1, ".* [DQS][a-z].* */", "")
 
 			// Drop records if missing a value for palette
 			qui: drop if mi(palette)
