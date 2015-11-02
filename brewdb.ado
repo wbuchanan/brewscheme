@@ -163,11 +163,17 @@ prog def brewdb
 					// Remove any trailing/closing square brackets
 					qui: replace `x' = subinstr(`x', `"]"', "", .)
 
+					// Remove any leading/opening square brackets
+					qui: replace `x' = subinstr(`x', `"["', "", .)
+
 					// Remove any remaining apostrophes 
 					qui: replace `x' = subinstr(`x', `"'"', "", .)
 
 					// Remove IDs for next color/palette combination
 					qui: replace `x' = regexr(`x', "(  [0-9])", "")
+					
+					// Remove erroneous spaces
+					qui: replace `x' = trim(itrim(`x'))
 
 				} // End Loop over individual color variables
 				
