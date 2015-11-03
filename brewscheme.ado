@@ -17,7 +17,7 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2411                                                                     *
+*     2414                                                                     *
 *                                                                              *
 ********************************************************************************
 		
@@ -53,15 +53,18 @@ prog def brewscheme, rclass
 		CONSTart(string asis) CONEnd(string asis) CONSATuration(real 100)	 ///   
 		SOMESTyle(string asis) SOMEColors(real 3) SOMESATuration(real 100)	 ///   
 		REFResh DBug ]
+		
+		// Try closing existing file if it already exists
+		cap file close scheme
 
 		// Preserve data currently loaded in memory
 		preserve
 		
 			// Check for directory and if not build it	
-			dirfile, p(`"`c(sysdir_personal)'b"') rebuild
+			dirfile, p(`"`c(sysdir_personal)'b"') 
 			
 			// Check for subdirectory used for storing scheme files
-			dirfile, p(`"`c(sysdir_plus)'s"') rebuild
+			dirfile, p(`"`c(sysdir_plus)'s"')
 
 			// Check for the metadata dataset
 			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
