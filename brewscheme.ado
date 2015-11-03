@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2403                                                                     *
+*     2411                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.9
-*! 27OCT2015
+*! v 0.0.10
+*! 03NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -57,6 +57,12 @@ prog def brewscheme, rclass
 		// Preserve data currently loaded in memory
 		preserve
 		
+			// Check for directory and if not build it	
+			dirfile, p(`"`c(sysdir_personal)'b"') rebuild
+			
+			// Check for subdirectory used for storing scheme files
+			dirfile, p(`"`c(sysdir_plus)'s"') rebuild
+
 			// Check for the metadata dataset
 			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
