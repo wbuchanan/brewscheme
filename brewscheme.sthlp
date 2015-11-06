@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.1 09MAY2015}{...}
+{* *! version 0.0.2 06NOV2015}{...}
 {cmd:help brewscheme}
 {hline}
 
@@ -83,6 +83,13 @@ of the program.  {p_end}
 {col 5}{hi:ylorbr}{col 18}{help brewscheme##brewer: Brewer (2002)}{col 40}{hi:activitiest}{col 55}{help brewscheme##linetal: Lin et al (2013)}
 {col 5}{hi:ylorrd}{col 18}{help brewscheme##brewer: Brewer (2002)}{col 40}{hi:mdebar}{col 55}{browse "http://www.mde.k12.ms.us"} 
 {col 40}{hi:mdepoint}{col 55}{browse "http://www.mde.k12.ms.us"} 
+{col 5}{hline 75}
+
+{col 5}{hline 75}
+{col 5}{hi:Ordinal}{col 55}{hi:{help brewscheme##bostock: D3js}}
+{col 5}{hline 75}
+{col 5}{hi:category10}{col 18}{help brewscheme##bostock: D3}{col 40}{hi:category20}{col 55}{help brewscheme##bostock: D3} 
+{col 5}{hi:category20b}{col 18}{help brewscheme##bostock: D3}{col 40}{hi:category20c}{col 55}{help brewscheme##bostock: D3} 
 {col 5}{hline 75}
 
 {marker brewopts}{p 2 2 2}{title:Options}{p_end}{break}
@@ -250,7 +257,15 @@ graph types.  Use the default values of colors and intensity for each.{p_end}
 
 {p 10 10 10}{stata brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg):brewscheme, scheme(mixed1)  scatst(set1) barst(pastel1) somest(brbg)}{p_end}{break}
 
+{p 8 8 8}{hi: Note, this program only creates the scheme file.  To achieve the intended effect, you must use the scheme file in your subsequent graph commands:}{p_end}
+
+{p 10 10 10}{stata sysuse auto.dta, clear}{p_end}
+{p 10 10 10}{stata gr box mpg, over(rep78) scheme(mixed1)}{p_end}
+
 {marker refs}{p 4 4 4}{title:{ul:References}}{p_end}{break}
+{marker bostock}{p 4 8 8}Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. {it: IEEE Transactions on Visualization & Computer Graphics. 17(12)} pp 2301 - 2309. Retrieved from 
+{browse "http://vis.stanford.edu/papers/d3":Stanford Vis Group}.{p_end}  
+
 {marker brewer}{p 4 8 8}Brewer, C. A. (2002) {browse "http://colorbrewer.org/":Color Brewer 2} [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University.{p_end}
 
 {marker linetal}{p 4 8 8}Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013).{browse "http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf":  Selecting Semantically-Resonant Colors for Data Visualization}. In 
