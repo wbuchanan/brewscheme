@@ -33,7 +33,7 @@ cap prog drop brewterpolate
 prog def brewterpolate, rclass
 
 	// Set the version to interpret the code under
-	version 14
+	version 13.1
 
 	// Set the syntax for the program
 	syntax, SColor(string) EColor(string) Colors(integer) 					 ///   
