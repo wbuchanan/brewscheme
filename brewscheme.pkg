@@ -13,9 +13,9 @@ d KW: Graphs
 d KW: Scheme files
 d KW: Color
 d
-d Requires: Stata version 13.1
+d Requires: Stata version 13
 d
-d Distribution-Date: 20151013
+d Distribution-Date: 20151106
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -35,3 +35,9 @@ f brewextra.sthlp
 f recycle.mata
 f recycle.mo
 f librecycle.mlib
+f dirfile.ado
+f brewterpolate.ado
+f brewterpolate.sthlp
+f brewterpolate.jar
+f hextorgb.ado
+f hextorgb.sthlp

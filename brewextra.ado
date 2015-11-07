@@ -17,13 +17,13 @@
 *     r(brewextras) - File path/name where extras dataset is located		   *
 *                                                                              *
 * Lines -                                                                      *
-*     607                                                                      *
+*     705                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.5
-*! 25SEP2015
+*! v 0.0.7
+*! 06NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -40,32 +40,20 @@ prog def brewextra, rclass
 	// Preserve pre-existing state of the data
 	preserve
 	
-		// Check for a b subdirectory in personal
-		cap confirm new file `"`c(sysdir_personal)'brewuser"'
-		
-		// If it would be a new directory
-		if _rc == 0 {
-		
-			// Create the subdirectory
-			qui: mkdir `"`c(sysdir_personal)'brewuser"'
-			
-			// Print status message to console
-			di as res `"Creating directory `c(sysdir_personal)'brewuser "'	 ///   
-			`"to store user defined palette files."'
-		
-		} // End IF Block for b subdirectory of personal
+		// Check for/build directory
+		dirfile, p(`"`c(sysdir_personal)'brewuser"')
 		
 		// Check for refresh option
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
 		
 		// Check for existing extras file or refresh option
-		if inlist(_rc, 0, 603) | "`refresh'" != "" {
+		if _rc == 0 | "`refresh'" != "" {
 		
 			// Clear existing data from memory
 			clear
 
 			// Reserve memory for 130 observations
-			set obs 130
+			set obs 200
 
 			// Create palette, RGB, and meta variables 
 			// Meta variable contains additional info related to the research/experiments
@@ -94,6 +82,10 @@ prog def brewextra, rclass
 			qui: replace palette = "featurest" in 116/120
 			qui: replace palette = "activitiesa" in 121/125
 			qui: replace palette = "activitiest" in 126/130
+			qui: replace palette = "category10" in 131/140
+			qui: replace palette = "category20" in 141/160
+			qui: replace palette = "category20b" in 161/180
+			qui: replace palette = "category20c" in 181/200
 			bys palette: g colorid = _n
 			bys palette: g pcolor = _N
 			qui: g maxcolors = pcolor
@@ -394,7 +386,88 @@ prog def brewextra, rclass
 			qui: replace rgb = "127 127 127" if palette == "activitiest"	 ///   
 														& colorid == 5
 
-														
+			/* This section adds the D3js palettes from:
+			https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal */
+			
+			// D3js 10 Category Ordinal Scale
+			qui: replace rgb = "226 56 27" if palette == "category10" & colorid == 1
+			qui: replace rgb = "240 232 196" if palette == "category10" & colorid == 2
+			qui: replace rgb = "146 10 146" if palette == "category10" & colorid == 3
+			qui: replace rgb = "49 51 66" if palette == "category10" & colorid == 4
+			qui: replace rgb = "25 55 180" if palette == "category10" & colorid == 5
+			qui: replace rgb = "152 41 125" if palette == "category10" & colorid == 6
+			qui: replace rgb = "23 56 16" if palette == "category10" & colorid == 7
+			qui: replace rgb = "232 232 232" if palette == "category10" & colorid == 8
+			qui: replace rgb = "155 180 6" if palette == "category10" & colorid == 9
+			qui: replace rgb = "50 207 232" if palette == "category10" & colorid == 10
+
+			// D3js 20 Category Ordinal Scale
+			qui: replace rgb = "226 56 27" if palette == "category20" & colorid == 1
+			qui: replace rgb = "206 61 78" if palette == "category20" & colorid == 2
+			qui: replace rgb = "240 232 196" if palette == "category20" & colorid == 3
+			qui: replace rgb = "240 132 71" if palette == "category20" & colorid == 4
+			qui: replace rgb = "146 10 146" if palette == "category20" & colorid == 5
+			qui: replace rgb = "73 238 108" if palette == "category20" & colorid == 6
+			qui: replace rgb = "49 51 66" if palette == "category20" & colorid == 7
+			qui: replace rgb = "240 73 45" if palette == "category20" & colorid == 8
+			qui: replace rgb = "25 55 180" if palette == "category20" & colorid == 9
+			qui: replace rgb = "37 11 38" if palette == "category20" & colorid == 10
+			qui: replace rgb = "152 41 125" if palette == "category20" & colorid == 11
+			qui: replace rgb = "28 153 25" if palette == "category20" & colorid == 12
+			qui: replace rgb = "23 56 16" if palette == "category20" & colorid == 13
+			qui: replace rgb = "64 47 17" if palette == "category20" & colorid == 14
+			qui: replace rgb = "232 232 232" if palette == "category20" & colorid == 15
+			qui: replace rgb = "61 61 61" if palette == "category20" & colorid == 16
+			qui: replace rgb = "155 180 6" if palette == "category20" & colorid == 17
+			qui: replace rgb = "134 134 177" if palette == "category20" & colorid == 18
+			qui: replace rgb = "50 207 237" if palette == "category20" & colorid == 19
+			qui: replace rgb = "205 113 39" if palette == "category20" & colorid == 20
+
+			
+			// D3js 20 Category Ordinal Scale b
+			qui: replace rgb = "84 124 88" if palette == "category20b" & colorid == 1
+			qui: replace rgb = "9 21 19" if palette == "category20b" & colorid == 2
+			qui: replace rgb = "127 202 237" if palette == "category20b" & colorid == 3
+			qui: replace rgb = "153 205 209" if palette == "category20b" & colorid == 4
+			qui: replace rgb = "15 88 84" if palette == "category20b" & colorid == 5
+			qui: replace rgb = "152 14 9" if palette == "category20b" & colorid == 6
+			qui: replace rgb = "36 237 127" if palette == "category20b" & colorid == 7
+			qui: replace rgb = "208 134 153" if palette == "category20b" & colorid == 8
+			qui: replace rgb = "152 175 4" if palette == "category20b" & colorid == 9
+			qui: replace rgb = "180 205 84" if palette == "category20b" & colorid == 10
+			qui: replace rgb = "63 111 9" if palette == "category20b" & colorid == 11
+			qui: replace rgb = "63 133 25" if palette == "category20b" & colorid == 12
+			qui: replace rgb = "24 147 84" if palette == "category20b" & colorid == 13
+			qui: replace rgb = "179 85 104" if palette == "category20b" & colorid == 14
+			qui: replace rgb = "49 7 127" if palette == "category20b" & colorid == 15
+			qui: replace rgb = "63 45 153" if palette == "category20b" & colorid == 16
+			qui: replace rgb = "128 5 16" if palette == "category20b" & colorid == 17
+			qui: replace rgb = "35 6 25" if palette == "category20b" & colorid == 18
+			qui: replace rgb = "208 175 180" if palette == "category20b" & colorid == 19
+			qui: replace rgb = "209 205 49" if palette == "category20b" & colorid == 20
+						
+			// D3js 20 Category Ordinal Scale c
+			qui: replace rgb = "4 12 180" if palette == "category20c" & colorid == 1
+			qui: replace rgb = "127 206 49" if palette == "category20c" & colorid == 2
+			qui: replace rgb = "205 112 15" if palette == "category20c" & colorid == 3
+			qui: replace rgb = "48 134 239" if palette == "category20c" & colorid == 4
+			qui: replace rgb = "50 30 169" if palette == "category20c" & colorid == 5
+			qui: replace rgb = "184 177 147" if palette == "category20c" & colorid == 6
+			qui: replace rgb = "184 206 127" if palette == "category20c" & colorid == 7
+			qui: replace rgb = "184 13 14" if palette == "category20c" & colorid == 8
+			qui: replace rgb = "4 19 21" if palette == "category20c" & colorid == 9
+			qui: replace rgb = "23 28 43" if palette == "category20c" & colorid == 10
+			qui: replace rgb = "11 94 130" if palette == "category20c" & colorid == 11
+			qui: replace rgb = "61 95 12" if palette == "category20c" & colorid == 12
+			qui: replace rgb = "32 127 12" if palette == "category20c" & colorid == 13
+			qui: replace rgb = "205 109 76" if palette == "category20c" & colorid == 14
+			qui: replace rgb = "155 180 157" if palette == "category20c" & colorid == 15
+			qui: replace rgb = "113 113 135" if palette == "category20c" & colorid == 16
+			qui: replace rgb = "15 15 15" if palette == "category20c" & colorid == 17
+			qui: replace rgb = "45 45 45" if palette == "category20c" & colorid == 18
+			qui: replace rgb = "180 180 180" if palette == "category20c" & colorid == 19
+			qui: replace rgb = "94 94 94" if palette == "category20c" & colorid == 20
+			
 			// Create a sequence ID for the Data set 
 			qui: egen seqid = concat(palette pcolor colorid)
 			
@@ -410,21 +483,13 @@ prog def brewextra, rclass
 			
 			// Return file path/name for file created
 			ret loc brewextras = `"`c(sysdir_personal)'brewuser/extras.dta"'
-			
-			// Check for brewuser directory
-			if `"`: dir `"`c(sysdir_personal)'"' dirs brewuser, nofail respect'"' == "" {
-			
-				// Make directory
-				qui: mkdir `"`c(sysdir_personal)'brewuser"'
+							
+			// Save the brew extras data set
+			qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
 				
-				// Save the brew extras data set
-				qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
-				
-				// Push the extras file through check file spec sub routine
-				checkfilespec `"`c(sysdir_personal)'brewuser/extras.dta"'
+			// Push the extras file through check file spec sub routine
+			checkfilespec 
 			
-			} // End IF Block to save the extra color palettes
-					
 		} // End IF Block for refresh/no extras file
 									
 		// If the files parameter contains an argument 								
@@ -453,153 +518,188 @@ end
 // Define subroutine to check the additional incoming files
 prog def checkfilespec, rclass
 
-		// Syntax structure for subroutine
- 		syntax anything(name = infiles id = "Palette file")
-		
-		// Preserve state of data currently in memory
-		preserve
+	// Syntax structure for subroutine
+	syntax [anything(name = infiles id = "Palette file")]
+	
+	// Preserve state of data currently in memory
+	preserve
+	
+		// Onload load file if not null
+		if `"`infiles'"' != "" {
 		
 			// Load the data file into memory
 			qui: use `infiles', clear
+
+		} // End IF Block for checking of file specifications
+		
+		// Loop over required variables to make sure all necessary data is 
+		// available
+		foreach v in palette rgb seqid meta {
+		
+			// Confirm variable exists
+			cap confirm variable `v'
 			
-			// Loop over required variables to make sure all necessary data is 
-			// available
-			foreach v in palette rgb seqid meta {
+			// If variable doesn't exist
+			if _rc != 0 {
 			
-				// Confirm variable exists
-				cap confirm variable `v'
+				// Display error message
+				di as err "Variable `v' does not exist in the file."
 				
-				// If variable doesn't exist
-				if _rc != 0 {
+				// Return code of 1
+				ret sca code = 1
+
+			} // End IF Block for variable existence
+			
+			// If variable exists check type
+			else {
+			
+				// Check to make sure the variable is a string
+				if regexm("`: type `v''", "str*") != 1 {
 				
-					// Display error message
-					di as err "Variable `v' does not exist in the file."
+					// Print error message to console
+					di as err "Variable `v' must be a string variable."
 					
 					// Return code of 1
 					ret sca code = 1
-
-				} // End IF Block for variable existence
+					
+				} // End IF Block for type cast checking
+			
+			} // End ELSE Block for type checking
+			
+		} // End Loop over string variables
+		
+		// Loop over numeric variables
+		foreach v in colorblind print photocopy lcd colorid pcolor {
+		
+			// Confirm variable exists
+			cap confirm variable `v'
+			
+			// If variable doesn't exist
+			if _rc != 0 & inlist("`v'", "colorid", "pcolor") == 1 {
+			
+				// Display error message
+				di as err "Variable `v' does not exist in the file."
 				
-				// If variable exists check type
+				// Return code of 1
+				ret sca code = 1
+
+			} // End IF Block for variable existence
+			
+			// For the meta data variables create them if they don't exist
+			else if _rc != 0 & !inlist("`v'", "colorid", "pcolor") == 1 {
+			
+				// Populate the meta data variables with missing codes for 
+				// information not available
+				qui: g `v' = .n
+				
+			} // End ELSEIF Block 
+			
+			// Otherwise secondary checks
+			else {
+			
+				// For id variables they must be non-null
+				if inlist("`v'", "colorid", "pcolor") == 1  {
+				
+					// See if any values are missing 
+					qui: count if mi(`v')
+					
+					// Exit if missing values
+					if `= r(N)' != 0 {
+					
+						// Print error message
+						di as err `"Missing values encountered in `v'"'
+						
+						// Exit program
+						exit
+						
+					} // End IF Block for no null value ids
+					
+				} // End IF Block for ID Variable additional validation
+				
+				// Otherwise
 				else {
 				
-					// Check to make sure the variable is a string
-					if regexm("`: type `v''", "str*") != 1 {
+					// Replace missing values with coded missing values
+					qui: replace `v' = .n if mi(`v')
 					
-						// Print error message to console
-						di as err "Variable `v' must be a string variable."
-						
-						// Return code of 1
-						ret sca code = 1
-						
-					} // End IF Block for type cast checking
+				} // End ELSE Block for metadata variables
 				
-				} // End ELSE Block for type checking
-				
-			} // End Loop over string variables
+			} // End ELSE Block
 			
-			// Loop over numeric variables
-			foreach v in colorblind print photocopy lcd colorid pcolor {
-			
-				// Confirm variable exists
-				cap confirm variable `v'
-				
-				// If variable doesn't exist
-				if _rc != 0 & inlist("`v'", "colorid", "pcolor") == 1 {
-				
-					// Display error message
-					di as err "Variable `v' does not exist in the file."
-					
-					// Return code of 1
-					ret sca code = 1
+		} // End Loop over numeric variables
+		
+		// Get the names of the palettes to add to the brewmeta data file
+		qui: levelsof palette, loc(newpalettes)
 
-				} // End IF Block for variable existence
-				
-				// For the meta data variables create them if they don't exist
-				else if _rc != 0 & !inlist("`v'", "colorid", "pcolor") == 1 {
-				
-					// Populate the meta data variables with missing codes for 
-					// information not available
-					qui: g `v' = .n
-					
-				} // End ELSEIF Block 
-				
-				// Otherwise secondary checks
-				else {
-				
-					// For id variables they must be non-null
-					if inlist("`v'", "colorid", "pcolor") == 1  {
-					
-						// See if any values are missing 
-						qui: count if mi(`v')
-						
-						// Exit if missing values
-						if `= r(N)' != 0 {
-						
-							// Print error message
-							di as err `"Missing values encountered in `v'"'
-							
-							// Exit program
-							exit
-							
-						} // End IF Block for no null value ids
-						
-					} // End IF Block for ID Variable additional validation
-					
-					// Otherwise
-					else {
-					
-						// Replace missing values with coded missing values
-						qui: replace `v' = .n if mi(`v')
-						
-					} // End ELSE Block for metadata variables
-					
-				} // End ELSE Block
-				
-			} // End Loop over numeric variables
-			
-			// Get the names of the palettes to add to the brewmeta data file
-			qui: levelsof palette, loc(newpalettes)
+		// Set the display order of the variables to match brewmeta.dta
+		order palette colorblind print photocopy lcd colorid pcolor rgb 	 ///   
+		maxcolors seqid meta
 
-			// Set the display order of the variables to match brewmeta.dta
-			order palette colorblind print photocopy lcd colorid pcolor rgb  ///   
-			maxcolors seqid meta
+		// Compress dataset before saving
+		qui: compress
+		
+		// Check for path delimiters in the file name
+		loc fnm = regexm(`"`infiles'"', "(\/)")
+		
+		// If filename includes path delimiters
+		if `fnm' == 1 & `"`infiles'"' != "" {
+		
+			// Get new file name from user
+			di as res "Enter a short file name for this palette" _request(_nfnm)
 
-			// Compress dataset before saving
-			qui: compress
+			// Save file to user directory
+			qui: save `"`c(sysdir_personal)'brewuser/`nfnm'.dta"'
 			
-			// Parse the file path/name passed to the function and store the file name
-			loc fnm `"`: di regexr(`infiles', ".*/", "")'"'
-			
+		} // End IF Block for filename with file path
+		
+		// If no path delimiters in name
+		else if `fnm' == 0 & `"`infiles'"' != "" {
+		
+			// Set local macro for later reference
+			loc nfnm `"`infiles'"'
+		
 			// If the file checks out thus far save it to the extras directory
-			qui: save `"`c(sysdir_personal)'brewuser/`fnm'"', replace
-						
-			// Load brewmeta file
-			qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
-			
-			// Get existing palettes characteristics
-			loc existpalettes : char _dta[palettes]
+			qui: save `"`c(sysdir_personal)'brewuser/`infiles'"'
+					
+		} // End ELSEIF Block for fileonly file name
 		
-			// Append new colors
-			qui: append using `"`c(sysdir_personal)'brewuser/`fnm'"'
-			
-			// Drop any duplicates
-			qui: duplicates drop
-			
-			// Define meta data characteristics with available palettes
-			char _dta[palettes] `"`existpalettes', `newpalettes'"'	
-			
-			// Save over old file
-			qui: save, replace
+		// For all other cases (e.g., null) save default file name
+		else {
 		
-		// Restore to original state of data in memory
-		restore
+			// Default file built with program
+			loc nfnm "extras.dta"
 		
-		// Return a code of 0
-		ret sca code = 0
+			// If the file checks out thus far save it to the extras directory
+			qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
 		
-		// Return file name
-		ret loc filenm = `"`c(sysdir_personal)'brewuser/`infiles'"'
+		} // End ELSE Block for default file name
+		
+		// Load brewmeta file
+		qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear
+		
+		// Get existing palettes characteristics
+		loc existpalettes : char _dta[palettes]
+	
+		// Append new colors
+		qui: append using `"`c(sysdir_personal)'brewuser/`nfnm'"'
+		
+		// Drop any duplicates
+		qui: duplicates drop
+		
+		// Define meta data characteristics with available palettes
+		char _dta[palettes] `"`existpalettes', `newpalettes'"'	
+		
+		// Save over old file
+		qui: save, replace
+	
+	// Restore to original state of data in memory
+	restore
+	
+	// Return a code of 0
+	ret sca code = 0
+	
+	// Return file name
+	ret loc filenm = `"`c(sysdir_personal)'brewuser/`infiles'"'
 		
 // End Subroutine
 end		
