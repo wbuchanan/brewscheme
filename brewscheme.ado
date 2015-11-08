@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     2414                                                                     *
+*     2415                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.10
-*! 03NOV2015
+*! v 0.0.11
+*! 08NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -842,7 +842,7 @@ prog def brewscheme, rclass
 			file write scheme `"*!  version 1.2.5   16jun2011"' _n(2)
 			file write scheme `"sequence 1299"' _n
 			file write scheme `"label "`schemename'""' _n(2)
-			file write scheme `"system naturally_white  1"' _n(3)
+			file write scheme `"* system naturally_white  1"' _n(3)
 			file write scheme `"graphsize             5"' _n
 			file write scheme `"graphsize x           9"' _n
 			file write scheme `"graphsize y           6"' _n(3)
@@ -2408,7 +2408,8 @@ prog def brewscheme, rclass
 	// Print reference to console
 	di in smcl "For additional information about these color palettes, " _n    
 	di "see: http://www.colorbrewer2.org" _n _skip(15) " & " _n				 ///   
-	"http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf"
+	"http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf" _n 		 ///   
+	_skip(15) " & " _n "https://github.com/mbostock/d3/wiki/API-Reference" _n
 	
 // End of Program		
 end

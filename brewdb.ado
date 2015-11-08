@@ -449,7 +449,7 @@ prog def brewdb
 			qui: replace rgb = "26 26 26" if palette == "rdgy" & pcolor == 10 & colorid == 10 
 			qui: replace rgb = "49 54 149" if palette == "rdylbu" & pcolor == 10 & colorid == 10 
 			qui: replace rgb = "0 104 55" if palette == "rdylgn" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "94 79 1621" if palette == "spectral" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "94 79 162" if palette == "spectral" & pcolor == 10 & colorid == 10 
 			
 			// Attach a checksum to the file
 			qui: datasignature set 

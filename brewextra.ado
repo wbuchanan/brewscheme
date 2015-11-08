@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.7
-*! 06NOV2015
+*! v 0.0.8
+*! 08NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -390,83 +390,83 @@ prog def brewextra, rclass
 			https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal */
 			
 			// D3js 10 Category Ordinal Scale
-			qui: replace rgb = "226 56 27" if palette == "category10" & colorid == 1
-			qui: replace rgb = "240 232 196" if palette == "category10" & colorid == 2
-			qui: replace rgb = "146 10 146" if palette == "category10" & colorid == 3
-			qui: replace rgb = "49 51 66" if palette == "category10" & colorid == 4
-			qui: replace rgb = "25 55 180" if palette == "category10" & colorid == 5
-			qui: replace rgb = "152 41 125" if palette == "category10" & colorid == 6
-			qui: replace rgb = "23 56 16" if palette == "category10" & colorid == 7
-			qui: replace rgb = "232 232 232" if palette == "category10" & colorid == 8
-			qui: replace rgb = "155 180 6" if palette == "category10" & colorid == 9
-			qui: replace rgb = "50 207 232" if palette == "category10" & colorid == 10
+			qui: replace rgb = "31 119 180" if palette == "category10" & colorid == 1
+			qui: replace rgb = "255 127 14" if palette == "category10" & colorid == 2
+			qui: replace rgb = "44 160 44" if palette == "category10" & colorid == 3
+			qui: replace rgb = "214 39 40" if palette == "category10" & colorid == 4
+			qui: replace rgb = "148 103 189" if palette == "category10" & colorid == 5
+			qui: replace rgb = "140 86 75" if palette == "category10" & colorid == 6
+			qui: replace rgb = "227 119 194" if palette == "category10" & colorid == 7
+			qui: replace rgb = "127 127 127" if palette == "category10" & colorid == 8
+			qui: replace rgb = "188 189 34" if palette == "category10" & colorid == 9
+			qui: replace rgb = "23 190 207" if palette == "category10" & colorid == 10
 
 			// D3js 20 Category Ordinal Scale
-			qui: replace rgb = "226 56 27" if palette == "category20" & colorid == 1
-			qui: replace rgb = "206 61 78" if palette == "category20" & colorid == 2
-			qui: replace rgb = "240 232 196" if palette == "category20" & colorid == 3
-			qui: replace rgb = "240 132 71" if palette == "category20" & colorid == 4
-			qui: replace rgb = "146 10 146" if palette == "category20" & colorid == 5
-			qui: replace rgb = "73 238 108" if palette == "category20" & colorid == 6
-			qui: replace rgb = "49 51 66" if palette == "category20" & colorid == 7
-			qui: replace rgb = "240 73 45" if palette == "category20" & colorid == 8
-			qui: replace rgb = "25 55 180" if palette == "category20" & colorid == 9
-			qui: replace rgb = "37 11 38" if palette == "category20" & colorid == 10
-			qui: replace rgb = "152 41 125" if palette == "category20" & colorid == 11
-			qui: replace rgb = "28 153 25" if palette == "category20" & colorid == 12
-			qui: replace rgb = "23 56 16" if palette == "category20" & colorid == 13
-			qui: replace rgb = "64 47 17" if palette == "category20" & colorid == 14
-			qui: replace rgb = "232 232 232" if palette == "category20" & colorid == 15
-			qui: replace rgb = "61 61 61" if palette == "category20" & colorid == 16
-			qui: replace rgb = "155 180 6" if palette == "category20" & colorid == 17
-			qui: replace rgb = "134 134 177" if palette == "category20" & colorid == 18
-			qui: replace rgb = "50 207 237" if palette == "category20" & colorid == 19
-			qui: replace rgb = "205 113 39" if palette == "category20" & colorid == 20
-
+			qui: replace rgb = "31 119 180" if palette == "category20" & colorid == 1
+			qui: replace rgb = "174 199 232" if palette == "category20" & colorid == 2
+			qui: replace rgb = "255 127 14" if palette == "category20" & colorid == 3
+			qui: replace rgb = "255 187 120" if palette == "category20" & colorid == 4
+			qui: replace rgb = "44 160 44" if palette == "category20" & colorid == 5
+			qui: replace rgb = "152 223 138" if palette == "category20" & colorid == 6
+			qui: replace rgb = "214 39 40" if palette == "category20" & colorid == 7
+			qui: replace rgb = "255 152 150" if palette == "category20" & colorid == 8
+			qui: replace rgb = "148 103 189" if palette == "category20" & colorid == 9
+			qui: replace rgb = "197 176 213" if palette == "category20" & colorid == 10
+			qui: replace rgb = "140 86 75" if palette == "category20" & colorid == 11
+			qui: replace rgb = "196 156 148" if palette == "category20" & colorid == 12
+			qui: replace rgb = "227 119 194" if palette == "category20" & colorid == 13
+			qui: replace rgb = "247 182 210" if palette == "category20" & colorid == 14
+			qui: replace rgb = "127 127 127" if palette == "category20" & colorid == 15
+			qui: replace rgb = "199 199 199" if palette == "category20" & colorid == 16
+			qui: replace rgb = "188 189 34" if palette == "category20" & colorid == 17
+			qui: replace rgb = "219 219 141" if palette == "category20" & colorid == 18
+			qui: replace rgb = "23 190 207" if palette == "category20" & colorid == 19
+			qui: replace rgb = "158 218 229" if palette == "category20" & colorid == 20
 			
 			// D3js 20 Category Ordinal Scale b
-			qui: replace rgb = "84 124 88" if palette == "category20b" & colorid == 1
-			qui: replace rgb = "9 21 19" if palette == "category20b" & colorid == 2
-			qui: replace rgb = "127 202 237" if palette == "category20b" & colorid == 3
-			qui: replace rgb = "153 205 209" if palette == "category20b" & colorid == 4
-			qui: replace rgb = "15 88 84" if palette == "category20b" & colorid == 5
-			qui: replace rgb = "152 14 9" if palette == "category20b" & colorid == 6
-			qui: replace rgb = "36 237 127" if palette == "category20b" & colorid == 7
-			qui: replace rgb = "208 134 153" if palette == "category20b" & colorid == 8
-			qui: replace rgb = "152 175 4" if palette == "category20b" & colorid == 9
-			qui: replace rgb = "180 205 84" if palette == "category20b" & colorid == 10
-			qui: replace rgb = "63 111 9" if palette == "category20b" & colorid == 11
-			qui: replace rgb = "63 133 25" if palette == "category20b" & colorid == 12
-			qui: replace rgb = "24 147 84" if palette == "category20b" & colorid == 13
-			qui: replace rgb = "179 85 104" if palette == "category20b" & colorid == 14
-			qui: replace rgb = "49 7 127" if palette == "category20b" & colorid == 15
-			qui: replace rgb = "63 45 153" if palette == "category20b" & colorid == 16
-			qui: replace rgb = "128 5 16" if palette == "category20b" & colorid == 17
-			qui: replace rgb = "35 6 25" if palette == "category20b" & colorid == 18
-			qui: replace rgb = "208 175 180" if palette == "category20b" & colorid == 19
-			qui: replace rgb = "209 205 49" if palette == "category20b" & colorid == 20
-						
+			qui: replace rgb = "57 59 121" if palette == "category20b" & colorid == 1
+			qui: replace rgb = "82 84 163" if palette == "category20b" & colorid == 2
+			qui: replace rgb = "107 110 207" if palette == "category20b" & colorid == 3
+			qui: replace rgb = "156 158 222" if palette == "category20b" & colorid == 4
+			qui: replace rgb = "99 121 57" if palette == "category20b" & colorid == 5
+			qui: replace rgb = "140 162 82" if palette == "category20b" & colorid == 6
+			qui: replace rgb = "181 207 107" if palette == "category20b" & colorid == 7
+			qui: replace rgb = "206 219 156" if palette == "category20b" & colorid == 8
+			qui: replace rgb = "140 109 49" if palette == "category20b" & colorid == 9
+			qui: replace rgb = "189 158 57" if palette == "category20b" & colorid == 10
+			qui: replace rgb = "231 186 82" if palette == "category20b" & colorid == 11
+			qui: replace rgb = "231 203 148" if palette == "category20b" & colorid == 12
+			qui: replace rgb = "132 60 57" if palette == "category20b" & colorid == 13
+			qui: replace rgb = "173 73 74" if palette == "category20b" & colorid == 14
+			qui: replace rgb = "214 97 107" if palette == "category20b" & colorid == 15
+			qui: replace rgb = "231 150 156" if palette == "category20b" & colorid == 16
+			qui: replace rgb = "123 65 115" if palette == "category20b" & colorid == 17
+			qui: replace rgb = "165 81 148" if palette == "category20b" & colorid == 18
+			qui: replace rgb = "206 109 189" if palette == "category20b" & colorid == 19
+			qui: replace rgb = "222 158 214" if palette == "category20b" & colorid == 20
+
 			// D3js 20 Category Ordinal Scale c
-			qui: replace rgb = "4 12 180" if palette == "category20c" & colorid == 1
-			qui: replace rgb = "127 206 49" if palette == "category20c" & colorid == 2
-			qui: replace rgb = "205 112 15" if palette == "category20c" & colorid == 3
-			qui: replace rgb = "48 134 239" if palette == "category20c" & colorid == 4
-			qui: replace rgb = "50 30 169" if palette == "category20c" & colorid == 5
-			qui: replace rgb = "184 177 147" if palette == "category20c" & colorid == 6
-			qui: replace rgb = "184 206 127" if palette == "category20c" & colorid == 7
-			qui: replace rgb = "184 13 14" if palette == "category20c" & colorid == 8
-			qui: replace rgb = "4 19 21" if palette == "category20c" & colorid == 9
-			qui: replace rgb = "23 28 43" if palette == "category20c" & colorid == 10
-			qui: replace rgb = "11 94 130" if palette == "category20c" & colorid == 11
-			qui: replace rgb = "61 95 12" if palette == "category20c" & colorid == 12
-			qui: replace rgb = "32 127 12" if palette == "category20c" & colorid == 13
-			qui: replace rgb = "205 109 76" if palette == "category20c" & colorid == 14
-			qui: replace rgb = "155 180 157" if palette == "category20c" & colorid == 15
-			qui: replace rgb = "113 113 135" if palette == "category20c" & colorid == 16
-			qui: replace rgb = "15 15 15" if palette == "category20c" & colorid == 17
-			qui: replace rgb = "45 45 45" if palette == "category20c" & colorid == 18
-			qui: replace rgb = "180 180 180" if palette == "category20c" & colorid == 19
-			qui: replace rgb = "94 94 94" if palette == "category20c" & colorid == 20
+			qui: replace rgb = "49 130 189" if palette == "category20c" & colorid == 1
+			qui: replace rgb = "107 174 214" if palette == "category20c" & colorid == 2
+			qui: replace rgb = "158 202 225" if palette == "category20c" & colorid == 3
+			qui: replace rgb = "198 219 239" if palette == "category20c" & colorid == 4
+			qui: replace rgb = "230 85 13" if palette == "category20c" & colorid == 5
+			qui: replace rgb = "253 141 60" if palette == "category20c" & colorid == 6
+			qui: replace rgb = "253 174 107" if palette == "category20c" & colorid == 7
+			qui: replace rgb = "253 208 162" if palette == "category20c" & colorid == 8
+			qui: replace rgb = "49 163 84" if palette == "category20c" & colorid == 9
+			qui: replace rgb = "116 196 118" if palette == "category20c" & colorid == 10
+			qui: replace rgb = "161 217 155" if palette == "category20c" & colorid == 11
+			qui: replace rgb = "199 233 192" if palette == "category20c" & colorid == 12
+			qui: replace rgb = "117 107 177" if palette == "category20c" & colorid == 13
+			qui: replace rgb = "158 154 200" if palette == "category20c" & colorid == 14
+			qui: replace rgb = "188 189 220" if palette == "category20c" & colorid == 15
+			qui: replace rgb = "218 218 235" if palette == "category20c" & colorid == 16
+			qui: replace rgb = "99 99 99" if palette == "category20c" & colorid == 17
+			qui: replace rgb = "150 150 150" if palette == "category20c" & colorid == 18
+			qui: replace rgb = "189 189 189" if palette == "category20c" & colorid == 19
+			qui: replace rgb = "217 217 217" if palette == "category20c" & colorid == 20
+
 			
 			// Create a sequence ID for the Data set 
 			qui: egen seqid = concat(palette pcolor colorid)
