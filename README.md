@@ -12,7 +12,7 @@ brewscheme is a tool to facilitate Stata users developing graph schemes using re
 
 3.  Build proofer to show same graph under each of the three colorblindness conditions described on [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) website; replay the graphs, but translate the RGB valuess for each of the three conditions, then have options to either ``gr combine``` or produce separate graph images to show how the graph would look to individuals with different forms of colorblindness.
 
-## Examples
+## brewscheme examples
 Generate a graph scheme using the set1 color brewer palette for all graphs.  Use the first five colors of the palette and set the color intensity to 80 for each of the graphs.
 
 ```
@@ -31,7 +31,36 @@ Create a graph scheme with a distinct color palette for each graph type:
 brewscheme, scheme(myriadColorPalettes) barst(paired) barc(12) dotst(prgn) dotc(7) scatstyle(set1) scatc(9) linest(pastel2) linec(8) boxstyle(accent) boxc(8) areast(dark2) areac(8) piest(mdepoint) sunst(greys) histst(veggiese) cist(activitiesa) matst(spectral) reflst(purd) refmst(set3) const(ylgn) cone(puor)
 ```
 
+## brewviewer examples
+
+Preview sequences of 3-5, 3-8, 3-10, and 3-12 color palettes for the D3js ordinal scales 
+d3.scale.category10(), d3.scale.category20(), d3.scale.category20b(), and d3.scale.category20c() 
+respectively.  
+
+```
+brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
+```
+![brewviewer Example 1](./brewviewerex1.png)
+
+
+Preview sequences for color palettes with 3-5 colors for multiple palettes simultaneously and combine in a single image.
+```
+brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) seq comb
+```
+![brewviewer Example 2](./brewviewerex2.png)
+
+Similar to example above, but only show instances with the colors 1-5 for each of the color palettes:
+``` 
+brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) comb
+```
+![brewviewer Example 3](./brewviewerex3.png)
+ 
+## Other examples
+For other examples of graphs created with brewscheme visit the examples from a related project [eda](https://github.com/wbuchanan/eda/blob/master/eda-example.pdf).
+ 
 ## References
+Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. _IEEE Transactions on Visualization & Computer Graphics. 17(12)_ pp 2301 - 2309. Retrieved from [Stanford Vis Group](http://vis.stanford.edu/papers/d3). Retrieved on 07nov2015.
+
 Brewer, C. A. (2002). _Color Brewer 2 [Computer Software]_. State College, PA: Cynthia Brewer, Mark Harrower, and 
     The Pennsylvania State University.
     

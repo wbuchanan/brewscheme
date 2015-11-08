@@ -7,6 +7,9 @@ d of colors from any of the 35 color palettes they would like to use and allows
 d users to mix/combine different palettes for the various graph types.  
 d Additionally, the program also contains color palettes from other researchers 
 d as well as color palettes commonly used in graphs in the education community.
+d The newest version also includes a submodule to preview combinations of color
+d palettes, a Hexadecimal to Decimal RGB converter, and a Java-based program to
+d interpolate a given number of colors between a starting and ending color.
 d
 d KW: Data Visualization
 d KW: Graphs
@@ -15,7 +18,7 @@ d KW: Color
 d
 d Requires: Stata version 13
 d
-d Distribution-Date: 20151106
+d Distribution-Date: 20151108
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -25,19 +28,22 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
+f brewdb.ado
+f brewextra.ado
+f brewextra.sthlp
 f brewmeta.ado
 f brewmeta.sthlp
 f brewscheme.ado
 f brewscheme.sthlp
-f brewdb.ado
-f brewextra.ado
-f brewextra.sthlp
-f recycle.mata
-f recycle.mo
-f librecycle.mlib
-f dirfile.ado
 f brewterpolate.ado
 f brewterpolate.sthlp
 f brewterpolate.jar
+f brewviewer.ado
+f brewviewer.sthlp
+f dirfile.ado
 f hextorgb.ado
 f hextorgb.sthlp
+f librecycle.mlib
+f recycle.mata
+f recycle.mo
+

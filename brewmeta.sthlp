@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  04AUG2015}{...}
+{* *! version 0.0.3  08NOV2015}{...}
 {cmd:help brewmeta}
 {hline}
 
@@ -64,13 +64,18 @@ refresh option are used, you should expect to see the performance dip slightly.
 Look ups take < 1 second on my system and will likely take a similar amount of 
 time on others as well. {p_end}
 
-{title:References}{break}
-{p 1 1 1} Colors from {browse "http://www.ColorBrewer2.org":Color Brewer} by 
-Cynthia A. Brewer, Geography, Pennsylvania State University{p_end}
+{marker refs}{p 4 4 4}{title:{ul:References}}{p_end}{break}
+{marker bostock}{p 4 8 8}Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. {it: IEEE Transactions on Visualization & Computer Graphics. 17(12)} pp 2301 - 2309. Retrieved from 
+{browse "http://vis.stanford.edu/papers/d3":Stanford Vis Group}.{p_end}  
 
-{title:License}
-{p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} of the ColorBrewer copyright notice for additional information 
-pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
+{marker brewer}{p 4 8 8}Brewer, C. A. (2002) {browse "http://colorbrewer.org/":Color Brewer 2} [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University.{p_end}
+
+{marker linetal}{p 4 8 8}Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013).{browse "http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf":  Selecting Semantically-Resonant Colors for Data Visualization}. In 
+{it:Computer Graphics Forum} (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.{p_end}
+
+{marker license}{p 4 4 4}{title:{ul:License}}{p_end}{break}
+{p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} 
+of the ColorBrewer copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

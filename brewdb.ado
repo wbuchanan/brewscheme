@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.4
-*! 02NOV2015
+*! v 0.0.5
+*! 07NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -439,6 +439,17 @@ prog def brewdb
 			qui: char def _dta[brew2] `"Use: "ssc inst brewscheme" to install"'
 			qui: char def _dta[brew3] "Development branch available at: "
 			qui: char def _dta[brew4] "https://github.com/wbuchanan/brewscheme"
+			
+			// Apply parser corrections
+			qui: replace rgb = "0 60 48" if palette == "brbg" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "106 61 154" if palette == "paired" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "0 68 27" if palette == "prgn" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "45 0 75" if palette == "puor" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "5 48 97" if palette == "rdbu" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "26 26 26" if palette == "rdgy" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "49 54 149" if palette == "rdylbu" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "0 104 55" if palette == "rdylgn" & pcolor == 10 & colorid == 10 
+			qui: replace rgb = "94 79 162" if palette == "spectral" & pcolor == 10 & colorid == 10 
 			
 			// Attach a checksum to the file
 			qui: datasignature set 
