@@ -44,18 +44,161 @@ prog def brewtheme
 						GRColors(string asis) TXTColors(string asis)		 ///   
 						PRColors(string asis) LEGColors(string asis)		 ///   
 						LINEPatterns(string asis) MARGins(string asis)		 ///   
-						LINEWidths(string asis) GRIDLines(string asis)		 /// 
-						TICKStyles(string asis) TICKSETStyles(string asis)	 ///   
-						BARLPos(string asis) GRIDRing(string asis)			 ///   
-						Yesno(string asis) AUXStyles(string asis) ]
+						LINEWidths(string asis) BARLPos(string asis) 		 ///   
+						GRIDRing(string asis) Yesno(string asis) 			 ///   
+						AUXStyles(string asis) ]
 	
 	// Check for directory and if not build it	
 	dirfile, p(`"`c(sysdir_personal)'b/theme"') rebuild
+	
+	// Create a local macro with allowable values for gapsizes argument
+	loc gapsty gap text body small_body heading subheading axis_title 		 ///   
+	matrix_label label small_label matrix_marklbl key_label note star 		 ///   
+	text_option dot_rectangle axis_space axis_title_gap tick minortick 		 ///   
+	tickgap notickgap tick_label tick_biglabel minortick_label filled_text 	 ///   
+	reverse_big alternate_gap title_gap key_gap key_linespace star_gap 		 ///   
+	legend_colgap label_gap matrix_mlblgap barlabel_gap legend_row_gap 		 ///   
+	legend_col_gap legend_key_gap legend_key_xsize legend_key_ysize 		 ///   
+	zyx2legend_key_gap zyx2legend_key_xsize zyx2legend_key_ysize zyx2rowgap  ///   
+	zyx2colgap clegend_width clegend_height pie_explode pielabel_gap plabel  ///   
+	pboxlabel sts_risktable_space sts_risktable_tgap sts_risktable_lgap 	 ///   
+	sts_risk_label sts_risk_title sts_risk_tick
+	
+	// Stores allowable arguments for gapsizes
+	loc gapargs zero minuscule half_tiny third_tiny vtiny tiny vsmall small  ///   
+	medsmall medium medlarge large vlarge
+	
+	// Local with legal arguments for relgapsizes
+	loc relgapsty bar_gap bar_groupgap bar_supgroupgap bar_outergap dot_gap	 ///   
+	dot_groupgap dot_supgroupgap dot_outergap box_gap box_groupgap			 ///   
+	box_supgroupgap box_outergap box_fence box_fencecap
+	
+	// Stores allowable arguments for relative gap sizes
+	loc relgapargs neg#pct neg##pct neg###pct #pct ##pct ###pct
+	
+	// Local with legal arguments for symbol sizes
+	loc symbolsty symbol smallsymbol star histogram histback dots ci ci2 	 ///   
+	matrix refmarker sunflower backsymbol backsymspace p pback parrow parrowbarb
+	
+	// Local holding argument values for symbolsizes
+	loc symargs zero minuscule half_tiny third_tiny vtiny tiny vsmall small  ///   
+	medsmall medium medlarge large vlarge
+	
+	// Local with legal arguments for axis ticks
+	loc ticksty major horizontal_major vertical_major horizontal_minor 		 ///   
+	vertical_minor horizontal_tmajor vertical_tmajor horizontal_tminor 		 ///   
+	vertical_tminor
+	
+	// Local holding argument values for ticks
+	loc tickargs # ## ###
+	
+	// Local with legal arguments for text/tick colors
+	loc txtsty text body small_body heading subheading axis_title 			 ///   
+	matrix_label label key_label tick_label tick_biglabel matrix_marklbl 	 ///   
+	sts_risk_label sts_risk_title box textbox mat_label_box text_option 	 ///   
+	text_option_line text_option_fill filled_text filled bylabel_outline 	 ///   
+	grid major_grid minor_grid axisline tick minortick
+	
+	// Plot region color type arguments
+	loc prcsty plotregion plotregion_line matrix_plotregion matplotregion_line
+	
+	// Legend color type aguments
+	loc lrcsty legend legend_line clegend clegend_outer clegend_inner clegend_line
 
-	// Write the scheme file to a location on the path
-	qui: file open theme using ///
-		`"`c(sysdir_personal)'b/theme/theme-`themefile'.theme"', w replace
+	// Line pattern type arguments
+	loc lpsty foreground background ci ci_area histogram dendrogram grid 	 ///   
+	major_grid minor_grid axisline tick minortick xyline refline refmarker   ///   
+	matrixmark dots dot dot_area dotmark pie legend clegend plotregion		 ///   
+	sunflower matrix_plotregion text_option zyx2 p pmark
 
+	// Local holding argument values for text styles/colors
+	loc lpargs solid dash dot dash_dot shortdash shortdash_dot longdash 	 ///   
+	longdash_dot blank // also need to hand combination of l, _, -, ., and #
+	
+	// Margin style aesthetics
+	loc mrgsty graph twoway bygraph combinegraph combine_region matrixgraph	 ///   
+	piegraph piegraph_region matrix_plotreg matrix_label mat_label_box		 ///   
+	by_indiv text textbox body small_body heading subheading axis_title		 ///   
+	label key_label text_option plotregion star bargraph boxgraph dotgraph   ///   
+	hbargraph hboxgraph hdotgraph legend legend_key_region legend_boxmargin	 ///   
+	clegend cleg_title clegend_boxmargin key_label filled_textbox filled_box ///   
+	editor plabel plabelbox pboxlabel pboxlabelbox
+	
+	// Margin style arguments
+	loc mrgargs zero tiny vsmall small medsmall medium medlarge large vlarge ///   
+	bottom top top_bottom lef right sides // also need to handle "# # # #" and "[lrtb] [+-=]#"
+
+	// Line width aesthetics
+	loc lwsty p foreground background grid major_grid minor_grid axisline	 ///   
+	tick tickline minortick ci ci_area ci2 ci2_area histogram dendrogram 	 ///   
+	xyline refline refmarker matrixmark dots dot_line dot_area dotmark 		 ///   
+	plotregion legend clegend pie reverse_big sunflower matrix_plotregion	 ///   
+	text_option zyx2 pbar
+	
+	// Arguments available for line widths
+	loc lwargs none vvthin vthin thin medthin medium medthick thick vthick	 ///   
+	vvthick vvvthick 
+	
+	// YESNO options
+	loc ynsty textbox text_options connect_missings cmissings pcmissings	 ///   
+	extend_axis_low extend_axis_high extend_axis_full_low 					 ///   
+	extend_axis_full_high draw_major_grid draw_minor_grid draw_majornl_grid  ///   
+	draw_minornl_grid draw_major_hgrid draw_minor_hgrid draw_majornl_hgrid   ///   
+	draw_minorhl_hgrid draw_major_vgrid draw_minor_vgrid draw_majornl_vgrid  ///   
+	draw_minornl_vgrid draw_major_nl_vgrid draw_minor_nl_vgrid 				 ///   
+	draw_majornl_nl_vgrid draw_minornl_nl_vgrid draw_major_nl_vgrid 		 ///   
+	draw_minor_nl_vgrid draw_majornl_nl_vgrid draw_minornl_nl_vgrid 		 ///   
+	draw_major_nt_vgrid draw_minor_nt_vgrid draw_majornl_nt_vgrid 			 ///   
+	draw_minornl_nt_vgrid draw_major_nt_vgrid draw_minor_nt_vgrid 			 ///   
+	draw_majornl_nt_vgrid draw_minornl_nt_vgrid draw_major_nlt_vgrid 		 ///   
+	draw_minor_nlt_vgrid draw_majornl_nlt_vgrid draw_minornl_nlt_vgrid 		 ///   
+	draw_major_nlt_vgrid draw_minor_nlt_vgrid draw_majornl_nlt_vgrid 		 ///   
+	draw_minornl_nlt_vgrid extend_grid_low extend_grid_high 				 ///    
+	extend_minorgrid_low extend_minorgrid_high extend_majorgrid_low			 ///   
+	extend_majorgrid_high grid_draw_min grid_draw_max grid_force_nomin		 ///   
+	grid_force_nomax xyline_extend_low xyline_extend_high alt_xaxes 		 ///   
+	alt_yaxes x2axis_ontop y2axis_onright use_labels_on_ticks 				 ///   
+	alternate_labels swap_bar_scaleaxis swap_bar_groupaxis 					 ///   
+	swap_dot_scaleaxis swap_dot_groupaxis swap_box_scaleaxis 				 ///  
+	swap_box_groupaxis extend_dots bar_reverse_scale dot_reverse_scale		 ///  
+	box_reverse_scale box_hollow box_custom_whiskers pie_clockwise			 ///   
+	by_edgelabel by_alternate_xaxes by_alternate_yaxes by_skip_xalternate 	 ///   
+	by_skip_yalternate by_outer_xtitles by_outer_ytitles by_outer_xaxes 	 ///   
+	by_outer_yaxes by_indiv_xaxes by_indiv_yaxes by_indiv_xtitles 			 ///   
+	by_indiv_ytitles by_indiv_xlabels by_indiv_ylabels by_indiv_xticks 		 ///   
+	by_indiv_yticks by_indiv_xrescale by_indiv_yrescale  by_indiv_as_whole 	 ///   
+	by_shrink_plotregion by_shrink_indiv mat_label_box mat_label_ax_textbox  ///   
+	legend_col_first legend_text_first legend_stacked legend_force_keysz 	 ///   
+	legend_force_draw legend_force_nodraw title_span subtitle_span 			 ///   
+	caption_span note_span legend_span zyx2legend_span clegend_title_span 	 ///   
+	adj_xmargins adj_ymargins plabelboxed pboxlabelboxed contours_outline 	 ///   
+	contours_reversekey contours_colorlines 
+
+	// Local holding valid argument values for yex/no styles/options
+	loc ynargs yes no
+	
+	// Auxillary arguments
+	loc auxsty bar box pie  
+	
+	// Auxillary valid arguments
+	loc barargs none bar total name group line 
+	loc pieargs sum percent name none 
+	loc boxargs line cline marker
+	
+	// Check for help as first argument
+	if `"`themefile'"' == "help" {
+	
+	}
+
+	// For all other cases
+	else {
+
+		// Write the scheme file to a location on the path
+		qui: file open theme using ///
+			`"`c(sysdir_personal)'b/theme/theme-`themefile'.theme"', w replace
+
+	} // End ELSE Block for non-help argument
+	
 	// Check for user specified graph size parameters
 	if `"`grsize'"' == "" {
 		
@@ -94,7 +237,7 @@ prog def brewtheme
 	
 	// Aspect ratio
 	file write theme `"numstyle graph_aspect     `aspectratio'"' _n
-	
+
 	// Check for gap size arguments
 	if `"`gapsizes'"' == "" {
 
@@ -163,25 +306,9 @@ prog def brewtheme
 
 	} // End IF Block for gap size parameters
 	
-	// Create a local macro with allowable values for gapsizes argument
-	loc gaps gap text body small_body heading subheading axis_title 		 ///   
-	matrix_label label small_label matrix_marklbl key_label note star 		 ///   
-	text_option dot_rectangle axis_space axis_title_gap tick minortick 		 ///   
-	tickgap notickgap tick_label tick_biglabel minortick_label filled_text 	 ///   
-	reverse_big alternate_gap title_gap key_gap key_linespace star_gap 		 ///   
-	legend_colgap label_gap matrix_mlblgap barlabel_gap legend_row_gap 		 ///   
-	legend_col_gap legend_key_gap legend_key_xsize legend_key_ysize 		 ///   
-	zyx2legend_key_gap zyx2legend_key_xsize zyx2legend_key_ysize zyx2rowgap  ///   
-	zyx2colgap clegend_width clegend_height pie_explode pielabel_gap plabel  ///   
-	pboxlabel sts_risktable_space sts_risktable_tgap sts_risktable_lgap 	 ///   
-	sts_risk_label sts_risk_title sts_risk_tick
-	
 	// If user passes values for gap size parameters
 	else {
 	
-		// Loop over arguments
-		forv i = 1/`: word count `gapsizes'' {
-
 		// Write default values to theme file
 		file write theme `"gsize gap             tiny"' _n
 		file write theme `"gsize text            medsmall"' _n
@@ -270,7 +397,6 @@ prog def brewtheme
 	// Symbol sizes
 	if `"`symsizes'"' == "" {
 	
-		file write theme `"symbolsize              medium"' _n
 		file write theme `"symbolsize symbol       medium"' _n
 		file write theme `"symbolsize smallsymbol  medsmall"' _n
 		file write theme `"symbolsize star         vlarge"' _n
@@ -294,7 +420,6 @@ prog def brewtheme
 	// Number of axis ticks
 	if `"`axticks'"' == "" {
 	
-		file write theme `"numticks_g 0"' _n
 		file write theme `"numticks_g major 5"' _n
 		file write theme `"numticks_g horizontal_major 5"' _n
 		file write theme `"numticks_g vertical_major 5"' _n
@@ -412,7 +537,6 @@ prog def brewtheme
 	// Linepatterns
 	if `"`linepatterns'"' == "" {
 	
-		file write theme `"linepattern solid"' _n
 		file write theme `"linepattern foreground blank"' _n
 		file write theme `"linepattern background blank"' _n
 		file write theme `"linepattern ci solid"' _n
@@ -445,11 +569,10 @@ prog def brewtheme
 		file write theme `"linepattern pmark solid"' _n
 	
 	}
-	
+		
 	// Margins
 	if `"`margins'"' == "" {
 	
-		file write theme `"margin zero"' _n
 		file write theme `"margin graph medium"' _n
 		file write theme `"margin twoway medsmall"' _n
 		file write theme `"margin bygraph zero"' _n
@@ -497,12 +620,10 @@ prog def brewtheme
 		file write theme `"margin pboxlabelbox zero"' _n
 	
 	}
-	
+
 	// Line widths
 	if `"`linewidths'"' == "" {
 	
-		file write theme `"linewidth thin thin"' _n
-		file write theme `"linewidth medium medium"' _n
 		file write theme `"linewidth p vthin"' _n
 		file write theme `"linewidth foreground none"' _n
 		file write theme `"linewidth background none"' _n
@@ -540,57 +661,6 @@ prog def brewtheme
 	
 	}
 	
-	// Grid styles
-	file write theme `"gridstyle default"' _n
-	file write theme `"gridstyle major major"' _n
-	file write theme `"gridstyle minor major"' _n
-	file write theme `"gridlinestyle default"' _n
-	file write theme `"gridlinestyle default default"' _n
-	
-	// Tick styles
-	if `"`tickstyles'"' == "" {
-	
-		file write theme `"tickstyle default"' _n
-		file write theme `"tickstyle default default"' _n
-		file write theme `"tickstyle major major"' _n
-		file write theme `"tickstyle minor minor"' _n
-		file write theme `"tickstyle major_nolabel major_nolabel"' _n
-		file write theme `"tickstyle minor_nolabel minor_nolabel"' _n
-		file write theme `"tickstyle major_notick major_notick"' _n
-		file write theme `"tickstyle minor_notick minor_notick"' _n
-		file write theme `"tickstyle major_notickbig major_notickbig"' _n
-		file write theme `"tickstyle minor_notickbig minor_notickbig"' _n
-		file write theme `"tickstyle sts_risktable sts_risktable"' _n
-	
-	}
-	
-	// Tickset styles
-	if `"`ticksetstyles'"' == "" {
-	
-		file write theme `"ticksetstyle major_horiz_default"' _n
-		file write theme `"ticksetstyle major_horiz_default major_horiz_default"' _n
-		file write theme `"ticksetstyle major_vert_default major_vert_default"' _n
-		file write theme `"ticksetstyle minor_horiz_default minor_horiz_default"' _n
-		file write theme `"ticksetstyle minor_vert_default minor_vert_default"' _n
-		file write theme `"ticksetstyle major_horiz_withgrid major_horiz_default"' _n
-		file write theme `"ticksetstyle major_vert_withgrid major_vert_withgrid"' _n
-		file write theme `"ticksetstyle major_horiz_nolabel major_horiz_nolabel"' _n
-		file write theme `"ticksetstyle major_vert_nolabel major_vert_nolabel"' _n
-		file write theme `"ticksetstyle minor_horiz_nolabel minor_horiz_nolabel"' _n
-		file write theme `"ticksetstyle minor_vert_nolabel minor_vert_nolabel"' _n
-		file write theme `"ticksetstyle major_horiz_notick major_horiz_notick"' _n
-		file write theme `"ticksetstyle major_vert_notick major_vert_notick"' _n
-		file write theme `"ticksetstyle minor_horiz_notick minor_horiz_notick"' _n
-		file write theme `"ticksetstyle minor_vert_notick minor_vert_notick"' _n
-		file write theme `"ticksetstyle major_horiz_notickbig major_horiz_notickbig"' _n
-		file write theme `"ticksetstyle major_vert_notickbig major_vert_notickbig"' _n
-		file write theme `"ticksetstyle sts_risktable sts_risktable"' _n
-		file write theme `"ticksetstyle major_clegend major_clegend"' _n
-		file write theme `"tickposition axis_tick outside"' _n
-		
-	}
-	
-
 	// Check for user supplied bar label position argument
 	if `"`barlpos'"' == "" {
 	
@@ -606,6 +676,12 @@ prog def brewtheme
 		file write theme `"barlabelpos bar `barlpos'"' _n
 		
 	} // End ELSE Block for user supplied bar label position argument
+	
+	// Grid ring style arguments
+	loc grdsty spacers_ring title_ring subtitle_ring caption_ring note_ring	 ///   
+	legend_ring zyx2legend_ring clegend_ring by_legend_ring 				 ///   
+	legend_title_ring legend_subtitle_ring legend_caption_ring 				 ///   
+	legend_note_ring clegend_title_ring
 	
 	// Grid Ring Options
 	if `"`gridring'"' == "" {
@@ -626,7 +702,7 @@ prog def brewtheme
 		file write theme `"gridringstyle clegend_title_ring 7"' _n
 	
 	} // End IF Block for grid ring options
-	
+		
 	// YES/NO Options 
 	if `"`yesno'"' == "" {
 	
@@ -759,26 +835,55 @@ prog def brewtheme
 	// Additional styles
 	if `"`auxstyles'"' == "" {
 	
-		file write theme `"barstyle default"' _n
-		file write theme `"barstyle default default"' _n
-		file write theme `"barstyle dot dotdefault"' _n
-		file write theme `"barstyle box boxdefault"' _n		
-		file write theme `"barlabelstyle      none"' _n
 		file write theme `"barlabelstyle bar bar"' _n		
-		file write theme `"dottypestyle dot dot"' _n		
 		file write theme `"medtypestyle boxplot line"' _n		
 		file write theme `"pielabelstyle default none"' _n		
-		file write theme `"arrowstyle default editor"' _n
-		file write theme `"arrowstyle editor editor"' _n		
-		file write theme `"starstyle default"' _n
-		file write theme `"starstyle default default"' _n		
-		file write theme `"above_below star below"' _n
-		file write theme `"zyx2rule contour intensity"' _n
-		file write theme `"zyx2rule contour hue"' _n		
-		file write theme `"zyx2style default"' _n
-		file write theme `"zyx2style default default"' _n
 		
 	} // End IF Block for auxilary style arugments
+	
+	// If arguments supplied
+	else {
+	
+		// Check number of arguments
+		forv i = 1/`: word count `auxstyles'' {
+		
+			// Get each of the word collections
+			loc aux`i' `: word `i' of `auxstyles''
+			
+		} // End Loop to get all arguments
+		
+		if `"`: word 1 of `aux1''"' == "bar" {
+		
+			loc arg `: word 2 of `aux1''
+			
+			if `"`: list arg & barargs'"' != "" {
+		
+				file write theme `"barlabelstyle bar `: list arg & barargs'"' _n
+
+			}
+			
+			else {
+			
+				di as err `"Allowable arguments for auxstyles(`""bar ..." "')"' ///   
+				`" are `: subinstr loc barargs `" "' `", "', all'."'
+				
+				err 198
+			
+			}
+			
+		}
+		
+		else {
+		
+		
+		}
+			file write theme `"medtypestyle boxplot  "' _n
+			file write theme `"pielabelstyle default "' _n
+			
+		
+		}
+	
+	} // End ELSE Block for auxillary style parameters
 	
 	// Close the open file connection
 	file close theme
