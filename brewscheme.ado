@@ -2072,7 +2072,7 @@ prog def brewscheme, rclass
 			file write scheme `"yesno contours_reversekey no"' _n
 			file write scheme `"yesno contours_colorlines no"' _n(2)
 			
-			file write scheme `"* yesno p#labelboxed           no"'
+			file write scheme `"* yesno p#labelboxed           no"' _n
 			file write scheme `"* yesno p#boxlabelboxed        no"' _n(3)
 
 			file write scheme `"barstyle default"' _n
