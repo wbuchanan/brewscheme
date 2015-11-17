@@ -70,17 +70,24 @@ prog def brewtheme
 	loc relative_posn `relativepos'
 	loc tb_orientstyle `orientstyle'
 	loc vertical_text `verticaltext' 
-						
+		
+	// Preserve the current state of the data	
 	preserve	
 	
 		// Build dataset with classes, arguments, and parameter values
 		qui: themedata
+		
+		// Store the name of the tempfile 
+		loc tmptheme `r(themefile)'
+		
+		// Load the tempfile
+		qui: use `tmptheme', clear
 
 		// Loop over the class names
-		foreach v in `r(classes)' {
+		foreach v in `"`r(classes)'"' {
 		
 			// Store arguments in new locals
-			loc `v'args `r(``v'args')'
+			loc `v'args `"`r(``v'args')'"'
 			
 			// If the user passed values
 			if `"``v''"' != "" {
@@ -109,60 +116,119 @@ prog def brewtheme
 					
 		} // End Loop over class names
 		
-	// Check for directory and if not build it	
-	// dirfile, p(`"`c(sysdir_personal)'b/theme"') rebuild
-	
-	// Check for help as first argument
-	// if `"`themefile'"' == "help" {
-	
-	// }
+		// Check for name of themefile
+		if `"`themefile'"' != "" {
 
-	// For all other cases
-	//  else {
+			// Check for directory and if not build it	
+			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
+			
+			// Write the scheme file to a location on the path
+			qui: file open theme using ///
+				`"`c(sysdir_personal)'b/theme/theme-`themefile'.theme"', w replace
+				
+			// Call write subroutine
+			themewriter
 
-		// Write the scheme file to a location on the path
-		// qui: file open theme using ///
-		// 	`"`c(sysdir_personal)'b/theme/theme-`themefile'.theme"', w replace
-
-	// } // End ELSE Block for non-help argument
-	
-	
-	// Close the open file connection
-	// file close theme
-	
-	restore
+		} // End IF BLock for writing a theme file if user specified a theme file name
 		
+		// If no name is passed write the default file
+		else {
+		
+			// Check for directory and if not build it	
+			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
+			
+			// Write the scheme file to a location on the path
+			qui: file open theme using ///
+				`"`c(sysdir_personal)'b/theme/theme-default.theme"', w replace
+				
+			// Load the tempfile
+			qui: use `tmptheme', clear
+			
+			// Call write subroutine
+			themewriter
+
+		} // End else block for a default theme file
+	
+	// Restore the data to the original state
+	restore
+	
+	// Check loadthemedata option
+	if `"`loadthemedata'"' != "" {
+	
+		// Load the tempfile
+		qui: use `tmptheme', clear
+		
+	} // End IF Block for load theme data option
+	
 // End Program Definition	
 end
 
 	
-
+// Subroutine to build look up dataset
 prog def themedata, rclass
 
-clear 
+	// Null syntax structure
+	syntax 
 
-qui: do brewthemedata.do
+	// Drop data from memory
+	clear 
 
-tempfile themedata
+	// Run the do file
+	qui: do brewthemedata.do
 
-qui: levelsof classname if substr(classname, 1, 1) != "*", loc(classes)
+	// Reserve namespace for a temporary file
+	tempfile themedata
 
-ret loc classes `classes'
+	// Get the names of the classes that can have values altered
+	qui: levelsof classname if substr(classname, 1, 1) != "*", loc(classes)
 
-foreach v of loc classes {
+	// Return a local with the class names
+	ret loc classes `classes'
 
-	qui: levelsof argname if classname == `"`v'"', loc(args)
-	
-	ret loc `v'args `args'
-	
-}
+	// Loop over the class names
+	foreach v of loc classes {
 
-qui: save `themedata'.dta, replace
+		// Get the argument names for the classes
+		qui: levelsof argname if classname == `"`v'"', loc(args)
+		
+		// Return the arguments for the given class
+		ret loc `v'args `args'
+		
+	} // End Loop over the class names
 
-clear
+	// Save the data to a temporary file
+	qui: save `themedata'.dta, replace
 
-ret loc themefile `themedata'.dta
+	// Clear those data from memory
+	clear
 
+	// Return the name of the tempfile 
+	ret loc themefile `themedata'.dta
+
+// End of the subroutine definition
 end
 	
+// Subroutine for writing the data to a theme file
+prog def themewriter
+
+	// Null syntax structure
+	syntax 
+
+	// Loop over the observations
+	forv i = 1/`c(N)' {
 	
+		// Combine the different variables into a single string
+		loc string `: di classnm[`i'] + argnm[`i'] + value[`i']'
+		
+		// Write the string to the file and insert the number of new 
+		// lines based on new line variable
+		file write theme `"`"`string'"' `: di newlines[`i']'"' _n
+		
+	} // End Loop over observations
+	
+	// Close the open file connection
+	file close theme
+	
+// End of sub routine
+end
+
