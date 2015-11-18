@@ -5,7 +5,7 @@ permalink: /brewscheme/
 ---
 
 # BREWSCHEME
-A program to help Stata users developing graph schemes using research-based color palettes.  Unlike other uses of the color palettes developed by Brewer (see References below), this program allows users to specify the number of colors from any of the 35 color palettes they would like to use and allows users to mix/combine different palettes for the various graph types available in Stata.  Additionally, as a way of creating a centralized source for the Stata community to work from, palettes from outside of ColorBrewer are being added to boost the capabilities of the program.
+A program to help Stata users developing graph schemes using research-based color palettes.  Unlike other uses of the color palettes developed by Brewer (see References below), this program allows users to specify the number of colors from any of the 35 color palettes they would like to use and allows users to mix/combine different palettes for the various graph types available in Stata.  Since starting the program, it has grown to include color resources from: [d3.scale.category10()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10), [d3.scale.category20()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20), [d3.scale.category20b()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20b), and [d3.scale.category20c()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c) from the [D3js](http://www.d3js.org) library; default colors used by [ggplot2](https://github.com/hadley/ggplot2) for 2-24 colors; semantic color mappings studied by [Lin, Fortuna, Kulkarni, Stone, & Heer (2013)](http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf); and additional colors are in the process of being added.
 
 ## Examples
 
@@ -34,3 +34,11 @@ cist(activitiesa) matst(spectral) reflst(purd) refmst(set3) const(ylgn)         
 cone(puor)
 ```
 
+# References
+[Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  
+
+[Brewer, C. A. (2002). Color Brewer 2. [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University](http://www.ColorBrewer2.org)
+
+[Lin, S., Fortuna, J., Kulkarni, C., Stone, M., & Heer, J. (2013). Selecting Semantically-Resonant Colors for Data Visualization. *Computer Graphics Forum 32(3)* pp. 401-410.  Retrieved from http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf](http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf)
+
+[Wickham, H. (2009).  *ggplot2: Elegant Graphics for Data Analysis*.  New York City, NY: Springer Science+Business Media LLC.](http://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403)
