@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2 06NOV2015}{...}
+{* *! version 0.0.3 17NOV2015}{...}
 {cmd:help brewscheme}
 {hline}
 
@@ -34,7 +34,8 @@ scheme files. {p_end}
 {cmdab:reflc:olors(}{it:real 3}{cmd:)} {cmdab:reflsat:uration(}{it:real 100}{cmd:)}  {break} 
 {cmdab:refmst:yle(}{it:string}{cmd:)} {cmdab:refmc:olors(}{it:real 3}{cmd:)} 
 {cmdab:refmsat:uration(}{it:real 100}{cmd:)} {break} {cmdab:const:art(}{it:string}{cmd:)} 
-{cmdab:cone:nd(}{it:string}{cmd:)} {cmdab:consat:uration(}{it:real 100}{cmd:)} ] {p_end}
+{cmdab:cone:nd(}{it:string}{cmd:)} {cmdab:consat:uration(}{it:real 100}{cmd:)} 
+{cmdab:themef:ile(}{it:string}{cmd:)}] {p_end}
 
 {marker brewdesc}{p 2 2 2}{title:Description}{p_end}
 
@@ -118,6 +119,8 @@ palette specifed by the {cmdab:somest:yle} option.{p_end}
 
 {p 4 4 8}{cmdab:somesat:uration} Used to set the color intensity for graph 
 types without specified color palettes.{p_end}
+
+{p 4 4 8}{cmdab:themef:ile} Is an optional argument used to supply {help brewscheme} with a theme file created by {help brewtheme}.  Theme files are used to control global aesthetic properties (e.g., background/foreground colors, text sizes, symbol sizes, etc...) that are typically independent of the data being visualized. {p_end}
 
 {dlgtab 4 8:Individual Graph Types}{break}
 {marker brewbar}{dlgtab 8 8:Bar Graphs}{break}

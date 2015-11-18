@@ -17,13 +17,13 @@
 *     r(brewextras) - File path/name where extras dataset is located		   *
 *                                                                              *
 * Lines -                                                                      *
-*     705                                                                      *
+*     708                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.8
-*! 08NOV2015
+*! v 0.0.9
+*! 17NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -532,6 +532,9 @@ prog def checkfilespec, rclass
 
 		} // End IF Block for checking of file specifications
 		
+		// Strip any unnecessary compound/single quotes
+		loc infiles `: list clean infiles'
+		
 		// Loop over required variables to make sure all necessary data is 
 		// available
 		foreach v in palette rgb seqid meta {
@@ -659,7 +662,7 @@ prog def checkfilespec, rclass
 			loc nfnm `"`infiles'"'
 		
 			// If the file checks out thus far save it to the extras directory
-			qui: save `"`c(sysdir_personal)'brewuser/`infiles'"'
+			qui: save `"`c(sysdir_personal)'brewuser/`infiles'"', replace
 					
 		} // End ELSEIF Block for fileonly file name
 		

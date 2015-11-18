@@ -661,7 +661,7 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "ticksetstyle " "minor_horiz_default " "minor_horiz_default" "_n"    
 "ticksetstyle " "minor_vert_default " "minor_vert_default" "_n"    
 "ticksetstyle " "major_horiz_withgrid " "major_horiz_default" "_n"    
-"ticksetstyle " "major_vert_withgrid " "major_vert_withgrid" "_n"    
+"ticksetstyle " "major_vert_withgrid " "major_vert_default" "_n"    
 "ticksetstyle " "major_horiz_nolabel " "major_horiz_nolabel" "_n"    
 "ticksetstyle " "major_vert_nolabel " "major_vert_nolabel" "_n"    
 "ticksetstyle " "minor_horiz_nolabel " "minor_horiz_nolabel" "_n"    
@@ -981,6 +981,13 @@ end
 qui: g argname = subinstr(argnm, " ", "", .)
 
 qui: g classname = subinstr(classnm, " ", "", .)
+
+qui: replace classname = 	cond(classname == "above_below", "abovebelow", 	 ///   
+							cond(classname == "numticks_g", "numticks",		 ///   
+							cond(classname == "relative_posn", "relativepos", ///   
+							cond(classname == "tb_orientstyle", "orientstyle", ///   
+							cond(classname == "vertical_text", "verticaltext", ///   
+							classname)))))
 
 la var classnm "Scheme File Class Name"
 la var argnm "Scheme File Argument Name"

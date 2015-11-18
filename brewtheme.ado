@@ -64,13 +64,14 @@ prog def brewtheme
 						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
 						ZYX2STYle(string asis) LOADThemedata ]
 						
-	// Change how some of the arguments are stored to align with class names
+	/* Change how some of the arguments are stored to align with class names
 	loc above_below `abovebelow'
 	loc numticks_g `numticks'
 	loc relative_posn `relativepos'
 	loc tb_orientstyle `orientstyle'
 	loc vertical_text `verticaltext' 
-		
+	*/
+	
 	// Preserve the current state of the data	
 	preserve	
 	
@@ -93,7 +94,7 @@ prog def brewtheme
 			if `"``v''"' != "" {
 			
 				// Loop over arguments
-				forv i = 1:`: word count ``v''' {
+				forv i = 1/`: word count ``v''' {
 				
 					// Store argument
 					loc indi `: word `i' of ``v'''
@@ -180,7 +181,7 @@ prog def themedata, rclass
 	tempfile themedata
 
 	// Get the names of the classes that can have values altered
-	qui: levelsof classname if substr(classname, 1, 1) != "*", loc(classes)
+	qui: levelsof classname if substr(classname, 1, 1) != "*", loc(classes) 
 
 	// Return a local with the class names
 	ret loc classes `classes'
@@ -189,7 +190,7 @@ prog def themedata, rclass
 	foreach v of loc classes {
 
 		// Get the argument names for the classes
-		qui: levelsof argname if classname == `"`v'"', loc(args)
+		qui: levelsof argname if classname == `"`v'"', loc(args) 
 		
 		// Return the arguments for the given class
 		ret loc `v'args `args'
