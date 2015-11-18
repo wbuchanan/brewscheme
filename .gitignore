@@ -1,5 +1,5 @@
 bystd.pkg
-tableau-palettes.csv
+*.csv
 brewcolors.ado
 *.dta
 
