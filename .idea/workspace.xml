@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="393c9fbf-7f5b-4c9f-8a57-523d82288452" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brewtheme.md" afterPath="$PROJECT_DIR$/brewtheme.md" />
-    </list>
+    <list default="true" id="393c9fbf-7f5b-4c9f-8a57-523d82288452" name="Default" comment="" />
     <ignored path="b.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +41,7 @@
           </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.375">
-              <caret line="8" column="434" selection-start-line="8" selection-start-column="434" selection-end-line="8" selection-end-column="434" />
+              <caret line="8" column="370" selection-start-line="8" selection-start-column="370" selection-end-line="8" selection-end-column="370" />
               <folding />
             </state>
           </provider>
@@ -286,7 +284,7 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.375">
-          <caret line="8" column="434" selection-start-line="8" selection-start-column="434" selection-end-line="8" selection-end-column="434" />
+          <caret line="8" column="370" selection-start-line="8" selection-start-column="370" selection-end-line="8" selection-end-column="370" />
           <folding />
         </state>
       </provider>
