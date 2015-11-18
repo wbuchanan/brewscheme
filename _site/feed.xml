@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>brewscheme</title>
+    <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
+    <link>https://wbuchanan.github.io/brewscheme/</link>
+    <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 18 Nov 2015 09:01:07 -0600</pubDate>
+    <lastBuildDate>Wed, 18 Nov 2015 09:01:07 -0600</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>A new homepage for BREWSCHEME</title>
+        <description>&lt;p&gt;I decided to learn a bit more about creating GitHub Pages using Jekyll to make the site a bit more useful.  You’ll still &lt;br /&gt;
+find the same content that was previously located in the README, but it should be easier to navigate back and forth between &lt;br /&gt;
+the subroutines in the package now.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Nov 2015 23:30:31 -0600</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</guid>
+        
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>

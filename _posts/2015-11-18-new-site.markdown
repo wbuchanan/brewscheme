@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "A new homepage for BREWSCHEME"
+date:   2015-11-18 05:30:31
+categories: update
+---
+
+I decided to learn a bit more about creating GitHub Pages using Jekyll to make the site a bit more useful.  You'll still 
+find the same content that was previously located in the README, but it should be easier to navigate back and forth between 
+the subroutines in the package now.
