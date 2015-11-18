@@ -7,8 +7,8 @@ permalink: /brewtheme/
 # BREWTHEME
 
 This program is used to set global aesthetic properties (e.g., gridlines, number of axis ticks, etc...) that are generally independent of specific plot/graph types.  
-[BREWSCHEME](https://wbuchanan.github.io/brewscheme) has been updated to allow a "theme" file to be passed to it as an argument, or will generate a theme file with the same defaults that have been used in 
-[BREWSCHEME](https://wbuchanan.github.io/brewscheme/brewscheme) since the beginning of the project.  
+[BREWSCHEME](https://wbuchanan.github.io/brewscheme) has been updated to allow a "theme" file to be passed to it as an argument, or will generate a theme file with 
+the same defaults that have been used in [BREWSCHEME](https://wbuchanan.github.io/brewscheme/brewscheme) since the beginning of the project.  
 
 
 ## Examples
