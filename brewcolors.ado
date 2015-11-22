@@ -35,162 +35,251 @@ prog def brewcolors
 	version 13.1
 	
 	// Syntax for program
-	syntax anything(name = source) [, SAve(passthru) INSTall(passthru)]
+	syntax anything(name = source) [, MAke INSTall COLors(passthru) ]
 	
+	// Check for/build directory
+	dirfile, p(`"`c(sysdir_personal)'style"')
+
 	// Check for/build directory
 	dirfile, p(`"`c(sysdir_personal)'brewcolors"')
 
 	// Make sure source is valid
-	if !inlist("`source'", "xkcd", "cbinvert") {
-		
-		// Display error message
-		di as err "Only two sources currently available: xkcd and cbinvert"
-		
-		// Return error code
-		err 198
+	if `"`source'"' == "xkcd" {
+
+		// Load and parse the xkcd data
+		xkcd, `make' `install' `colors'
 		
 	} // End else block for invalid source argument
 	
-	// Call the appropriate subroutine
-	`source', `save' `install'
+	// If colorblind argument is passed
+	else if `"`source'"' == "colorblind" {
+	
+		// Call color blind routine
+		colorblind, `make' `install' `colors'
+		
+	} // 
 	
 // End program
 end
 
 
 // Define sub-routine to get colorblind inversion data
-prog def cbinvert, rclass
+prog def colorblind, rclass
 	
 	// Define syntax
-	syntax , [ INSTall(string asis) ]
-	
+	syntax , [ make install colors(string asis) ]
+
 	// Store base URL 
 	local urlbase "http://mkweb.bcgsc.ca/colorblind"
+
+	// If no colors argument is passed use all as the default
+	if `"`colors'"' == "" loc colors all
 	
-	// Download a copy of the file locally
-	copy "`urlbase'/colorblind.rgb.table.deuteranopia.txt.gz"				 ///   
-		`"`c(sysdir_plus)'/b/deuteranopia.txt.gz"'
-	copy "`urlbase'/colorblind.rgb.table.protanopia.txt.gz"					 ///   
-		`"`c(sysdir_plus)'/b/protanopia.txt.gz"'
-	copy "`urlbase'/colorblind.rgb.table.tritanopia.txt.gz"					 ///   
-		`"`c(sysdir_plus)'/b/tritanopia.txt.gz"'
-	copy "`urlbase'/colorblind.rgb.table.txt.gz"							 ///   
-		 `"`c(sysdir_plus)'/b/cboverall.txt.gz"'
-
-	loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
-
-	// Make sure using compatible OS
-	if regexm(`"`c(os)'"', "[xX]") != 1 {
-	
-		// Turn Pause on
-		pause on
+	// Loop over the words passed to the colors parameter
+	forv i = 1/`: word count `colors'' {
 		
-		// Print pause message to screen
-		pause "If gunzip is not available from your system path, you need "	 ///   
-		"to decompress the files deuteranopia, protanopia, tritanopia, "	 ///   
-		"and overall.txt.gz manually.  Enter the letter q into the console " ///   
-		"and hit enter after doing this in order to continue."
-		
-		// Turn pause off
-		pause off
-		
-	} // End IF Block for windoze
-	
-	// For *nix based systems
-	else {
-
-		// Decompress the Green-Blind Table	 
-		! gunzip `"`c(sysdir_plus)'/b/deuteranopia.txt.gz"'
-
-		// Decompress the Red-Blind Table
-		! gunzip `"`c(sysdir_plus)'/b/protanopia.txt.gz"'
-		
-		// Decompress the Blue-Blind Table
-		! gunzip `"`c(sysdir_plus)'/b/tritanopia.txt.gz"'
-		
-		// Decompress an overall table
-		! gunzip `"`c(sysdir_plus)'/b/cboverall.txt.gz"'
-		
-	} // End ELSE Block for *nix based systems
-	
-	// Loop over the files
-	foreach v in deuteranopia protanopia tritanopia cboverall {
-	
-		// Read the data into Stata
-		qui: infix str lne 1-2045 using `"`c(sysdir_plus)'/b/`v'.txt"', clear
-
-		// Add notes to dataset
-		note "Data from : `urlbase'/colorblind.rgb.table.`v'.txt.gz"
-		note "Data Author: Martin Krzywinski"
-		note `"`dltime'"'
-		note "Implemented in Stata using brewscheme"
-		note "William.Buchanan@mpls.k12.mn.us - brewsceme maintainer"
-
-		// Drop leading comment lines
-		drop if regexm(lne, "^(#)") == 1
-
-		// Make storage more efficient
-		qui: compress
-
-		// Parse the string
-		qui: split lne, p(" ") gen(x)
-
-		// Rename the variables
-		rename (x1 x2 x3 x4 x5 x6 x7)(cbtype r1 g1 b1 r2 g2 b2)
-
-		// Create the RGB string
-		qui: egen color = concat(r1 g1 b1), p(" ")
-
-		// Create the transposed color based on color blindness type
-		qui: egen cbcolor = concat(r2 g2 b2), p(" ")
-		
-		// Count number of records
-		qui: count
-		
-		// Loop over records to return results
-		forv i = 1/`= r(N)' {
-		
-			// Store values temporarily
-			loc cbt `: di cbtype[`i']'
-			loc col `: di color[`i']'
-			loc tcol `: di cbcolor[`i']'
+		// Store individual color argument
+		loc color `: word `i' of `colors''
 			
-			// Remove spaces from the RGB value
-			loc ncol `: subinstr local col " " "", all'
-
-			// Return local with regular color that returns the transpose
-			ret loc `cbt'`ncol' "`cbcolor[`i']'"
+		// Check for valid color argument	
+		if !inlist(`"`color'"', "deuteranopia", "protanopia", "tritanopia", "all") {
+											
+			// Error out
+			di as err "Invalid argument passed to colors parameter." _n	 ///   
+			"Must be one of deuteranopia, protanopia, tritanopia, or all"
 			
-			// Check to see if this color should be installed
-			if inlist("`install'", "`cbt'", "`cbt'`ncol'", "`col'", "all") {
-				
-				// Store filename in local macro
-				loc fname `c(sysdir_personal)'c/color-`cbt'`ncol'.style
+			// Exit from the program
+			err 198
 			
-				// Make sure directory exists
-				cap confirm file `"`c(sysdir_personal)'c"'
-				
-				// If subdirectory doesn't exist create it
-				if _rc != 0 mkdir `"`c(sysdir_personal)'c"'
-				
-				// Open file
-				file open brewcolor using `fname', w replace
-				
-				// Write the color definition
-				file write brewcolor `"set rgb `tcol'"' _n(2)
-				
-				// Close the file
-				file close brewcolor
-				
-			} // End IF Block to install transpose colors
-			
-		} // End Loop over colors
-
-		// Save the dataset
-		qui: save `"`c(sysdir_personal)'brewcolors/colorblinddb_`v'.dta"', replace
+		} // End if Block for invalid argument
 		
-	} // End Loop over files
+		// If valid
+		else if inlist(`"`color'"', "deuteranopia", "green", "all") {
 
+			// Mark time when download started
+			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
+			
+			// Download a copy of the table
+			copy "`urlbase'/colorblind.rgb.table.deuteranopia.txt.gz"	 ///   
+			`"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+
+			// Decompress the file
+			decompress `"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+			
+			// Load the data set
+			qui: insheet using `"`c(sysdir_personal)'brewcolors/deuteranopia.txt"'
+			
+			// Drop the header
+			qui: drop in 1
+			
+			// Compress to reduce memory footprint
+			qui: compress
+			
+			// Split into individual RGB values 
+			qui: split v1, p(" ") gen(c)
+			
+			// Create initial RGB value used for lookups.
+			qui: g str11 from = c1 + " " + c2 + " " + c3
+			
+			// Create transformed values of the RGB 
+			qui: g str11 deuteranopia = c4 + " " + c5 + " " + c6
+			
+			// Keep only the required fields
+			qui: keep from deuteranopia
+			
+			// Compress the file
+			qui: compress
+			
+			// Add labels
+			la var from "Original RGB value to be transformed"
+			la var deuteranopia "RGB value transformed for Deuteranopia Green-Blind"
+			
+			// Add notes to dataset
+			note "Data from : `urlbase'/deuteranopia.txt.gz"
+			note "Data Author: Martin Krzywinski"
+			note `"`dltime'"'
+
+			// Save the file
+			qui: save `"`c(sysdir_personal)'brewcolors/deuteranopia.dta"', replace
+			
+			// Check for all options
+			if `"`color'"' == "all" {
+			
+				qui: copy `"`c(sysdir_personal)'brewcolors/deuteranopia.dta"' ///   
+				`"`c(sysdir_personal)'brewcolors/colorblinddb.dta"'
+		
+			} // End IF Block for all
+		
+		} // End ELSEIF Block for Green color blindness
+			
+		// If red color blind
+		else if inlist(`"`color'"', "protanopia", "red", "all") {
+		
+			// Mark time when download started
+			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
+			
+			// Download a copy of the table
+			copy "`urlbase'/colorblind.rgb.table.protanopia.txt.gz"	 ///   
+			`"`c(sysdir_personal)'brewcolors/protanopia.txt.gz"'
+
+			// Decompress the file
+			decompress `"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+			
+			// Load the data set
+			qui: insheet using `"`c(sysdir_personal)'brewcolors/protanopia.txt"'
+			
+			// Drop the header
+			qui: drop in 1
+			
+			// Compress to reduce memory footprint
+			qui: compress
+			
+			// Split into individual RGB values 
+			qui: split v1, p(" ") gen(c)
+			
+			// Create initial RGB value used for lookups.
+			qui: g str11 from = c1 + " " + c2 + " " + c3
+			
+			// Create transformed values of the RGB 
+			qui: g str11 protanopia = c4 + " " + c5 + " " + c6
+			
+			// Keep only the required fields
+			qui: keep from protanopia
+			
+			// Compress the file
+			qui: compress
+			
+			// Add labels
+			la var from "Original RGB value to be transformed"
+			la var protanopia "RGB value transformed for Protanopia Red-Blind"
+			
+			// Add notes to dataset
+			note "Data from : `urlbase'/protanopia.txt.gz"
+			note "Data Author: Martin Krzywinski"
+			note `"`dltime'"'
+
+			// Save the file
+			qui: save `"`c(sysdir_personal)'brewcolors/protanopia.dta"', replace
+
+			// Check for all option
+			if `"`color'"' == "all" {
+			
+				// Join with other files
+				qui: merge 1:1 from using 								 ///   
+				`"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', nogen
+		
+				// Save the colorblind database
+				qui: save `"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', replace
+		
+			} // End IF Block for all option
+		
+		} // End ELSEIF Block for Red color blindness
+			
+		// Else if blue color blind
+		else if inlist(`"`color'"', "tritanopia", "blue", "all") {
+		
+			// Mark time when download started
+			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
+			
+			// Download a copy of the table
+			copy "`urlbase'/colorblind.rgb.table.protanopia.txt.gz"	 ///   
+			`"`c(sysdir_personal)'brewcolors/protanopia.txt.gz"'
+
+			// Decompress the file
+			decompress `"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+			
+			// Load the data set
+			qui: insheet using `"`c(sysdir_personal)'brewcolors/protanopia.txt"'
+			
+			// Drop the header
+			qui: drop in 1
+			
+			// Compress to reduce memory footprint
+			qui: compress
+			
+			// Split into individual RGB values 
+			qui: split v1, p(" ") gen(c)
+			
+			// Create initial RGB value used for lookups.
+			qui: g str11 from = c1 + " " + c2 + " " + c3
+			
+			// Create transformed values of the RGB 
+			qui: g str11 protanopia = c4 + " " + c5 + " " + c6
+			
+			// Keep only the required fields
+			qui: keep from protanopia
+			
+			// Compress the file
+			qui: compress
+			
+			// Add labels
+			la var from "Original RGB value to be transformed"
+			la var protanopia "RGB value transformed for Protanopia Red-Blind"
+			
+			// Add notes to dataset
+			note "Data from : `urlbase'/tritanopia.txt.gz"
+			note "Data Author: Martin Krzywinski"
+			note `"`dltime'"'
+
+			// Save the file
+			qui: save `"`c(sysdir_personal)'brewcolors/tritanopia.dta"', replace
+
+			// Check for all option
+			if `"`color'"' == "all" {
+			
+				// Join with other files
+				qui: merge 1:1 from using 								 ///   
+				`"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', nogen
+		
+				// Save the colorblind database
+				qui: save `"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', replace
+		
+			} // End IF Block for all option
+		
+		} // End ELSEIF Block for Blue color blindness
+			
+	} // End Loop over color arguments
+		
 // End of colorblind
 end
 
@@ -198,7 +287,7 @@ end
 prog def xkcd, rclass
 	
 	// Define syntax
-	syntax , save(string asis) [ INSTall(string asis) ]
+	syntax [, make install colors(string asis) ]
 	
 	// For the xkcd colors
 	import delimited using "http://xkcd.com/color/rgb.txt", delim("#")
@@ -255,4 +344,48 @@ prog def xkcd, rclass
 	qui: save `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"', replace
 
 // End of program
+end
+
+
+// Decompression sub routine for gzip files
+prog def decompress
+
+	// Version of Stata to use when interpretting the code
+	version 13.1
+	
+	// Syntax used to call program
+	syntax anything(name = thefile id = "File name to be gunzipped")
+	
+	// Make sure using compatible OS
+	if regexm(`"`c(os)'"', "[xX]") != 1 {
+	
+		// Turn Pause on
+		pause on
+		
+		// Print pause message to screen
+		pause "If gunzip is not available from your system path, you need "	 ///   
+		"to decompress the files deuteranopia, protanopia, tritanopia, "	 ///   
+		"and overall.txt.gz manually.  Enter the letter q into the console " ///   
+		"and hit enter after doing this in order to continue."
+		
+		// Turn pause off
+		pause off
+		
+	} // End IF Block for windoze
+	
+	// For *nix based systems
+	else {
+	
+		if `"`c(os)'"' == "MacOSX" {
+		
+			loc thefile `: subinstr loc thefile `"~"' `"/Users/`c(username)'"', all'
+			
+		}
+		
+		// Decompress the Green-Blind Table	 
+		! gunzip "`thefile'"
+
+	} // End ELSE Block for *nix based systems
+
+// End of decompression subroutine
 end
