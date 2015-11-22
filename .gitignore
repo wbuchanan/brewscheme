@@ -5,5 +5,5 @@ brewcolors.ado
 .idea/*
 .idea*
 .idea/
-
+*.log
 
