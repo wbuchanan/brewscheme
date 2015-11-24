@@ -17,7 +17,7 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     1556                                                                     *
+*     425                                                                      *
 *                                                                              *
 ********************************************************************************
 		
@@ -73,10 +73,32 @@ prog def colorblind, rclass
 	local urlbase "http://mkweb.bcgsc.ca/colorblind"
 
 	// If no colors argument is passed use all as the default
-	if `"`colors'"' == "" loc colors all
+	if `"`colors'"' == "" { 
+		
+		// Set all types of colorblindness if no argument specified
+		loc colors deuteranopia protanopia tritanopia
+		
+		// Set colordb option
+		loc colordb colordb
+		
+	} // End IF Block for null colors argument
+	
+	// Check for all keyword in the argument
+	else if inlist("all", `"`: subinstr loc colors `" "' `", "', all'"') {
+	
+		// Set all types of colorblindness if all keyword is specified
+		loc colors deuteranopia protanopia tritanopia
+		
+		// Set colordb option
+		loc colordb colordb
+		
+	} // End IF Block for null colors argument
 	
 	// Loop over the words passed to the colors parameter
 	forv i = 1/`: word count `colors'' {
+	
+		// Clear any data out of memory
+		clear
 		
 		// Store individual color argument
 		loc color `: word `i' of `colors''
@@ -94,7 +116,7 @@ prog def colorblind, rclass
 		} // End if Block for invalid argument
 		
 		// If valid
-		else if inlist(`"`color'"', "deuteranopia", "green", "all") {
+		else if inlist(`"`color'"', "deuteranopia", "green") {
 
 			// Mark time when download started
 			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
@@ -135,15 +157,18 @@ prog def colorblind, rclass
 			la var deuteranopia "RGB value transformed for Deuteranopia Green-Blind"
 			
 			// Add notes to dataset
-			note "Data from : `urlbase'/deuteranopia.txt.gz"
-			note "Data Author: Martin Krzywinski"
-			note `"`dltime'"'
+			note : "Data from : `urlbase'/deuteranopia.txt.gz"
+			note : "Data Author: Martin Krzywinski"
+			note : `"`dltime'"'
 
 			// Save the file
 			qui: save `"`c(sysdir_personal)'brewcolors/deuteranopia.dta"', replace
 			
+			// Remove the original file
+			qui: rm `"`c(sysdir_personal)'brewcolors/deuteranopia.txt"'
+			
 			// Check for all options
-			if `"`color'"' == "all" {
+			if `"`colordb'"' != "" {
 			
 				qui: copy `"`c(sysdir_personal)'brewcolors/deuteranopia.dta"' ///   
 				`"`c(sysdir_personal)'brewcolors/colorblinddb.dta"'
@@ -153,7 +178,7 @@ prog def colorblind, rclass
 		} // End ELSEIF Block for Green color blindness
 			
 		// If red color blind
-		else if inlist(`"`color'"', "protanopia", "red", "all") {
+		else if inlist(`"`color'"', "protanopia", "red") {
 		
 			// Mark time when download started
 			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
@@ -163,7 +188,7 @@ prog def colorblind, rclass
 			`"`c(sysdir_personal)'brewcolors/protanopia.txt.gz"'
 
 			// Decompress the file
-			decompress `"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+			decompress `"`c(sysdir_personal)'brewcolors/protanopia.txt.gz"'
 			
 			// Load the data set
 			qui: insheet using `"`c(sysdir_personal)'brewcolors/protanopia.txt"'
@@ -194,15 +219,18 @@ prog def colorblind, rclass
 			la var protanopia "RGB value transformed for Protanopia Red-Blind"
 			
 			// Add notes to dataset
-			note "Data from : `urlbase'/protanopia.txt.gz"
-			note "Data Author: Martin Krzywinski"
-			note `"`dltime'"'
+			note : "Data from : `urlbase'/protanopia.txt.gz"
+			note : "Data Author: Martin Krzywinski"
+			note : `"`dltime'"'
 
 			// Save the file
 			qui: save `"`c(sysdir_personal)'brewcolors/protanopia.dta"', replace
 
-			// Check for all option
-			if `"`color'"' == "all" {
+			// Remove the original file
+			qui: rm `"`c(sysdir_personal)'brewcolors/protanopia.txt"'
+			
+			// Check for all options
+			if `"`colordb'"' != "" {
 			
 				// Join with other files
 				qui: merge 1:1 from using 								 ///   
@@ -216,20 +244,20 @@ prog def colorblind, rclass
 		} // End ELSEIF Block for Red color blindness
 			
 		// Else if blue color blind
-		else if inlist(`"`color'"', "tritanopia", "blue", "all") {
+		else if inlist(`"`color'"', "tritanopia", "blue") {
 		
 			// Mark time when download started
 			loc dltime `"Downloaded on : `c(current_date)' and `c(current_time)'"'
 			
 			// Download a copy of the table
-			copy "`urlbase'/colorblind.rgb.table.protanopia.txt.gz"	 ///   
-			`"`c(sysdir_personal)'brewcolors/protanopia.txt.gz"'
+			copy "`urlbase'/colorblind.rgb.table.tritanopia.txt.gz"	 ///   
+			`"`c(sysdir_personal)'brewcolors/tritanopia.txt.gz"'
 
 			// Decompress the file
-			decompress `"`c(sysdir_personal)'brewcolors/deuteranopia.txt.gz"'
+			decompress `"`c(sysdir_personal)'brewcolors/tritanopia.txt.gz"'
 			
 			// Load the data set
-			qui: insheet using `"`c(sysdir_personal)'brewcolors/protanopia.txt"'
+			qui: insheet using `"`c(sysdir_personal)'brewcolors/tritanopia.txt"'
 			
 			// Drop the header
 			qui: drop in 1
@@ -244,32 +272,38 @@ prog def colorblind, rclass
 			qui: g str11 from = c1 + " " + c2 + " " + c3
 			
 			// Create transformed values of the RGB 
-			qui: g str11 protanopia = c4 + " " + c5 + " " + c6
+			qui: g str11 tritanopia = c4 + " " + c5 + " " + c6
 			
 			// Keep only the required fields
-			qui: keep from protanopia
+			qui: keep from tritanopia
 			
 			// Compress the file
 			qui: compress
 			
 			// Add labels
 			la var from "Original RGB value to be transformed"
-			la var protanopia "RGB value transformed for Protanopia Red-Blind"
+			la var tritanopia "RGB value transformed for Tritanopia Blue-Blind"
 			
 			// Add notes to dataset
-			note "Data from : `urlbase'/tritanopia.txt.gz"
-			note "Data Author: Martin Krzywinski"
-			note `"`dltime'"'
+			note : "Data from : `urlbase'/tritanopia.txt.gz"
+			note : "Data Author: Martin Krzywinski"
+			note : `"`dltime'"'
 
 			// Save the file
 			qui: save `"`c(sysdir_personal)'brewcolors/tritanopia.dta"', replace
 
-			// Check for all option
-			if `"`color'"' == "all" {
+			// Remove the original file
+			qui: rm `"`c(sysdir_personal)'brewcolors/tritanopia.txt"'
+			
+			// Check for all options
+			if `"`colordb'"' != "" {
 			
 				// Join with other files
 				qui: merge 1:1 from using 								 ///   
 				`"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', nogen
+				
+				// Add additional note for completion of database
+				note : `"File completed at `c(current_time)' on `c(current_date)'"'
 		
 				// Save the colorblind database
 				qui: save `"`c(sysdir_personal)'brewcolors/colorblinddb.dta"', replace
@@ -389,3 +423,4 @@ prog def decompress
 
 // End of decompression subroutine
 end
+
