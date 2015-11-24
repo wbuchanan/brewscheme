@@ -1,3 +1,21 @@
+/*
+Code adopted from:
+
+Wickline, M. (????). Color.Vision.Simulate. version 0.1.  Retrieved from:
+http://galacticmilk.com/labs/Color-Vision/Chrome/Color.Vision.Simulate.js
+Retrieved on: 24nov2015
+
+Code also references work of:
+
+Meyer, G. W., & Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. Computer Graphics and Applications, IEEE 8(5), pp. 28-40.
+
+Smith, V. C., & Pokorny, J. (2005).  Spectral sensitivity of the foveal cone photopigments between 400 and 500nm.  Journal of the Optical Society of America A, 22(10) pp. 2060-2071.
+
+Lindbloom, B. ().  RGB working space information. Retrieved from: 
+http://www.brucelindbloom.com.  Retrieved on 24nov2015.
+
+*/
+
 // Change to Mata interpreter/compiler
 mata:
 
@@ -210,7 +228,8 @@ class colorblind {
 	// Setter methods, class constructor, and simulation method
 	void 								new(), achromatope(), protanope(), 
 										deuteranope(), tritanope(), setR(), 
-										setG(), setB(), setAmount(), simulate()
+										setG(), setB(), setAmount(), setRGB(), 
+										simulate()
 
 	// Getter methods for member variables/returning results to users
 	real 					scalar 		getR(), getG(), getB(), getGamma(), 
@@ -311,6 +330,20 @@ void colorblind::setB(real scalar blue) {
 
 } // End of Setter method
 
+// Sets the Initial values for the red, green, and blue channels
+void colorblind::setRGB(real scalar red, real scalar green, real scalar blue) {
+
+	// Set the red channel
+	setR(red)
+	
+	// Set the green channel
+	setG(green)
+	
+	// Set the blue channel
+	setB(blue)
+	
+} // End of Setter method declaration
+
 // Gets the red channel parameter value
 real scalar colorblind::getR() {
 
@@ -403,7 +436,10 @@ string colvector colorblind::getRgbStrings() {
 		x[i, 1] =  strofreal(this.transformedRGB[i, 1]) + " " +				 ///   
 			       strofreal(this.transformedRGB[i, 2])	+ " " +				 ///   
 				   strofreal(this.transformedRGB[i, 3])
-				   
+		
+		// Set Stata locals with return values
+		st_local(getType(i), x[i, 1])
+		
 	} // End Loop over rows of the transformed matrix
 	
 	// Return the string column vector
@@ -422,6 +458,9 @@ string scalar colorblind::getRgbString(real scalar type) {
 	x = strofreal(this.transformedRGB[type, 1])  	+ " " +					 ///   
 		strofreal(this.transformedRGB[type, 2])		+ " " +					 ///   
 		strofreal(this.transformedRGB[type, 3])
+		
+	// Set return value in Stata
+	st_local(getType(type), x)
 
 	// Return the RGB string
 	return(x)
