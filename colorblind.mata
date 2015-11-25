@@ -226,8 +226,7 @@ class colorblind {
 	public:
 	
 	// Setter methods, class constructor, and simulation method
-	void 								new(), achromatopsia(), protanope(), 
-										deuteranope(), tritanope(), setR(), 
+	void 								new(), achromatopsia(), setR(), 
 										setG(), setB(), setAmount(), setRGB(), 
 										simulate()
 
@@ -983,14 +982,6 @@ void translateColor(real scalar red, real scalar green, real scalar blue) {
 	x = J(0, 0, .)
 	
 } // End of Mata wrapper for simple color transforms
-
-// Function for simple color transform for multiple colors
-//void translateColors(string rowvector colors) {
-
-
-
-//} // End of Mata wrapper for multiple color transformations	
-	
 
 // Exit mata and return to Stata prompt
 end 
