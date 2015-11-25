@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>A new homepage for BREWSCHEME</title>
+    <title>brewcbsim</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/brewbcsim/">
 </head>
 
 
@@ -84,14 +84,37 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">A new homepage for BREWSCHEME</h1>
-    <p class="post-meta">Nov 17, 2015</p>
+    <h1 class="post-title">brewcbsim</h1>
   </header>
 
   <article class="post-content">
-    <p>I decided to learn a bit more about creating GitHub Pages using Jekyll to make the site a bit more useful.  You’ll still <br />
-find the same content that was previously located in the README, but it should be easier to navigate back and forth between <br />
-the subroutines in the package now.</p>
+    <h1 id="brewcbsim">BREWCBSIM</h1>
+<p>This program is analogous to <a href="https://wbuchanan.github.io/brewscheme/brewviewer">brewviewer</a> but with a focus on illustrating the way color may be perceived by individuals with various types of color sightedness impairments.  The current iteration of the program only shows a single color at a time, but future versions will expand on this capability.  The use of the program is fairly simple:</p>
+
+<h2 id="ex-1-green-channel-dominant-color">Ex 1. Green channel dominant color</h2>
+
+<pre><code>brewcbsim 63 210 142
+</code></pre>
+
+<p><img src="../img/brewcbsimex1.png" alt="brewcbsim Example 1" /></p>
+
+<h2 id="ex-2-blue-channel-dominant-color">Ex 2. Blue channel dominant color</h2>
+
+<pre><code>brewcbsim 8 151 233
+</code></pre>
+
+<p><img src="../img/brewcbsimex2.png" alt="brewcbsim Example 2" /></p>
+
+<h2 id="ex-3-red-channel-dominant-color">Ex 3. Red channel dominant color</h2>
+
+<pre><code>brewcbsim 182 33 43
+</code></pre>
+
+<p><img src="../img/brewcbsimex3.png" alt="brewcbsim Example 3" /></p>
+
+<h2 id="additional-info">Additional Info</h2>
+<p>The program is a wrapper around a Mata function <code>translateColor</code> that takes three arguments for the levels of the red, green, and blue color channels.  The function itself is a wrapper around the <code>colorblind</code> class Mata object and associated methods.  For additional information, see the source code in colorblind.mata.</p>
+
 
   </article>
 
