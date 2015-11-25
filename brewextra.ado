@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.10
-*! 18NOV2015
+*! v 0.0.11
+*! 25NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -53,7 +53,7 @@ prog def brewextra, rclass
 			clear
 
 			// Reserve memory for 130 observations
-			set obs 499
+			set obs 200
 
 			// Create palette, RGB, and meta variables 
 			// Meta variable contains additional info related to the research/experiments
@@ -75,9 +75,9 @@ prog def brewextra, rclass
 			qui: replace palette = "drinksa" in 71/77
 			qui: replace palette = "drinkse" in 78/84
 			qui: replace palette = "fooda" in 85/91
-			qui: replace palette = "foodt" in 92/98
+			qui: replace palette = "foode" in 92/98
 			qui: replace palette = "carsa" in 99/104
-			qui: replace palette = "carst" in 105/110
+			qui: replace palette = "carse" in 105/110
 			qui: replace palette = "featuresa" in 111/115
 			qui: replace palette = "featurest" in 116/120
 			qui: replace palette = "activitiesa" in 121/125
@@ -286,13 +286,13 @@ prog def brewextra, rclass
 			qui: replace rgb = "214 39 40" if palette == "fooda" & colorid == 7
 
 			// Foods export selected
-			qui: replace rgb = "199 199 199" if palette == "foodt" & colorid == 1
-			qui: replace rgb = "31 119 180" if palette == "foodt" & colorid == 2
-			qui: replace rgb = "140 86 75" if palette == "foodt" & colorid == 3
-			qui: replace rgb = "152 223 138" if palette == "foodt" & colorid == 4
-			qui: replace rgb = "219 219 141" if palette == "foodt" & colorid == 5
-			qui: replace rgb = "196 156 148" if palette == "foodt" & colorid == 6
-			qui: replace rgb = "214 39 40" if palette == "foodt" & colorid == 7
+			qui: replace rgb = "199 199 199" if palette == "foode" & colorid == 1
+			qui: replace rgb = "31 119 180" if palette == "foode" & colorid == 2
+			qui: replace rgb = "140 86 75" if palette == "foode" & colorid == 3
+			qui: replace rgb = "152 223 138" if palette == "foode" & colorid == 4
+			qui: replace rgb = "219 219 141" if palette == "foode" & colorid == 5
+			qui: replace rgb = "196 156 148" if palette == "foode" & colorid == 6
+			qui: replace rgb = "214 39 40" if palette == "foode" & colorid == 7
 
 			// Car Colors corresponding to brand palettes
 			qui: replace meta = "Red" if inlist(palette, "carse",			 ///   
@@ -317,12 +317,12 @@ prog def brewextra, rclass
 			qui: replace rgb = "31 119 180" if palette == "carsa" & colorid == 6
 
 			// Car Colors export selected
-			qui: replace rgb = "214 39 40" if palette == "carst" & colorid == 1
-			qui: replace rgb = "199 199 199" if palette == "carst" & colorid == 2
-			qui: replace rgb = "127 127 127" if palette == "carst" & colorid == 3 
-			qui: replace rgb = "44 160 44" if palette == "carst" & colorid == 4
-			qui: replace rgb = "140 86 75" if palette == "carst" & colorid == 5
-			qui: replace rgb = "31 119 180" if palette == "carst" & colorid == 6
+			qui: replace rgb = "214 39 40" if palette == "carse" & colorid == 1
+			qui: replace rgb = "199 199 199" if palette == "carse" & colorid == 2
+			qui: replace rgb = "127 127 127" if palette == "carse" & colorid == 3 
+			qui: replace rgb = "44 160 44" if palette == "carse" & colorid == 4
+			qui: replace rgb = "140 86 75" if palette == "carse" & colorid == 5
+			qui: replace rgb = "31 119 180" if palette == "carse" & colorid == 6
 
 			// Features corresponding to brand palettes
 			qui: replace meta = "Speed" if inlist(palette, "featurest",		 ///   
@@ -467,6 +467,9 @@ prog def brewextra, rclass
 			qui: replace rgb = "189 189 189" if palette == "category20c" & colorid == 19
 			qui: replace rgb = "217 217 217" if palette == "category20c" & colorid == 20
 
+			// Add observations to the data set
+			qui: set obs 499
+			
 			// Add the ggplot2 default colors for 2-24 colors in the scale
 			qui: replace palette = "ggplot2" in 201/499
 			qui: replace maxcolors = 24 in 201/499
@@ -1110,7 +1113,7 @@ prog def brewextra, rclass
 							
 			// Save the brew extras data set
 			qui: save `"`c(sysdir_personal)'brewuser/extras.dta"', replace
-				
+			
 			// Push the extras file through check file spec sub routine
 			checkfilespec 
 			
@@ -1264,6 +1267,9 @@ prog def checkfilespec, rclass
 
 		// Compress dataset before saving
 		qui: compress
+		
+		// Add colorblind transformed values to the file
+		qui: brewtransform rgb
 		
 		// Check for path delimiters in the file name
 		loc fnm = regexm(`"`infiles'"', "(\/)")

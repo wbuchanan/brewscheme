@@ -1,8 +1,8 @@
 /*
 Code adopted from:
 
-Wickline, M. (????). Color.Vision.Simulate. version 0.1.  Retrieved from:
-http://galacticmilk.com/labs/Color-Vision/Chrome/Color.Vision.Simulate.js
+Wickline, M. (2014). Color.Vision.Simulate. version 0.1.  Retrieved from:
+http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js
 Retrieved on: 24nov2015
 
 Code also references work of:

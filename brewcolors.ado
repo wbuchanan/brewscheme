@@ -23,7 +23,7 @@
 		
 *! brewcolors
 *! v 0.0.1
-*! 21NOV2015
+*! 25NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -62,7 +62,7 @@ prog def brewcolors
 // End program
 end
 
-
+// This subroutine will be deprecated prior to v 1.0 release
 // Define sub-routine to get colorblind inversion data
 prog def colorblind, rclass
 	

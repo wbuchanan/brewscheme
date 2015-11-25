@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! brewcolordb
-*! v 0.0.1
-*! 21NOV2015
+*! v 0.0.2
+*! 25NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -141,6 +141,9 @@ prog def brewcolordb, rclass
 		// Add metadata 
 		la var id "Name of Stata Colorstyle"
 		la var rgb "RGB Value of Stata Colorstyle"
+		
+		// Translate colorblind equivalent RGB values
+		qui: brewtransform rgb
 
 		// Save to the brewscheme created directories
 		qui: save `"`c(sysdir_personal)'brewuser/colordb.dta"', replace

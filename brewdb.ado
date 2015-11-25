@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.5
-*! 07NOV2015
+*! v 0.0.6
+*! 25NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -450,6 +450,9 @@ prog def brewdb
 			qui: replace rgb = "49 54 149" if palette == "rdylbu" & pcolor == 10 & colorid == 10 
 			qui: replace rgb = "0 104 55" if palette == "rdylgn" & pcolor == 10 & colorid == 10 
 			qui: replace rgb = "94 79 162" if palette == "spectral" & pcolor == 10 & colorid == 10 
+			
+			// Add transformed values to the data set
+			qui: brewtransform rgb
 			
 			// Attach a checksum to the file
 			qui: datasignature set 
