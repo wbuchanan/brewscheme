@@ -203,7 +203,7 @@ class colorblind {
 	private:
 	
 	// A row vector with the types of colorblindness
-	string 					rowvector 	types
+	string 					rowvector 	types, typelabs
 	
 	// The initial RGB values, amount parameter, gamma correction parameter, and
 	// inverse gamma correction parameter
@@ -226,7 +226,7 @@ class colorblind {
 	public:
 	
 	// Setter methods, class constructor, and simulation method
-	void 								new(), achromatope(), protanope(), 
+	void 								new(), achromatopsia(), protanope(), 
 										deuteranope(), tritanope(), setR(), 
 										setG(), setB(), setAmount(), setRGB(), 
 										simulate()
@@ -238,10 +238,10 @@ class colorblind {
 										getConfuseYint(), getAmount(), condMax()
 										
 	// Method to return the string names of the available types									
-	string					rowvector	getTypes()
+	string					rowvector	getTypes(), getTypeLabs()
 	
 	// Returns the name of a single type of color blindness
-	string					scalar		getType()
+	string					scalar		getType(), getTypeLab()
 	
 	// Returns a matrix with the transformed RGB values
 	real					matrix		getTransformedRgbs()
@@ -250,10 +250,10 @@ class colorblind {
 	real					rowvector	getTransformedRgb(), checkRange()
 
 	// Method used to return the string representation of the transformed RGB 
-	string					scalar		getRgbString()
+	void								getRgbString()
 	
 	// Method used to return the string representation of all transformed RGB values
-	string					colvector	getRgbStrings()
+	void								getRgbStrings()
 	
 	// Member variables used to store data transformed throughout the simulation 
 	// method call
@@ -272,10 +272,14 @@ void colorblind::new() {
 	this.tritanope = Tritanopia()
 	
 	// Initialize the matrix used to store the transformation results
-	this.transformedRGB = J(4, 3, .)
+	this.transformedRGB = J(5, 3, .)
+	
+	// Store the types of colorblindness for macro names
+	this.types = ("baseline", "achromatopsia", "protanopia", "deuteranopia", "tritanopia")
 	
 	// Store the types of colorblindness
-	this.types = ("achromatope", "protanope", "deuteranope", "tritanope")
+	this.typelabs = ("Normal Vision", "Achromatopsic Vision", 				 ///   
+				"Protanopic Vision", "Deuteranopic Vision", "Tritanopic Vision")
 
 	// Store prototype values for amount, gamma, and inverse gamma parameters
 	this.amount = 1
@@ -283,18 +287,32 @@ void colorblind::new() {
 	this.invgamma = 1/2.2
 	
 	// Initialize null matrices used to store data created in the simulation method
-	this.drgb1 = J(4, 3, .)
-	this.powrgb = J(4, 3, .)
-	this.xyz = J(4, 3, .)
-	this.chroma = J(4, 2, .)
-	this.sim = J(4, 8, .)
-	this.diffrgb = J(4, 5, .)
-	this.drgb2 = J(4, 3, .)
-	this.drgb3 = J(4, 4, .)
-	this.drgb4 = J(4, 3, .)
-	this.drgb5 = J(4, 3, .)
-	this.fitrgb = J(4, 3, .)
-	this.trnsconstants = J(4, 4, .)
+	this.drgb1 = J(5, 3, .)
+	this.powrgb = J(5, 3, .)
+	this.xyz = J(5, 3, .)
+	this.chroma = J(5, 2, .)
+	this.sim = J(5, 8, .)
+	this.diffrgb = J(5, 5, .)
+	this.drgb2 = J(5, 3, .)
+	this.drgb3 = J(5, 4, .)
+	this.drgb4 = J(5, 3, .)
+	this.drgb5 = J(5, 3, .)
+	this.fitrgb = J(5, 3, .)
+	this.trnsconstants = J(5, 4, .)
+
+	// Set null baseline values for matrices
+	this.drgb1[1, 1..3] = (0, 0, 0)
+	this.powrgb[1, 1..3] = (0, 0, 0)
+	this.xyz[1, 1..3] = (0, 0, 0)
+	this.chroma[1, 1..2] = (0, 0)
+	this.sim[1, 1..8] = (0, 0, 0, 0, 0, 0, 0, 0)
+	this.diffrgb[1, 1..5] = (0, 0, 0, 0, 0)
+	this.drgb2[1, 1..3] = (0, 0, 0)
+	this.drgb3[1, 1..4] = (0, 0, 0, 0)
+	this.drgb4[1, 1..3] = (0, 0, 0)
+	this.drgb5[1, 1..3] = (0, 0, 0)
+	this.fitrgb[1, 1..3] = (0, 0, 0)
+	this.trnsconstants[1, 1..4] = (0, 0, 0, 0)
 	
 } // End Colorblind class constructor definition
 
@@ -311,6 +329,9 @@ void colorblind::setR(real scalar red) {
 
 	// Sets the inputR member variable to the value passed to the method
 	this.inputR = red
+	
+	// Set first element of transform matrix to baseline red channel
+	this.transformedRGB[1, 1] = red
 
 } // End of Setter method
 
@@ -320,6 +341,9 @@ void colorblind::setG(real scalar green) {
 	// Sets the inputG member variable to the value passed to the method
 	this.inputG = green
 
+	// Set first element of transform matrix to baseline green channel
+	this.transformedRGB[1, 2] = green
+
 } // End of Setter method
 
 // Sets the Initial value of the blue channel
@@ -327,6 +351,9 @@ void colorblind::setB(real scalar blue) {
 
 	// Sets the inputB member variable to the value passed to the method
 	this.inputB = blue
+
+	// Set first element of transform matrix to baseline blue channel
+	this.transformedRGB[1, 3] = blue
 
 } // End of Setter method
 
@@ -392,6 +419,22 @@ string rowvector colorblind::getTypes() {
 	
 } // End Accessor method declaration for color blindness types
 
+// Gets the color blind type labels member variable
+string rowvector colorblind::getTypeLabs() {
+
+	// Returns labels used for returned macros
+	return(this.typelabs)
+	
+} // End Accessor method declaration for color blind type labels
+
+// Gets color blindness type label for specific form of color sight impairment
+string scalar colorblind::getTypeLab(real scalar typ) {
+
+	// Returns the label to use for graphs/etc...
+	return(this.typelabs[1, typ])
+		
+} // End Accessor method declaration for individual color blindness type label
+
 // Gets a specific type of color blindness 
 string scalar colorblind::getType(real scalar typ) {
 	
@@ -417,38 +460,41 @@ real rowvector colorblind::getTransformedRgb(real scalar type) {
 } // End Accessor method declaration for single transformed RGB value
 
 // Method to return a column vector of transformed RGB values
-string colvector colorblind::getRgbStrings() {
+void colorblind::getRgbStrings() {
 
 	// Declares column vector variable to use to build the return value
-	string colvector x
+	string matrix x
 	
 	// Declares variable to use for looping over elements in the transformed matrix
 	real scalar i
 	
 	// Initializes the column vector with null strings
-	x = J(rows(getTransformedRgbs()), 1, "")
+	x = J(rows(getTransformedRgbs()), 2, "")
 	
 	// Loop over the rows of the matrix with the transformed results
 	for(i = 1; i <= rows(getTransformedRgbs()); i++) {
 	
+		// Set the first element in the row to the name of the vision type
+		x[i, 1] = getTypeLab(i)
+	
 		// Populate each element of the column vector with the numeric values 
 		// appended into a single string value
-		x[i, 1] =  strofreal(this.transformedRGB[i, 1]) + " " +				 ///   
+		x[i, 2] =  strofreal(this.transformedRGB[i, 1]) + " " +				 ///   
 			       strofreal(this.transformedRGB[i, 2])	+ " " +				 ///   
 				   strofreal(this.transformedRGB[i, 3])
 		
-		// Set Stata locals with return values
-		st_local(getType(i), x[i, 1])
+		// Set Stata locals with labels and values
+		st_local((getType(i) + "lab"), x[i, 1])
+		
+		// Set Stata locals with values
+		st_local(getType(i), (x[i, 2]))
 		
 	} // End Loop over rows of the transformed matrix
-	
-	// Return the string column vector
-	return(x)
 	
 } // End of getter method
 	
 // Getter method used to retrieve a single RGB string for the specified transform
-string scalar colorblind::getRgbString(real scalar type) {
+void colorblind::getRgbString(real scalar type) {
 
 	// String local variable used to store the retrieved RGB value for return
 	string scalar x
@@ -459,12 +505,12 @@ string scalar colorblind::getRgbString(real scalar type) {
 		strofreal(this.transformedRGB[type, 2])		+ " " +					 ///   
 		strofreal(this.transformedRGB[type, 3])
 		
-	// Set return value in Stata
-	st_local(getType(type), x)
+	// Set return value with labels and values
+	st_local((getType(type) + "lab"), getTypeLab(type))
 
-	// Return the RGB string
-	return(x)
-	
+	// Set Stata locals with values
+	st_local(getType(type), x)
+		
 } // End of getter method
 	
 // Getter method used to access the amount member variable
@@ -478,45 +524,45 @@ real scalar colorblind::getAmount() {
 // Getter method used to access the x member variable of the IDd colorblind object
 real scalar colorblind::getConfuseX(real scalar type) {
 	
-	// If value passed to method is 2
-	if (type == 2) {
+	// If value passed to method is 3
+	if (type == 3) {
 		
 		// Return the constant for Protanopia transformation
 		return(this.protanope.getConfuseX())
 		
 	} // End IF Block for Protanopia
 	
-	// If value 3 is passed
-	else if (type == 3) {
+	// If value 4 is passed
+	else if (type == 4) {
 	
 		// Return the constant for Deuteranopia transformation
 		return(this.deuteranope.getConfuseX())
 		
 	} // End ELSEIF Block for Deuteranopia
 	
-	// Otherwise
-	else {
+	// If a value of 5 is passed
+	else if (type == 5) {
 	
 		// Return the constant for Tritanopia transformation
 		return(this.tritanope.getConfuseX())
 		
-	} // End ELSE Block for Tritanopia
+	} // End ELSEIF Block for Tritanopia
 	
 } // End of getter method for the color blind x variable
 
 // Getter method used to access the y member variable of the IDd colorblind object
 real scalar colorblind::getConfuseY(real scalar type) {
 	
-	// If value passed to method is 2
-	if (type == 2) {
+	// If value passed to method is 3
+	if (type == 3) {
 		
 		// Return the constant for Protanopia transformation
 		return(this.protanope.getConfuseY())
 		
 	} // End IF Block for Protanopia
 	
-	// If value 3 is passed
-	else if (type == 3) {
+	// If value 4 is passed
+	else if (type == 4) {
 	
 		// Return the constant for Deuteranopia transformation
 		return(this.deuteranope.getConfuseY())
@@ -524,70 +570,70 @@ real scalar colorblind::getConfuseY(real scalar type) {
 	} // End ELSEIF Block for Deuteranopia
 	
 	// Otherwise
-	else {
+	else if (type == 5) {
 	
 		// Return the constant for Tritanopia transformation
 		return(this.tritanope.getConfuseY())
 		
-	} // End ELSE Block for Tritanopia
+	} // End ELSEIF Block for Tritanopia
 	
 } // End of getter method for the color blind y variable
 
 // Getter method used to access the slope member variable of the IDd colorblind object
 real scalar colorblind::getConfuseM(real scalar type) {
 	
-	// If value passed to method is 2
-	if (type == 2) {
+	// If value passed to method is 3
+	if (type == 3) {
 		
 		// Return the constant for Protanopia transformation
 		return(this.protanope.getConfuseM())
 		
 	} // End IF Block for Protanopia
 	
-	// If value 3 is passed
-	else if (type == 3) {
+	// If value 4 is passed
+	else if (type == 4) {
 	
 		// Return the constant for Deuteranopia transformation
 		return(this.deuteranope.getConfuseM())
 		
 	} // End ELSEIF Block for Deuteranopia
 	
-	// Otherwise
-	else {
+	// If a value of 5 is passed
+	else if (type == 5) {
 	
 		// Return the constant for Tritanopia transformation
 		return(this.tritanope.getConfuseM())
 		
-	} // End ELSE Block for Tritanopia
+	} // End ELSEIF Block for Tritanopia
 	
 } // End of getter method for the color blind slope variable
 
 // Getter method used to access the intercept member variable of the IDd colorblind object 
 real scalar colorblind::getConfuseYint(real scalar type) {
 	
-	// If value passed to method is 2
-	if (type == 2) {
+	// If value passed to method is 3
+	if (type == 3) {
 		
 		// Return the constant for Protanopia transformation
 		return(this.protanope.getConfuseYint())
 		
 	} // End IF Block for Protanopia
 	
-	// If value 3 is passed
-	else if (type == 3) {
+	// If value 4 is passed
+	else if (type == 4) {
 	
 		// Return the constant for Deuteranopia transformation
 		return(this.deuteranope.getConfuseYint())
 		
 	} // End ELSEIF Block for Deuteranopia
 	
-	// Otherwise
-	else {
+	// If a value of 5 is passed
+	else if (type == 5) {
 	
 		// Return the constant for Tritanopia transformation
 		return(this.tritanope.getConfuseYint())
 		
-	} // End ELSE Block for Tritanopia
+	} // End ELSEIF Block for Tritanopia
 	
 } // End of getter method for the color blind intercept variable
 
@@ -638,7 +684,7 @@ real rowvector colorblind::checkRange(real rowvector rgb) {
 } // End of method to validate range for RGB values
 
 // Total colorblindness method (type == 1)
-void colorblind::achromatope() {
+void colorblind::achromatopsia() {
 
 	// Declare local variables for method
 	real scalar dr, dg, db
@@ -658,7 +704,7 @@ void colorblind::achromatope() {
 	nrgb = checkRange((dr, dg, db))
 	
 	// Update the matrix containing the transformed values
-	this.transformedRGB[1, .] = nrgb
+	this.transformedRGB[2, .] = nrgb
 	
 } // End Method used to transform value to complete colorblind values
 
@@ -720,24 +766,27 @@ void colorblind::simulate(| real rowvector types) {
 		
 	} // End IF Block for optional argument handling
 	
+	// Add baseline color to color matrix
+	this.transformedRGB[1, .] = ((getR(), getG(), getB()))
+	
 	// Loop over the arguments passed to the method
 	for(i = 1; i <= cols(types); i++) {
 	
 		// Get the transformation/simulation type
-		thetype = types[1, i]
+		thetype = types[1, i] + 1
 		
 		// For type = 1 (Full Color Blindness
-		if (thetype == 1) {
+		if (thetype == 2) {
 		
 			// Transform values for full/complete color blindness
-			achromatope()
+			achromatopsia()
 		
 		} // End IF Block for full color blindness
 
 		/* For all other types of color blindness the type codes are:
-		2 = Protanopia (Red Color Blindness)
-		3 = Deuteranopia (Green Color Blindness)
-		4 = Tritanopia (Blue Color Blindness) 
+		3 = Protanopia (Red Color Blindness)
+		4 = Deuteranopia (Green Color Blindness)
+		5 = Tritanopia (Blue Color Blindness) 
 		*/
 		else {
 		
@@ -911,6 +960,37 @@ void colorblind::simulate(| real rowvector types) {
 	} // End Loop over the number of transformations
 
 } // End Method definition
+
+// Function for simple color transform
+void translateColor(real scalar red, real scalar green, real scalar blue) {
+	
+	// Declare a colorblind type member variable
+	class colorblind scalar x
+	
+	// Initialize the object
+	x = colorblind()
+	
+	// Set the RGB values
+	x.setRGB(red, green, blue)
+	
+	// Simulate for all types of color blindness
+	x.simulate()
+	
+	// Return the results to the end user
+	x.getRgbStrings()
+	
+	// Destroy the variable
+	x = J(0, 0, .)
+	
+} // End of Mata wrapper for simple color transforms
+
+// Function for simple color transform for multiple colors
+//void translateColors(string rowvector colors) {
+
+
+
+//} // End of Mata wrapper for multiple color transformations	
+	
 
 // Exit mata and return to Stata prompt
 end 
