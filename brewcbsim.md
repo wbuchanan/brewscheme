@@ -1,7 +1,7 @@
 ---
 layout: page
 title: brewcbsim
-permalink: /brewbcsim/
+permalink: /brewcbsim/
 ---
 
 # BREWCBSIM
