@@ -5,13 +5,13 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 25 Nov 2015 06:22:48 -0600</pubDate>
-    <lastBuildDate>Wed, 25 Nov 2015 06:22:48 -0600</lastBuildDate>
+    <pubDate>Wed, 25 Nov 2015 06:26:32 -0600</pubDate>
+    <lastBuildDate>Wed, 25 Nov 2015 06:26:32 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
         <title>New addition to the brewscheme family</title>
-        <description>&lt;p&gt;&lt;code&gt;brewscheme&lt;/code&gt; now includes new Mata classes/methods to simulate the color that would be perceived by individuals with varying types of color sightedness impairments.  Additionally, similar to &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewviewer&quot;&gt;brewviewer&lt;/a&gt; there is also an analogous program available to show how the simulated color values would appear called &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewcbsim&quot;&gt;brewcbsim&lt;/a&gt;.  Future development will exapand the options of both brewcbview (e.g., to handle multiple color tuples and display them in a single graph), brewviewer (e.g., to show a preview of specific palette combinations under varying forms of color sightedness impairment), to add the simulated colors to lookup tables used by &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewscheme&quot;&gt;brewscheme&lt;/a&gt; and &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewtheme&quot;&gt;brewtheme&lt;/a&gt;, and to create a proofer for Stata graphs that would show how they would appear under different forms of color sight impairment.  &lt;/p&gt;
+        <description>&lt;p&gt;&lt;code&gt;brewscheme&lt;/code&gt; now includes new Mata classes/methods to simulate the color that would be perceived by individuals with varying types of color sightedness impairments.  Additionally, similar to &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewviewer/&quot;&gt;brewviewer&lt;/a&gt; there is also an analogous program available to show how the simulated color values would appear called &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewbcsim/&quot;&gt;brewcbsim&lt;/a&gt;.  Future development will exapand the options of both brewcbview (e.g., to handle multiple color tuples and display them in a single graph), brewviewer (e.g., to show a preview of specific palette combinations under varying forms of color sightedness impairment), to add the simulated colors to lookup tables used by &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewscheme/&quot;&gt;brewscheme&lt;/a&gt; and &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt;, and to create a proofer for Stata graphs that would show how they would appear under different forms of color sight impairment.  &lt;/p&gt;
 
 &lt;p&gt;As always, comments, requests, and collaborators are always welcome.&lt;/p&gt;
 
