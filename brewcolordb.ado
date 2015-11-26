@@ -90,6 +90,18 @@ prog def brewcolordb, rclass
 		// Create a row id for the lines from each color style file
 		qui: bys id (fileid): g linenum = _n
 
+		// Get the sequence number
+		qui: g seqid = v1 if regexm(v1, "^sequence") == 1
+
+		// Remove the word sequence
+		qui: replace seqid = trim(itrim(subinstr(seqid, "sequence ", "", .)))
+
+		// Make the sequence ID variable numeric
+		qui: destring seqid, replace
+		
+		// Carry the value for the rest of the color
+		bys id (fileid): replace seqid = seqid[_n -1] if mi(seqid)
+		
 		// Keep only the records that contain the RGB values
 		qui: keep if lines == linenum
 
@@ -136,17 +148,55 @@ prog def brewcolordb, rclass
 		order id rgb
 		
 		// Keep only the needed variables
-		qui: keep id rgb
+		qui: keep id rgb seqid
+		
+		// Clean up rgb values
+		qui: replace rgb = trim(itrim(rgb))
+		
+		// Rename variable 
+		qui: rename id palette
+		
+		// Make sequence ID string
+		qui: tostring seqid, replace
+		
+		// Make sequence ID follow logic used for rest of suite
+		qui: replace seqid = palette + seqid
+		
+		// Generate meta data fields
+		foreach v in colorblind print lcd photocopy {
+		
+			// Generate variables with null values
+			qui: g `v' = .n
+			
+		} // End Loop over meta properties
+		
+		// Generate a meta data field
+		qui: g meta = "Stata"
+		
+		// Create a max colors value
+		qui: g maxcolors = 1
+		
+		// Create colorid 
+		qui: g colorid = 1
+		
+		// Create palette ID
+		qui: g pcolor = 1
 		
 		// Add metadata 
-		la var id "Name of Stata Colorstyle"
+		la var palette "Name of Stata Colorstyle"
 		la var rgb "RGB Value of Stata Colorstyle"
+		
+		// Optimize data storage
+		qui: compress
+		
+		// Drop any duplicate values
+		qui: duplicates drop
 		
 		// Translate colorblind equivalent RGB values
 		qui: brewtransform rgb
 
 		// Save to the brewscheme created directories
-		qui: save `"`c(sysdir_personal)'brewuser/colordb.dta"', replace
+		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
 		
 // end of program
 end

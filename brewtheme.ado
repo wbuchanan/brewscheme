@@ -2,13 +2,11 @@
 * Description of the Program -												   *
 * This program is used to set theme values for things like backgrounds, point  *
 * sizes, font sizes, etc...   The purpose is to allow the end user greater	   *
-* flexibility in developing graph themes (e.g., create a ggplot2 theme with   *
-* a given set of palettes and also create a theme with a more Tufte inspired  *
+* flexibility in developing graph themes (e.g., create a ggplot2 theme with    *
+* a given set of palettes and also create a theme with a more Tufte inspired   *
 * set of background/size parameters). 										   *
 *                                                                              *
 * Data Requirements -														   *
-*     Reads a file containing properties/parameters 	                       *
-*						  OR												   *
 *	  Allows users to build the property file interactively					   *
 *																			   *
 * System Requirements -														   *

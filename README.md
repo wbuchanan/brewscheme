@@ -6,67 +6,40 @@ brewscheme is a tool to facilitate Stata users developing graph schemes using re
 
 ## TODO
 
-1.  Add submodule brewtheme to allow users to manipulate background settings to mirror layouts like [ggplot2](https://github.com/hadley/ggplot2) and/or others.
+1. Create program to look up named color styles and return the RGB value instead
 
-2.  Build named color installer to add named colors from [xkcd](http://xkcd.com/color/rgb.txt) and [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) sites.
+2. Update brewcbsim to allow the end user to specify multiple RGB tuples
 
-3.  Build proofer to show same graph under each of the three colorblindness conditions described on [Martin Krzywinski's](http://mkweb.bcgsc.ca/colorblind) website; replay the graphs, but translate the RGB valuess for each of the three conditions, then have options to either ``gr combine``` or produce separate graph images to show how the graph would look to individuals with different forms of colorblindness.
+3. Update brewviewer to provide options for generating graphs that show the palette under normal and color sight impaired vision.  
 
-## brewscheme examples
-Generate a graph scheme using the set1 color brewer palette for all graphs.  Use the first five colors of the palette and set the color intensity to 80 for each of the graphs.
+4.  Build proofer to show same graph under each of the three colorblindness conditions 
 
-```
-brewscheme, scheme(set1) allst(set1) allc(5) allsat(80)
-```
+## Examples
+To view examples, please see the [project website](https://wbuchanan.github.io/brewscheme).
 
-Generate a graph scheme using the set1 color brewer palette for scatterplots, pastel1 for bar graphs, and brown to blue-green for all other graph types.  Use the default values of colors and intensity for each.
-
-```
-brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg)
-```
-
-Create a graph scheme with a distinct color palette for each graph type:
-
-```
-brewscheme, scheme(myriadColorPalettes) barst(paired) barc(12) dotst(prgn) dotc(7) scatstyle(set1) scatc(9) linest(pastel2) linec(8) boxstyle(accent) boxc(8) areast(dark2) areac(8) piest(mdepoint) sunst(greys) histst(veggiese) cist(activitiesa) matst(spectral) reflst(purd) refmst(set3) const(ylgn) cone(puor)
-```
-
-## brewviewer examples
-
-Preview sequences of 3-5, 3-8, 3-10, and 3-12 color palettes for the D3js ordinal scales 
-d3.scale.category10(), d3.scale.category20(), d3.scale.category20b(), and d3.scale.category20c() 
-respectively.  
-
-```
-brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
-```
-![brewviewer Example 1](./brewviewerex1.png)
-
-
-Preview sequences for color palettes with 3-5 colors for multiple palettes simultaneously and combine in a single image.
-```
-brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) seq comb
-```
-![brewviewer Example 2](./brewviewerex2.png)
-
-Similar to example above, but only show instances with the colors 1-5 for each of the color palettes:
-``` 
-brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) comb
-```
-![brewviewer Example 3](./brewviewerex3.png)
  
 ## Other examples
 For other examples of graphs created with brewscheme visit the examples from a related project [eda](https://github.com/wbuchanan/eda/blob/master/eda-example.pdf).
  
 ## References
-Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. _IEEE Transactions on Visualization & Computer Graphics. 17(12)_ pp 2301 - 2309. Retrieved from [Stanford Vis Group](http://vis.stanford.edu/papers/d3). Retrieved on 07nov2015.
+[Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  
 
-Brewer, C. A. (2002). _Color Brewer 2 [Computer Software]_. State College, PA: Cynthia Brewer, Mark Harrower, and 
-    The Pennsylvania State University.
-    
-Lin, S., Fortuna, J., Kulkarni, C., Stone, M., & Heer, J. (2013). Selecting Semantically-Resonant Colors for 
-    Data Visualization. In _Computer Graphics Forum_ (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.
+[Brewer, C. A. (2002). Color Brewer 2. [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University](http://www.ColorBrewer2.org)
 
+[Krzywinski, M. (2015). *Color palettes for color blindness*.  Retrieved on: 22nov2015.  Retrieved from: http://mkweb.bcgsc.ca/colorblind/](http://mkweb.bcgsc.ca/colorblind/)
+
+[Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013). Selecting Semantically-Resonant Colors for Data Visualization. *Computer Graphics Forum 32(3)* pp. 401-410.  Retrieved from http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf](http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf)
+
+[Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.](http://www.brucelindbloom.com/WorkingSpaceInfo.html)
+
+[Meyer, G. W., & Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. *Computer Graphics and Applications, IEEE 8(5),* pp. 28-40.  Retrieved from: http://www-users.cs.umn.edu/~meyer/papers/meyer-greenberg-cga-1988.pdf.  Retrieved on: 26nov2015](http://www-users.cs.umn.edu/~meyer/papers/meyer-greenberg-cga-1988.pdf)
+
+[Smith, V. C., & Pokorny, J. (2005).  Spectral sensitivity of the foveal cone photopigments between 400 and 500nm.  *Journal of the Optical Society of America A, 22(10),* pp. 2060-2071. Retrieved from: http://macboy.uchicago.edu/~eye1/PDF%20files/Smith%20Pokorny%2075.pdf.  Retrieved on: 26nov2015](http://macboy.uchicago.edu/~eye1/PDF%20files/Smith%20Pokorny%2075.pdf)
+
+[Wickham, H. (2009).  *ggplot2: Elegant Graphics for Data Analysis*.  New York City, NY: Springer Science+Business Media LLC.](http://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403)
+	
+[Wickline, M. (2014). *Color.Vision.Simulate, Version 0.1*.  Retrieved from: http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js.  Retrieved on: 24nov2015.](http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js)
+	
 ## License Information
 Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.  
 
