@@ -13,9 +13,6 @@ void brewNameSearch(string scalar name) {
 	// String scalar to store file path
 	string scalar colordb
 	
-	// Set up null matrix
-	rgbdata = J(0, 0, "")
-	
 	// Stores the file path to the color data base
 	colordb = st_macroexpand("`" + "c(sysdir_personal)" + "'") + "brewcolors/colordb.dta"
 	

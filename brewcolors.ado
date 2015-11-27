@@ -17,13 +17,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     581                                                                      *
+*     767                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolors
 *! v 0.0.1
-*! 26NOV2015
+*! 27NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -34,50 +34,173 @@ prog def brewcolors, rclass
 	// Version number specification
 	version 13.1
 	
-	// Syntax for program
+	// Syntax for program (make adds to color DB, install install's colors)
 	syntax anything(name = source) [, MAke INSTall COLors(passthru) ]
 	
-	// Check for/build directory
-	dirfile, p(`"`c(sysdir_personal)'style"')
-
-	// Check for/build directory
-	dirfile, p(`"`c(sysdir_personal)'brewcolors"')
-
-	// Make sure source is valid
-	if `"`source'"' == "xkcd" {
-
-		// Load and parse the xkcd data
-		xkcd, `make' `install' `colors'
-		
-		// Loop over each of the return name macros
-		foreach nm in `r(colnms)' { 
-		
-			// Return the individual color name/RGB
-			ret loc `nm' `r(`nm')'
-		
-		} // End Loop over returned values
-		
-	} // End else block for invalid source argument
+	// Check for any optional arguments to add a comma to the command string
+	if `"`make'`install'`colors'"' == "" loc optstring ","
 	
-	// If colorblind argument is passed
-	//else if `"`source'"' == "colorblind" {
+	// Build local macro with the command string
+	loc cmdstring brewcolors `source'`optstring' `make' `install' `colors'
 	
-		// Call color blind routine
-		// colorblind, `make' `install' `colors'
+	// Preserve current state of the data
+	preserve 
+	
+		// Check for/build directory
+		dirfile, p(`"`c(sysdir_personal)'style"')
+
+		// Check for/build directory
+		dirfile, p(`"`c(sysdir_personal)'brewcolors"')
+
+		// Make sure source is valid
+		if `"`source'"' == "xkcd" {
+
+			// Load and parse the xkcd data
+			xkcd, `make' `install' `colors' cmd(`cmdstring')
+			
+			// Loop over each of the return name macros
+			foreach nm in `r(colnms)' { 
+			
+				// Return the individual color name/RGB
+				ret loc `nm' `r(`nm')'
+			
+			} // End Loop over returned values
+			
+		} // End else block for invalid source argument
 		
-	//} //
-	
-	// Check for new
+		// If colorblind argument is passed
+		else if `"`source'"' == "new" {
+		
+			// Call color blind routine
+			colorinstaller, `make' `install' `colors' cmd(`cmdstring')
+			
+			// Return the sub routine's return value
+			ret loc colorpath `r(colorpath)'
+			
+		} // End ELSE IF Block for the argument new passed to the program
+		
+	// Restore data to original state
+	restore
 	
 // End program
 end
+
+// Drop program if previously loaded in memory
+cap prog drop colorinstaller
+
+// Sub routine for user defined named colors
+prog def colorinstaller, rclass
+
+	// Syntax for sub routine
+	syntax, colors(string asis) [ make install cmd(passthru) ]
+	
+	// Set the number of observations
+	qui: set obs `: word count `colors''
+
+	// Create palette and RGB string variables
+	qui: g palette = ""
+	qui: g str11 rgb = ""
+
+	// Loop over arguments passed in the color string
+	forv i = 1/`: word count `colors'' {
+	
+		// Get the word string
+		loc wrd `"`: word `i' of `colors''"'
+		
+		// If single word, assume it is RGB string
+		if `: word count `wrd'' == 1 {
+				
+			// Get the palette name
+			loc palname "uc`: subinstr loc wrd `" "' "", all'"
+		
+			// Get the color string
+			loc colorstring "`wrd'"
+			
+			// Create a meta string
+			loc metastring "User Defined Color - "
+			
+		} // End IF Block for single word color definition
+		
+		// If user specifies color name
+		else {
+		
+			// Get the palette name
+			loc palname "`: word 1 of `wrd'"
+			
+			// Get the color string
+			loc colorstring "`: word 2 of `wrd''"
+			
+			// Create a meta string
+			loc metastring "User Defined Color - "
+			
+		} // End ELSE Block for colors with user specified names
+				
+		// Generate the palette name
+		qui: replace palette = "`palname'"'
+		
+		// Generate the rgb value
+		qui: replace rgb = "`colorstring'"
+		
+		// Generate the rest of the variables
+		brewcolorvars, meta(`"`metastring'"' + palette) colorb `cmd'
+		
+	} // End Loop over color arguments
+	
+	// Check install option
+	if `"`install'"' != "" {
+	
+		// Loop over records
+		forv i = 1/`: word count `colors'' {
+	
+			// Store filename in local macro
+			loc fname `"`c(sysdir_personal)'style/color-`palname'.style"'
+		
+			// Create new file wit the color definition
+			qui: file open newcolor using `"`fname'"', w replace
+			
+			// Write a version number
+			qui: file write newcolor `"*! v 0.0.0 `c(current_date)' `c(current_time)'"' _n
+			
+			// Write color attribution
+			qui: file write newcolor `"*! Color defined by the user: `c(username)'"' _n
+			
+			// Add a sequence ID to the file
+			qui: file write newcolor `"sequence `: di seqid[`i']'"' _n
+			
+			// Write the color name
+			qui: file write newcolor `"label "`: di meta[`i']'""' _n(2)
+			
+			// Write the color definition to the file
+			qui: file write newcolor `"set rgb "`: di rgb[`i']'""' _n(2)
+			
+			// Close the file
+			qui: file close newcolor
+						
+		} // End Loop over records
+		
+	} // End IF Block for color installation
+	
+	// Save the dataset with the colors
+	qui: save `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"', replace
+
+	// Check for make option
+	qui: brewColorMaker `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
+	
+	// Return the file path for the colors created by the user
+	ret loc colorpath `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
+	
+// End of subroutine definition	
+end	
+	
+// Drop program if previously loaded in memory
+cap prog drop colorblind	
 
 // This subroutine will be deprecated prior to v 1.0 release
 // Define sub-routine to get colorblind inversion data
 prog def colorblind, rclass
 	
 	// Define syntax
-	syntax , [ make install colors(string asis) ]
+	syntax , [ make cmd(`cmdstring')]
 
 	// Store base URL 
 	local urlbase "http://mkweb.bcgsc.ca/colorblind"
@@ -327,14 +450,17 @@ prog def colorblind, rclass
 // End of colorblind
 end
 
+// Drop program if previously loaded in memory
+cap prog drop xkcd
+
 // Define sub-routine to get xkcd named color list
 prog def xkcd, rclass
 	
 	// Define syntax
-	syntax [, make install colors(string asis) ]
+	syntax [, make install colors(string asis) cmd(passthru) ]
 	
 	// For the xkcd colors
-	import delimited using "http://xkcd.com/color/rgb.txt", delim("#")
+	import delimited using "http://xkcd.com/color/rgb.txt", delim("#") clear
 
 	// Get the licensing attribution
 	loc license "`: di v2[1]'" 
@@ -349,9 +475,12 @@ prog def xkcd, rclass
 	qui: replace v1 = subinstr(v1, `"'"', "", .)
 	qui: replace v1 = subinstr(v1, "and ", "", .)
 	qui: replace v1 = subinstr(v1, "/", "", .)
-	qui: rename v1 meta
 	
-	qui: sort meta
+	// Sort Colors alphabetically
+	qui: sort v1
+	
+	// Add XKCD Ref to meta
+	qui: replace v1 = "XKCD - " + proper(v1)
 	
 	// Replace spaces in color names with underscores
 	qui: g palette = _n
@@ -359,10 +488,10 @@ prog def xkcd, rclass
 	qui: replace palette = "xkcd" + palette
 
 	// Get length of palette name string
-	qui: g x = length(meta)
+	qui: g x = length(v1)
 	
 	// Drop the random character at the end of the color name that won't disappear otherwise
-	qui: replace meta = substr(meta, 1, x - 1)
+	qui: replace v1 = substr(v1, 1, x - 1)
 	
 	// Convert colors from Hexadecimal to decimal RGB values
 	hextorgb, hex(v2)
@@ -377,7 +506,7 @@ prog def xkcd, rclass
 	loc retnames 
 	
 	// Generate sequence ID number
-	qui: g seqid = 6999 + _n
+	qui: g tmpid = 6999 + _n
 	
 	// Loop over observations
 	forv i = 1/949 {
@@ -414,13 +543,13 @@ prog def xkcd, rclass
 				qui: file write newcolor `"*! Color names from XKCD.com survey (http://blog.xkcd.com/2010/05/03/color-survey-results/)"' _n
 				
 				// Add a sequence ID to the file
-				qui: file write newcolor `"sequence `: di seqid[`i']'"' _n
+				qui: file write newcolor `"sequence `: di tmpid[`i']'"' _n
 				
 				// Write the color name
-				qui: file write newcolor `"`: di meta[`i']'"' _n
+				qui: file write newcolor `"label "`: di v1[`i']'""' _n(2)
 				
 				// Write the color definition to the file
-				qui: file write newcolor "set rgb `: di rgb[`i']'" _n(2)
+				qui: file write newcolor `"set rgb "`: di rgb[`i']'""' _n(2)
 				
 				// Close the file
 				qui: file close newcolor
@@ -437,99 +566,23 @@ prog def xkcd, rclass
 	// Return the local with the return names
 	ret loc colnms `retnames'
 	
-	// Generate the color blind colors
-	qui: brewtransform rgb
+	// Create required variables
+	qui: brewcolorvars, meta(v1) colorb `cmd' seqid(palette + strofreal(tmpid))
 	
-	// Generate variables needed
-	foreach v in colorblind print lcd photocopy {
+	// Drop variables that are no longer needed
+	qui: drop v1 tmpid
 	
-		// Populate meta data indicators with null values
-		qui: g `v' = .n
-		
-	} // End Loop over meta data variables
-	
-	// Generate max colors, pcolor, colorid and seqid
-	qui: g maxcolors = 1
-	qui: g pcolor = 1
-	qui: g colorid = 1
-	
-	// Set the display order of the variables
-	order palette colorblind print photocopy lcd colorid pcolor rgb 		 ///   
-	maxcolors seqid meta achromatopsia protanopia deuteranopia tritanopia
-	
-	// Variable labels
-	loc varlabs "Name of Color Palette" 									 ///   
-		"Colorblind Indicator" 												 ///   
-		"Print Indicator"													 ///   
-		"Photocopy Indicator" 												 ///   
-		"LCD/Laptop Indicator"												 ///   
-		"Within pcolor ID for individual color look ups" 					 ///   
-		"Palette by Colors Selected ID"										 ///   
-		"Red-Green-Blue Values to Build Scheme Files"						 ///   
-		"Maximum number of colors allowed for the palette"					 ///   
-		"Sequential ID for property lookups"								 ///   
-		"Meta-Data Palette Characteristics (see char _meta[*] for more info)" ///   
-		"Achromatopsic Vision RGB Transformed Equivalent"					 ///   
-		"Protanopic Vision RGB Transformed Equivalent"						 ///   
-		"Deuteranopic Vision RGB Transformed Equivalent"					 ///   
-		"Tritanopic Vision RGB Transformed Equivalent"
-
-	// Get variable names
-	qui: ds
-		
-	// Loop over variable labels
-	forv v = 1/15 {
-	
-		// Apply variable labels
-		la var `: word `v' of `r(varlist)'' `"`: word `v' of `varlabs''"'
-		
-	} // End Loop over variables/labels
-		
-	// Make sequence ID a string	
-	qui: tostring seqid, replace
-	
-	// And make it conform to the same format as the other files
-	qui: replace seqid = palette + seqid
-
 	// Save the dataset
 	qui: save `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"', replace
 	
 	// Check make option
-	if `"`make'"' != "" {
-	
-		// Append to existing colordb if it exists
-		cap confirm file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
-		
-		// If file exists
-		if _rc == 0 {
-		
-			// Append existing data
-			qui: append using `"`c(sysdir_personal)'brewcolors/colordb.dta"'
-			
-			// Save over file
-			qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
-			
-		} // End IF Block for existing color database
-		
-		// If file does not exist
-		else {
-		
-			// Call the color database program
-			qui: brewcolordb
-		
-			// Append existing data
-			qui: append using `"`c(sysdir_personal)'brewcolors/colordb.dta"'
-			
-			// Save data as first instance of colordb
-			qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
-			
-		} // End ELSE Block for non-existent color database
-		
-	} // End IF Block to make color database/update color database
+	if `"`make'"' != "" brewColorMaker `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"'
 
 // End of program
 end
 
+// Drop program if previously loaded in memory
+cap prog drop decompress
 
 // Decompression sub routine for gzip files
 prog def decompress
@@ -573,4 +626,144 @@ prog def decompress
 
 // End of decompression subroutine
 end
+
+// Drop program if previously loaded in memory
+cap prog drop brewcolorvars 
+
+// Defines subroutine for adding standard variables for color definitions
+prog def brewcolorvars
+
+	// Define syntax structure
+	syntax [, seqid(string asis) meta(string asis) COLORBlindvars cmd(string asis) ] 
+	
+	// Check for palette name and RGB string variables
+	cap confirm v rgb palette
+	
+	// If these variables do not exist throw an error and exit
+	if _rc != 0 {
+	
+		// Print error message for user
+		di as err "The brewcolorvars subroutine called by `cmd' requires "	 ///   
+		"the variables palette (color/palette name) and rgb (the Stata "	 ///   
+		"formatted RGB string) to be present in the dataset currently in " 	 ///   
+		"memory."
+		
+		// Error code
+		err 198
+		
+	} // End IF Block for bad data
+		
+	// Check for colorblindvars parameter
+	if `"`colorblindvars'"' != "" {
+		
+		// Set the macro with the names of the color blind variables for sorting
+		loc colorblindvars achromatopsia protanopia deuteranopia tritanopia
+		
+		// Generate color blindness variables
+		qui: brewtransform rgb
+		
+	} // End IF Block for color blindness variables
+	
+	// Add variables to existing file
+	foreach v in colorblind lcd photocopy print {
+	
+		// Initialize variables w/extended missing values
+		qui: g `v' = .n
+		
+	} // End Loop for meta variables
+	
+	// Add id variables
+	foreach v in pcolor colorid maxcolors {
+	
+		// Add variables used for IDs
+		qui: g `v' = 1
+		
+	} // End Loop over ID variables
+	
+	// Check for sequence ID argument
+	if `"`seqid'"' != "" {
+
+		// Create a sequence ID variable
+		qui: g seqid = `seqid'
+		
+	} // End IF Block for user specified sequence id
+	
+	// If no argument passed
+	else {
+	
+		// Generic sequence ID 
+		qui: g seqid = palette + strofreal(pcolor) + strofreal(colorid)
+		
+	} // End ELSE Block for no sequence ID argument
+	
+	// Check if meta is a variable or string
+	cap confirm v `meta'
+	
+	// If argument is a variable generate the meta variable from the variable passed
+	qui: g meta = `meta'
+	
+	// Specify the display order of the variables
+	order palette colorblind print photocopy lcd colorid pcolor rgb 		 ///   
+	maxcolors seqid meta `colorblindvars'
+	
+	// Variable labels
+	la var palette "Name of Color Palette" 									 
+	la var colorblind "Colorblind Indicator" 
+	la var print "Print Indicator"
+	la var photocopy "Photocopy Indicator"
+	la var lcd "LCD/Laptop Indicator"
+	la var colorid "Within pcolor ID for individual color look ups"
+	la var pcolor "Palette by Colors Selected ID"
+	la var rgb "Red-Green-Blue Values to Build Scheme Files"
+	la var maxcolors "Maximum number of colors allowed for the palette"
+	la var seqid "Sequential ID for property lookups"
+	la var meta "Meta-Data Palette Characteristics (see char _meta[*] for more info)"
+	la var achromatopsia "Achromatopsic Vision RGB Transformed Equivalent"
+	la var protanopia "Protanopic Vision RGB Transformed Equivalent"
+	la var deuteranopia "Deuteranopic Vision RGB Transformed Equivalent"
+	la var tritanopia "Tritanopic Vision RGB Transformed Equivalent"
+
+// End of subroutine definition
+end
+
+// Drop program if previously loaded in memory
+cap prog drop brewColorMaker
+
+// Define program
+prog def brewColorMaker
+
+	// Syntax
+	syntax anything(name = filename id = "File name containing colors to install")
+	
+	// Append to existing colordb if it exists
+	cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
+	
+	// If file exists
+	if _rc == 0 {
+	
+		// Call the color database program
+		qui: brewcolordb
+	
+		// Append existing data
+		qui: append using `"`filename'.dta"'
+		
+		// Save data as first instance of colordb
+		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
+		
+	} // End ELSE Block for non-existent color database
+	
+	// If file does not exist
+	else {
+			
+		// Append existing data
+		qui: append using `"`c(sysdir_personal)'brewcolors/colordb.dta"'
+		
+		// Save over file
+		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
+		
+	} // End IF Block for existing color database
+		
+// End of program definition
+end
+
 

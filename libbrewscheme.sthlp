@@ -113,6 +113,13 @@ This help file defines the objects and methods defined in the library.{p_end}
 {p 14 14 14}{hi:translateColor()} a wrapper around the {help libbrewscheme##co:colorblind} 
 object that simulates the RGB arguments under all conditions of color sightedness impairment. {p_end}
 
+{marker brewtilities}{dlgtab 8 8:Additional Utilities}{break}
+{p 14 14 14}{it:The following functions are exposed publicly, but are used internally by programs in the {help brewscheme} package.}{p_end}{break}
+{p 14 14 14}{hi:brewNameSearch()} a function used to search for {help libbrewscheme##co:colorblind} 
+transformed RGB values given the color's name or meta property. {p_end}
+
+{p 14 14 14}{hi:brewColorSearch()} a function used to search for {help libbrewscheme##co:colorblind} 
+transformed RGB values given an RGB string. {p_end}
 
 {marker refs}{title:{ul:References}}{break}
 {marker wickline}{p 4 8 8}Wickline, M. (2014). {it:Color.Vision.Simulate, Version 0.1}.  Retrieved from: 
