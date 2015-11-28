@@ -6,6 +6,17 @@ permalink: /brewviewer/
 
 Preview sequences of 3-5, 3-8, 3-10, and 3-12 color palettes for the [D3js](http://www.d3js.org) ordinal scales [d3.scale.category10()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10), [d3.scale.category20()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20), [d3.scale.category20b()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20b), and [d3.scale.category20c()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c) respectively.
 
+# Beta feature
+A new feature recently added to this program is an option to show palettes under differing conditions of colorblindness.  There is still a decent amount of testing/checking to be done, but here is an early preview of what the feature does:
+
+```
+brewviewer category10, im seq c(6)
+```
+![brewviewer Example 4beta](../img/brewviewerex4.png)
+
+The feature is enabled by specifying the `IMpaired` option (abbreviated as `im` above).
+
+
 ```
 brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
 ```

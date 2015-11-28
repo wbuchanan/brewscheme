@@ -90,6 +90,15 @@
   <article class="post-content">
     <p>Preview sequences of 3-5, 3-8, 3-10, and 3-12 color palettes for the <a href="http://www.d3js.org">D3js</a> ordinal scales <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10">d3.scale.category10()</a>, <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20">d3.scale.category20()</a>, <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20b">d3.scale.category20b()</a>, and <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c">d3.scale.category20c()</a> respectively.</p>
 
+<h1 id="beta-feature">Beta feature</h1>
+<p>A new feature recently added to this program is an option to show palettes under differing conditions of colorblindness.  There is still a decent amount of testing/checking to be done, but here is an early preview of what the feature does:</p>
+
+<pre><code>brewviewer category10, im seq c(6)
+</code></pre>
+<p><img src="../img/brewviewerex4.png" alt="brewviewer Example 4beta" /></p>
+
+<p>The feature is enabled by specifying the <code>IMpaired</code> option (abbreviated as <code>im</code> above).</p>
+
 <pre><code>brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
 </code></pre>
 <p><img src="../img/brewviewerex1.png" alt="brewviewer Example 1" /></p>
