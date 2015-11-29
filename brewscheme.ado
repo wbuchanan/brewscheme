@@ -750,10 +750,55 @@ prog def brewscheme, rclass
 								
 			// Scatterplot saturation gets defined as a color multiplier
 			// loc scatsaturation = `scatsaturation'/100
+			
+			// Use a tempname for the scheme file filehandle
+			tempname scheme scheme_achromatopsia scheme_protanopia 			 ///   
+			scheme_deuteranopia scheme_tritanopia 
+			
+			// Root file path to theme files
+			loc themeroot `c(sysdir_personal)'b/theme/theme
 					
+			// Root file path for brewscheme created scheme files
+			loc schemeroot `c(sysdir_plus)'/s/scheme
+					
+			// Temp names for theme files
+			tempname theme theme_achromatopsia theme_protanopia 			 ///   
+			theme_deuteranopia theme_tritanopia
+			
+			// Check for theme name
+			if `"`themefile'"' == "" {
+				
+				// Themefile names
+				loc themefiles `"`themeroot'-default.theme"'				 ///   
+								`"`themeroot'-default_achromatopsia.theme"'	 ///   
+								`"`themeroot'-default_protanopia.theme"'	 ///   
+								`"`themeroot'-default_deuteranopia.theme"'	 ///   
+								`"`themeroot'-default_tritanopia.theme"'	
+								
+			} // End of IF Block for null themefile argument
+			
+			// If theme file name is passed
+			else {
+			
+				// Themefile names
+				loc themefiles `"`themeroot'-`themefile'.theme"'			 ///   
+							`"`themeroot'-`themefile'_achromatopsia.theme"'	 ///   
+							`"`themeroot'-`themefile'_protanopia.theme"'	 ///   
+							`"`themeroot'-`themefile'_deuteranopia.theme"'	 ///   
+							`"`themeroot'-`themefile'_tritanopia.theme"'	
+											
+			} // End ELSE Block for named theme file
+			
 			// Write the scheme file to a location on the path
-			qui: file open scheme using ///
-				`"`c(sysdir_plus)'/s/scheme-`schemename'.scheme"', w replace
+			qui: file open `scheme' using `"`schemeroot'-`schemename'.scheme"', w replace
+			qui: file open `scheme_achromatopsia' using 					 ///   
+			`"`schemeroot'-`schemename'_achromatopsia.scheme"', w replace
+			qui: file open `scheme_protanopia' using						 ///   
+			`"`schemeroot'-`schemename'_protanopia.scheme"', w replace
+			qui: file open `scheme_deuteranopia' using						 ///   
+			`"`schemeroot'-`schemename'_deuteranopia.scheme"', w replace
+			qui: file open `scheme_tritanopia' using						 ///   
+			`"`schemeroot'-`schemename'_tritanopia.scheme"', w replace
 
 			// Find maximum number of colors to set the recycle parameter
 			loc pcycles = max(	`barcolors', `scatcolors', `areacolors',	 ///   
@@ -887,101 +932,149 @@ prog def brewscheme, rclass
 			} // End ELSE Block for null theme file
 			
 			
-			file write scheme `"*                                    s2color.scheme"' _n
-			file write scheme `""' _n
-			file write scheme `"* s2 scheme family with a naturally white background (white plotregions and"' _n
-			file write scheme `"* lightly colored background) and color foreground (lines, symbols, text, etc)."' _n
-			file write scheme `""' _n
-			file write scheme `"*  For p[#][stub] scheme references the corresponding style is resolved by"' _n
-			file write scheme `"*  searching the scheme ids with the following preference ordering:"' _n
-			file write scheme `"*"' _n
-			file write scheme `"*                p#stub"' _n
-			file write scheme `"*                pstub"' _n
-			file write scheme `"*                p#"' _n
-			file write scheme `"*                p"' _n
-			file write scheme `"*"' _n
-			file write scheme `"*  Thus it is possible to control the selected style to great detail, or let it"' _n
-			file write scheme `"*  default to common defaults.  In particular -p- or -pstub- without"' _n
-			file write scheme `"*  # can be used to designate a common plotting symbol, or back plotting"' _n
-			file write scheme `"*  symbol, or for that matter common color or sizes."' _n
-			file write scheme `"*"' _n
-			file write scheme `"*  "style"s designated "special" are not styles at all, but direct signals to"' _n
-			file write scheme `"*  graphs, plots, or other classes and their parsers.  Their contents are"' _n
-			file write scheme `"*  specific to the use and may only be understood by the caller."' _n
-			file write scheme `""' _n
-			file write scheme `"*!  version 1.2.5   16jun2011"' _n(2)
-			file write scheme `"sequence 1299"' _n
-			file write scheme `"label "`schemename'""' _n(2)
-			file write scheme `"* system naturally_white  1"' _n(3)
+			file write `scheme' `"*                                    s2color.scheme"' _n
+			file write `scheme' `""' _n
+			file write `scheme' `"* s2 scheme family with a naturally white background (white plotregions and"' _n
+			file write `scheme' `"* lightly colored background) and color foreground (lines, symbols, text, etc)."' _n
+			file write `scheme' `""' _n
+			file write `scheme' `"*  For p[#][stub] scheme references the corresponding style is resolved by"' _n
+			file write `scheme' `"*  searching the scheme ids with the following preference ordering:"' _n
+			file write `scheme' `"*"' _n
+			file write `scheme' `"*                p#stub"' _n
+			file write `scheme' `"*                pstub"' _n
+			file write `scheme' `"*                p#"' _n
+			file write `scheme' `"*                p"' _n
+			file write `scheme' `"*"' _n
+			file write `scheme' `"*  Thus it is possible to control the selected style to great detail, or let it"' _n
+			file write `scheme' `"*  default to common defaults.  In particular -p- or -pstub- without"' _n
+			file write `scheme' `"*  # can be used to designate a common plotting symbol, or back plotting"' _n
+			file write `scheme' `"*  symbol, or for that matter common color or sizes."' _n
+			file write `scheme' `"*"' _n
+			file write `scheme' `"*  "style"s designated "special" are not styles at all, but direct signals to"' _n
+			file write `scheme' `"*  graphs, plots, or other classes and their parsers.  Their contents are"' _n
+			file write `scheme' `"*  specific to the use and may only be understood by the caller."' _n
+			file write `scheme' `""' _n
+			file write `scheme' `"*!  version 1.2.5   16jun2011"' _n(2)
+			file write `scheme' `"sequence 1299"' _n
+			file write `scheme' `"label "`schemename'""' _n(2)
+			file write `scheme' `"* system naturally_white  1"' _n(3)
 
 			// Loop over first 10 lines of theme file
 			forv i = 1/10 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End Loop over lines 1-10 of theme file
 			
-			file write scheme `"numstyle pcycle           `pcycles'"' _n(2)
+			file write `scheme' `"numstyle pcycle           `pcycles'"' _n(2)
 			
 			// Loop over lines 11-16 of the theme file
 			forv i = 11/16 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 11-16 of the theme file
 			
-			file write scheme `"numstyle contours         `pcycles'"' _n(2)
+			file write `scheme' `"numstyle contours         `pcycles'"' _n(2)
 						
 			// Loop over lines 17-179 of the theme file
 			forv i = 17/179 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 17-179 of the theme file
 			
-			file write scheme `"color ci_line        black"' _n
-			file write scheme `"color ci_arealine    black"' _n
-			file write scheme `"color ci_area        "`: word 1 of `areargb''" "' _n
-			file write scheme `"color ci_symbol      "`: word 1 of `cirgb''" "' _n
-			file write scheme `"color ci2_line       black"' _n
-			file write scheme `"color ci2_arealine   black"' _n
-			file write scheme `"color ci2_area       "`: word 2 of `areargb''" "' _n
-			file write scheme `"color ci2_symbol     "`: word 2 of `cirgb''" "' _n(2)
+			file write `scheme' `"color ci_line        black"' _n
+			file write `scheme' `"color ci_arealine    black"' _n
+			file write `scheme' `"color ci_area        "`: word 1 of `areargb''" "' _n
+			file write `scheme' `"color ci_symbol      "`: word 1 of `cirgb''" "' _n
+			file write `scheme' `"color ci2_line       black"' _n
+			file write `scheme' `"color ci2_arealine   black"' _n
+			file write `scheme' `"color ci2_area       "`: word 2 of `areargb''" "' _n
+			file write `scheme' `"color ci2_symbol     "`: word 2 of `cirgb''" "' _n(2)
 			
-			file write scheme `"color pieline        black"' _n(2)
+			file write `scheme' `"color pieline        black"' _n(2)
 			
 			// Writes line 180 from the theme file
-			file write scheme `line180'
+			file write `scheme' `line180'
 			
 			// Writes line 181 from the theme file
-			file write scheme `line181'
+			file write `scheme' `line181'
 			
-			file write scheme `"color refmarker      black"' _n
-			file write scheme `"color refmarkline    black"' _n
-			file write scheme `"color histogram      "`: word 1 of `histrgb''" "' _n
+			file write `scheme' `"color refmarker      black"' _n
+			file write `scheme' `"color refmarkline    black"' _n
+			file write `scheme' `"color histogram      "`: word 1 of `histrgb''" "' _n
 
 			// Writes line 182 from the theme file
-			file write scheme `line182'
+			file write `scheme' `line182'
 			
-			file write scheme `"color histogram_line black"' _n
-			file write scheme `"color dot_line       black"' _n
-			file write scheme `"color dot_arealine   black"' _n
-			file write scheme `"color dot_area       "`: word 1 of `areargb''" "' _n
-			file write scheme `"color dotmarkline    black"' _n(2)
+			file write `scheme' `"color histogram_line black"' _n
+			file write `scheme' `"color dot_line       black"' _n
+			file write `scheme' `"color dot_arealine   black"' _n
+			file write `scheme' `"color dot_area       "`: word 1 of `areargb''" "' _n
+			file write `scheme' `"color dotmarkline    black"' _n(2)
 			
-			file write scheme `"color xyline         black"' _n
-			file write scheme `"color refline        black"' _n
-			file write scheme `"color dots           black"' _n(2)
+			file write `scheme' `"color xyline         black"' _n
+			file write `scheme' `"color refline        black"' _n
+			file write `scheme' `"color dots           black"' _n(2)
 			
 			// Loop over lines 183-192 of the theme file
 			forv i = 183/192 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 183-192 of the theme file
 			
 			// Check for values for starting/ending contour plots
@@ -992,45 +1085,69 @@ prog def brewscheme, rclass
 				loc conend orange
 			}
 			
-			file write scheme `"color contour_begin `constart'"' _n
-			file write scheme `"color contour_end `conend'"' _n
-			file write scheme `"color zyx2 black"' _n(2)
+			file write `scheme' `"color contour_begin `constart'"' _n
+			file write `scheme' `"color contour_end `conend'"' _n
+			file write `scheme' `"color zyx2 black"' _n(2)
 			
-			file write scheme `"color sunflower "`: word 1 of `sunrgb''""' _n
-			file write scheme `"color sunflowerlb black"' _n
-			file write scheme `"color sunflowerlf "`: word 2 of `sunrgb''""' _n
-			file write scheme `"color sunflowerdb black"' _n
-			file write scheme `"color sunflowerdf "`: word 3 of `sunrgb''""' _n(2)
+			file write `scheme' `"color sunflower "`: word 1 of `sunrgb''""' _n
+			file write `scheme' `"color sunflowerlb black"' _n
+			file write `scheme' `"color sunflowerlf "`: word 2 of `sunrgb''""' _n
+			file write `scheme' `"color sunflowerdb black"' _n
+			file write `scheme' `"color sunflowerdf "`: word 3 of `sunrgb''""' _n(2)
 			
 			/* Add generic color loop here */
 			forv i = 1/`: word count `gencolor'' {
 			
-				file write scheme `"color p`i' "`: word `i' of `gencolor''""' _n
+				file write `scheme' `"color p`i' "`: word `i' of `gencolor''""' _n
 			
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End Loop for generic colors
 			
-			file write scheme `""' _n
+			file write `scheme' `""' _n
 			
 			// Loop over lines 193-331 of the theme file
 			forv i = 193/331 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 193-331 of the theme file
 			
-			file write scheme `"markerstyle p1"' _n
-			file write scheme `"markerstyle dots dots"' _n
-			file write scheme `"markerstyle star star"' _n
-			file write scheme `"markerstyle histogram histogram"' _n
-			file write scheme `"markerstyle ci ci"' _n
-			file write scheme `"markerstyle ci2 ci2"' _n
-			file write scheme `"markerstyle ilabel ilabel"' _n
-			file write scheme `"markerstyle matrix matrix"' _n
-			file write scheme `"markerstyle box_marker refmarker"' _n
-			file write scheme `"markerstyle editor editor"' _n
-			file write scheme `"markerstyle editor_arrow ed_arrow"' _n
-			file write scheme `"markerstyle sunflower sunflower"' _n(2)
+			file write `scheme' `"markerstyle p1"' _n
+			file write `scheme' `"markerstyle dots dots"' _n
+			file write `scheme' `"markerstyle star star"' _n
+			file write `scheme' `"markerstyle histogram histogram"' _n
+			file write `scheme' `"markerstyle ci ci"' _n
+			file write `scheme' `"markerstyle ci2 ci2"' _n
+			file write `scheme' `"markerstyle ilabel ilabel"' _n
+			file write `scheme' `"markerstyle matrix matrix"' _n
+			file write `scheme' `"markerstyle box_marker refmarker"' _n
+			file write `scheme' `"markerstyle editor editor"' _n
+			file write `scheme' `"markerstyle editor_arrow ed_arrow"' _n
+			file write `scheme' `"markerstyle sunflower sunflower"' _n(2)
 			
 			// Write generic marker styles
 			foreach i in "" "box" "dot" "arrow" {
@@ -1039,47 +1156,59 @@ prog def brewscheme, rclass
 				forv v = 1/`pcycles' {
 				
 					// Add entry to scheme file
-					file write scheme `"markerstyle p`v'`i'  p`v'`i'"' _n
+					file write `scheme' `"markerstyle p`v'`i'  p`v'`i'"' _n
 				
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
 			
 			} // End Loop over marker style generic types
 
 			// Add extra space after p#arrow
-			file write scheme `""' _n
+			file write `scheme' `""' _n
 			
 			// Loop over lines 332-382 of the theme file
 			forv i = 332/382 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 332-382 of the theme file
 			
 			// Shade/fill settings
-			file write scheme `"shadestyle foreground"' _n
-			file write scheme `"shadestyle background background"' _n
-			file write scheme `"shadestyle foreground foreground"' _n(2)
-			file write scheme `"shadestyle ci ci"' _n
-			file write scheme `"shadestyle ci2 ci2"' _n
-			file write scheme `"shadestyle histogram histogram"' _n
-			file write scheme `"shadestyle dendrogram dendrogram"' _n
-			file write scheme `"shadestyle dotchart dotchart"' _n
-			file write scheme `"shadestyle legend legend"' _n
-			file write scheme `"shadestyle clegend_outer clegend_outer"' _n
-			file write scheme `"shadestyle clegend_inner clegend_inner"' _n
-			file write scheme `"shadestyle clegend_preg none"' _n
-			file write scheme `"shadestyle plotregion plotregion"' _n
-			file write scheme `"shadestyle matrix_plotregion matrix_plotregion"' _n
-			file write scheme `"shadestyle sunflower sunflower"' _n
-			file write scheme `"shadestyle sunflowerlb sunflowerlb"' _n
-			file write scheme `"shadestyle sunflowerdb sunflowerdb"' _n
-			file write scheme `"shadestyle contour_begin contour_begin"' _n
-			file write scheme `"shadestyle contour_end contour_end"' _n(2)
-			file write scheme `"shadestyle p foreground"' _n(2)
+			file write `scheme' `"shadestyle foreground"' _n
+			file write `scheme' `"shadestyle background background"' _n
+			file write `scheme' `"shadestyle foreground foreground"' _n(2)
+			file write `scheme' `"shadestyle ci ci"' _n
+			file write `scheme' `"shadestyle ci2 ci2"' _n
+			file write `scheme' `"shadestyle histogram histogram"' _n
+			file write `scheme' `"shadestyle dendrogram dendrogram"' _n
+			file write `scheme' `"shadestyle dotchart dotchart"' _n
+			file write `scheme' `"shadestyle legend legend"' _n
+			file write `scheme' `"shadestyle clegend_outer clegend_outer"' _n
+			file write `scheme' `"shadestyle clegend_inner clegend_inner"' _n
+			file write `scheme' `"shadestyle clegend_preg none"' _n
+			file write `scheme' `"shadestyle plotregion plotregion"' _n
+			file write `scheme' `"shadestyle matrix_plotregion matrix_plotregion"' _n
+			file write `scheme' `"shadestyle sunflower sunflower"' _n
+			file write `scheme' `"shadestyle sunflowerlb sunflowerlb"' _n
+			file write `scheme' `"shadestyle sunflowerdb sunflowerdb"' _n
+			file write `scheme' `"shadestyle contour_begin contour_begin"' _n
+			file write `scheme' `"shadestyle contour_end contour_end"' _n(2)
+			file write `scheme' `"shadestyle p foreground"' _n(2)
 			
 			// Write generic marker styles
 			foreach i in "" "bar" "box" "pie" "area" {
@@ -1088,7 +1217,7 @@ prog def brewscheme, rclass
 				forv v = 1/`pcycles' {
 				
 					// Add entry to scheme file
-					file write scheme `"shadestyle p`v'`i'  p`v'`i'"' _n
+					file write `scheme' `"shadestyle p`v'`i'  p`v'`i'"' _n
 				
 				} // End Loop over cycle number
 				
@@ -1096,7 +1225,7 @@ prog def brewscheme, rclass
 				if "`i'" != "area" {
 				
 					// Write blank line between each of the types
-					file write scheme `""' _n
+					file write `scheme' `""' _n
 
 				} // End IF Block for other graphtypes
 				
@@ -1104,7 +1233,7 @@ prog def brewscheme, rclass
 				else {
 				
 					// This line files final area entry
-					file write scheme `"* shadestyle p#other  p1"' _n(3)
+					file write `scheme' `"* shadestyle p#other  p1"' _n(3)
 					
 				} // End Else Block for area shade styles
 					
@@ -1114,8 +1243,20 @@ prog def brewscheme, rclass
 			forv i = 383/434 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 383-434 of the theme file
 			
 			// Write generic marker styles
@@ -1130,7 +1271,7 @@ prog def brewscheme, rclass
 					if !inlist(`"`i'"', "sunflowerlight", "sunflowerdark") {
 
 						// Add entry to scheme file
-						file write scheme `"linestyle p`v'`i'  p`v'`i'"' _n
+						file write `scheme' `"linestyle p`v'`i'  p`v'`i'"' _n
 					
 					} // End If Block for non sunflower plots
 					
@@ -1138,14 +1279,26 @@ prog def brewscheme, rclass
 					else {
 					
 						// Use the generic line style for the sunflower plots
-						file write scheme `"linestyle p`v'`i' p`v'"' _n
+						file write `scheme' `"linestyle p`v'`i' p`v'"' _n
 					
 					} // End ELSE Block for sunflower plots
 					
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
+
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `""' _n
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `""' _n
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `""' _n
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `""' _n
 
 			} // End Loop over marker style generic types
 			
@@ -1153,50 +1306,74 @@ prog def brewscheme, rclass
 			forv i = 435/495 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 435-495 of the theme file
 			
 			// Settings for color saturation
-			file write scheme `"intensity            full"' _n
-			file write scheme `"intensity foreground inten100"' _n
-			file write scheme `"intensity background inten100"' _n(2)
-			file write scheme `"intensity symbol     inten`scatsaturation'"' _n
-			file write scheme `"intensity ci_area    inten`cisaturation'"' _n
-			file write scheme `"intensity histogram  inten`histsaturation'"' _n
-			file write scheme `"intensity dendrogram inten`linesaturation'"' _n
-			file write scheme `"intensity dot_area   inten`dotsaturation'"' _n
-			file write scheme `"intensity sunflower  inten`sunsaturation'"' _n(2)
-			file write scheme `"intensity bar        inten`barsaturation'"' _n
-			file write scheme `"intensity bar_line   inten`linesaturation'"' _n
-			file write scheme `"intensity box        inten`boxsaturation'"' _n
-			file write scheme `"intensity box_line   inten`linesaturation'"' _n
-			file write scheme `"intensity pie        inten`piesaturation'"' _n(2)
-			file write scheme `"intensity legend     inten100"' _n
-			file write scheme `"intensity plotregion inten100"' _n
-			file write scheme `"intensity matrix_plotregion inten`matsaturation'"' _n(2)
-			file write scheme `"intensity clegend       inten100"' _n
-			file write scheme `"intensity clegend_outer inten100"' _n
-			file write scheme `"intensity clegend_inner inten100"' _n(3)
-			file write scheme `"intensity p          inten`scatsaturation'"' _n
+			file write `scheme' `"intensity            full"' _n
+			file write `scheme' `"intensity foreground inten100"' _n
+			file write `scheme' `"intensity background inten100"' _n(2)
+			file write `scheme' `"intensity symbol     inten`scatsaturation'"' _n
+			file write `scheme' `"intensity ci_area    inten`cisaturation'"' _n
+			file write `scheme' `"intensity histogram  inten`histsaturation'"' _n
+			file write `scheme' `"intensity dendrogram inten`linesaturation'"' _n
+			file write `scheme' `"intensity dot_area   inten`dotsaturation'"' _n
+			file write `scheme' `"intensity sunflower  inten`sunsaturation'"' _n(2)
+			file write `scheme' `"intensity bar        inten`barsaturation'"' _n
+			file write `scheme' `"intensity bar_line   inten`linesaturation'"' _n
+			file write `scheme' `"intensity box        inten`boxsaturation'"' _n
+			file write `scheme' `"intensity box_line   inten`linesaturation'"' _n
+			file write `scheme' `"intensity pie        inten`piesaturation'"' _n(2)
+			file write `scheme' `"intensity legend     inten100"' _n
+			file write `scheme' `"intensity plotregion inten100"' _n
+			file write `scheme' `"intensity matrix_plotregion inten`matsaturation'"' _n(2)
+			file write `scheme' `"intensity clegend       inten100"' _n
+			file write `scheme' `"intensity clegend_outer inten100"' _n
+			file write `scheme' `"intensity clegend_inner inten100"' _n(3)
+			file write `scheme' `"intensity p          inten`scatsaturation'"' _n
 
-			file write scheme `"* intensity p#        inten80"' _n
-			file write scheme `"* intensity p#shade   inten80"' _n
-			file write scheme `"* intensity p#bar     inten80	   // twoway bar only, graph bar overall"' _n
-			file write scheme `"* intensity p#box     inten80	   // unused, overall only, control w/ color"' _n
-			file write scheme `"* intensity p#pie     inten80	   // unused, overall only, control w/ color"' _n
-			file write scheme `"* intensity p#area    inten80"' _n(3)
+			file write `scheme' `"* intensity p#        inten80"' _n
+			file write `scheme' `"* intensity p#shade   inten80"' _n
+			file write `scheme' `"* intensity p#bar     inten80	   // twoway bar only, graph bar overall"' _n
+			file write `scheme' `"* intensity p#box     inten80	   // unused, overall only, control w/ color"' _n
+			file write `scheme' `"* intensity p#pie     inten80	   // unused, overall only, control w/ color"' _n
+			file write `scheme' `"* intensity p#area    inten80"' _n(3)
 			
-			file write scheme `"fillpattern pattern10"' _n
-			file write scheme `"fillpattern foreground pattern10"' _n
-			file write scheme `"fillpattern background pattern10"' _n(3)
+			file write `scheme' `"fillpattern pattern10"' _n
+			file write `scheme' `"fillpattern foreground pattern10"' _n
+			file write `scheme' `"fillpattern background pattern10"' _n(3)
 			
 			// Loop over lines 496-537 of the theme file
 			forv i = 496/537 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
-				
+				file write `scheme' `line`i''
+
+				// Write each line to the scheme file
+				file write `scheme_achromatopsia' `lineachrom`i''
+
+				// Write each line to the scheme file
+				file write `scheme_protanopia' `lineprotan`i''
+
+				// Write each line to the scheme file
+				file write `scheme_deuteranopia' `linedeuteran`i''
+
+				// Write each line to the scheme file
+				file write `scheme_tritanopia' `linetritan`i''
+
 			} // End loop over lines 496-537 of the theme file
 			
 			// Write generic marker styles
@@ -1206,22 +1383,22 @@ prog def brewscheme, rclass
 				forv v = 1/`pcycles' {
 
 					// Add entry to scheme file
-					file write scheme `"textboxstyle p`v'`i'  p`v'`i'"' _n
+					file write `scheme' `"textboxstyle p`v'`i'  p`v'`i'"' _n
 					
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
 
 			} // End Loop over marker style generic types
 			
-			file write scheme `"* textboxstyle p15label     xyz"' _n(3)
+			file write `scheme' `"* textboxstyle p15label     xyz"' _n(3)
 
 			// Loop over lines 538-591 of the theme file
 			forv i = 538/591 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
 			} // End loop over lines 538-591 of the theme file
 			
@@ -1236,7 +1413,7 @@ prog def brewscheme, rclass
 					if !inlist(`"`i'"', "sunflowerlight", "sunflowerdark") {
 
 						// Add entry to scheme file
-						file write scheme `"areastyle p`v'`i'  p`v'`i'"' _n
+						file write `scheme' `"areastyle p`v'`i'  p`v'`i'"' _n
 					
 					} // End If Block for non sunflower plots
 					
@@ -1244,14 +1421,14 @@ prog def brewscheme, rclass
 					else {
 					
 						// Use the generic line style for the sunflower plots
-						file write scheme `"areastyle p`v'`i' p`v'"' _n
+						file write `scheme' `"areastyle p`v'`i' p`v'"' _n
 					
 					} // End ELSE Block for sunflower plots
 					
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
 
 			} // End Loop over marker style generic types
 			
@@ -1259,7 +1436,7 @@ prog def brewscheme, rclass
 			forv i = 592/771 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
 			} // End loop over lines 592-771 of the theme file
 			
@@ -1270,22 +1447,22 @@ prog def brewscheme, rclass
 				forv v = 1/`pcycles' {
 
 					// Add entry to scheme file
-					file write scheme `"labelstyle p`v'`i'  p`v'`i'"' _n
+					file write `scheme' `"labelstyle p`v'`i'  p`v'`i'"' _n
 					
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
 
 			} // End Loop over marker style generic types
 			
-			file write scheme `""' _n
+			file write `scheme' `""' _n
 			
 			// Loop over lines 772-912 of the theme file
 			forv i = 772/912 {
 			
 				// Write each line to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
 			} // End loop over lines 772-912 of the theme file
 			
@@ -1293,16 +1470,16 @@ prog def brewscheme, rclass
 			forv i = 1/`pcycles' {
 
 				// Add default entry for each color cycle
-				file write scheme `"zyx2style p`i' default"' _n
+				file write `scheme' `"zyx2style p`i' default"' _n
 				
 			} // End Loop over number of color cycles
 			
-			file write scheme `"seriesstyle p1"' _n(2)
+			file write `scheme' `"seriesstyle p1"' _n(2)
 			
-			file write scheme `"seriesstyle dendrogram dendrogram"' _n(2)
+			file write `scheme' `"seriesstyle dendrogram dendrogram"' _n(2)
 			
-			file write scheme `"seriesstyle ilabel ilabel"' _n
-			file write scheme `"seriesstyle matrix matrix"' _n(2)
+			file write `scheme' `"seriesstyle ilabel ilabel"' _n
+			file write `scheme' `"seriesstyle matrix matrix"' _n(2)
 			
 			// Write generic marker styles
 			foreach i in "" "bar" "box" "pie" "area" "line" "dot" "arrow" {
@@ -1311,12 +1488,12 @@ prog def brewscheme, rclass
 				forv v = 1/`pcycles' {
 
 					// Add entry to scheme file
-					file write scheme `"seriesstyle p`v'`i'  p`v'`i'"' _n
+					file write `scheme' `"seriesstyle p`v'`i'  p`v'`i'"' _n
 										
 				} // End Loop over cycle number
 				
 				// Write blank line between each of the types
-				file write scheme `""' _n
+				file write `scheme' `""' _n
 
 			} // End Loop over marker style generic types
 
@@ -1324,7 +1501,7 @@ prog def brewscheme, rclass
 			forv i = 913/977 {
 			
 				// Write each line from the theme file to the scheme file
-				file write scheme `line`i''
+				file write `scheme' `line`i''
 				
 			} // End Loop over lines 913-977 of the theme file
 			
@@ -1333,10 +1510,10 @@ prog def brewscheme, rclass
 										
 				// Generic Sunflower plot styles
 				if `i' == 1 {
-					file write scheme `"sunflowerstyle p1 sunflower"' _n
+					file write `scheme' `"sunflowerstyle p1 sunflower"' _n
 				}
 				else {
-					file write scheme `"sunflowerstyle p`i' p`i'"' _n
+					file write `scheme' `"sunflowerstyle p`i' p`i'"' _n
 				}
 			
 			} // End Generic parameters
@@ -1402,116 +1579,120 @@ prog def brewscheme, rclass
 				
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'area "`areacolor'""' _n
-				file write scheme `"linewidth p`i'area vvthin"' _n
-				file write scheme `"linepattern p`i'area solid"' _n
-				file write scheme `"color p`i'arealine "`linecolor'""' _n
-				file write scheme `"intensity p`i'area inten`areasaturation'"' _n
+				file write `scheme' `"color p`i'area "`areacolor'""' _n
+				file write `scheme' `"linewidth p`i'area vvthin"' _n
+				file write `scheme' `"linepattern p`i'area solid"' _n
+				file write `scheme' `"color p`i'arealine "`linecolor'""' _n
+				file write `scheme' `"intensity p`i'area inten`areasaturation'"' _n
 
 				// Define scheme colors for bar graphs
-				file write scheme `"color p`i' "`barcolor'""' _n
-				file write scheme `"color p`i'bar "`barcolor'""' _n
-				file write scheme `"intensity p`i'bar inten`barsaturation'"' _n
-				// file write scheme `"areastyle p`i'bar p`i'bar"' _n
-				file write scheme `"seriesstyle p`i'bar p`i'bar"' _n
-				file write scheme `"color p`i'barline black"' _n
+				file write `scheme' `"color p`i' "`barcolor'""' _n
+				file write `scheme' `"color p`i'bar "`barcolor'""' _n
+				file write `scheme' `"intensity p`i'bar inten`barsaturation'"' _n
+				// file write `scheme' `"areastyle p`i'bar p`i'bar"' _n
+				file write `scheme' `"seriesstyle p`i'bar p`i'bar"' _n
+				file write `scheme' `"color p`i'barline black"' _n
 
 				/* Box Plot Styles */
 				// Primary box plot entries
-				file write scheme `"color p`i'box "`boxcolor'""' _n
-				file write scheme `"intensity box inten`boxsaturation'"' _n
-				file write scheme `"linewidth p`i'box medthin"' _n
-				file write scheme `"linepattern p`i'box solid"' _n
-				file write scheme `"color p`i'boxline black"' _n
-				file write scheme `"intensity box_line full"' _n
-				file write scheme `"symbol p`i'box circle"' _n
-				file write scheme `"symbolsize p`i'box medium"' _n
-				file write scheme `"linewidth p`i'boxmark vthin"' _n
-				file write scheme `"color p`i'boxmarkfill "`scatcolor'""' _n
-				file write scheme `"color p`i'boxmarkline	black"' _n
-				file write scheme `"gsize p`i'boxlabel vsmall"' _n
-				file write scheme `"color p`i'boxlabel black"' _n
-				file write scheme `"clockdir p`i'box 0"' _n
+				file write `scheme' `"color p`i'box "`boxcolor'""' _n
+				file write `scheme' `"intensity box inten`boxsaturation'"' _n
+				file write `scheme' `"linewidth p`i'box medthin"' _n
+				file write `scheme' `"linepattern p`i'box solid"' _n
+				file write `scheme' `"color p`i'boxline black"' _n
+				file write `scheme' `"intensity box_line full"' _n
+				file write `scheme' `"symbol p`i'box circle"' _n
+				file write `scheme' `"symbolsize p`i'box medium"' _n
+				file write `scheme' `"linewidth p`i'boxmark vthin"' _n
+				file write `scheme' `"color p`i'boxmarkfill "`scatcolor'""' _n
+				file write `scheme' `"color p`i'boxmarkline	black"' _n
+				file write `scheme' `"gsize p`i'boxlabel vsmall"' _n
+				file write `scheme' `"color p`i'boxlabel black"' _n
+				file write `scheme' `"clockdir p`i'box 0"' _n
 
 				// Composite entries for box plots
-				file write scheme `"linestyle p`i'box p`i'box"' _n
-				file write scheme `"linestyle p`i'boxmark p`i'boxmark"' _n
-				file write scheme `"markerstyle p`i'box p`i'box"' _n
-				file write scheme `"seriesstyle p`i'box p`i'box"' _n
+				file write `scheme' `"linestyle p`i'box p`i'box"' _n
+				file write `scheme' `"linestyle p`i'boxmark p`i'boxmark"' _n
+				file write `scheme' `"markerstyle p`i'box p`i'box"' _n
+				file write `scheme' `"seriesstyle p`i'box p`i'box"' _n
 
 				// Custom median and whisker entries
-				file write scheme `"medtypestyle boxplot line"' _n
-				file write scheme `"yesno custom_whiskers yes"' _n
-				file write scheme `"linestyle box_whiskers ci"' _n
-				file write scheme `"linestyle box_median refline"' _n
-				file write scheme `"markerstyle box_marker p`i'box"' _n
+				file write `scheme' `"medtypestyle boxplot line"' _n
+				file write `scheme' `"yesno custom_whiskers yes"' _n
+				file write `scheme' `"linestyle box_whiskers ci"' _n
+				file write `scheme' `"linestyle box_median refline"' _n
+				file write `scheme' `"markerstyle box_marker p`i'box"' _n
 				
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'line "`linecolor'""' _n
-				file write scheme `"yesno p`i'cmissings no"' _n
-				file write scheme `"connectstyle p`i' direct"' _n
+				file write `scheme' `"color p`i'line "`linecolor'""' _n
+				file write `scheme' `"yesno p`i'cmissings no"' _n
+				file write `scheme' `"connectstyle p`i' direct"' _n
 
 				// Composite entries for connected plots
-				file write scheme `"markerstyle p`i' p`i'"' _n
-				file write scheme `"seriesstyle p`i' p`i'"' _n
-				file write scheme `"linestyle p`i'connect p`i'"' _n
-				file write scheme `"linestyle p`i'mark p`i'line"' _n
-				file write scheme `"linewidth p`i' medium"' _n
-				file write scheme `"linepattern p`i'line solid"' _n
+				file write `scheme' `"markerstyle p`i' p`i'"' _n
+				file write `scheme' `"seriesstyle p`i' p`i'"' _n
+				file write `scheme' `"linestyle p`i'connect p`i'"' _n
+				file write `scheme' `"linestyle p`i'mark p`i'line"' _n
+				file write `scheme' `"linewidth p`i' medium"' _n
+				file write `scheme' `"linepattern p`i'line solid"' _n
 
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'dotmarkfill "`dotcolor'"' _n
-				file write scheme `"linewidth p`i'dotmark vthin"' _n
-				file write scheme `"symbol p`i'dot diamond"' _n
-				file write scheme `"symbolsize p`i'dot medium"' _n
+				file write `scheme' `"color p`i'dotmarkfill "`dotcolor'"' _n
+				file write `scheme' `"linewidth p`i'dotmark vthin"' _n
+				file write `scheme' `"symbol p`i'dot diamond"' _n
+				file write `scheme' `"symbolsize p`i'dot medium"' _n
 
 				// Composite entries for connected plots
-				file write scheme `"linestyle p`i'dotmark p`i'dotmark"' _n
-				file write scheme `"markerstyle p`i'dot p`i'dot"' _n
-				file write scheme `"seriesstyle p`i'dot p`i'dot"' _n
+				file write `scheme' `"linestyle p`i'dotmark p`i'dotmark"' _n
+				file write `scheme' `"markerstyle p`i'dot p`i'dot"' _n
+				file write `scheme' `"seriesstyle p`i'dot p`i'dot"' _n
 
 				/* Connected Plots */
 				// Primary connected plot entries
-				file write scheme `"color p`i'lineplot "`linecolor'""' _n
-				file write scheme `"linewidth p`i'lineplot medium"' _n
-				file write scheme `"linepattern p`i'lineplot solid"' _n
-				file write scheme `"connectstyle p`i' direct"' _n
+				file write `scheme' `"color p`i'lineplot "`linecolor'""' _n
+				file write `scheme' `"linewidth p`i'lineplot medium"' _n
+				file write `scheme' `"linepattern p`i'lineplot solid"' _n
+				file write `scheme' `"connectstyle p`i' direct"' _n
 
 				// Primary entries for scatter plots
-				file write scheme `"color p`i'pie "`piecolor'""' _n
-				file write scheme `"color p`i'pieline black"' _n
-				file write scheme `"intensity pie inten`piesaturation'"' _n
-				file write scheme `"areastyle p`i'pie p`i'pie"' _n
-				file write scheme `"seriesstyle p`i'pie p`i'pie"' _n
+				file write `scheme' `"color p`i'pie "`piecolor'""' _n
+				file write `scheme' `"color p`i'pieline black"' _n
+				file write `scheme' `"intensity pie inten`piesaturation'"' _n
+				file write `scheme' `"areastyle p`i'pie p`i'pie"' _n
+				file write `scheme' `"seriesstyle p`i'pie p`i'pie"' _n
 					
 				// Primary entries for scatter plots
-				file write scheme `"symbol p`i' circle"' _n
-				file write scheme `"symbolsize p`i' medium"' _n
-				file write scheme `"color p`i'markline black"' _n
-				file write scheme `"linewidth p`i'mark vthin"' _n
-				file write scheme `"color p`i'markfill "`scatcolor'""' _n
-				file write scheme `"color p`i'label black"' _n
-				file write scheme `"clockdir p`i' 0"' _n
+				file write `scheme' `"symbol p`i' circle"' _n
+				file write `scheme' `"symbolsize p`i' medium"' _n
+				file write `scheme' `"color p`i'markline black"' _n
+				file write `scheme' `"linewidth p`i'mark vthin"' _n
+				file write `scheme' `"color p`i'markfill "`scatcolor'""' _n
+				file write `scheme' `"color p`i'label black"' _n
+				file write `scheme' `"clockdir p`i' 0"' _n
 					
 				// Secondary entries for scatter plots
-				file write scheme `"color p`i'shade "`scatcolor'""' _n
-				file write scheme `"intensity p`i'shade inten`scatsaturation'"' _n
-				file write scheme `"linewidth p`i'other vthin"' _n
-				file write scheme `"linepattern p`i'other solid"' _n
-				file write scheme `"color p`i'otherline "`linecolor'""' _n 
+				file write `scheme' `"color p`i'shade "`scatcolor'""' _n
+				file write `scheme' `"intensity p`i'shade inten`scatsaturation'"' _n
+				file write `scheme' `"linewidth p`i'other vthin"' _n
+				file write `scheme' `"linepattern p`i'other solid"' _n
+				file write `scheme' `"color p`i'otherline "`linecolor'""' _n 
 
 				// Composite entries for scatter plots
-				file write scheme `"linestyle p`i'mark p`i'mark"' _n
-				file write scheme `"markerstyle p`i' p`i'"' _n
-				file write scheme `"labelstyle p`i' p`i'"' _n
-				file write scheme `"seriesstyle p`i' p`i'"' _n
+				file write `scheme' `"linestyle p`i'mark p`i'mark"' _n
+				file write `scheme' `"markerstyle p`i' p`i'"' _n
+				file write `scheme' `"labelstyle p`i' p`i'"' _n
+				file write `scheme' `"seriesstyle p`i' p`i'"' _n
 
 			} // End Loop to create scatterplot scheme file entries
 
 		// Close and save the graph scheme file
-		file close scheme
+		file close `scheme'
+		file close `scheme_achromatopsia'
+		file close `scheme_protanopia'
+		file close `scheme_deuteranopia'
+		file close `scheme_tritanopia'
 
 		// Create loop to generate all of the returned values
 		foreach metachar in `: char _dta[]' {

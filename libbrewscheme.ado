@@ -1,3 +1,21 @@
+********************************************************************************
+* Description of the Program -												   *
+* This program is a utility to compile the libbrewscheme Mata library locally  *
+* on the end user's computer.  												   *
+*                                                                              *
+* Program Output -                                                             *
+* 	libbrewscheme.mlib - a Mata library with classes, methods, and functions   * 
+*						 used by programs in the brewscheme package.		   *
+*                                                                              *
+* Lines -                                                                      *
+*     58                                                                       *
+*                                                                              *
+********************************************************************************
+		
+*! libbrewscheme
+*! v 0.0.1
+*! 29NOV2015
+
 // Drop program if loaded in memory
 cap prog drop libbrewscheme
 
@@ -26,7 +44,7 @@ prog def libbrewscheme
 	// the mata library file
 	qui: mata: mata mlib add libbrewscheme cbtype() Protanopia() 			 ///   
 	Deuteranopia() Tritanopia() colorblind() translateColor() 				 ///   
-	brewNameSearch() brewColorSearch(), complete
+	brewcolors(), complete
 
 	// Prints the current search path for mata functions/libraries to the console
 	mata: mata mlib index

@@ -8,13 +8,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     432                                                                      *
+*     238                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolordb
-*! v 0.0.2
-*! 25NOV2015
+*! v 0.0.3
+*! 29NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -26,177 +26,195 @@ prog def brewcolordb, rclass
 	version 13.1
 
 	// Defines syntax structure of program
-	syntax [, DISplay]
+	syntax [, DISplay REFresh]
 
-		// Get list of color style file names
-		loc colors `: dir `"`c(sysdir_base)'/style/"' files "color*.style", respect'
-
-		// Clean up the file names
-		loc colors : list clean colors
+		// Check for file
+		cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
 		
-		// Remove quotation marks from color file names
-		loc colors `: subinstr loc colors `"""' "", all'
+		// If file does not exist or refresh option passed
+		if _rc == 0 | `"`refresh'"' != "" {
+	
+			// Get list of color style file names
+			loc colors `: dir `"`c(sysdir_base)'/style/"' files "color*.style", respect'
 
-		// Create a name reference to use 
-		loc name `: word 1 of `colors''
-
-		// Load the first color style file in memory
-		qui: insheet using `"`c(sysdir_base)'style/`name'"', clear
-
-		// Get the color name
-		getColorName `name'
-
-		// // Create an id using the name of the color style
-		qui: g id = "`r(colorname)'"
-
-		// Loop over the list of files
-		forv i = 2/`: word count `colors'' {
+			// Clean up the file names
+			loc colors : list clean colors
 			
-			// Keep the current data preserved in memory
-			preserve
+			// Remove quotation marks from color file names
+			loc colors `: subinstr loc colors `"""' "", all'
+
+			// Create a name reference to use 
+			loc name `: word 1 of `colors''
+
+			// Load the first color style file in memory
+			qui: insheet using `"`c(sysdir_base)'style/`name'"', clear
+
+			// Get the color name
+			getColorName `name'
+
+			// // Create an id using the name of the color style
+			qui: g id = "`r(colorname)'"
+
+			// Loop over the list of files
+			forv i = 2/`: word count `colors'' {
 				
-				// Get the color style file name
-				loc name `: word `i' of `colors''
-				
-				// Load the color style file into memory
-				qui: insheet using `"`c(sysdir_base)'style/`name'"', clear
-				
-				// Get the color name
-				getColorName `name'
-				
-				// Use the color name for the ID field
-				qui: g id = "`r(colorname)'"
-				
-				// Reserve space for a temp file in memory
-				tempfile `i'
-				
-				// Save the current data set in the tempfile reserved above
-				qui: save ``i''.dta, replace
+				// Keep the current data preserved in memory
+				preserve
+					
+					// Get the color style file name
+					loc name `: word `i' of `colors''
+					
+					// Load the color style file into memory
+					qui: insheet using `"`c(sysdir_base)'style/`name'"', clear
+					
+					// Get the color name
+					getColorName `name'
+					
+					// Use the color name for the ID field
+					qui: g id = "`r(colorname)'"
+					
+					// Reserve space for a temp file in memory
+					tempfile `i'
+					
+					// Save the current data set in the tempfile reserved above
+					qui: save ``i''.dta, replace
 
-			// Restore memory to previous state (e.g., first color style file)
-			restore
+				// Restore memory to previous state (e.g., first color style file)
+				restore
 
-			// Append this color style to the existing data set
-			qui: append using ``i''.dta
+				// Append this color style to the existing data set
+				qui: append using ``i''.dta
 
-		} // End Loop over the color style files
+			} // End Loop over the color style files
 
-		// Generate a file id (row number)
-		qui: g fileid = _n
+			// Generate a file id (row number)
+			qui: g fileid = _n
 
-		// Count the number of lines per file
-		qui: bys id (fileid): g lines = _N
+			// Count the number of lines per file
+			qui: bys id (fileid): g lines = _N
 
-		// Create a row id for the lines from each color style file
-		qui: bys id (fileid): g linenum = _n
+			// Create a row id for the lines from each color style file
+			qui: bys id (fileid): g linenum = _n
 
-		// Get the sequence number
-		qui: g seqid = v1 if regexm(v1, "^sequence") == 1
+			// Get the sequence number
+			qui: g seqid = v1 if regexm(v1, "^sequence") == 1
 
-		// Remove the word sequence
-		qui: replace seqid = trim(itrim(subinstr(seqid, "sequence ", "", .)))
+			// Remove the word sequence
+			qui: replace seqid = trim(itrim(subinstr(seqid, "sequence ", "", .)))
 
-		// Make the sequence ID variable numeric
-		qui: destring seqid, replace
-		
-		// Carry the value for the rest of the color
-		bys id (fileid): replace seqid = seqid[_n -1] if mi(seqid)
-		
-		// Keep only the records that contain the RGB values
-		qui: keep if lines == linenum
+			// Make the sequence ID variable numeric
+			qui: destring seqid, replace
+			
+			// Carry the value for the rest of the color
+			bys id (fileid): replace seqid = seqid[_n -1] if mi(seqid)
+			
+			// Keep only the records that contain the RGB values
+			qui: keep if lines == linenum
 
-		// Replace the value for the color style none
-		qui: replace v1 = "" if id == "none"
+			// Replace the value for the color style none
+			qui: replace v1 = "" if id == "none"
 
-		// Rename v1 to something more informative
-		rename v1 rgb
+			// Rename v1 to something more informative
+			rename v1 rgb
 
-		// Check display option
-		if `"`display'"' != "" {
-
-			// Write the table header
-			di as text _dup(80) `"_"' _n _skip(10) "Color Name" _skip(10) 	 ///   
-			"RGB" _n _dup(80) "_" _n 
-
-		} // End If Block for Display Header
-		
-		// Loop over the observations
-		forv v = 1/`: word count `colors'' {
-		
 			// Check display option
 			if `"`display'"' != "" {
 
-				// Print the data to the screen
-				di as res _skip(10) id[`v'] _col(30) rgb[`v']
+				// Write the table header
+				di as text _dup(80) `"_"' _n _skip(10) "Color Name" _skip(10) 	 ///   
+				"RGB" _n _dup(80) "_" _n 
 
+			} // End If Block for Display Header
+			
+			// Loop over the observations
+			forv v = 1/`: word count `colors'' {
+			
+				// Check display option
+				if `"`display'"' != "" {
+
+					// Print the data to the screen
+					di as res _skip(10) id[`v'] _col(30) rgb[`v']
+
+				} // End IF Block for display option
+				
+				// Return the color value in the name of the color
+				ret loc `: di id[`v']' `"`: di rgb[`v']'"'
+					
+			} // End Loop
+				
+			// Check display option
+			if `"`display'"' != "" {
+
+				// Add footer
+				di as text _dup(80) "_"
+				
 			} // End IF Block for display option
 			
-			// Return the color value in the name of the color
-			ret loc `: di id[`v']' `"`: di rgb[`v']'"'
+			// Set the display order of the variables
+			order id rgb
+			
+			// Keep only the needed variables
+			qui: keep id rgb seqid
+			
+			// Clean up rgb values
+			qui: replace rgb = trim(itrim(rgb))
+			
+			// Rename variable 
+			qui: rename id palette
+			
+			// Make sequence ID string
+			qui: tostring seqid, replace
+			
+			// Make sequence ID follow logic used for rest of suite
+			qui: replace seqid = palette + seqid
+			
+			// Generate meta data fields
+			foreach v in colorblind print lcd photocopy {
+			
+				// Generate variables with null values
+				qui: g `v' = .n
 				
-		} // End Loop
+			} // End Loop over meta properties
 			
-		// Check display option
-		if `"`display'"' != "" {
+			// Generate a meta data field
+			qui: g meta = "Stata"
+			
+			// Create a max colors value
+			qui: g maxcolors = 1
+			
+			// Create colorid 
+			qui: g colorid = 1
+			
+			// Create palette ID
+			qui: g pcolor = 1
+			
+			// Add metadata 
+			la var palette "Name of Stata Colorstyle"
+			la var rgb "RGB Value of Stata Colorstyle"
+			
+			// Optimize data storage
+			qui: compress
+			
+			// Drop any duplicate values
+			qui: duplicates drop
+			
+			// Translate colorblind equivalent RGB values
+			qui: brewtransform rgb
 
-			// Add footer
-			di as text _dup(80) "_"
+			// Save to the brewscheme created directories
+			qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
 			
-		} // End IF Block for display option
+		} // End IF Block for case where refresh option is passed or file does not exist
 		
-		// Set the display order of the variables
-		order id rgb
+		// Otherwise
+		else {
 		
-		// Keep only the needed variables
-		qui: keep id rgb seqid
-		
-		// Clean up rgb values
-		qui: replace rgb = trim(itrim(rgb))
-		
-		// Rename variable 
-		qui: rename id palette
-		
-		// Make sequence ID string
-		qui: tostring seqid, replace
-		
-		// Make sequence ID follow logic used for rest of suite
-		qui: replace seqid = palette + seqid
-		
-		// Generate meta data fields
-		foreach v in colorblind print lcd photocopy {
-		
-			// Generate variables with null values
-			qui: g `v' = .n
+			// Print message to console
+			di as res `"The file "'											 ///   
+			`"`c(sysdir_personal)'brewcolors/colordb.dta already exists "'	 ///   
+			`"and will not be overwritten"' 
 			
-		} // End Loop over meta properties
-		
-		// Generate a meta data field
-		qui: g meta = "Stata"
-		
-		// Create a max colors value
-		qui: g maxcolors = 1
-		
-		// Create colorid 
-		qui: g colorid = 1
-		
-		// Create palette ID
-		qui: g pcolor = 1
-		
-		// Add metadata 
-		la var palette "Name of Stata Colorstyle"
-		la var rgb "RGB Value of Stata Colorstyle"
-		
-		// Optimize data storage
-		qui: compress
-		
-		// Drop any duplicate values
-		qui: duplicates drop
-		
-		// Translate colorblind equivalent RGB values
-		qui: brewtransform rgb
-
-		// Save to the brewscheme created directories
-		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
+		} // End ELSE Block for existing file without overwrite
 		
 // end of program
 end

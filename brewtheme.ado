@@ -13,16 +13,20 @@
 *     none                                                                     *
 *                                                                              *
 * Program Output -                                                             *
-*     none																	   *
+*     theme-[theme file name].theme - The theme file created by the user	   *
+*	  theme-[theme file name]_achromatopsia.theme - Full Colorblind version	   *
+*	  theme-[theme file name]_protanopia.theme - Full Colorblind version	   *
+*	  theme-[theme file name]_deuteranopia.theme - Full Colorblind version	   *
+*	  theme-[theme file name]_tritanopia.theme - Full Colorblind version	   *
 *                                                                              *
 * Lines -                                                                      *
-*     585                                                                      *
+*     300                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.1
-*! 08SEP2015
+*! v 0.0.2
+*! 29NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -62,17 +66,24 @@ prog def brewtheme
 						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
 						ZYX2STYle(string asis) LOADThemedata ]
 						
-	/* Change how some of the arguments are stored to align with class names
-	loc above_below `abovebelow'
-	loc numticks_g `numticks'
-	loc relative_posn `relativepos'
-	loc tb_orientstyle `orientstyle'
-	loc vertical_text `verticaltext' 
-	*/
+	// Stores the root file path for theme files
+	loc themeroot `c(sysdir_personal)'b/theme/theme
 	
 	// Preserve the current state of the data	
 	preserve	
 	
+		// Create a brewcolors object
+		mata: brewc = brewcolors()
+		
+		// Get the list of unique meta names
+		mata: brewc.getNames(2)
+		
+		// Store the meta names in separate macro
+		loc matanames `colornames'
+			
+		// Get the list of unique colors
+		mata: brewc.getNames(1)
+		
 		// Build dataset with classes, arguments, and parameter values
 		qui: themedata
 		
@@ -81,6 +92,12 @@ prog def brewtheme
 		
 		// Load the tempfile
 		qui: use `tmptheme', clear
+		
+		// Add variables to store color sight impairment transforms
+		qui: g achromatopsia = ""
+		qui: g protanopia = "" 
+		qui: g deuteranopia = "" 
+		qui: g tritanopia = "" 
 
 		// Loop over the class names
 		foreach v in `"`r(classes)'"' {
@@ -100,12 +117,26 @@ prog def brewtheme
 					loc arg `: word 1 of `indi''
 					
 					loc val `: word 2 of `indi''
-				
+					
 					// Check if valid argument
 					if `"`: list indivarg in `v'args'"' != "" {
-					
+
+						// Search for the RGB values
+						mata: brewc.brewNameSearch("`val'")
+							
 						// Replace value with user specified value
-						qui: replace value = `"`val'"' if classname == `"`v'"' & argname == `"`arg'"'
+						qui: replace value = `"`rgb'"' if 					 ///   
+						classname == `"`v'"' & argname == `"`arg'"'
+						
+						// Loop over colorblind variables
+						foreach cb in achromatopsia protanopia deuteranopia  ///   
+						tritanopia {
+						
+							// Replace colorblind transform values
+							qui: replace `cb' = "``cb''" if 				 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+						
+						} // End Loop over transformed RGB variables
 					
 					} // End IF Block for valid arguments
 				
@@ -122,9 +153,17 @@ prog def brewtheme
 			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
 			
 			// Write the scheme file to a location on the path
-			qui: file open theme using ///
-				`"`c(sysdir_personal)'b/theme/theme-`themefile'.theme"', w replace
+			qui: file open theme using `"`themeroot'-`themefile'.theme"', w replace
 				
+			// Loop over colorblind variables
+			foreach cb in achromatopsia protanopia deuteranopia tritanopia {
+
+				// Open a theme file for each of the colorblind types
+				qui: file open `cb'theme using 								 ///   
+				`"`themeroot'-`themefile'_`cb'.theme"', w replace
+			
+			} // End Loop to open color blindness theme files
+			
 			// Call write subroutine
 			themewriter
 
@@ -137,11 +176,16 @@ prog def brewtheme
 			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
 			
 			// Write the scheme file to a location on the path
-			qui: file open theme using ///
-				`"`c(sysdir_personal)'b/theme/theme-default.theme"', w replace
+			qui: file open theme using `"`themeroot'-default.theme"', w replace
 				
-			// Load the tempfile
-			qui: use `tmptheme', clear
+			// Loop over colorblind variables
+			foreach cb in achromatopsia protanopia deuteranopia tritanopia {
+
+				// Open a theme file for each of the colorblind types
+				qui: file open `cb'theme using 								 ///   
+				`"`themeroot'-default_`cb'.theme"', w replace
+			
+			} // End Loop to open color blindness theme files
 			
 			// Call write subroutine
 			themewriter
@@ -162,6 +206,8 @@ prog def brewtheme
 // End Program Definition	
 end
 
+// Drop subroutine if already loaded in memory
+cap prog drop themedata
 	
 // Subroutine to build look up dataset
 prog def themedata, rclass
@@ -206,6 +252,9 @@ prog def themedata, rclass
 
 // End of the subroutine definition
 end
+
+// Drop subroutine if already loaded in memory
+cap prog drop themewriter
 	
 // Subroutine for writing the data to a theme file
 prog def themewriter
@@ -223,11 +272,30 @@ prog def themewriter
 		// lines based on new line variable
 		file write theme `"`"`string'"' `: di newlines[`i']'"' _n
 		
+		// Loop over the colorblindness types
+		foreach cb in achromatopsia protanopia deuteranopia tritanopia {
+			
+			// Creates string with color bli
+			loc string `: di classnm[`i'] + argnm[`i'] + `cb'[`i']'
+			
+			// Write to the colorblind simulated theme file
+			file write `cb'theme `"`"`string'"' `: di newlines[`i']'"' _n
+			
+		} // End Loop over colorblind transformed theme files
+			
 	} // End Loop over observations
 	
 	// Close the open file connection
 	file close theme
 	
+	// Loop over the colorblindness types
+	foreach cb in achromatopsia protanopia deuteranopia tritanopia {
+			
+		// Close the theme file
+		file close `cb'theme
+		
+	} // End loop over colorblindness type theme files
+			
 // End of sub routine
 end
 
