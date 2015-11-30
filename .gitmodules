@@ -1,3 +1,8 @@
 [submodule "recycle"]
 	path = recycle
 	url = /Users/billy/Desktop/Programs/StataPrograms/r/recycle
+	path = brewthemehelp
+	url = https://github.com/wbuchanan/brewthemehelp
+[submodule "brewthemehelp"]
+	path = brewthemehelp
+	url = https://github.com/wbuchanan/brewthemehelp

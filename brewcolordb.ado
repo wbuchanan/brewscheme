@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! brewcolordb
-*! v 0.0.3
-*! 29NOV2015
+*! v 0.0.4
+*! 30NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -42,21 +42,18 @@ prog def brewcolordb, rclass
 			
 			// Remove quotation marks from color file names
 			loc colors `: subinstr loc colors `"""' "", all'
+			
+			// Set observations
+			qui: set obs 2
 
-			// Create a name reference to use 
-			loc name `: word 1 of `colors''
-
-			// Load the first color style file in memory
-			qui: insheet using `"`c(sysdir_base)'style/`name'"', clear
-
-			// Get the color name
-			getColorName `name'
-
-			// // Create an id using the name of the color style
-			qui: g id = "`r(colorname)'"
+			// Create entry for color black
+			qui: g id = "black"
+			
+			// Create RGB balues for color black
+			qui: g v1 = cond(_n == 1, "sequence 1", "0 0 0")
 
 			// Loop over the list of files
-			forv i = 2/`: word count `colors'' {
+			forv i = 1/`: word count `colors'' {
 				
 				// Keep the current data preserved in memory
 				preserve
@@ -86,7 +83,7 @@ prog def brewcolordb, rclass
 				qui: append using ``i''.dta
 
 			} // End Loop over the color style files
-
+			
 			// Generate a file id (row number)
 			qui: g fileid = _n
 

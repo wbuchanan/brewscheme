@@ -20,13 +20,13 @@
 *	  theme-[theme file name]_tritanopia.theme - Full Colorblind version	   *
 *                                                                              *
 * Lines -                                                                      *
-*     300                                                                      *
+*     305                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.2
-*! 29NOV2015
+*! v 0.0.3
+*! 30NOV2015
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -64,7 +64,7 @@ prog def brewtheme
 						TICKSTYle(string asis) TICKSETSTYle(string asis)	 ///   
 						VERTICAL(string asis) VERTICALText(string asis)		 ///   
 						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
-						ZYX2STYle(string asis) LOADThemedata ]
+						ZYX2STYle(string asis) LOADThemedata brewscheme ]
 						
 	// Stores the root file path for theme files
 	loc themeroot `c(sysdir_personal)'b/theme/theme
@@ -72,9 +72,14 @@ prog def brewtheme
 	// Preserve the current state of the data	
 	preserve	
 	
-		// Create a brewcolors object
-		mata: brewc = brewcolors()
+		// Only initialize this mata class if program not called by brewscheme
+		if `"`brewscheme'"' == "" {
 		
+			// Create a brewcolors object
+			mata: brewc = brewcolors()
+
+		} // End IF Block to initialize brewcolors object	
+			
 		// Get the list of unique meta names
 		mata: brewc.getNames(2)
 		
