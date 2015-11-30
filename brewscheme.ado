@@ -856,6 +856,9 @@ prog def brewscheme, rclass
 			// Stubs to use for line references to theme files
 			loc linerefs theme1 theme2 theme3 theme4 theme5
 
+			// Tempnames
+			tempname theme1 theme2 theme3 theme4 theme5
+
 			// Check for theme file
 			if `"`themefile'"' != "" {
 
@@ -866,14 +869,11 @@ prog def brewscheme, rclass
 				`"`themeroot'-`themefile'_deuteranopia.theme"'				 ///   
 				`"`themeroot'-`themefile'_tritanopia.theme"'
 
-				// Tempnames
-				tempname theme1 theme2 theme3 theme4 theme5
-
 				// Loop over theme files
 				forv thf = 1/5 {
 				
 					// Open the first file
-					file open `theme`thf'' using `"`: word `thf' of `themerefs''"', r
+					file open `theme`thf'' using `"`: word `thf' of `"`themerefs'"''"', r
 						
 					// zero value local macro
 					loc x = 0
@@ -885,12 +885,12 @@ prog def brewscheme, rclass
 						loc x = `x' + 1
 						
 						// Read line into local macro
-						file read `theme1' `: word `thf' of `linerefs''_`x'
+						file read `theme`thf'' `: word `thf' of `linerefs''_`x'
 					
 					} // End Loop over theme file
 					
 					// Close the file connection
-					file close `theme1'
+					file close `theme`thf''
 				
 				} // End Loop over themefiles
 			
@@ -917,14 +917,11 @@ prog def brewscheme, rclass
 				`themeroot'-default_deuteranopia.theme						 ///   
 				`themeroot'-default_tritanopia.theme
 
-				// Tempnames
-				tempname theme1 theme2 theme3 theme4 theme5
-
 				// Loop over theme files
 				forv thf = 1/5 {
 				
 					// Open the first file
-					file open `theme`thf'' using `"`: word `thf' of `themerefs''"', r
+					file open `theme`thf'' using `"`: word `thf' of `"`themerefs'"''"', r
 						
 					// zero value local macro
 					loc x = 0
@@ -936,12 +933,12 @@ prog def brewscheme, rclass
 						loc x = `x' + 1
 						
 						// Read line into local macro
-						file read `theme1' `: word `thf' of `linerefs''_`x'
+						file read `theme`thf'' `: word `thf' of `linerefs''_`x'
 					
 					} // End Loop over theme file
 					
 					// Close the file connection
-					file close `theme1'
+					file close `theme`thf''
 				
 				} // End Loop over themefiles
 						
@@ -953,6 +950,12 @@ prog def brewscheme, rclass
 			// Loop over the theme/scheme file pairs
 			forv j = 1/5 {
 			
+				// Correction for schemenames
+				if `j' == 1  loc schemelabel `"label "`schemename'""'
+
+				// For all other cases
+				else loc schemelabel `"label "`schemename'`: word `j' of `nameext''""'
+				
 				file write `scheme`j'' `"*                                    s2color.scheme"' _n
 				file write `scheme`j'' `""' _n
 				file write `scheme`j'' `"* s2 scheme family with a naturally white background (white plotregions and"' _n
@@ -977,7 +980,7 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `""' _n
 				file write `scheme`j'' `"*!  version 1.2.5   16jun2011"' _n(2)
 				file write `scheme`j'' `"sequence 1299"' _n
-				file write `scheme`j'' `"label "`schemename'`: word `j' of `nameext''""' _n(2)
+				file write `scheme`j'' `"`schemelabel'"' _n(2)
 				file write `scheme`j'' `"* system naturally_white  1"' _n(3)
 
 				// Loop over first 10 lines of theme file
@@ -1107,7 +1110,7 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `"color ci_line        0 0 0"' _n
 				file write `scheme`j'' `"color ci_arealine    0 0 0"' _n
 				file write `scheme`j'' `"color ci_area        "`ci_area`j''" "' _n
-				file write `scheme`j'' `"color ci_symbol      "`cisymbol`j''" "' _n
+				file write `scheme`j'' `"color ci_symbol      "`ci_symbol`j''" "' _n
 				file write `scheme`j'' `"color ci2_line       0 0 0"' _n
 				file write `scheme`j'' `"color ci2_arealine   0 0 0"' _n
 				file write `scheme`j'' `"color ci2_area       "`ci2_area`j''" "' _n
@@ -1119,24 +1122,24 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `theme`j'_180'
 						
 				// Writes line 181 from the theme file
-				file write `scheme1' `line181'
+				file write `scheme`j'' `theme`j'_181'
 				
-				file write `scheme1' `"color refmarker      0 0 0"' _n
-				file write `scheme1' `"color refmarkline    0 0 0"' _n
-				file write `scheme1' `"color histogram      "`histogram`j''" "' _n
+				file write `scheme`j'' `"color refmarker      0 0 0"' _n
+				file write `scheme`j'' `"color refmarkline    0 0 0"' _n
+				file write `scheme`j'' `"color histogram      "`histogram`j''" "' _n
 
 				// Writes line 182 from the theme file
-				file write `scheme1' `line182'
+				file write `scheme`j'' `theme`j'_182'
 				
-				file write `scheme1' `"color histogram_line 0 0 0"' _n
-				file write `scheme1' `"color dot_line       0 0 0"' _n
-				file write `scheme1' `"color dot_arealine   0 0 0"' _n
-				file write `scheme1' `"color dot_area       "`ci_area`j''" "' _n
-				file write `scheme1' `"color dotmarkline    0 0 0"' _n(2)
+				file write `scheme`j'' `"color histogram_line 0 0 0"' _n
+				file write `scheme`j'' `"color dot_line       0 0 0"' _n
+				file write `scheme`j'' `"color dot_arealine   0 0 0"' _n
+				file write `scheme`j'' `"color dot_area       "`ci_area`j''" "' _n
+				file write `scheme`j'' `"color dotmarkline    0 0 0"' _n(2)
 				
-				file write `scheme1' `"color xyline         0 0 0"' _n
-				file write `scheme1' `"color refline        0 0 0"' _n
-				file write `scheme1' `"color dots           0 0 0"' _n(2)
+				file write `scheme`j'' `"color xyline         0 0 0"' _n
+				file write `scheme`j'' `"color refline        0 0 0"' _n
+				file write `scheme`j'' `"color dots           0 0 0"' _n(2)
 				
 				// Loop over lines 183-192 of the theme file
 				forv i = 183/192 {

@@ -197,10 +197,74 @@ prog def brewcolordb, rclass
 			
 			// Translate colorblind equivalent RGB values
 			qui: brewtransform rgb
+			
+			// Loop over value variables
+			foreach v of var rgb achromatopsia protanopia deuteranopia		 ///   
+			tritanopia {
 
+				// Replace the value for the color style none
+				qui: replace `v' = "none" if palette == "none"
+
+			} // End of loop over value columns
+			
 			// Save to the brewscheme created directories
 			qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
 			
+			// Loop over records
+			forv i = 1/`c(N)' {
+		
+				// open new files for named colors
+				loc rootnm `: di palette[`i']'
+		
+				// Store filename in local macro
+				loc styleroot `"`c(sysdir_personal)'style/color-"'
+			
+				// Create new file wit the color definition
+				qui: file open achrom using `"`styleroot'`rootnm'_achromatopsia.style"', w replace
+				
+				// Create new file wit the color definition
+				qui: file open protan using `"`styleroot'`rootnm'_protanopia.style"', w replace
+
+				// Create new file wit the color definition
+				qui: file open deuter using `"`styleroot'`rootnm'_deuteranopia.style"', w replace
+				
+				// Create new file wit the color definition
+				qui: file open tritan using `"`styleroot'`rootnm'_tritanopia.style"', w replace
+				
+				// Loop over the file connections
+				foreach fnm in achrom protan deuter tritan {
+				
+					// Write a version number
+					qui: file write `fnm' `"*! v 0.0.0 `c(current_date)' `c(current_time)'"' _n
+					
+					// Write color attribution
+					qui: file write `fnm' `"*! Color defined by the user: `c(username)'"' _n
+					
+					// Add a sequence ID to the file
+					qui: file write `fnm' `"sequence `: di seqid[`i']'"' _n
+				
+				} // End Loop over Stata defined colors
+				
+				// Write the color name
+				qui: file write achrom `"label "`rootnm'_achromatopsia""' _n(2)
+				qui: file write protan `"label "`rootnm'_protanopia""' _n(2)
+				qui: file write deuter `"label "`rootnm'_deuteranopia""' _n(2)
+				qui: file write tritan `"label "`rootnm'_tritanopia""' _n(2)
+				
+				// Write the color definition to the file
+				qui: file write achrom `"set rgb "`: di achromatopsia[`i']'""' _n(2)
+				qui: file write protan `"set rgb "`: di protanopia[`i']'""' _n(2)
+				qui: file write deuter `"set rgb "`: di deuteranopia[`i']'""' _n(2)
+				qui: file write tritan `"set rgb "`: di tritanopia[`i']'""' _n(2)
+				
+				// Close the file
+				qui: file close achrom
+				qui: file close protan
+				qui: file close deuter
+				qui: file close tritan
+							
+			} // End Loop over records
+
 		} // End IF Block for case where refresh option is passed or file does not exist
 		
 		// Otherwise

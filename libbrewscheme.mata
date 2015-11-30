@@ -1166,7 +1166,7 @@ void brewcolors::brewColorSearch(string scalar rgbstring) {
 } // End Function definition for RGB color search
 
 // Method to retrieve defined colornames 
-void brewcolors::getNames(| real scalar metaOrNames) {
+void brewcolors::getNames(| real scalar metaOrNames, real scalar stataonly) {
 
 	// Check argument 
 	if (args() == 0) metaOrNames = 1
@@ -1175,15 +1175,19 @@ void brewcolors::getNames(| real scalar metaOrNames) {
 	// Declare string column vector for the names
 	string rowvector names
 	
+	string matrix statacols
+	
+	statacols = (this.color \ this.meta)
+	
+	if (stataonly == 1) names = uniqrows(select(statacols[., 1], statacols[., 2] :== "Stata"))'
+	
 	// Get all unique color names based on the palette variable
-	names = uniqrows((this.color[., metaOrNames] \ this.meta[., metaOrNames]))'
+	else names = uniqrows((this.color[., metaOrNames] \ this.meta[., metaOrNames]))'
 	
 	// Return the names in a Stata macro
 	st_local("colornames", invtokens(names))
 	
 } // End of Method declaration
-	
-	
 	
 // Exit mata and return to Stata prompt
 end 
