@@ -708,8 +708,8 @@ void colorblind::achromatopsia() {
 	
 	// Anomylize colors
 	dr = (getR() * (1.0 - getAmount())) + dr * getAmount()
-	dg = (getG() * (1.0 - getAmount())) + dg * getAmount()
-	db = (getB() * (1.0 - getAmount())) + db * getAmount()
+	dg = (getR() * (1.0 - getAmount())) + dr * getAmount()
+	db = (getR() * (1.0 - getAmount())) + dr * getAmount()
 	
 	// Pass the values and check that they are in [0, 255]
 	nrgb = checkRange((dr, dg, db))
