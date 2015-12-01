@@ -63,3 +63,41 @@ scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 					 ///
 
 ![brewtheme Example 1](../img/ggthemeTest.png)
 Figure 1. *Example of graph created with ggplot2 theme file and ggplot2 color palettes in Stata.*
+
+# Feature Preview
+In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the `brewtheme` and `brewscheme` programs now automatically generate color vision impaired clones of themselves.  If you already have the programs installed, you'll want to run this first to make sure all of the required mata functions/classes, colors, and palettes are available.
+
+```
+// Compile the libbrewscheme mata library on your computer
+libbrewscheme
+
+// Rebuild the color palette database
+brewdb, ref
+
+/* The XKCD colors is the only optional line in this example.  
+All other lines must be executed for the programs to function properly */
+// If you want to install the XKCD named colors:
+brewcolors xkcd, meta inst ref
+
+// If you don't want to install the XKCD named colors
+brewcolordb, ref
+```
+
+Once those commands are completed, the calls to `brewtheme` and `brewscheme` above will produce the files:
+theme-ggplot2.theme
+theme-ggplot2_achromatopsia.theme
+theme-ggplot2_protanopia.theme
+theme-ggplot2_deuteranopia.theme
+theme-ggplot2_tritanopia.theme
+scheme-ggtest2.scheme
+scheme-ggtest2_achromatopsia.scheme
+scheme-ggtest2_protanopia.scheme
+scheme-ggtest2_deuteranopia.scheme
+scheme-ggtest2_tritanopia.scheme
+
+With these scheme files, the `brewproofer` function can be developed to provide a tool to proof data visualizations prior to moving them into production to assess the perceptability of the graphs under varying forms of colorblindness.
+
+![brewproof Proof of Concept](../img/brewproofex1.png)
+Figure 2. *Proof of concept illustration building on the example in figure 1.*
+
+While `brewproof` is still in the process of being developed, the command will also add labels to each of the panels in the resulting graph to identify the specific form of color sight impairment.  For now, the panels represent the graph in figure 1 simulated for achromatopsia, protanopia, deuteranopia, and tritanopia clockwise from the top left panel.
