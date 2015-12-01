@@ -17,13 +17,13 @@
 *     r(brewextras) - File path/name where extras dataset is located		   *
 *                                                                              *
 * Lines -                                                                      *
-*     1332                                                                     *
+*     1342                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.11
-*! 25NOV2015
+*! v 0.0.12
+*! 01DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -86,6 +86,9 @@ prog def brewextra, rclass
 			qui: replace palette = "category20" in 141/160
 			qui: replace palette = "category20b" in 161/180
 			qui: replace palette = "category20c" in 181/200
+			qui: replace meta = "Mississippi Department of Education" in 1/8
+			qui: replace meta = "D3js" in 131/200
+			qui: replace meta = "Tableau" in 9/28
 			bys palette: g colorid = _n
 			bys palette: g pcolor = _N
 			qui: g maxcolors = pcolor
@@ -472,6 +475,7 @@ prog def brewextra, rclass
 			
 			// Add the ggplot2 default colors for 2-24 colors in the scale
 			qui: replace palette = "ggplot2" in 201/499
+			qui: replace meta = "ggplot2" in 201/499
 			qui: replace maxcolors = 24 in 201/499
 			qui: replace pcolor = 2 in 201/202
 			qui: replace pcolor = 3 in 203/205
