@@ -1,0 +1,6 @@
+[submodule "recycle"]
+	path = recycle
+	url = https://github.com/wbuchanan/recycle
+[submodule "brewthemehelp"]
+	path = brewthemehelp
+	url = https://github.com/wbuchanan/brewthemehelp
