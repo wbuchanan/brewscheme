@@ -1009,25 +1009,37 @@ forv i = 1/977 {
 
 	// Get value
 	loc val `"`: di value[`i']'"'
+	
+	if `i' == 382 {
+	
+		foreach v in achromatopsia protanopia deuteranopia tritanopia {
+			qui: replace `v' = "" in 382
+		}
+
+	}
 
 	// If it is one of the Stata named color styles
-	if `: list val in colornames' == 1 {
+	else if `: list val in colornames' == 1 & `"`val'"' != "none" {
 
 		// Set the values based on the named colors installed by brewcolordb
-		qui: replace achromatopsia = `"`val'_achromatopsia"' ///   
-		if classname == `"`v'"' & argname == `"`arg'"'
+		qui: replace achromatopsia = `"`val'_achromatopsia"' in `i'
 		
-		qui: replace protanopia = `"`val'_protanopia"'		 ///   
-		if classname == `"`v'"' & argname == `"`arg'"'
+		qui: replace protanopia = `"`val'_protanopia"' in `i'
 		
-		qui: replace deuteranopia = `"`val'_deuteranopia"'	 ///   
-		if classname == `"`v'"' & argname == `"`arg'"'
+		qui: replace deuteranopia = `"`val'_deuteranopia"' in `i'
 		
-		qui: replace tritanopia = `"`val'_tritanopia"'  	 ///   
-		if classname == `"`v'"' & argname == `"`arg'"'
+		qui: replace tritanopia = `"`val'_tritanopia"' in `i'
 		
 	} // End IF Block for Stata Named colors
-
+	
+	else if `"`val'"' == "none" {
+	
+		foreach v in achromatopsia protanopia deuteranopia tritanopia {
+			qui: replace `v' = "none" in `i'
+		}
+	
+	}
+	
 	// Otherwise
 	else {
 		mata: brewc.brewNameSearch(`"`: di value[`i']'"')	
