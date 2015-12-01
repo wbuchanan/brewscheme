@@ -876,16 +876,19 @@ prog def brewscheme, rclass
 					file open `theme`thf'' using `"`: word `thf' of `"`themerefs'"''"', r
 						
 					// zero value local macro
-					loc x = 0
+					loc x = 1
 						
+					// Read the first line of the file
+					file read `theme`thf'' theme`thf'_`x'	
+
 					// Loop until end of file
-					while r(eof) != 1 {
+					while r(eof) == 0 {
 					
 						// Increment line counter
 						loc x = `x' + 1
 						
 						// Read line into local macro
-						file read `theme`thf'' `: word `thf' of `linerefs''_`x'
+						file read `theme`thf'' theme`thf'_`x'
 					
 					} // End Loop over theme file
 					
@@ -911,11 +914,11 @@ prog def brewscheme, rclass
 				} // End IF Block to open a connection to the default theme
 				
 				// Themefile names
-				loc themerefs `themeroot'-default.theme						 ///   
-				`themeroot'-default_achromatopsia.theme						 ///   
-				`themeroot'-default_protanopia.theme						 ///   
-				`themeroot'-default_deuteranopia.theme						 ///   
-				`themeroot'-default_tritanopia.theme
+				loc themerefs `"`themeroot'-default.theme"'					 ///   
+				`"`themeroot'-default_achromatopsia.theme"'					 ///   
+				`"`themeroot'-default_protanopia.theme"'					 ///   
+				`"`themeroot'-default_deuteranopia.theme"'					 ///   
+				`"`themeroot'-default_tritanopia.theme"'
 
 				// Loop over theme files
 				forv thf = 1/5 {
@@ -924,17 +927,20 @@ prog def brewscheme, rclass
 					file open `theme`thf'' using `"`: word `thf' of `"`themerefs'"''"', r
 						
 					// zero value local macro
-					loc x = 0
-						
+					loc x = 1
+					
+					// Read the first line of the file
+					file read `theme`thf'' theme`thf'_`x'	
+
 					// Loop until end of file
-					while r(eof) != 1 {
+					while r(eof) == 0 {
 					
 						// Increment line counter
 						loc x = `x' + 1
 						
 						// Read line into local macro
-						file read `theme`thf'' `: word `thf' of `linerefs''_`x'
-					
+						file read `theme`thf'' theme`thf'_`x'
+						
 					} // End Loop over theme file
 					
 					// Close the file connection
@@ -981,7 +987,7 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `"*!  version 1.2.5   16jun2011"' _n(2)
 				file write `scheme`j'' `"sequence 1299"' _n
 				file write `scheme`j'' `"`schemelabel'"' _n(2)
-				file write `scheme`j'' `"* system naturally_white  1"' _n(3)
+				file write `scheme`j'' `"system   naturally_white  1"' _n(3)
 
 				// Loop over first 10 lines of theme file
 				forv i = 1/10 {
@@ -1107,16 +1113,16 @@ prog def brewscheme, rclass
 			// Loop over scheme/theme file pairs
 			forv j = 1/5 {
 			
-				file write `scheme`j'' `"color ci_line        0 0 0"' _n
-				file write `scheme`j'' `"color ci_arealine    0 0 0"' _n
+				file write `scheme`j'' `"color ci_line        "0 0 0""' _n
+				file write `scheme`j'' `"color ci_arealine    "0 0 0""' _n
 				file write `scheme`j'' `"color ci_area        "`ci_area`j''" "' _n
 				file write `scheme`j'' `"color ci_symbol      "`ci_symbol`j''" "' _n
-				file write `scheme`j'' `"color ci2_line       0 0 0"' _n
-				file write `scheme`j'' `"color ci2_arealine   0 0 0"' _n
+				file write `scheme`j'' `"color ci2_line       "0 0 0""' _n
+				file write `scheme`j'' `"color ci2_arealine   "0 0 0""' _n
 				file write `scheme`j'' `"color ci2_area       "`ci2_area`j''" "' _n
 				file write `scheme`j'' `"color ci2_symbol     "`ci2_symbol`j''" "' _n(2)
 				
-				file write `scheme`j'' `"color pieline        0 0 0"' _n(2)
+				file write `scheme`j'' `"color pieline        "0 0 0""' _n(2)
 			
 				// Writes line 180 from the theme file
 				file write `scheme`j'' `theme`j'_180'
@@ -1124,22 +1130,22 @@ prog def brewscheme, rclass
 				// Writes line 181 from the theme file
 				file write `scheme`j'' `theme`j'_181'
 				
-				file write `scheme`j'' `"color refmarker      0 0 0"' _n
-				file write `scheme`j'' `"color refmarkline    0 0 0"' _n
+				file write `scheme`j'' `"color refmarker      "0 0 0""' _n
+				file write `scheme`j'' `"color refmarkline    "0 0 0""' _n
 				file write `scheme`j'' `"color histogram      "`histogram`j''" "' _n
 
 				// Writes line 182 from the theme file
 				file write `scheme`j'' `theme`j'_182'
 				
-				file write `scheme`j'' `"color histogram_line 0 0 0"' _n
-				file write `scheme`j'' `"color dot_line       0 0 0"' _n
-				file write `scheme`j'' `"color dot_arealine   0 0 0"' _n
+				file write `scheme`j'' `"color histogram_line "0 0 0""' _n
+				file write `scheme`j'' `"color dot_line       "0 0 0""' _n
+				file write `scheme`j'' `"color dot_arealine   "0 0 0""' _n
 				file write `scheme`j'' `"color dot_area       "`ci_area`j''" "' _n
-				file write `scheme`j'' `"color dotmarkline    0 0 0"' _n(2)
+				file write `scheme`j'' `"color dotmarkline    "0 0 0""' _n(2)
 				
-				file write `scheme`j'' `"color xyline         0 0 0"' _n
-				file write `scheme`j'' `"color refline        0 0 0"' _n
-				file write `scheme`j'' `"color dots           0 0 0"' _n(2)
+				file write `scheme`j'' `"color xyline         "0 0 0""' _n
+				file write `scheme`j'' `"color refline        "0 0 0""' _n
+				file write `scheme`j'' `"color dots           "0 0 0""' _n(2)
 				
 				// Loop over lines 183-192 of the theme file
 				forv i = 183/192 {
@@ -1159,12 +1165,12 @@ prog def brewscheme, rclass
 			
 				file write `scheme`j'' `"color contour_begin `constart'"' _n
 				file write `scheme`j'' `"color contour_end `conend'"' _n
-				file write `scheme`j'' `"color zyx2 0 0 0"' _n(2)
+				file write `scheme`j'' `"color zyx2 "0 0 0""' _n(2)
 			
 				file write `scheme`j'' `"color sunflower "`sunflower`j''""' _n
-				file write `scheme`j'' `"color sunflowerlb 0 0 0"' _n
+				file write `scheme`j'' `"color sunflowerlb "0 0 0""' _n
 				file write `scheme`j'' `"color sunflowerlf "`sunflowerlf`j''""' _n
-				file write `scheme`j'' `"color sunflowerdb 0 0 0"' _n
+				file write `scheme`j'' `"color sunflowerdb "0 0 0""' _n
 				file write `scheme`j'' `"color sunflowerdf "`sunflowerdf`j''""' _n(2)
 			
 			} // End Loop over theme/scheme pairs
@@ -1648,7 +1654,7 @@ prog def brewscheme, rclass
 					file write `scheme`j'' `"intensity p`i'bar inten`barsaturation'"' _n
 					// file write `scheme1' `"areastyle p`i'bar p`i'bar"' _n
 					file write `scheme`j'' `"seriesstyle p`i'bar p`i'bar"' _n
-					file write `scheme`j'' `"color p`i'barline 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'barline "0 0 0""' _n
 
 					/* Box Plot Styles */
 					// Primary box plot entries
@@ -1656,15 +1662,15 @@ prog def brewscheme, rclass
 					file write `scheme`j'' `"intensity box inten`boxsaturation'"' _n
 					file write `scheme`j'' `"linewidth p`i'box medthin"' _n
 					file write `scheme`j'' `"linepattern p`i'box solid"' _n
-					file write `scheme`j'' `"color p`i'boxline 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'boxline "0 0 0""' _n
 					file write `scheme`j'' `"intensity box_line full"' _n
 					file write `scheme`j'' `"symbol p`i'box circle"' _n
 					file write `scheme`j'' `"symbolsize p`i'box medium"' _n
 					file write `scheme`j'' `"linewidth p`i'boxmark vthin"' _n
 					file write `scheme`j'' `"color p`i'boxmarkfill "`scatcolor`j''""' _n
-					file write `scheme`j'' `"color p`i'boxmarkline	0 0 0"' _n
+					file write `scheme`j'' `"color p`i'boxmarkline	"0 0 0""' _n
 					file write `scheme`j'' `"gsize p`i'boxlabel vsmall"' _n
-					file write `scheme`j'' `"color p`i'boxlabel 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'boxlabel "0 0 0""' _n
 					file write `scheme`j'' `"clockdir p`i'box 0"' _n
 
 					// Composite entries for box plots
@@ -1715,7 +1721,7 @@ prog def brewscheme, rclass
 
 					// Primary entries for scatter plots
 					file write `scheme`j'' `"color p`i'pie "`piecolor`j''""' _n
-					file write `scheme`j'' `"color p`i'pieline 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'pieline "0 0 0""' _n
 					file write `scheme`j'' `"intensity pie inten`piesaturation'"' _n
 					file write `scheme`j'' `"areastyle p`i'pie p`i'pie"' _n
 					file write `scheme`j'' `"seriesstyle p`i'pie p`i'pie"' _n
@@ -1723,10 +1729,10 @@ prog def brewscheme, rclass
 					// Primary entries for scatter plots
 					file write `scheme`j'' `"symbol p`i' circle"' _n
 					file write `scheme`j'' `"symbolsize p`i' medium"' _n
-					file write `scheme`j'' `"color p`i'markline 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'markline "0 0 0""' _n
 					file write `scheme`j'' `"linewidth p`i'mark vthin"' _n
 					file write `scheme`j'' `"color p`i'markfill "`scatcolor`j''""' _n
-					file write `scheme`j'' `"color p`i'label 0 0 0"' _n
+					file write `scheme`j'' `"color p`i'label "0 0 0""' _n
 					file write `scheme`j'' `"clockdir p`i' 0"' _n
 						
 					// Secondary entries for scatter plots
@@ -1765,10 +1771,10 @@ prog def brewscheme, rclass
 	restore
 		
 	// Print reference to console
-	di in smcl "For additional information about these color palettes, " _n    
-	di "see: http://www.colorbrewer2.org" _n _skip(15) " & " _n				 ///   
-	"http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf" _n 		 ///   
-	_skip(15) " & " _n "https://github.com/mbostock/d3/wiki/API-Reference" _n
+	di in green _n(2) `"For bugs/issues, please submit issues to: "' _n		 ///       
+	as res `"{browse "http://github.com/wbuchanan/brewscheme"}"' _n 		 ///   
+	in green `"For additional information about the program visit: "' _n 	 ///   
+	as res `"{browse "http://wbuchanan.github.io/brewscheme"}"' _n
 	
 // End of Program		
 end
