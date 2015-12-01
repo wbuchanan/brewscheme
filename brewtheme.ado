@@ -81,13 +81,7 @@ prog def brewtheme
 		} // End IF Block to initialize brewcolors object	
 			
 		// Get the list of unique meta names
-		mata: brewc.getNames(2)
-		
-		// Store the meta names in separate macro
-		loc matanames `colornames'
-			
-		// Get the list of unique colors
-		mata: brewc.getNames(1)
+		mata: brewc.getNames(1, 1)
 		
 		// Build dataset with classes, arguments, and parameter values
 		qui: themedata
@@ -98,12 +92,6 @@ prog def brewtheme
 		// Load the tempfile
 		qui: use `tmptheme', clear
 		
-		// Add variables to store color sight impairment transforms
-		qui: g achromatopsia = ""
-		qui: g protanopia = "" 
-		qui: g deuteranopia = "" 
-		qui: g tritanopia = "" 
-
 		// Loop over the class names
 		foreach v in `"`r(classes)'"' {
 		
@@ -127,29 +115,100 @@ prog def brewtheme
 					if `"`: list indivarg in `v'args'"' != "" {
 
 						// Search for the RGB values
-						mata: brewc.brewNameSearch("`val'")
+						mata: brewc.brewNameSearch(`"`val'"')
+						
+						foreach x in rgb achromatopsia protanopia deuteranopia tritanopia { 
+						
+							if `"``x''"' == "" loc `x' none
 							
-						// Replace value with user specified value
-						qui: replace value = `"`rgb'"' if 					 ///   
-						classname == `"`v'"' & argname == `"`arg'"'
+						}
 						
-						// Loop over colorblind variables
-						foreach cb in achromatopsia protanopia deuteranopia  ///   
-						tritanopia {
-						
-							// Replace colorblind transform values
-							qui: replace `cb' = "``cb''" if 				 ///   
+						// Check for named color style
+						if `: list val in colornames' == 1 {
+							
+							// Replace value with user specified value
+							qui: replace value = `"`val'"' if 				 ///   
 							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate color blind variables
+							qui: replace achromatopsia = `"`val'_achromatopsia"' ///   
+							if classname == `"`v'"' & argname == `"`arg'"'
+
+							// Populate red colorblindness 
+							qui: replace protanopia = `"`val'_protanopia"' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace deuteranopia = `"`val'_deuteranopia"' ///   
+							if classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace tritanopia = `"`val'_tritanopia"' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+						} // End IF Block for color value
+											
+						// Check to see if the value was a color
+						else if `"`val'"' != `"`rgb'"' &					 ///   
+						`: list val in colornames' == 0 {
+							
+							// Replace value with user specified value
+							qui: replace value = `""`rgb'""' if 			 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate color blind variables
+							qui: replace achromatopsia = `""`achromatopsia'""' ///   
+							if classname == `"`v'"' & argname == `"`arg'"'
+
+							// Populate red colorblindness 
+							qui: replace protanopia = `""`protanopia'""' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace deuteranopia = `""`deuteranopia'""' ///   
+							if classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace tritanopia = `""`tritanopia'""' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+						} // End ELSEIF Block for color value
 						
-						} // End Loop over transformed RGB variables
-					
+						// For non color values
+						else {
+						
+							// Replace value with user specified value
+							qui: replace value = `"`rgb'"' if 				 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate color blind variables
+							qui: replace achromatopsia = `"`achromatopsia'"' ///   
+							if classname == `"`v'"' & argname == `"`arg'"'
+
+							// Populate red colorblindness 
+							qui: replace protanopia = `"`protanopia'"' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace deuteranopia = `"`deuteranopia'"' if ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+							
+							// Populate red colorblindness 
+							qui: replace tritanopia = `"`tritanopia'"' if	 ///   
+							classname == `"`v'"' & argname == `"`arg'"'
+													
+						} // End ELSE Block for non color values
+										
 					} // End IF Block for valid arguments
-				
+									
 				} // End Loop over arguments
 			
 			} // End IF Block for user supplied values
-					
+			
 		} // End Loop over class names
+		
+		// Save changes to the tempfile
+		qui: save `tmptheme', replace
 		
 		// Check for name of themefile
 		if `"`themefile'"' != "" {
