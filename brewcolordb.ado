@@ -215,6 +215,10 @@ prog def brewcolordb, rclass
 
 				// Replace the value for the color style none
 				qui: replace `v' = "none" if palette == "none"
+				
+				// Make sure black and white are constant
+				qui: replace `v' = "0 0 0" if palette == "black"
+				qui: replace `v' = "255 255 255" if palette == "white"
 
 			} // End of loop over value columns
 			
