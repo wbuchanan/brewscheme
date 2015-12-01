@@ -56,7 +56,7 @@ prog def brewdb
 			loc time `"`c(current_time)'"'
 						
 			// Read the javascript into memory
-			qui: copy "http://www.colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
+			qui: copy "http://colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
 			`brewjs'.js
 			
 			// Read the data into memory
