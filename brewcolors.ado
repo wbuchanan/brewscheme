@@ -17,13 +17,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     767                                                                      *
+*     779                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolors
-*! v 0.0.1
-*! 27NOV2015
+*! v 0.0.2
+*! 01DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -35,16 +35,19 @@ prog def brewcolors, rclass
 	version 13.1
 	
 	// Syntax for program (make adds to color DB, install install's colors)
-	syntax anything(name = source) [, MAke INSTall COLors(passthru) ]
+	syntax anything(name = source) [, MAke INSTall COLors(passthru) REFresh ]
 	
 	// Check for any optional arguments to add a comma to the command string
 	if `"`make'`install'`colors'"' == "" loc optstring ","
 	
 	// Build local macro with the command string
-	loc cmdstring brewcolors `source'`optstring' `make' `install' `colors'
+	loc cmdstring brewcolors `source'`optstring' `make' `install' `colors' `refresh'
 	
 	// Preserve current state of the data
 	preserve 
+	
+		// Clear any data from memory
+		clear
 	
 		// Check for/build directory
 		dirfile, p(`"`c(sysdir_personal)'style"')
@@ -56,7 +59,7 @@ prog def brewcolors, rclass
 		if `"`source'"' == "xkcd" {
 
 			// Load and parse the xkcd data
-			xkcd, `make' `install' `colors' cmd(`cmdstring')
+			xkcd, `make' `install' `colors' `refresh' cmd(`cmdstring')
 			
 			// Loop over each of the return name macros
 			foreach nm in `r(colnms)' { 
@@ -72,7 +75,7 @@ prog def brewcolors, rclass
 		else if `"`source'"' == "new" {
 		
 			// Call color blind routine
-			colorinstaller, `make' `install' `colors' cmd(`cmdstring')
+			colorinstaller, `make' `install' `colors' `refresh' cmd(`cmdstring')
 			
 			// Return the sub routine's return value
 			ret loc colorpath `r(colorpath)'
@@ -92,7 +95,7 @@ cap prog drop colorinstaller
 prog def colorinstaller, rclass
 
 	// Syntax for sub routine
-	syntax, colors(string asis) [ make install cmd(passthru) ]
+	syntax, colors(string asis) [ make install cmd(passthru) refresh ]
 	
 	// Set the number of observations
 	qui: set obs `: word count `colors''
@@ -184,7 +187,7 @@ prog def colorinstaller, rclass
 	qui: save `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"', replace
 
 	// Check for make option
-	qui: brewColorMaker `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
+	qui: brewColorMaker `c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta, `refresh'
 	
 	// Return the file path for the colors created by the user
 	ret loc colorpath `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
@@ -457,7 +460,7 @@ cap prog drop xkcd
 prog def xkcd, rclass
 	
 	// Define syntax
-	syntax [, make install colors(string asis) cmd(passthru) ]
+	syntax [, make install colors(string asis) refresh cmd(passthru) ]
 	
 	// For the xkcd colors
 	import delimited using "http://xkcd.com/color/rgb.txt", delim("#") clear
@@ -576,7 +579,7 @@ prog def xkcd, rclass
 	qui: save `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"', replace
 	
 	// Check make option
-	if `"`make'"' != "" brewColorMaker `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"'
+	if `"`make'"' != "" brewColorMaker `c(sysdir_personal)'brewcolors/brewxkcd.dta, `refresh'
 
 // End of program
 end
@@ -733,19 +736,25 @@ cap prog drop brewColorMaker
 prog def brewColorMaker
 
 	// Syntax
-	syntax anything(name = filename id = "File name containing colors to install")
+	syntax anything(name = filename id = "Colors to install") [, refresh ]
 	
 	// Append to existing colordb if it exists
 	cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
 	
 	// If file exists
-	if _rc == 0 {
+	if _rc == 0 | `"`refresh'"' != "" {
 	
 		// Call the color database program
-		qui: brewcolordb
+		brewcolordb, `refresh'
+		
+		// Load colordb file
+		qui: use `"`c(sysdir_personal)'brewcolors/colordb.dta"', clear
 	
 		// Append existing data
-		qui: append using `"`filename'.dta"'
+		qui: append using `"`filename'"'
+		
+		// Drop any duplicate color references
+		qui: duplicates drop
 		
 		// Save data as first instance of colordb
 		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace
@@ -757,6 +766,9 @@ prog def brewColorMaker
 			
 		// Append existing data
 		qui: append using `"`c(sysdir_personal)'brewcolors/colordb.dta"'
+		
+		// Drop any duplicate color references
+		qui: duplicates drop
 		
 		// Save over file
 		qui: save `"`c(sysdir_personal)'brewcolors/colordb.dta"', replace

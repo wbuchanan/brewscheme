@@ -27,6 +27,17 @@ prog def brewcolordb, rclass
 
 	// Defines syntax structure of program
 	syntax [, DISplay REFresh]
+	
+	// Print warning message
+	di as res "This program needs to clear all data currently in memory. "	 ///   
+	"If this is ok hit enter, otherwise enter the letter 'n' and hit enter " ///  
+	"to exit the program without clearing data from memory." _request(_perm)
+	
+	// Check response
+	if lower(`"`perm'"') == "n" exit 
+	
+		// Clear data from memory
+		clear
 
 		// Check for file
 		cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
