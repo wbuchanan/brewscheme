@@ -1,18 +1,9 @@
 # brewscheme
 brewscheme is a tool to facilitate Stata users developing graph schemes using research-based color palettes.  Unlike other uses of the color palettes developed by Brewer (see References below), this program allows users to specify the number of colors from any of the 35 color palettes they would like to use and allows users to mix/combine different palettes for the various graph types available in Stata.  Additionally, as a way of creating a centralized source for the Stata community to work from, palettes from outside of ColorBrewer are being added to boost the capabilities of the program.
 
-## Updates
-24sep2015 - Program should now automatically recycle rgb values to make the scheme file produce the same number of color values across all graph types (e.g., if the maximum value supplied to any of the colors parameters is 8 all other types with color parameters < 8 will be recycled until there are 8 values.  The creation of the lookup table is now pushed to a subroutine called ```brewdb.ado``` that has no required arguments, but includes an optional argument to rebuild the database.  
-
 ## TODO
 
-1. Create program to look up named color styles and return the RGB value instead
-
-2. Update brewcbsim to allow the end user to specify multiple RGB tuples
-
-3. Update brewviewer to provide options for generating graphs that show the palette under normal and color sight impaired vision.  
-
-4.  Build proofer to show same graph under each of the three colorblindness conditions 
+1. Update brewcbsim to allow the end user to specify multiple RGB tuples
 
 ## Examples
 To view examples, please see the [project website](https://wbuchanan.github.io/brewscheme).
