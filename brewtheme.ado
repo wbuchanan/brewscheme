@@ -25,8 +25,8 @@
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.3
-*! 30NOV2015
+*! v 0.0.4
+*! 02DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -281,9 +281,21 @@ prog def themedata, rclass
 
 	// Drop data from memory
 	clear 
+	
+	// Check for file
+	cap confirm file `"`c(sysdir_plus)'b/brewthemedata.do"'
+	
+	// If does not exist
+	if _rc != 0 { 
+	
+		// Download the file from GitHub
+		copy "http://wbuchanan.github.io/brewscheme/brewthemedata.do" 		 ///   
+		`"`c(sysdir_plus)'b/brewthemedata.do"'
+		
+	} // End IF Block for non-existent file
 
 	// Run the do file
-	qui: do brewthemedata.do
+	qui: do `"`c(sysdir_plus)'b/brewthemedata.do"'
 
 	// Reserve namespace for a temporary file
 	tempfile themedata
