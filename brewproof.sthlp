@@ -11,7 +11,7 @@ protanopia, deuteranopia, and tritanopia.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewproof, scheme(}{it:brewscheme scheme file}{cmd ):}{it: graph command} {break}
+{p 4 4 4}{cmd:brewproof, scheme{c 40}}{it:brewscheme scheme file}{cmd:{c 41}{c 58}}{it: graph command} {break}
 
 {title:Description}
 
@@ -25,13 +25,11 @@ all four of the color impaired versions of the graph on a single image.  {p_end}
 {p 4 4 4} Generate a graph with {browse "http://github.com/hadley/ggplot2":ggplot2} styled aesthetics. {p_end}
 
 {p 8 8 12}{stata sysuse auto.dta, clear}{p_end}
-{p 8 8 12}{stata `"brewproof, scheme(ggtest2) : tw lowess mpg weight, || scatter mpg weight if rep78 == 1 || scatter mpg weight if rep78 == 2 || scatter mpg weight if rep78 == 3 || scatter mpg weight if rep78 == 4 || scatter mpg weight if rep78 == 5, legend(order(2 "1978 Repair Record = 1" 3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3" 5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))"':brewproof example} {p_end}
+{p 8 8 12}brewproof, scheme(ggtest2) : tw lowess mpg weight, || scatter mpg weight if rep78 == 1 || scatter mpg weight if rep78 == 2 || scatter mpg weight if rep78 == 3 || scatter mpg weight if rep78 == 4 || scatter mpg weight if rep78 == 5, legend(order(2 "1978 Repair Record = 1" 3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3" 5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5")){p_end}
 
 {marker refs}{title:{ul:References}}{break}
 {marker wickline}{p 4 8 8}Wickline, M. (2014). {it:Color.Vision.Simulate, Version 0.1}.  Retrieved from: 
-{browse "http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js"}. 
-Retrieved on: 24nov2015.{p_end} 
-
+{browse "http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js"}. Retrieved on: 24nov2015.{p_end} 
 {marker mg}{p 4 8 8}Meyer, G. W., & Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. 
 {it:Computer Graphics and Applications, IEEE 8(5)}, pp. 28-40.{p_end}
 
