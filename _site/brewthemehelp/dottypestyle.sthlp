@@ -9,10 +9,7 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optdottypestyle}
-
-
-
+{p 4 4 4}{dot} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

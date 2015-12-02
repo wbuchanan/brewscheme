@@ -4,10 +4,7 @@ title: brewtheme
 permalink: /brewtheme/
 ---
 
-# BREWTHEME
-
 This program is used to set global aesthetic properties (e.g., gridlines, number of axis ticks, etc...) that are generally independent of specific plot/graph types. [brewscheme](https://wbuchanan.github.io/brewscheme) has been updated to allow a "theme" file to be passed to it as an argument, or will generate a theme file with the same defaults that have been used in [brewscheme](https://wbuchanan.github.io/brewscheme/brewscheme) since the beginning of the project.  
-
 
 ## Examples
 This is a first attempt/example at creating a theme file that emulates the aesthetics of the 
@@ -64,7 +61,7 @@ scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 					 ///
 ![brewtheme Example 1](../img/ggthemeTest.png)
 Figure 1. *Example of graph created with ggplot2 theme file and ggplot2 color palettes in Stata.*
 
-# Feature Preview
+# Additional information
 In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the `brewtheme` and `brewscheme` programs now automatically generate color vision impaired clones of themselves.  If you already have the programs installed, you'll want to run this first to make sure all of the required mata functions/classes, colors, and palettes are available.
 
 ```
@@ -94,10 +91,3 @@ scheme-ggtest2_achromatopsia.scheme
 scheme-ggtest2_protanopia.scheme
 scheme-ggtest2_deuteranopia.scheme
 scheme-ggtest2_tritanopia.scheme
-
-With these scheme files, the `brewproofer` function can be developed to provide a tool to proof data visualizations prior to moving them into production to assess the perceptability of the graphs under varying forms of colorblindness.
-
-![brewproof Proof of Concept](../img/brewproofex1.png)
-Figure 2. *Proof of concept illustration building on the example in figure 1.*
-
-While `brewproof` is still in the process of being developed, the command will also add labels to each of the panels in the resulting graph to identify the specific form of color sight impairment.  For now, the panels represent the graph in figure 1 simulated for achromatopsia, protanopia, deuteranopia, and tritanopia clockwise from the top left panel.

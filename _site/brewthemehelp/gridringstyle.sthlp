@@ -9,10 +9,33 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optgridringstyle}
+{p 4 4 4}{cmd: by_legend_ring} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: caption_ring} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: clegend_ring} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: clegend_title_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_caption_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_note_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_subtitle_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_title_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: note_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: spacers_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: subtitle_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: title_ring} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: zyx2legend_ring} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

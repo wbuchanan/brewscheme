@@ -169,7 +169,7 @@ pre {
     color: #111;
     line-height: 1.5; }
     .site-nav .page-link:not(:first-child) {
-      margin-left: 20px; }
+      margin-left: 10px; }
   @media screen and (max-width: 600px) {
     .site-nav {
       position: absolute;

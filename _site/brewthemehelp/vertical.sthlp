@@ -9,10 +9,6 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optvertical}
-
-
-
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

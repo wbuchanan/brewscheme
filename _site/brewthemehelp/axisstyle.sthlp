@@ -9,9 +9,45 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optaxisstyle}
+{p 4 4 4}{bar_group} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{bar_scale_horiz} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{bar_scale_vert} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{bar_super} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{bar_var} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{box_scale_horiz} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{box_scale_vert} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{clegend} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{dot_group} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{dot_scale_horiz} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{dot_scale_vert} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{dot_super} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{dot_var} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{horizontal_default} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{horizontal_nogrid} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{matrix_horiz} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{matrix_vert} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{sts_risktable} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{vertical_default} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{vertical_nogrid} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

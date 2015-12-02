@@ -9,10 +9,11 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optgraphstyle}
+{p 4 4 4}{default} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{graph} is an optional argument that accepts the values as valid arguments.{p_end}
 
-
+{p 4 4 4}{matrixgraph} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

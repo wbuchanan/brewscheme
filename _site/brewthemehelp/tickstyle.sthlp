@@ -9,10 +9,25 @@
 
 {title:Arguments}
 
-{p 4 4 4}{opttickstyle}
+{p 4 4 4}{cmd: default} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: major} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: major_nolabel} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: major_notick} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: major_notickbig} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: minor} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: minor_nolabel} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: minor_notick} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: minor_notickbig} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: sts_risktable} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

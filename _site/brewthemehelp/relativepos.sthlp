@@ -9,10 +9,11 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optrelativepos}
+{p 4 4 4}{cmd: clegend_axispos} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: clegend_pos} is an optional argument that accepts the values as valid arguments.{p_end}
 
-
+{p 4 4 4}{cmd: zyx2legend_pos} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

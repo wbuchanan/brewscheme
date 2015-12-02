@@ -9,9 +9,11 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optbygraphstyle}
+{p 4 4 4}{bygraph} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{combine} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{default} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

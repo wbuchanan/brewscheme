@@ -4,7 +4,6 @@ title: brewcbsim
 permalink: /brewcbsim/
 ---
 
-# BREWCBSIM
 This program is analogous to [brewviewer](https://wbuchanan.github.io/brewscheme/brewviewer) but with a focus on illustrating the way color may be perceived by individuals with various types of color sightedness impairments.  The current iteration of the program only shows a single color at a time, but future versions will expand on this capability.  The use of the program is fairly simple:
 
 ## Ex 1. Green channel dominant color

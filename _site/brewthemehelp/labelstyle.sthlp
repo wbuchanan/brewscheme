@@ -9,9 +9,13 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optlabelstyle}
+{p 4 4 4}{cmd: editor} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: ilabel} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: matrix} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: sunflower} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

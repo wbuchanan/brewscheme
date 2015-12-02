@@ -4,7 +4,6 @@ title: hextorgb
 permalink: /hextorgb/
 ---
 
-# Hexadecimal RGB Values to Decimal RGB Values in Stata
 This is a utility program that converts hexadecimal RGB encoded colors into decimal values.  It takes a sole argument which can be either a string value or a variable.  If a variable is passed to the program, it returns the RGB values in a new variable called rgb.  If string values are passed to the program it will print a table showing the individual component values, a comma separated RGB value, and a Stata formatted RGB string.
 
 ## Examples

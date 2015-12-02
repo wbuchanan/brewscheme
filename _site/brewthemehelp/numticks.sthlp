@@ -9,10 +9,23 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optnumticks}
+{p 4 4 4}{cmd: horizontal_major} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: horizontal_minor} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: horizontal_tmajor} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: horizontal_tminor} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: major} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: vertical_major} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: vertical_minor} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: vertical_tmajor} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: vertical_tminor} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

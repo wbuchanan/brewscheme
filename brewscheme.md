@@ -4,7 +4,6 @@ title: brewscheme
 permalink: /brewscheme/
 ---
 
-# BREWSCHEME
 A program to help Stata users developing graph schemes using research-based color palettes.  Unlike other uses of the color palettes developed by Brewer (see References below), this program allows users to specify the number of colors from any of the 35 color palettes they would like to use and allows users to mix/combine different palettes for the various graph types available in Stata.  Since starting the program, it has grown to include color resources from: [d3.scale.category10()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10), [d3.scale.category20()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20), [d3.scale.category20b()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20b), and [d3.scale.category20c()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c) from the [D3js](http://www.d3js.org) library; default colors used by [ggplot2](https://github.com/hadley/ggplot2) for 2-24 colors; semantic color mappings studied by [Lin, Fortuna, Kulkarni, Stone, & Heer (2013)](http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf); and additional colors are in the process of being added.
 
 ## Examples

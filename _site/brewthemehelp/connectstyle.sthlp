@@ -9,9 +9,7 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optconnectstyle}
-
-
+{p 4 4 4}{cmd: p} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

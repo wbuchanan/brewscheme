@@ -4,9 +4,7 @@ title: brewterpolate
 permalink: /brewterpolate/
 ---
 
-# BREWTERPOLATE
 A program to interpolate an arbitrary number of colors between a starting and ending color and knowing input/output colorspace.  
-
 
 ## Examples
 

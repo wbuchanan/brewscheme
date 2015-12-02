@@ -5,9 +5,33 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 01 Dec 2015 05:31:56 -0600</pubDate>
-    <lastBuildDate>Tue, 01 Dec 2015 05:31:56 -0600</lastBuildDate>
+    <pubDate>Wed, 02 Dec 2015 04:58:15 -0600</pubDate>
+    <lastBuildDate>Wed, 02 Dec 2015 04:58:15 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Getting ready for version 1 release</title>
+        <description>&lt;h1 id=&quot;new-feature-addition&quot;&gt;New feature addition&lt;/h1&gt;
+&lt;p&gt;The &lt;code&gt;brewproof&lt;/code&gt; prefix command has finally been added to the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme&quot;&gt;brewscheme&lt;/a&gt; collection of programs.  &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; is a command that allows users to quickly and easily create proofs of their data visualizations that simulate the appearance of the graph to individuals with achromatopsia (complete color vision loss), protanopia (red color vision impairment), deuteranopia (green color vision impairment), and tritanopia (blue color vision impairment) without having to modify their existing syntax beyond the addition of &lt;code&gt;brewproof, scheme(brewscheme generated scheme name):&lt;/code&gt; to the start of the command.  For additional information, examples, and to see the output of the command, please visit the &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; page.  &lt;/p&gt;
+
+&lt;h1 id=&quot;other-newsupdates&quot;&gt;Other news/updates&lt;/h1&gt;
+&lt;p&gt;The addition of the &lt;code&gt;brewproof&lt;/code&gt; command marks the end of development for the v 1.0.0 release.  No new features will be added prior to the release of this first major version.  However, some of the plans for the next release include:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Providing option for brewscheme/brewtheme to generate CSS file(s)&lt;/li&gt;
+  &lt;li&gt;More comprehensive color translations (e.g., translating across color spaces, etc…)&lt;/li&gt;
+  &lt;li&gt;Color distance estimation (e.g., to help users pick the most contrasting color given an input)&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 01 Dec 2015 22:50:00 -0600</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</guid>
+        
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>New addition to the brewscheme family</title>

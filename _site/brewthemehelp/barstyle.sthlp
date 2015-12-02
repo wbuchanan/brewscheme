@@ -9,9 +9,11 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optbarstyle}
+{p 4 4 4}{box} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{default} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{dot} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

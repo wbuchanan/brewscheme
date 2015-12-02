@@ -9,10 +9,39 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optsymbolsize}
+{p 4 4 4}{cmd: backsymbol} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: backsymspace} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: ci} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: ci2} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: dots} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: histback} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: histogram} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: matrix} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: p} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: parrow} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: parrowbarb} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: pback} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: refmarker} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: smallsymbol} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: star} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: sunflower} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: symbol} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

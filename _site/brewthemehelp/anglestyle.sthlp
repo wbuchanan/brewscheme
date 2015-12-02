@@ -9,9 +9,17 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optanglestyle}
+{p 4 4 4}{clegend} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{horizontal_tick} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{p} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{parrow} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{parrowbarb} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{vertical_tick} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

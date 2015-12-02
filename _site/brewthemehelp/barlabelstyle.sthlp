@@ -9,9 +9,7 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optbarlabelstyle}
-
-
+{p 4 4 4}{bar} is an optional argument that accepts the values as valid arguments.{p_end}
 
 
 {title: Author}{break}

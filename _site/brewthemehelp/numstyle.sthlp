@@ -9,10 +9,29 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optnumstyle}
+{p 4 4 4}{cmd: bar_num_dots} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: dot_extend_high} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: dot_extend_low} is an optional argument that accepts the values as valid arguments.{p_end}
 
+{p 4 4 4}{cmd: dot_num_dots} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: graph_aspect} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: grid_outer_tol} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_cols} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: legend_rows} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: max_wted_symsize} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: pie_angle} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: zyx2cols} is an optional argument that accepts the values as valid arguments.{p_end}
+
+{p 4 4 4}{cmd: zyx2rows} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

@@ -9,10 +9,9 @@
 
 {title:Arguments}
 
-{p 4 4 4}{optgraphsize}
+{p 4 4 4}{x} is an optional argument that accepts the values as valid arguments.{p_end}
 
-
-
+{p 4 4 4}{y} is an optional argument that accepts the values as valid arguments.{p_end}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}

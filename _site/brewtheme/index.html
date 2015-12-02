@@ -42,6 +42,10 @@
           
         
           
+          <a class="page-link" href="/brewscheme/brewproof/">brewproof</a>
+          
+        
+          
           <a class="page-link" href="/brewscheme/brewscheme/">brewscheme</a>
           
         
@@ -88,9 +92,7 @@
   </header>
 
   <article class="post-content">
-    <h1 id="brewtheme">BREWTHEME</h1>
-
-<p>This program is used to set global aesthetic properties (e.g., gridlines, number of axis ticks, etc…) that are generally independent of specific plot/graph types. <a href="https://wbuchanan.github.io/brewscheme">brewscheme</a> has been updated to allow a “theme” file to be passed to it as an argument, or will generate a theme file with the same defaults that have been used in <a href="https://wbuchanan.github.io/brewscheme/brewscheme">brewscheme</a> since the beginning of the project.  </p>
+    <p>This program is used to set global aesthetic properties (e.g., gridlines, number of axis ticks, etc…) that are generally independent of specific plot/graph types. <a href="https://wbuchanan.github.io/brewscheme">brewscheme</a> has been updated to allow a “theme” file to be passed to it as an argument, or will generate a theme file with the same defaults that have been used in <a href="https://wbuchanan.github.io/brewscheme/brewscheme">brewscheme</a> since the beginning of the project.  </p>
 
 <h2 id="examples">Examples</h2>
 <p>This is a first attempt/example at creating a theme file that emulates the aesthetics of the <br />
@@ -144,7 +146,7 @@ scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 					 ///
 <p><img src="../img/ggthemeTest.png" alt="brewtheme Example 1" /><br />
 Figure 1. <em>Example of graph created with ggplot2 theme file and ggplot2 color palettes in Stata.</em></p>
 
-<h1 id="feature-preview">Feature Preview</h1>
+<h1 id="additional-information">Additional information</h1>
 <p>In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the <code>brewtheme</code> and <code>brewscheme</code> programs now automatically generate color vision impaired clones of themselves.  If you already have the programs installed, you’ll want to run this first to make sure all of the required mata functions/classes, colors, and palettes are available.</p>
 
 <pre><code>// Compile the libbrewscheme mata library on your computer
@@ -173,13 +175,6 @@ scheme-ggtest2_achromatopsia.scheme<br />
 scheme-ggtest2_protanopia.scheme<br />
 scheme-ggtest2_deuteranopia.scheme<br />
 scheme-ggtest2_tritanopia.scheme</p>
-
-<p>With these scheme files, the <code>brewproofer</code> function can be developed to provide a tool to proof data visualizations prior to moving them into production to assess the perceptability of the graphs under varying forms of colorblindness.</p>
-
-<p><img src="../img/brewproofex1.png" alt="brewproof Proof of Concept" /><br />
-Figure 2. <em>Proof of concept illustration building on the example in figure 1.</em></p>
-
-<p>While <code>brewproof</code> is still in the process of being developed, the command will also add labels to each of the panels in the resulting graph to identify the specific form of color sight impairment.  For now, the panels represent the graph in figure 1 simulated for achromatopsia, protanopia, deuteranopia, and tritanopia clockwise from the top left panel.</p>
 
   </article>
 
