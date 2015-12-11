@@ -20,6 +20,7 @@ brewcolors xkcd, make install ref
 
 // If you've previously installed brewscheme, you'll also need to rebuild the look up data set used by brewscheme
 // to build the scheme files (the difference is that this file will now also include the color sight impairment simulation values)
+// You can also accomplish the step above this by passing the refresh option to brewscheme
 brewdb, ref
 ```
 

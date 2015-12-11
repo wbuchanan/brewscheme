@@ -61,6 +61,28 @@ scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 					 ///
 ![brewtheme Example 1](../img/ggthemeTest.png)
 Figure 1. *Example of graph created with ggplot2 theme file and ggplot2 color palettes in Stata.*
 
+# New Examples 
+A new fix related to [issue #18](https://github.com/wbuchanan/brewscheme/issues/18) has been pushed into a branch of the repo.  With the proposed fix, the example above can be modified to implement the same type of recycling of symbol types for points in Stata graphs:
+
+```
+brewscheme, scheme(ggtest2) const(orange) cone(blue) consat(20) 			 ///  
+scatst(ggplot2) scatc(5) piest(ggplot2) piec(6) barst(ggplot2) barc(2) 		 ///   
+linest(ggplot2) linec(2) areast(ggplot2) areac(5) somest(ggplot2) somec(24)  ///   
+cist(ggplot2) cic(3) themef(ggplot2) symbols(diamond triangle square)
+
+sysuse auto.dta, clear
+
+tw lowess mpg weight, || scatter mpg weight if rep78 == 1 || 				 ///   
+scatter mpg weight if rep78 == 2 || scatter mpg weight if rep78 == 3 || 	 ///   
+scatter mpg weight if rep78 == 4 || scatter mpg weight if rep78 == 5, 		 ///   
+scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 					 ///   
+3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3"						 ///   
+5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))
+```
+
+![brewtheme Example 2](../img/ggthemeTest2.png)
+Figure 1. *Example 1 (above) with recycled symbol types.*
+
 # Additional information
 In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the `brewtheme` and `brewscheme` programs now automatically generate color vision impaired clones of themselves.  If you already have the programs installed, you'll want to run this first to make sure all of the required mata functions/classes, colors, and palettes are available.
 

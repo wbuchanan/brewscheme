@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>brewscheme</title>
+    <title>Bug fixes and minor feature additions prior to version 1.0</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html">
 </head>
 
 
@@ -85,47 +85,69 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">Bug fixes and minor feature additions prior to version 1.0</h1>
+    <p class="post-meta">Dec 11, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Dec 11, 2015</span>
+  <article class="post-content">
+    <h1 id="using-symbol-types">Using symbol types</h1>
+<p>As a way to remind myself to get around to adding this, I submitted a <a href="https://github.com/wbuchanan/brewscheme/issues/18">feature/enhancement request</a> for handling symbol types in scheme files.  There is now a fix for this on the <a href="https://github.com/wbuchanan/brewscheme/tree/symbols">symbols branch</a> in brewscheme.ado.  There is an example of how the feature can be used on the <a href="http://wbuchanan.github.io/brewscheme/brewtheme/">brewtheme</a> page and with a few more tests I anticipate this making it into the release.  </p>
 
-        <h2>
-          <a class="post-link" href="/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html">Bug fixes and minor feature additions prior to version 1.0</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 1, 2015</span>
+<h2 id="other-updates">Other Updates</h2>
+<p>A few users have had issues with the installation process.  I’ve tried adding a fix to for this particular issue (caused when there is no personal subdirectory on the ADOPATH) in the <a href="https://github.com/wbuchanan/brewscheme/tree/personaldirectory">personaldirectory branch</a>.  If you have issues getting things installed please submit an issue using these instructions:</p>
 
-        <h2>
-          <a class="post-link" href="/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html">Getting ready for version 1 release</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 24, 2015</span>
+<pre><code>// Start logging all the output
+log using brewschemeIssueLog.txt, text replace
 
-        <h2>
-          <a class="post-link" href="/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html">New addition to the brewscheme family</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 17, 2015</span>
+// Print information about your system/Stata
+about
 
-        <h2>
-          <a class="post-link" href="/brewscheme/update/2015/11/17/new-site.html">A new homepage for BREWSCHEME</a>
-        </h2>
-      </li>
-    
-  </ul>
+// Print the operating system
+di `"`c(os)'"'
 
-  <p class="rss-subscribe">subscribe <a href="/brewscheme/feed.xml">via RSS</a></p>
+// Print the system directories
+sysdir
+
+// Get the package ID for any existing installations of brewscheme
+ado, find(brewscheme)
+
+// Remove any installations that currently exist
+// In the syntax below the [] is required and the # should be the number displayed 
+// from the command above
+ado uninstall [#]
+
+// You may need to repeat the second step a few times.  If there are different installations on your machine
+// Once the package has been completely uninstalled:
+
+// Install the current version
+net inst brewscheme, from("http://wbuchanan.github.io/brewscheme") rep
+
+// Set the preference for the traceback depth to decend three levels into the program call
+set tracedepth 3
+
+// Turn on tracing
+set trace on
+
+// Compile the mata libraries
+libbrewscheme
+
+// Build out the color database
+brewcolordb, ref
+
+// try your commands here
+
+
+// Close the log file 
+log c _all
+</code></pre>
+
+<p>That should provide a fair amount of information that I can use to trace issues and replicate problems that you may have.  In some cases, I may not have access to the operating system you use, but there generally shouldn’t be too many issues caused by the OS at this point.</p>
+
+
+  </article>
 
 </div>
 

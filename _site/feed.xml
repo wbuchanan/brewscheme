@@ -5,9 +5,74 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 03 Dec 2015 16:45:57 -0600</pubDate>
-    <lastBuildDate>Thu, 03 Dec 2015 16:45:57 -0600</lastBuildDate>
+    <pubDate>Fri, 11 Dec 2015 06:18:23 -0600</pubDate>
+    <lastBuildDate>Fri, 11 Dec 2015 06:18:23 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Bug fixes and minor feature additions prior to version 1.0</title>
+        <description>&lt;h1 id=&quot;using-symbol-types&quot;&gt;Using symbol types&lt;/h1&gt;
+&lt;p&gt;As a way to remind myself to get around to adding this, I submitted a &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/18&quot;&gt;feature/enhancement request&lt;/a&gt; for handling symbol types in scheme files.  There is now a fix for this on the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/tree/symbols&quot;&gt;symbols branch&lt;/a&gt; in brewscheme.ado.  There is an example of how the feature can be used on the &lt;a href=&quot;http://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt; page and with a few more tests I anticipate this making it into the release.  &lt;/p&gt;
+
+&lt;h2 id=&quot;other-updates&quot;&gt;Other Updates&lt;/h2&gt;
+&lt;p&gt;A few users have had issues with the installation process.  I’ve tried adding a fix to for this particular issue (caused when there is no personal subdirectory on the ADOPATH) in the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/tree/personaldirectory&quot;&gt;personaldirectory branch&lt;/a&gt;.  If you have issues getting things installed please submit an issue using these instructions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Start logging all the output
+log using brewschemeIssueLog.txt, text replace
+
+// Print information about your system/Stata
+about
+
+// Print the operating system
+di `&quot;`c(os)&#39;&quot;&#39;
+
+// Print the system directories
+sysdir
+
+// Get the package ID for any existing installations of brewscheme
+ado, find(brewscheme)
+
+// Remove any installations that currently exist
+// In the syntax below the [] is required and the # should be the number displayed 
+// from the command above
+ado uninstall [#]
+
+// You may need to repeat the second step a few times.  If there are different installations on your machine
+// Once the package has been completely uninstalled:
+
+// Install the current version
+net inst brewscheme, from(&quot;http://wbuchanan.github.io/brewscheme&quot;) rep
+
+// Set the preference for the traceback depth to decend three levels into the program call
+set tracedepth 3
+
+// Turn on tracing
+set trace on
+
+// Compile the mata libraries
+libbrewscheme
+
+// Build out the color database
+brewcolordb, ref
+
+// try your commands here
+
+
+// Close the log file 
+log c _all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should provide a fair amount of information that I can use to trace issues and replicate problems that you may have.  In some cases, I may not have access to the operating system you use, but there generally shouldn’t be too many issues caused by the OS at this point.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 11 Dec 2015 00:10:00 -0600</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</guid>
+        
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>Getting ready for version 1 release</title>
