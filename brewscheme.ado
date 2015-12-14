@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1534                                                                     *
+*     1798                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.13
-*! 30NOV2015
+*! v 0.0.14
+*! 11DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -55,7 +55,7 @@ prog def brewscheme, rclass
 		REFResh DBug THEMEFile(string asis) SYMBols(string asis) ]
 		
 		// Define local with valid symbols arguments
-		loc validsymbols circle diamond triangle square plus X smcircle 	 ///   
+		loc validsymbols circle diamond triangle square plus smcircle 		 ///   
 		smdiamond smsquare smtriangle smplus smx circle_hollow				 ///   
 		diamond_hollow triangle_hollow square_hollow smcircle_hollow 		 ///   
 		smdiamond_hollow smtriangle_hollow smsquare_hollow point none
@@ -91,6 +91,9 @@ prog def brewscheme, rclass
 		
 		// If no argument passed default to circle
 		else {
+		
+			// Set number of symbols local
+			loc numsymbols = 1
 		
 			// Set symbols to default to circle
 			loc symbols circle
@@ -798,6 +801,18 @@ prog def brewscheme, rclass
 								`piecolors', `suncolors', `histcolors', 	 ///   
 								`cicolors', `matcolors', `reflcolors', 		 ///   
 								`refmcolors')
+			
+			// Recycle the number of symbols
+			qui: mata: recycle(`numsymbols', `pcycles')
+			
+			// Loop over the sequence of symbols
+			foreach symb in `sequence' {
+			
+				// Build a string with each of the symbols corresponding to the 
+				// appropriate cycle number
+				loc symbolseq `"`symbolseq' "`: word `symb' of `symbols''""'
+				
+			} // End Loop over symbol sequence
 			
 			// Loop over color macros
 			foreach color in bar scat area line box dot pie hist ci mat		 ///   
@@ -1553,6 +1568,9 @@ prog def brewscheme, rclass
 				// Get scatterplot color index value
 				loc scatid `: word `i' of `scatcolorsseq''
 				
+				// Get current symbol
+				loc thissymbol `: word `i' of `symbolseq''
+				
 				// Get the area colors
 				mata: brewc.brewColorSearch("`: word `i' of `areargb''")
 				
@@ -1664,7 +1682,7 @@ prog def brewscheme, rclass
 					file write `scheme`j'' `"linepattern p`i'box solid"' _n
 					file write `scheme`j'' `"color p`i'boxline "0 0 0""' _n
 					file write `scheme`j'' `"intensity box_line full"' _n
-					file write `scheme`j'' `"symbol p`i'box circle"' _n
+					file write `scheme`j'' `"symbol p`i'box `thissymbol'"' _n
 					file write `scheme`j'' `"symbolsize p`i'box medium"' _n
 					file write `scheme`j'' `"linewidth p`i'boxmark vthin"' _n
 					file write `scheme`j'' `"color p`i'boxmarkfill "`scatcolor`j''""' _n
@@ -1704,7 +1722,7 @@ prog def brewscheme, rclass
 					// Primary connected plot entries
 					file write `scheme`j'' `"color p`i'dotmarkfill "`dotcolor`j''"' _n
 					file write `scheme`j'' `"linewidth p`i'dotmark vthin"' _n
-					file write `scheme`j'' `"symbol p`i'dot diamond"' _n
+					file write `scheme`j'' `"symbol p`i'dot `thissymbol'"' _n
 					file write `scheme`j'' `"symbolsize p`i'dot medium"' _n
 
 					// Composite entries for connected plots
@@ -1727,7 +1745,7 @@ prog def brewscheme, rclass
 					file write `scheme`j'' `"seriesstyle p`i'pie p`i'pie"' _n
 						
 					// Primary entries for scatter plots
-					file write `scheme`j'' `"symbol p`i' circle"' _n
+					file write `scheme`j'' `"symbol p`i' `thissymbol'"' _n
 					file write `scheme`j'' `"symbolsize p`i' medium"' _n
 					file write `scheme`j'' `"color p`i'markline "0 0 0""' _n
 					file write `scheme`j'' `"linewidth p`i'mark vthin"' _n
