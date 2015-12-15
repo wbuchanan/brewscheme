@@ -18,13 +18,13 @@
 *     r(terpcolor#) - The ith interpolated color between start and end		   *
 *                                                                              *
 * Lines -                                                                      *
-*     192                                                                      *
+*     216                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewterpolate
-*! v 0.0.2
-*! 02NOV2015
+*! v 0.0.3
+*! 15DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewterpolate
@@ -163,28 +163,54 @@ prog def brewterpolate, rclass
 		// Call the java program to interpolate the colors
 		javacall org.paces.Stata.ColorTerp.ColorTerp interpcolors, args()
 
-		// Macro to store all colors in single string
-		loc scolorstring `""`scolor'" "'
-
+		// Clear existing return valies
+		return clear
+		
+		// Return colors
+		loc retcolors `= `colors' + 2'
+		
 		// Loop over the returned results
-		forv i = 1/`colors' {
+		forv i = 1/`retcolors' {
 
 			// Set the return macros
 			ret loc terpcolor`i' "`color`i''"
 
-			// Add each of the colors to the same macro
-			loc scolorstring `"`scolorstring' "`color`i''""'
+			// On first iteration
+			if `i' == 1 {
+			
+				// Add each of the colors to the same macro
+				loc scolorstring `""`color`i''""'
+				
+				// Store the starting color
+				loc startingcolor "`color`i''"
+			
+			} // End IF Block for first iteration
+			
+			// ELSE Block for cases after the first iteration
+			else {
 
+				// Add each of the colors to the same macro
+				loc scolorstring `"`scolorstring' "`color`i''""'
+				
+				// Check for last iteration and store ending color
+				if `i' == `retcolors' loc endingcolor "`color`i''"
+			
+			} // End ELSE Block for iterations after the first
+			
 		} // End Loop
-
-		// Starting Color
-		ret loc start "`scolor'"
 		
-		// Ending color
-		ret loc end "`ecolor'"
-
-		// Return the full color string
-		ret loc colorstring `"`scolorstring' "`ecolor'""'
+		// Return starting color
+		ret loc start "`startingcolor'"
+		
+		// Return ending color
+		ret loc end "`endingcolor'"
+		
+		// Return the total number of colors
+		ret loc totalcolors `retcolors'
+		
+		// Return range for interpolated colors
+		ret loc interpstart 2
+		ret loc interpend `= `retcolors' - 1'
 
 // End Program definition
 end
