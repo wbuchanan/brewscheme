@@ -6,3 +6,6 @@
 [submodule "brewthemehelp"]
 	path = brewthemehelp
 	url = https://github.com/wbuchanan/brewthemehelp
+[submodule "StataFileSystem"]
+	path = StataFileSystem
+	url = https://github.com/wbuchanan/StataFileSystem

@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewcbsim
-*! v 0.0.1
-*! 25NOV2015
+*! v 0.0.2
+*! 16DEC2015
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim
@@ -30,6 +30,9 @@ prog def brewcbsim, rclass
 	// Syntax structure of program
 	syntax anything(name = rgb id = "Red, Green, Blue Color")
 	
+	// Check for brewscheme Mata library
+	brewlibcheck
+
 	// If not all values present
 	if `: word count `rgb'' != 3 {
 	
