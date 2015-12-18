@@ -5,9 +5,37 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 18 Dec 2015 08:43:58 -0600</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2015 08:43:58 -0600</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2015 09:33:45 -0600</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2015 09:33:45 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Version 1.0 Release Candidate available</title>
+        <description>&lt;h1 id=&quot;news&quot;&gt;NEWS&lt;/h1&gt;
+&lt;p&gt;It’s almost that time for a version 1 release.  There is currently no additional development planned for the current version of brewscheme.  All features that were previously posted on todo lists for the project have been implemented and the bug that have been reported have been corrected/addressed.  &lt;/p&gt;
+
+&lt;p&gt;The most recent release brings a few minor changes to some of the functionality of the brewcbsim program, but the remaining changes take place on the backend and/or here on the project page.  &lt;/p&gt;
+
+&lt;h2 id=&quot;brewcbsim-updates&quot;&gt;brewcbsim updates&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;brewcbsim&lt;/code&gt; now handles multiple colors and is allows users to pass either a named color style or an RGB string.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brewcbsim xkcd119 &quot;63 210 142&quot; &quot;8 151 233&quot; &quot;182 33 43&quot; bluishgray8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;../img/brewcbsimex4.png&quot; alt=&quot;brewcbsim&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;other-updates&quot;&gt;Other updates&lt;/h2&gt;
+&lt;p&gt;The other updates that have been made are intended to make it easier for the end user to install/maintain the software.  &lt;code&gt;brewlibcheck&lt;/code&gt; leverages &lt;code&gt;filesys.ado&lt;/code&gt; and the associated Java plugin to test whether or not the &lt;code&gt;libbrewscheme&lt;/code&gt; Mata library is up to date - and if not to compile the Mata source code into the library for you.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 18 Dec 2015 03:00:00 -0600</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</guid>
+        
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>Bug fixes and minor feature additions prior to version 1.0</title>

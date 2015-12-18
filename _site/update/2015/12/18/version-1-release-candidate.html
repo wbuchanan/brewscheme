@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>brewcbsim</title>
+    <title>Version 1.0 Release Candidate available</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/brewcbsim/">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html">
 </head>
 
 
@@ -88,60 +88,26 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">brewcbsim</h1>
+    <h1 class="post-title">Version 1.0 Release Candidate available</h1>
+    <p class="post-meta">Dec 18, 2015</p>
   </header>
 
   <article class="post-content">
-    <h1 id="updates">Updates</h1>
-<p>The functionality previously mentioned on this page has been implemented.  Below are a couple of examples (based on the previous examples) that show how the program handles multiple color - and color type - arguments now.  </p>
+    <h1 id="news">NEWS</h1>
+<p>It’s almost that time for a version 1 release.  There is currently no additional development planned for the current version of brewscheme.  All features that were previously posted on todo lists for the project have been implemented and the bug that have been reported have been corrected/addressed.  </p>
 
-<h2 id="ex-1-an-xkcd-named-color-style-with-green-blue-and-red-dominant-colors-and-a-statacorp-named-colorstyle">Ex 1. An XKCD named color style, with green, blue, and red dominant colors, and a StataCorp named colorstyle</h2>
+<p>The most recent release brings a few minor changes to some of the functionality of the brewcbsim program, but the remaining changes take place on the backend and/or here on the project page.  </p>
+
+<h2 id="brewcbsim-updates">brewcbsim updates</h2>
+<p><code>brewcbsim</code> now handles multiple colors and is allows users to pass either a named color style or an RGB string.  </p>
 
 <pre><code>brewcbsim xkcd119 "63 210 142" "8 151 233" "182 33 43" bluishgray8
 </code></pre>
 
-<p><img src="../img/brewcbsimex4.png" alt="brewcbsim Example 1" /></p>
+<p><img src="../img/brewcbsimex4.png" alt="brewcbsim" /></p>
 
-<h2 id="ex-2-colors-that-are-typically-associated-with-sensitivity-to-color-perception">Ex 2. Colors that are typically associated with sensitivity to color perception</h2>
-
-<pre><code>brewcbsim red green blue yellow
-</code></pre>
-
-<p><img src="../img/brewcbsimex5.png" alt="brewcbsim Example 2" /></p>
-
-<h1 id="deprecated-info">Deprecated info</h1>
-
-<p>This program is analogous to <a href="https://wbuchanan.github.io/brewscheme/brewviewer">brewviewer</a> but with a focus on illustrating the way color may be perceived by individuals with various types of color sightedness impairments.  The current iteration of the program only shows a single color at a time, but future versions will expand on this capability.  The use of the program is fairly simple:</p>
-
-<h2 id="ex-3-green-channel-dominant-color">Ex 3. Green channel dominant color</h2>
-
-<pre><code>brewcbsim 63 210 142
-</code></pre>
-
-<p><img src="../img/brewcbsimex1.png" alt="brewcbsim Example 3" /></p>
-
-<h2 id="ex-4-blue-channel-dominant-color">Ex 4. Blue channel dominant color</h2>
-
-<pre><code>brewcbsim 8 151 233
-</code></pre>
-
-<p><img src="../img/brewcbsimex2.png" alt="brewcbsim Example 4" /></p>
-
-<h2 id="ex-5-red-channel-dominant-color">Ex 5. Red channel dominant color</h2>
-
-<pre><code>brewcbsim 182 33 43
-</code></pre>
-
-<p><img src="../img/brewcbsimex3.png" alt="brewcbsim Example 5" /></p>
-
-<h2 id="references">References</h2>
-<p><a href="http://www.brucelindbloom.com/WorkingSpaceInfo.html">Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.</a></p>
-
-<p><a href="http://www-users.cs.umn.edu/~meyer/papers/meyer-greenberg-cga-1988.pdf">Meyer, G. W., &amp; Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. <em>Computer Graphics and Applications, IEEE 8(5),</em> pp. 28-40.</a></p>
-
-<p><a href="http://macboy.uchicago.edu/~eye1/PDF%20files/Smith%20Pokorny%2075.pdf">Smith, V. C., &amp; Pokorny, J. (2005).  Spectral sensitivity of the foveal cone photopigments between 400 and 500nm.  <em>Journal of the Optical Society of America A, 22(10),</em> pp. 2060-2071.</a></p>
-
-<p><a href="http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js">Wickline, M. (2014).  Color.Vision.Simulate, Version 0.1.  Retrieved from: http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js.  Retrieved on: 24nov2015</a></p>
+<h2 id="other-updates">Other updates</h2>
+<p>The other updates that have been made are intended to make it easier for the end user to install/maintain the software.  <code>brewlibcheck</code> leverages <code>filesys.ado</code> and the associated Java plugin to test whether or not the <code>libbrewscheme</code> Mata library is up to date - and if not to compile the Mata source code into the library for you.</p>
 
 
   </article>
