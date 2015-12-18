@@ -26,11 +26,11 @@ brewdb, ref
 
 If you used the second option above `brewcolors xkcd, make install ref`, you should see something like:
 
-![brewcolors Example 1.](../img/brewcolorsex1.png)
+![brewcolors Example 1.](http://wbuchanan.github.io/brewscheme/img/brewcolorsex1.png)
 
 when you look for named color styles in Stata.  Additionally, you should also have translated version of the Stata named color styles available as well:
 
-![brewcolors Example 2.](../img/brewcolorsex2.png)
+![brewcolors Example 2.](http://wbuchanan.github.io/brewscheme/img/brewcolorsex2.png)
 
 Once you've done this you should be all set.  If the look up database is not present when `brewscheme` is called it will build the file automatically for you, but before you can create a scheme/theme file you'll need to have the data set and modified named color styles created by `brewcolordb`.
 
