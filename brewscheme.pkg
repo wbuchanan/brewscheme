@@ -1,24 +1,21 @@
-d 'BREWSCHEME': a program for generating customized graph scheme files
+d 'BREWSCHEME': a suite of programs, mata classes/methods/functions, and Java 
+d plugins to make it easier to make better looking graphs in Stata.
 d
-d brewscheme is a program to facilitate Stata users developing graph schemes    
-d using research-based color palettes.  Unlike other uses of the color 		   
-d palettes developed by Brewer, this program allows users to specify the number 
-d of colors from any of the 35 color palettes they would like to use and allows 
-d users to mix/combine different palettes for the various graph types.  
-d Additionally, the program also contains color palettes from other researchers 
-d as well as color palettes commonly used in graphs in the education community.
-d The newest version also includes a submodule to preview combinations of color
-d palettes, a Hexadecimal to Decimal RGB converter, and a Java-based program to
-d interpolate a given number of colors between a starting and ending color.
+d brewscheme is a collection of tools to make it easier for users to 
+d generate customized scheme files, interpolate points in colorspace, 
+d simulate/proof the appearance of data visualizations to individuals 
+d with color sight impairments, and more.  This is release is a beta and 
+d any/all testing, comments, bugs, feature requests, etc... should be 
+d submitted to http://github.com/wbuchanan/brewscheme/issues/new.
 d
 d KW: Data Visualization
 d KW: Graphs
 d KW: Scheme files
 d KW: Color
 d
-d Requires: Stata version 13
+d Requires: Stata version 13.1
 d
-d Distribution-Date: 20151108
+d Distribution-Date: 20151218
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -28,22 +25,95 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
+f abovebelow.sthlp
+f anglestyle.sthlp
+f areastyle.sthlp
+f arrowstyle.sthlp
+f axisstyle.sthlp
+f barlabelpos.sthlp
+f barlabelstyle.sthlp
+f barstyle.sthlp
+f brewcbsim.ado
+f brewcbsim.sthlp
+f brewcolordb.ado
+f brewcolordb.sthlp
+f brewcolors.ado
 f brewdb.ado
 f brewextra.ado
 f brewextra.sthlp
+f brewlibcheck.ado
 f brewmeta.ado
 f brewmeta.sthlp
+f brewproof.ado
+f brewproof.sthlp
 f brewscheme.ado
 f brewscheme.sthlp
+f brewsearch.ado
+f brewsearch.sthlp
 f brewterpolate.ado
-f brewterpolate.sthlp
 f brewterpolate.jar
+f brewterpolate.sthlp
+f brewtheme.ado
+f brewtheme.sthlp
+f brewthemedata.do
+f brewtransform.ado
+f brewtransform.sthlp
 f brewviewer.ado
 f brewviewer.sthlp
+f btmargin.sthlp
+f bygraphstyle.sthlp
+f clegendstyle.sthlp
+f clockdir.sthlp
+f color.sthlp
+f compass2dir.sthlp
+f compass3dir.sthlp
+f connectstyle.sthlp
 f dirfile.ado
+f dottypestyle.sthlp
+f extraColors.do
+f filesys.ado
+f filesys.jar
+f filesys.sthlp
+f graphsize.sthlp
+f graphstyle.sthlp
+f gridlinestyle.sthlp
+f gridringstyle.sthlp
+f gridstyle.sthlp
+f gsize.sthlp
 f hextorgb.ado
 f hextorgb.sthlp
+f horizontal.sthlp
+f labelstyle.sthlp
+f legendstyle.sthlp
+f libbrewscheme.ado
+f libbrewscheme.mata
+f libbrewscheme.sthlp
 f librecycle.mlib
+f linepattern.sthlp
+f linestyle.sthlp
+f linewidth.sthlp
+f medtypestyle.sthlp
+f numstyle.sthlp
+f numticks.sthlp
+f orientstyle.sthlp
+f piegraphstyle.sthlp
+f pielabelstyle.sthlp
+f plotregionstyle.sthlp
 f recycle.mata
 f recycle.mo
+f relativepos.sthlp
+f relsize.sthlp
+f special.sthlp
+f starstyle.sthlp
+f symbol.sthlp
+f symbolsize.sthlp
+f textboxstyle.sthlp
+f tickposition.sthlp
+f ticksetstyle.sthlp
+f tickstyle.sthlp
+f vertical.sthlp
+f verticaltext.sthlp
+f yesno.sthlp
+f zyx2rule.sthlp
+f zyx2style.sthlp
 
