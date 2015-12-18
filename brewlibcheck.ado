@@ -46,7 +46,7 @@ prog def brewlibcheck
 		
 		// If the existing version of the library is lower than the distro date
 		// recompile the library
-		if `r(creatednum)' < clock("16dec2015 00:00:00", "YMDhms") {
+		if `r(creatednum)' < clock("18dec2015 00:00:00", "YMDhms") {
 			
 			// Recompile the library
 			libbrewscheme, replace size(2048)
