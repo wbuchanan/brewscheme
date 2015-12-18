@@ -55,9 +55,6 @@ prog def brewlibcheck
 	
 	} // End ELSE Block for existing brewscheme Mata library
 	
-	// Call program to check for Stata named color style database
-	qui: brewcolordb
-
 // End of Program definition	
 end
 	
