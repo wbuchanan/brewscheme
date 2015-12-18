@@ -1,9 +1,12 @@
+# NEWS
+This update to the development branch concludes the last commit with any feature additions and/or enhancements.  There is still documentation needing completion for the `brewtheme` program, but there should not be any significant changes beyond that.  Bugs will still be fixed before the version 1 release, but this version can generally be considered representative of what the stable release will look like and demonstrate the features that will be available.  
+
 # brewscheme
-brewscheme is a tool to facilitate Stata users developing graph schemes using research-based color palettes.  Unlike other uses of the color palettes developed by Brewer (see References below), this program allows users to specify the number of colors from any of the 35 color palettes they would like to use and allows users to mix/combine different palettes for the various graph types available in Stata.  Additionally, as a way of creating a centralized source for the Stata community to work from, palettes from outside of ColorBrewer are being added to boost the capabilities of the program.
+A data visualization toolkit for Stata.  This package contains Stata programs; Mata functions, classes, and methods; and Java plugins to make customizing graphs in Stata easier.  The major functionality is provided by the `brewtheme` and `brewscheme` programs which generate a `.theme` file (for aesthetic settings that are not specific to a graph/plot type) and `.scheme` files (which inherit the `.theme` files and set aesthetic properties specific to plot/graph types).  In addition to the user specified/requested aesthetics, these programs also leverage the `libbrewscheme` Mata library to generate parallel versions of these files with values that simulate the appearance to individuals with achromatopsia (complete color blindness), protanopia (red color sight impairment), deuteranopia (green color sight impairment), and tritanopia (blue color sight impairment).  
 
-## TODO
+There are additional programs for color interpolation (`brewterpolate`), translation between hexadecimal and RGB color spaces (`hextorgb`), estimating simulated RGB values for the forms of color sight impairments listed above (`libbrewscheme`), a color palette previewer (`brewviewer`), and a color vision simulator (`brewcbsim`).  
 
-1. Update brewcbsim to allow the end user to specify multiple RGB tuples
+Together, this provides users with a powerful toolkit to customize their data visualizations generated in Stata and makes it easier and faster to incorporate Stata code into production environments that require standardization.
 
 ## Examples
 To view examples, please see the [project website](https://wbuchanan.github.io/brewscheme).
