@@ -30,6 +30,9 @@ prog def brewcbsim, rclass
 	// Syntax structure of program
 	syntax anything(name = colors id = "Red, Green, Blue Color or named color styles")
 	
+	// Check for brewscheme Mata library
+	brewlibcheck
+
 	// Clear existing returned value
 	return clear
 	

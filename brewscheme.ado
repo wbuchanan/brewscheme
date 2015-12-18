@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1798                                                                     *
+*     1801                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.14
-*! 11DEC2015
+*! v 0.0.15
+*! 16DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -54,6 +54,9 @@ prog def brewscheme, rclass
 		SOMESTyle(string asis) SOMEColors(real 3) SOMESATuration(real 100)	 ///   
 		REFResh DBug THEMEFile(string asis) SYMBols(string asis) ]
 		
+		// Check for brewscheme Mata library
+		brewlibcheck
+	
 		// Define local with valid symbols arguments
 		loc validsymbols circle diamond triangle square plus smcircle 		 ///   
 		smdiamond smsquare smtriangle smplus smx circle_hollow				 ///   

@@ -8,13 +8,13 @@
 *						 used by programs in the brewscheme package.		   *
 *                                                                              *
 * Lines -                                                                      *
-*     58                                                                       *
+*     56                                                                       *
 *                                                                              *
 ********************************************************************************
 		
 *! libbrewscheme
-*! v 0.0.1
-*! 29NOV2015
+*! v 0.0.2
+*! 16DEC2015
 
 // Drop program if loaded in memory
 cap prog drop libbrewscheme
@@ -26,7 +26,7 @@ prog def libbrewscheme
 	version 13.1
 	
 	// Syntax of the program
-	syntax[, DISplay Locpath ]
+	syntax[, DISplay Locpath REPlace SIze(real 2048) ]
 
 	// Clear all objects, classes, methods, and functions from Mata's cache
 	mata: mata clear
@@ -38,7 +38,7 @@ prog def libbrewscheme
 	else qui: do `"`c(sysdir_plus)'l/libbrewscheme.mata"'
 	
 	// Create libbrewscheme.mlib
-	qui: mata: mata mlib create libbrewscheme, replace size(2048)
+	qui: mata: mata mlib create libbrewscheme, `replace' `size'
 
 	// Add the classes, methods, and functions defined in libbrewscheme.mata to 
 	// the mata library file
