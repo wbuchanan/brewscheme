@@ -4,7 +4,7 @@
 * combinations created by different numbers of colors.						   *
 *                                                                              *
 * Lines -                                                                      *
-*     444                                                                      *
+*     461                                                                      *
 *                                                                              *
 ********************************************************************************
 		
@@ -35,6 +35,13 @@ prog def brewviewer
 		err 198
 		
 	} // End IF Block for invalid number of color arguments
+	
+	// Check number of colors and sequential option is turned on
+	if inrange(`colors', 2, 6) & `"`seq'"' != "" loc labsize medsmall
+	else if inrange(`colors', 7, 12) & `"`seq'"' != "" loc labsize small
+	else if inrange(`colors', 13, 18) & `"`seq'"' != "" loc labsize vsmall
+	else if `colors' >= 19 & `"`seq'"' != "" loc labsize tiny
+	else loc labsize medsmall
 	
 	// Check impairment option to add subtitle to graph
 	if `"`impaired'"' != "" loc xtralab `""with simulated total, red, green, and blue colorblindness""'
@@ -183,10 +190,10 @@ prog def brewviewer
 			loc bkupmax `r(max)'
 			
 			// Check for colorblindness simulation option
-			if `"`simcb'"' != "" loc sze `= 3 * (1 + `= 1/(`maxcol' * 5)''
+			if `"`simcb'"' != "" loc sze `= 1.5 + `= 1/(`maxcol' * 5)''
 			
 			// Set the size of the boxes based on the log of 3 times n colors
-			else loc sze `= 3 * (1 + `= 1/`maxcol'')'
+			else loc sze `= 2 + `= 1/`maxcol'''
 			
 			// Local to build xaxis labeling rules
 			loc xax 
@@ -248,44 +255,44 @@ prog def brewviewer
 							loc basex `= (`simcount' * 5) - 4'
 							
 							// Sets xaxis label for the baseline palette
-							loc baselab `basex' "`i'"
+							loc baselab `basex' "`i' "
 						
 							// Sets the xaxis position for the achromatopsia transformed palette
 							loc achromx `= (`simcount' * 5) - 3'
 						
 							// Sets the xaxis label for the achromatopsia transformed palette
-							loc achromlab `achromx' "`i' Achromatopsic Vision"
+							loc achromlab `achromx' " a "
 						
 							// Sets the xaxis position for the protanopia transformed palette
 							loc protanx `= (`simcount' * 5) - 2'
 						
 							// Sets the xaxis label for the protanopia transformed palette
-							loc protanlab `protanx' "`i' Protanopic Vision"
+							loc protanlab `protanx' " p "
 						
 							// Sets the xaxis position for the deuteranopia transformed palette
 							loc deuterx `= (`simcount' * 5) - 1'
 						
 							// Sets the xaxis label for the deuteranopia transformed palette
-							loc deuteranlab `deuterx' "`i' Deuteranopic Vision"
+							loc deuteranlab `deuterx' " d "
 						
 							// Sets the xaxis position for the tritanopia transformed palette
 							loc tritanx `= (`simcount' * 5) - 0'
 						
 							// Sets the xaxis label for the tritanopia transformed palette
-							loc tritanlab `tritanx' "`i' Tritanopic Vision"
+							loc tritanlab `tritanx' " t "
 							
 							// Build the command for graphing this individual color/label
 							loc scat`i' `scat`i''							 ///   
 							(scatteri `j' `basex', mc("`col'") mlabc(black) ///   
-									msize(`sze' `sze') mlc(black) ms(S))	 ///   
+									/*msize(`sze' `sze')*/ mlc(black) ms(S))	 ///   
 							(scatteri `j' `achromx', mlc(black) ms(S)		 ///   
-								mc("`achromatopsia'") msize(`sze' `sze'))	 ///   
+								mc("`achromatopsia'") /*msize(`sze' `sze')*/)	 ///   
 							(scatteri `j' `protanx', ms(S) mlc(black)		 ///   
-								mc("`protanopia'") msize(`sze' `sze'))		 ///   
+								mc("`protanopia'") /*msize(`sze' `sze')*/)		 ///   
 							(scatteri `j' `deuterx', ms(S) mlc(black)		 ///   
-								mc("`deuteranopia'") msize(`sze' `sze'))	 ///    
+								mc("`deuteranopia'") /*msize(`sze' `sze')*/)	 ///    
 							(scatteri `j' `tritanx', ms(S) mlc(black) 		 ///   
-								mc("`tritanopia'") msize(`sze' `sze'))
+								mc("`tritanopia'") /*msize(`sze' `sze')*/)
 							
 							// Add to existing x-axis label macros
 							loc xax `xax' `baselab' `achromlab' `protanlab' `deuteranlab' `tritanlab'
@@ -325,7 +332,7 @@ prog def brewviewer
 			if `"`impaired'"' != "" {
 			
 				// Adjust label angle and size 
-				loc xax `xax', angle(90) labsize(vsmall)
+				loc xax `xax', labsize(`labsize') angle(0)
 				
 				// Remove x-axis title to make room for the additional labeling
 				loc xaxti ""
@@ -341,20 +348,30 @@ prog def brewviewer
 				// Remove any duplicate values
 				loc xax : list uniq xax
 			
+				loc xax `xax', labsize(`labsize')
+			
 				// Set the x-axis title
 				loc xaxti "# Colors"
 
 			} // End ELSE Block for graph w/o simulated colorblindness option
 			
 			// Get minimum value
-			loc scales r(`= `mincol' - 0.25'(0.1)`= `maxcol' + 0.25')
+			loc scales r(`= `mincol' - 0.25'(0.5)`= `maxcol' + 0.25')
+			
+			if `"`impaired'"' != "" {
+				loc note1 "a = Achromatopsia    p = Protanopia" 
+				loc note2 "    d = Deuteranopia     t = Tritanopia" 
+				loc note note(`note1' `note2', size(medsmall) c(black) pos(7))
+			}
 			
 			// Graph the color palette
-			tw `cmd', ysca(r(1 `maxcol') off) xsca(`scales') xlab(`xax')	 ///   
-			yti("") ylab(none, nogrid) legend(nodraw) xti(`"`xaxti'"') 		 ///   
-			graphr(margin(medlarge) fc(white) lc(white) ic(white)) 			 ///   
-			plotr(lc(white) fc(white) ic(white)) name(`palnm'`color', 		 /// 
-			replace) ti("BrewScheme palette: `palnm' colors" `xtralab', size(medsmall) span)
+			tw `cmd', ysca(r(1 `maxcol') off) xsca(`scales') xlab(`xax') 	 ///   
+			yti("") ylab(none, nogrid) legend(nodraw) `note'				 ///   
+			xti(`"`xaxti'"') graphr(margin(medlarge) fc(white) lc(white) 	 ///   
+			ic(white)) plotr(lc(white) fc(white) ic(white)) 				 ///   
+			name(`palnm'`color', replace) xsize(17) ysize(11) 				 ///   
+			ti("BrewScheme palette: `palnm' colors" `xtralab', 				 ///   
+			size(medsmall) span)
 			
 			// Store the name of the graph
 			loc grnames `grnames' `palnm'`color'
