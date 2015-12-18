@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! libbrewscheme
-*! v 0.0.2
-*! 16DEC2015
+*! v 0.0.3
+*! 18DEC2015
 
 // Drop program if loaded in memory
 cap prog drop libbrewscheme
@@ -26,7 +26,7 @@ prog def libbrewscheme
 	version 13.1
 	
 	// Syntax of the program
-	syntax[, DISplay Locpath REPlace SIze(real 2048) ]
+	syntax[, DISplay Locpath REPlace SIze(passthru) ]
 
 	// Clear all objects, classes, methods, and functions from Mata's cache
 	mata: mata clear
