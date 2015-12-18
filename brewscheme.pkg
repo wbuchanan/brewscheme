@@ -15,7 +15,7 @@ d KW: Color
 d
 d Requires: Stata version 13
 d
-d Distribution-Date: 20151202
+d Distribution-Date: 20151218
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -78,6 +78,9 @@ f compass2dir.sthlp
 f compass3dir.sthlp
 f connectstyle.sthlp
 f dottypestyle.sthlp
+f filesys.ado
+f filesys.sthlp
+f filesys.jar
 f graphsize.sthlp
 f graphstyle.sthlp
 f gridlinestyle.sthlp
