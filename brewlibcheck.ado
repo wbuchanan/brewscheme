@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewlibcheck
-*! v 0.0.1
-*! 16DEC2015
+*! v 0.0.2
+*! 18DEC2015
 
 // Drop the program if already loaded in memory
 cap prog drop brewlibcheck
@@ -34,7 +34,7 @@ prog def brewlibcheck
 	if _rc == 0 {
 	
 		// Compile the file for the first time
-		libbrewscheme, size(2048)
+		libbrewscheme, replace size(2048)
 		
 	} // End IF Block for non-existent Mata library	
 	
