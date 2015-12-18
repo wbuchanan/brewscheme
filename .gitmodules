@@ -1,12 +1,3 @@
-[submodule "recycle"]
-	path = recycle
-	url = https://github.com/wbuchanan/recycle.git
-[submodule "brewthemehelp"]
-	path = brewthemehelp
-	url = https://github.com/wbuchanan/brewthemehelp.git
-[submodule "StataFileSystem"]
-	path = StataFileSystem
-	url = https://github.com/wbuchanan/StataFileSystem.git
 
 
 
