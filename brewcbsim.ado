@@ -10,13 +10,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     129                                                                      *
+*     176                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcbsim
-*! v 0.0.1
-*! 25NOV2015
+*! v 0.0.2
+*! 18DEC2015
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim
@@ -28,102 +28,149 @@ prog def brewcbsim, rclass
 	version 13.1
 	
 	// Syntax structure of program
-	syntax anything(name = rgb id = "Red, Green, Blue Color")
+	syntax anything(name = colors id = "Red, Green, Blue Color or named color styles")
 	
-	// If not all values present
-	if `: word count `rgb'' != 3 {
+	// Clear existing returned value
+	return clear
 	
-		// Print error message to console
-		di as err "Insufficient arguments.  Must provide red, green, and blue channels"
-		
-		// Error out of the program
-		err 198
-		
-	} // End IF block 
+	// Create a new brewcolors object
+	mata: x = brewcolors()
 	
-	// Concatenate the RGB string
-	else {
+	// Get a list of all named color styles currently installed
+	mata: x.getNames(1)
 	
-		// Store the Stata formatted RGB string in the local color
-		loc color "`: word 1 of `rgb'' `: word 2 of `rgb'' `: word 3 of `rgb''"
+	// Macro to store constructor for the graph
+	loc cbsim 
 	
-	} // End ELSE Block for sufficient arguments
+	// Macro to store the x-labels
+	loc xlabels 
 	
-	// Pass the color string to the Mata wrapper used to perform the transform
-	mata translateColor(`: subinstr loc color `" "' `", "', all')
+	// Macro to define y-axis labels
+	loc ylabs 10 "Specified" 8 "Achromatopsia" 6 "Protanopia" 4 "Deuteranopia" 2 "Tritanopia"
 	
-	// Preserve current state of the data
-	preserve
+	// Loop over colors passed to program
+	forv i = 1/`: word count `colors'' {
 	
-		// Clear existing data from memory
-		clear
-		
-		// Set the number of observations
-		qui: set obs 5
-		
-		// Set the val variable to 5
-		qui: g val = 5
-		
-		// Create an id variable with values that will be used to identify 
-		// vision types and returned colors
-		qui: g id = _n
-		
-		// Define value labels based on the passed color string and the 
-		// returned local macros from the Mata function
-		la def colors 	1 `"`baselinelab' `baseline'"'						 ///   
-						2 `"`achromatopsialab' `achromatopsia'"'			 ///   
-						3 `"`protanopialab' `protanopia'"'					 ///   
-						4 `"`deuteranopialab' `deuteranopia'"'				 ///   
-						5 `"`tritanopialab' `tritanopia'"', modify
-		
-		// Apply the value labels
-		la val id colors
+		// Get the token for this iteration
+		loc color "`: word `i' of `colors''"
 	
-		// Create the graph to show how the color would appear under varying 
-		// types of color blindness
-		gr hbar (asis) val, over(id, gap(*5) axis(off)) asyvars				 ///   
-		bar(1, c("`baseline'")) bar(2, c("`achromatopsia'"))				 ///   
-		bar(3, c("`protanopia'")) bar(4, c("`deuteranopia'"))				 ///   
-		bar(5, c("`tritanopia'")) bargap(10)								 ///   
-		graphr(ic(white) fc(white) lc(white))								 ///   
-		plotr(ic(white) fc(white) lc(white))								 ///   
-		legend(off) ysc(off) ylab(, nogrid) 								 ///   
-		blabel(name, pos(center) size(vsmall)) 								 ///   
-		ti("brewscheme: ", size(large) c(black))							 ///   
-		subti("Color Sightedness Impairment Simulation", size(medium) c(black))
-	
-		// Return the color value passed to the program
-		ret loc original `baseline'
+		// If the argument is only a single word and is a named color style
+		if `: word count `color'' == 1 & `: list color in colornames' == 1 {
 		
-		// Return the color value with label
-		ret loc originallab `baselinelab'
-		
-		// Return the RGB transform for complete color blindness
-		ret loc achromatopsic `achromatopsia'
-		
-		// Return the RGB transform for complete color blindness with label
-		ret loc achromatopsiclab `achromatopsialab'
-		
-		// Return the RGB value for Red color blindness
-		ret loc protanope `protanopia'
-		
-		// Return the RGB value for Red color blindness with label
-		ret loc protanopelab `protanopialab'
-		
-		// Return the RGB value for Green color blindness
-		ret loc deuteranope `deuteranopia'
-		
-		// Return the RGB value for Green color blindness with label
-		ret loc deuteranopelab `deuteranopialab'
-		
-		// Return the RGB value for Blue color blindness
-		ret loc tritanope `tritanopia'
+			// Get the named color style
+			mata: x.brewNameSearch("`color'")
+			
+			// Define baseline points
+			loc cbbase (scatteri 10 `i' (12) "`rgb'", mlc(black) ms(S)		 ///   
+			mc("`rgb'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
 
-		// Return the RGB value for Blue color blindness with label
-		ret loc tritanopelab `tritanopialab'
+			// Define point for Achromatopsia
+			loc achrom (scatteri 8 `i' (12) "`achromatopsia'", mlc(black) 	 ///   
+			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						
+			// Define point for protanopia			
+			loc protan (scatteri 6 `i' (12) "`protanopia'", mlc(black) ms(S) ///   
+			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						
+			// Define point for deuteranopia			
+			loc deuteran (scatteri 4 `i' (12) "`deuteranopia'", mlc(black) 	 ///   
+			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						  
+			// Define point for tritanopia			  
+			loc tritan (scatteri 2 `i' (12) "`tritanopia'", mlc(black) ms(S) ///    
+			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			
+			// Add the RGB value to a macro to store all the RGB values
+			loc thebaseline "`rgb'"
+			
+			// Add the entry to the macro to build the graph command
+			loc cbsim `cbsim' `cbbase' `achrom' `protan' `deuteran' `tritan'
+			
+			// The current xaxis label
+			loc thisxlab `i' "`color'"
+			
+			// Add xlabel entry
+			loc xlabels `xlabels' `thisxlab'
 		
-	// Restore the data back to original state
-	restore	
+		} // End IF Block for named color styles
+
+		// If the argument is an RGB color string
+		else if `: word count `color'' == 3 {
+		
+			// Used to parse/clean/format the string to be passed to the mata 
+			// function on the next line
+			loc transcolors `: word 1 of `color'' `: word 2 of `color'' `: word 3 of `color''
+		
+			// Get the translated colors
+			mata: translateColor(`: subinstr loc transcolors `" "' `", "', all')
+		
+			// Define baseline points
+			loc cbbase (scatteri 10 `i' (12) "`baseline'", mlc(black) ms(S)	 ///   
+			mc("`baseline'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+
+			// Define point for Achromatopsia
+			loc achrom (scatteri 8 `i' (12) "`achromatopsia'", mlc(black) 	 ///   
+			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						
+			// Define point for protanopia			
+			loc protan (scatteri 6 `i' (12) "`protanopia'", mlc(black) ms(S) ///   
+			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						
+			// Define point for deuteranopia			
+			loc deuteran (scatteri 4 `i' (12) "`deuteranopia'", mlc(black) 	 ///   
+			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+						  
+			// Define point for tritanopia			  
+			loc tritan (scatteri 2 `i' (12) "`tritanopia'", mlc(black) ms(S) ///    
+			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			
+			// Gets the baseline color passed to the program
+			loc thebaseline "`baseline'"
+
+			// Add the entry to the macro to build the graph command
+			loc cbsim `cbsim' `cbbase' `achrom' `protan' `deuteran' `tritan'
+		
+			// The current xaxis label
+			loc thisxlab `i' "`baseline'"
+			
+			// Add xlabel entry
+			loc xlabels `xlabels' `thisxlab'
+		
+		} // End ELSEIF Block for RGB color strings
+		
+		// For any other values
+		else {
+		
+			// Print error message to the Stata console
+			di as err "IGNORED: `color' is not a valid named color style or RGB color string."
+
+		} // End ELSE Block for invalid arguments	
+		
+		// Add the RGB value to a macro to store all the RGB values
+		ret loc original`i' `"`thebaseline'"'
+			
+		// Add the achromatopsia value to a macro for achromatopsia values
+		ret loc achromatopsic`i' `"`achromatopsia'"'
+		
+		// Add the protanopia value to a macro for protanopia values
+		ret loc protanopic`i' `"`protanopia'"'
+		
+		// Add the deuteranopia value to a macro for deuteranopia values
+		ret loc deuteranopic`i' `"`deuteranopia'"'
+		
+		// Add the tritanopia value to a macro for tritanopia values
+		ret loc tritanopic`i' `"`tritanopia'"'
+
+	} // End Loop over the arguments
+			
+	// Create the graph to show the colors
+	tw `cbsim', ti("brewscheme - Color Sight Simulator", 					 ///   
+	size(large) c(black) margin(l = 10 r = 10 b = 10 t = 5) span)			 ///   
+	graphr(ic(white) fc(white) lc(white)) yti("Vision Type") 				 ///   
+	plotr(ic(white) fc(white) lc(white)) legend(off)						 ///   
+	xlab(`xlabels', labs(small)) ylab(`ylabs', angle(0) labs(small) nogrid)  ///    
+	xsca(range(0.5(0.1)`= 0.5 + `: word count `colors''')) 					 ///   
+	ysca(range(1.5(1)10.5))	xti("User Specified Colors", margin(t=2))
 
 // End of program definition
 end
