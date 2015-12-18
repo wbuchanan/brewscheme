@@ -17,13 +17,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     779                                                                      *
+*     785                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolors
-*! v 0.0.2
-*! 01DEC2015
+*! v 0.0.3
+*! 16DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -36,6 +36,9 @@ prog def brewcolors, rclass
 	
 	// Syntax for program (make adds to color DB, install install's colors)
 	syntax anything(name = source) [, MAke INSTall COLors(passthru) REFresh ]
+	
+	// Check for brewscheme Mata library
+	brewlibcheck
 	
 	// Check for any optional arguments to add a comma to the command string
 	if `"`make'`install'`colors'"' == "" loc optstring ","
@@ -616,11 +619,14 @@ prog def decompress
 	// For *nix based systems
 	else {
 	
-		if `"`c(os)'"' == "MacOSX" {
+		// For *nix based systems, substitute the tilde character if it is the 
+		// first character in the file path
+		if substr(`"`thefile'"', 1, 1) == "~" {
 		
-			loc thefile `: subinstr loc thefile `"~"' `"/Users/`c(username)'"', all'
+			// Replace the tilde with the expansion
+			loc thefile `: subinstr loc thefile `"~"' `"`: environment HOME'"', all'
 			
-		}
+		} // End IF Block for tilde substitution
 		
 		// Decompress the Green-Blind Table	 
 		! gunzip "`thefile'"

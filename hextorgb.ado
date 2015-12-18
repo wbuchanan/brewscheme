@@ -12,7 +12,7 @@
 
 *! hextorgb
 *! v 0.0.1
-*! 08nov2015
+*! 08NOV2015
 
 // Drop program if already loaded in memory
 cap prog drop hextorgb
@@ -164,4 +164,3 @@ prog def hextorgb, rclass
 // End of program
 end
 
-	

@@ -13,7 +13,7 @@ d KW: Graphs
 d KW: Scheme files
 d KW: Color
 d
-d Requires: Stata version 13
+d Requires: Stata version 13.1
 d
 d Distribution-Date: 20151218
 d
@@ -25,6 +25,14 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
+f abovebelow.sthlp
+f anglestyle.sthlp
+f areastyle.sthlp
+f arrowstyle.sthlp
+f axisstyle.sthlp
+f barlabelpos.sthlp
+f barlabelstyle.sthlp
+f barstyle.sthlp
 f brewcbsim.ado
 f brewcbsim.sthlp
 f brewcolordb.ado
@@ -33,6 +41,7 @@ f brewcolors.ado
 f brewdb.ado
 f brewextra.ado
 f brewextra.sthlp
+f brewlibcheck.ado
 f brewmeta.ado
 f brewmeta.sthlp
 f brewproof.ado
@@ -51,24 +60,6 @@ f brewtransform.ado
 f brewtransform.sthlp
 f brewviewer.ado
 f brewviewer.sthlp
-f dirfile.ado
-f extraColors.do
-f hextorgb.ado
-f hextorgb.sthlp
-f libbrewscheme.ado
-f libbrewscheme.mata
-f libbrewscheme.sthlp
-f librecycle.mlib
-f recycle.mata
-f recycle.mo
-f abovebelow.sthlp
-f anglestyle.sthlp
-f areastyle.sthlp
-f arrowstyle.sthlp
-f axisstyle.sthlp
-f barlabelpos.sthlp
-f barlabelstyle.sthlp
-f barstyle.sthlp
 f btmargin.sthlp
 f bygraphstyle.sthlp
 f clegendstyle.sthlp
@@ -77,19 +68,27 @@ f color.sthlp
 f compass2dir.sthlp
 f compass3dir.sthlp
 f connectstyle.sthlp
+f dirfile.ado
 f dottypestyle.sthlp
+f extraColors.do
 f filesys.ado
-f filesys.sthlp
 f filesys.jar
+f filesys.sthlp
 f graphsize.sthlp
 f graphstyle.sthlp
 f gridlinestyle.sthlp
 f gridringstyle.sthlp
 f gridstyle.sthlp
 f gsize.sthlp
+f hextorgb.ado
+f hextorgb.sthlp
 f horizontal.sthlp
 f labelstyle.sthlp
 f legendstyle.sthlp
+f libbrewscheme.ado
+f libbrewscheme.mata
+f libbrewscheme.sthlp
+f librecycle.mlib
 f linepattern.sthlp
 f linestyle.sthlp
 f linewidth.sthlp
@@ -100,6 +99,8 @@ f orientstyle.sthlp
 f piegraphstyle.sthlp
 f pielabelstyle.sthlp
 f plotregionstyle.sthlp
+f recycle.mata
+f recycle.mo
 f relativepos.sthlp
 f relsize.sthlp
 f special.sthlp

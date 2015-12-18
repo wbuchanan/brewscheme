@@ -16,13 +16,13 @@
 *	  tritanopia - Blue color blindness RGB transform/translate				   *
 *                                                                              *
 * Lines -                                                                      *
-*     91                                                                       *
+*     94                                                                       *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtransform
-*! v 0.0.1
-*! 25NOV2015
+*! v 0.0.2
+*! 16DEC2015
 
 // Drop the program if already loaded in memory
 cap prog drop brewtransform
@@ -35,6 +35,9 @@ prog def brewtransform
 	
 	// Syntax structure for program
 	syntax varlist(max=1 string)
+	
+	// Check for brewscheme Mata library
+	brewlibcheck
 	
 	// Get all unique rgb values
 	qui: levelsof `varlist', loc(colors)

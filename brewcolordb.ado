@@ -8,13 +8,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     238                                                                      *
+*     317                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolordb
-*! v 0.0.4
-*! 30NOV2015
+*! v 0.0.5
+*! 17DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -28,6 +28,9 @@ prog def brewcolordb, rclass
 	// Defines syntax structure of program
 	syntax [, DISplay REFresh]
 	
+	// Check for brewscheme Mata library
+	brewlibcheck
+
 	// Print warning message
 	di as res "This program needs to clear all data currently in memory. "	 ///   
 	"If this is ok hit enter, otherwise enter the letter 'n' and hit enter " ///  

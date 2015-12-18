@@ -5,13 +5,13 @@ title: about
 
 **brewscheme** is a Stata utility for the creation of data visualizations.  The package includes tools for conversions between colorspaces, color interpolation, setting global graph aesthetics, setting plot type aesthetics and previewing color palette combinations.  Most importantly for Stata users, this program saves *you* time.  Rather than constantly needing to pass arguments to aesthetic parameters, you can create a theme and/or scheme file to store these settings.  Then, you only need to pass an argument like `scheme(myschemeFileName)` to the command to the graph command to use all of your aesthetic settings without having to manually enter them.  
 
-# Updating from previous version of brewscheme
+# Installation
+**If you are using Windoze 10 you must make sure that the personal directory on your adopath is readable (by default this is usually C:\ado\personal)**.  On most systems the personal directory should be writable by the user, but some individuals have had difficulties using `brewscheme` due to file permission errors they believe were caused by updating to Windoze 10.  You can check on the location of your personal directory using `sysdir` from within Stata.  
+
+## Additional information about installation
 If you already installed a previous version of brewscheme, there are a few quick/minor things you'll need to do on your system to enable all the functionality of the programs:
 
 ```
-// This program compiles the libbrewscheme Mata library locally on your machine
-libbrewscheme
-
 // Next build out the color database (which also creates color blind translations of the Stata named color styles)
 brewcolordb, ref
 
@@ -24,23 +24,15 @@ brewcolors xkcd, make install ref
 brewdb, ref
 ```
 
-Once you've done this you should be all set.  
+If you used the second option above `brewcolors xkcd, make install ref`, you should see something like:
 
-# First time installation
-If you've never installed brewscheme before, things are ever so slightly easier.
+![brewcolors Example 1](../img/brewcolorsex1.png)
 
-```
-// This program compiles the libbrewscheme Mata library locally on your machine
-libbrewscheme
+when you look for named color styles in Stata.  Additionally, you should also have translated version of the Stata named color styles available as well:
 
-// Next build out the color database (which also creates color blind translations of the Stata named color styles)
-brewcolordb, ref
+![brewcolors Example 2](../img/brewcolorsex2.png)
 
-// If you also wanted to install all of the named colors available from the XKCD you can skip the step above and use:
-brewcolors xkcd, make install ref
-```
-
-If the look up database is not present when `brewscheme` is called it will build the file automatically for you, but before you can create a scheme/theme file you'll need to have the data set and modified named color styles created by `brewcolordb` and the functionality provided by the `libbrewscheme` Mata library available on your computer.
+Once you've done this you should be all set.  If the look up database is not present when `brewscheme` is called it will build the file automatically for you, but before you can create a scheme/theme file you'll need to have the data set and modified named color styles created by `brewcolordb`.
 
 
 # References

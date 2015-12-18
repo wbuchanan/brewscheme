@@ -20,13 +20,13 @@
 *	  theme-[theme file name]_tritanopia.theme - Full Colorblind version	   *
 *                                                                              *
 * Lines -                                                                      *
-*     305                                                                      *
+*     379                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.4
-*! 02DEC2015
+*! v 0.0.5
+*! 16DEC2015
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -66,6 +66,9 @@ prog def brewtheme
 						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
 						ZYX2STYle(string asis) LOADThemedata brewscheme ]
 						
+	// Check for brewscheme Mata library
+	brewlibcheck
+	
 	// Stores the root file path for theme files
 	loc themeroot `c(sysdir_personal)'b/theme/theme
 	
