@@ -59,12 +59,12 @@ prog def brewtheme
 						PLOTREGIONSTYle(string asis) RELATIVEPos(string asis) ///   
 						RELSIze(string asis) SPECial(string asis)			 ///   
 						STARSTYle(string asis) SYMBol(string asis)			 ///   
-						SYMBOLSIze(string asis) ORIENTSTYle(string asis)	 ///   
+						SYMBOLSIze(string asis) SUNFLOWERSTYle(string asis)	 ///   
 						TEXTBOXSTYle(string asis) TICKPosition(string asis)  ///   
 						TICKSTYle(string asis) TICKSETSTYle(string asis)	 ///   
-						VERTICAL(string asis) VERTICALText(string asis)		 ///   
-						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
-						ZYX2STYle(string asis) LOADThemedata brewscheme ]
+						VERTICALText(string asis) YESNo(string asis) 		 ///   
+						ZYX2Rule(string asis) ZYX2STYle(string asis) 		 ///   
+						LOADThemedata brewscheme ]
 						
 	// Check for brewscheme Mata library
 	brewlibcheck
