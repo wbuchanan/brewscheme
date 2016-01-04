@@ -20,13 +20,13 @@
 *	  theme-[theme file name]_tritanopia.theme - Full Colorblind version	   *
 *                                                                              *
 * Lines -                                                                      *
-*     379                                                                      *
+*     391                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.5
-*! 16DEC2015
+*! v 0.0.6
+*! 04JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -114,11 +114,23 @@ prog def brewtheme
 					
 					loc val `: word 2 of `indi''
 					
+					// Block used to handle cases with unbalanced quotation marks
+					// in the value of the key-value pair.
+					if 	substr(`"`val'"', 1, 1) != `"""' & 					 ///   
+						substr(`"`val'"', -1, 1) == `"""' {
+						
+						// If the first character isn't a " but the last 
+						// character is a " replace all instances of " with 
+						// nothing in the value string
+						loc val `: subinstr loc val `"""' "", all'
+
+					} // End IF Block for unbalanced quotation mark handling
+					
 					// Check if valid argument
-					if `"`: list indivarg in `v'args'"' != "" {
+					if `"`: list arg in `v'args'"' != "" {
 
 						// Search for the RGB values
-						mata: brewc.brewNameSearch(`"`val'"')
+						mata: brewc.brewNameSearch("`val'")
 						
 						foreach x in rgb achromatopsia protanopia deuteranopia tritanopia { 
 						
