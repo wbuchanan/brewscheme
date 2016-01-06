@@ -211,6 +211,10 @@ prog def brewterpolate, rclass
 		// Return range for interpolated colors
 		ret loc interpstart 2
 		ret loc interpend `= `retcolors' - 1'
+		
+		// Return all the colors in a single macro
+		ret loc colorstring `scolorstring'
+		ret loc colorsdelim `: subinstr loc scolorstring `"" ""' `"", ""', all'
 
 // End Program definition
 end
