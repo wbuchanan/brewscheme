@@ -9,8 +9,8 @@
 ********************************************************************************
 		
 *! brewviewer
-*! v 0.0.2
-*! 16DEC2015
+*! v 0.0.3
+*! 06JAN2016
 
 // Drop program if already loaded in memory
 cap prog drop brewviewer
@@ -35,14 +35,7 @@ prog def brewviewer
 		err 198
 		
 	} // End IF Block for invalid number of color arguments
-	
-	// Check number of colors and sequential option is turned on
-	if inrange(`colors', 2, 6) & `"`seq'"' != "" loc labsize medsmall
-	else if inrange(`colors', 7, 12) & `"`seq'"' != "" loc labsize small
-	else if inrange(`colors', 13, 18) & `"`seq'"' != "" loc labsize vsmall
-	else if `colors' >= 19 & `"`seq'"' != "" loc labsize tiny
-	else loc labsize medsmall
-	
+		
 	// Check impairment option to add subtitle to graph
 	if `"`impaired'"' != "" loc xtralab `""with simulated total, red, green, and blue colorblindness""'
 	
@@ -206,6 +199,13 @@ prog def brewviewer
 			
 				// Find max colors
 				qui: su maxcolors if palette == `"`palnm'"', meanonly
+			
+				// Check number of colors and sequential option is turned on
+				if inrange(`i', 2, 6) & `"`seq'"' != "" loc labsize medsmall
+				else if inrange(`i', 7, 12) & `"`seq'"' != "" loc labsize small
+				else if inrange(`i', 13, 18) & `"`seq'"' != "" loc labsize vsmall
+				else if `i' >= 19 & `"`seq'"' != "" loc labsize tiny
+				else loc labsize medsmall
 			
 				// Create graph if acceptable value
 				if `r(mean)' >= `i' {

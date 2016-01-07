@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1801                                                                     *
+*     1485                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.15
-*! 16DEC2015
+*! v 0.0.16
+*! 07JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -195,6 +195,13 @@ prog def brewscheme, rclass
 			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 		 ///   
 			mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
 
+				// Checks the saturation values and returns valid value if 
+				// invalid argument is passed
+				checkSat, int(`allsaturation')
+				
+				// Resets the local to the corrected value
+				loc allsaturation = `r(saturation)'
+
 				// Set the style parameters for all graph types to the values in the 
 				// all parameters
 				if `allcolors' <= ``allstyle'c' {
@@ -257,13 +264,14 @@ prog def brewscheme, rclass
 			} // End ELSEIF Block for missing types w/o some argument
 			
 			// If missing some graph types and defaults provided
-			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   	 ///   
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		     ///   
 				"`areastyle'" == "" |  "`linestyle'" == "" |  		    	 ///   
-				"`dotstyle'" == "" |  "`boxstyle'" == "" |  				 ///
+				"`boxstyle'" == "" |  "`dotstyle'" == "" |					 ///
 				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    	 ///   
 				"`histstyle'" == "" |  "`cistyle'" == "" |  		    	 ///   
-				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 ///   
-				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 ///   
+				"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
+				"`somestyle'" != "" {
 				
 				// Check to see if some style was an available palette
 				if `: list somestyle in palettes' != 1 {
@@ -276,499 +284,113 @@ prog def brewscheme, rclass
 					
 				} // End IF Block to check for valid color palette
 				
+				// Tests the saturation value for the some option
+				checkSat, int(`somesaturation')
+				
+				// Returns the corrected values to the same local
+				loc somesaturation = `r(saturation)'
+				
+				// If more colors specified for default than available
+				if `somecolors' > ``somestyle'c' & `somecolors' != . {
+					
+					// Print error message to screen
+					di as err `"More colors (``stile'colors') than "'	 ///   
+					`"available (``stile'style') in the palette "' 		 ///  
+					`""`stile'style" = ``somestyle'c'"'
+					
+					// Kill the program
+					err 198
+					
+				} // End ELSEIF Block for # colors > available for defaults
+	
+				// Loop over # available colors per graph
+				foreach stile in `grstyles' {
+					
+					// Skip validation for contour plot type
+					if `"`stile'"' == "con" continue
+						
+					// If the style is missing and valid # colors for default
+					if "``stile'style'" == "" {
+							
+						// Assign the default styles to the graph type
+						loc `stile'style "`somestyle'"
+						loc `stile'colors `somecolors'
+						loc `stile'saturation `somesaturation'
+							
+					} // End IF Block for unspecified graphs
+							
+					// If the graph type has a style specified
+					else {
+						
+						// Check to see if there are the requested number of colors
+						if ``stile'colors' > ```stile'style'c' {
+						
+							// If not print error to screen
+							di as err `"Too many colors specified in "' 	 ///   
+							`"`stile'colors(``stile'colors') for the "'		 ///   
+							`"``stile'style' palette."' _n 					 ///   
+							`"Maximum number of colors allowed is ```stile'style'c'"'
+							
+							// Issue error code and exit
+							err 198
+							
+						} // End IF Block for more colors than available
+						
+						// If there are an appropriate number of colors requested
+						else {
+							
+							// Check the saturation values
+							checkSat, int(``stile'saturation')
+
+							// And replace the passed argument with the validated value
+							loc `stile'saturation = `r(saturation)'
+							
+						} // End ELSE Block for sufficient colors
+						
+					} // End ELSE Block for graphs with specified color palettes
+					
+				} // End Loop over graph types
+						
+			} // End ELSEIF Block for valid parameters
+			
+			// For cases where all styles are specified
+			else {
+			
 				// Loop over # available colors per graph
 				foreach stile in `grstyles' {
 				
-					// If the style is missing and valid # colors for default
-					if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
+					// Skip over contour plot case
+					if `"`stile'"' == "con" continue
 					
-						// Loop over the individual graph types
-						foreach x in "bar" "scat" "area" "line" "box" "dot"  ///   
-						"pie" "sun" "hist" "ci" "mat" "refl" "con" "refm" {
-						
-							// If the graph type does not have a style specified
-							if "``x'style'" == "" {
-							
-								// Assign the default styles to the graph type
-								loc `x'style "`somestyle'"
-								loc `x'colors `somecolors'
-								loc `x'saturation `somesaturation'
-								
-								
-							} // End IF Block for unspecified graphs
-							
-							// If the graph type has a style specified
-							else {
-							
-								// Continue on to next graph type
-								continue
-								
-							} // End ELSE Block for graphs with specified colors
-							
-						} // End Loop over graph types
-						
-						exit
-						
-					} // End IF Block checking # colors available for default
+					// Check to see if there are the requested number of colors
+					else if ``stile'colors' > ```stile'style'c' {
 					
-					// If more colors specified for default than available
-					else if "``stile'style'" == "" & `somecolors' > ``somestyle'c' {
-					
-						// Print error message to screen
-						di as err `"More colors (``stile'colors') than "'	 ///   
-						`"available (``stile'style') in the palette "`stile'style""'
+						// If not print error to screen
+						di as err `"Too many colors specified in "' 	 ///   
+						`"`stile'colors(``stile'colors') for the "'		 ///   
+						`"``stile'style' palette."' _n 					 ///   
+						`"Maximum number of colors allowed is ```stile'style'c'"'
 						
-						// Kill the program
+						// Issue error code and exit
 						err 198
 						
-					} // End ELSEIF Block for # colors > available for defaults
+					} // End ELSEIF Block for more colors than available
 					
-					// Check for # colors available for specific graph types
-					else if "``stile'style'" != "" &						 ///   
-						``stile'colors' > ```stile'style'c' {
+					// If there are an appropriate number of colors requested
+					else {
 						
-						// Print error message to the screen
-						di as err `"More colors (``stile'colors') than "'	 ///   
-						`"available (``stile'style') in the palette "`stile'style""'
-						
-						// Kill the program
-						err 198
-						
-					} // End ELSEIF Block for # colors > available for graph types
-					
-				} // End Loop over # colors for specified styles
-				
-			} // End ELSE Block for valid parameters
-				
-			// If color intensity is not a valid value
-			if !inlist(`allsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 	///   
-				100, 200) {
-				
-				// If if invalid value is <= 104
-				if `allsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc allsaturation = round(`allsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `allsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc allsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For all other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting ALL saturation to 100"
-					
-					// Set value to full saturation
-					loc allsaturation 100
-					
-				} // End ELSE Block for all other values of saturation
-				
-			} // End IF Block for allsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`barsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `barsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc barsaturation = round(`barsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `barsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc barsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For bar other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting bar graph saturation to 100"
-					
-					// Set value to full saturation
-					loc barsaturation 100
-					
-				} // End ELSE Block for bar other values of saturation
-				
-			} // End IF Block for barsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`areasaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `areasaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc areasaturation = round(`areasaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `areasaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc areasaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For area other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting area graph saturation to 100"
-					
-					// Set value to full saturation
-					loc areasaturation 100
-					
-				} // End ELSE Block for area other values of saturation
-				
-			} // End IF Block for areasaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`consaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `consaturation' <= 104 {
-				
-					// Set the value to the nearest deconle in [0, 100]
-					loc consaturation = round(`consaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `consaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc consaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For con other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting contour plot saturation to 100"
-					
-					// Set value to full saturation
-					loc consaturation 100
-					
-				} // End ELSE Block for con other values of saturation
-				
-			} // End IF Block for consaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`boxsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `boxsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc boxsaturation = round(`boxsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `boxsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc boxsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For box other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting box plot saturation to 100"
-					
-					// Set value to full saturation
-					loc boxsaturation 100
-					
-				} // End ELSE Block for box other values of saturation
-				
-			} // End IF Block for boxsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`piesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `piesaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc piesaturation = round(`piesaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `piesaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc piesaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For pie other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting pie graph saturation to 100"
-					
-					// Set value to full saturation
-					loc piesaturation 100
-					
-				} // End ELSE Block for pie other values of saturation
-				
-			} // End IF Block for piesaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`sunsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `sunsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc sunsaturation = round(`sunsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `sunsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc sunsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For sun other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting sunflower plot saturation to 100"
-					
-					// Set value to full saturation
-					loc sunsaturation 100
-					
-				} // End ELSE Block for sun other values of saturation
-				
-			} // End IF Block for sunsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`histsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `histsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc histsaturation = round(`histsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `histsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc histsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For hist other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting histogram saturation to 100"
-					
-					// Set value to full saturation
-					loc histsaturation 100
-					
-				} // End ELSE Block for hist other values of saturation
-				
-			} // End IF Block for histsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`cisaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,    ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `cisaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc cisaturation = round(`cisaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `cisaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc cisaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For ci other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting confidence interval saturation to 100"
-					
-					// Set value to full saturation
-					loc cisaturation 100
-					
-				} // End ELSE Block for ci other values of saturation
-				
-			} // End IF Block for cisaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`matsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `matsaturation' <= 104 {
-				
-					// Set the value to the nearest dematle in [0, 100]
-					loc matsaturation = round(`matsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `matsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc matsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For mat other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting scatterplot matrix saturation to 100"
-					
-					// Set value to full saturation
-					loc matsaturation 100
-					
-				} // End ELSE Block for mat other values of saturation
-				
-			} // End IF Block for matsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`reflsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `reflsaturation' <= 104 {
-				
-					// Set the value to the nearest dereflle in [0, 100]
-					loc reflsaturation = round(`reflsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `reflsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc reflsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For refl other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting reference line saturation to 100"
-					
-					// Set value to full saturation
-					loc reflsaturation 100
-					
-				} // End ELSE Block for refl other values of saturation
-				
-			} // End IF Block for reflsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`refmsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `refmsaturation' <= 104 {
-				
-					// Set the value to the nearest derefmle in [0, 100]
-					loc refmsaturation = round(`refmsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `refmsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc refmsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For refm other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting reference marker saturation to 100"
-					
-					// Set value to full saturation
-					loc refmsaturation 100
-					
-				} // End ELSE Block for refm other values of saturation
-				
-			} // End IF Block for refmsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`somesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `somesaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc somesaturation = round(`somesaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `somesaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc somesaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For some other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting some saturation to 100"
-					
-					// Set value to full saturation
-					loc somesaturation 100
-					
-				} // End ELSE Block for some other values of saturation
-				
-			} // End IF Block for somesaturation value validation
+						// Check the saturation values
+						checkSat, int(``stile'saturation')
 
+						// And replace the passed argument with the validated value
+						loc `stile'saturation = `r(saturation)'
+						
+					} // End ELSE Block for sufficient colors
+					
+				} // End Loop over graph types
+				
+			} // End ELSE Block for cases with all graph types specified	
+			
 			// Line saturation gets defined as a color multiplier
 			// loc linesaturation = `linesaturation'/100
 			
@@ -832,17 +454,27 @@ prog def brewscheme, rclass
 				qui: levelsof rgb if palette == "``color'style'" & 			 ///   
 				pcolor == ``color'colors', loc(rgbs)
 				
+				// If the RGB value macro is null get the values for the maxmimum
+				// number of colors available for the palette
+				if `"`rgbs'"' == "" {
+				
+					// Gets the same palette but with the maximum number of colors
+					qui: levelsof rgb if palette == "``color'style'" &		 ///   
+					pcolor == ```color'style'c', loc(rgbs)
+					
+				} // End IF Block for palettes that only have a single set of colors	
+
+				// Developer option to print debug messages
 				if "`dbug'" != "" {
 					
-					levelsof rgb if palette == "``color'style'" & pcolor == ``color'colors'
-					
+					// Prints the graph type with data that follows
 					di "Graph type = `color'"
 					
 					// Print debugging message
 					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
 					`"Color sequence: ``color'seq'"'
 				
-				}
+				} // End Debug messages
 				
 				// Loop over the rgb values to construct the graph specific  
 				// rgb values
@@ -1723,7 +1355,7 @@ prog def brewscheme, rclass
 
 					/* Connected Plots */
 					// Primary connected plot entries
-					file write `scheme`j'' `"color p`i'dotmarkfill "`dotcolor`j''"' _n
+					file write `scheme`j'' `"color p`i'dotmarkfill "`dotcolor`j''""' _n
 					file write `scheme`j'' `"linewidth p`i'dotmark vthin"' _n
 					file write `scheme`j'' `"symbol p`i'dot `thissymbol'"' _n
 					file write `scheme`j'' `"symbolsize p`i'dot medium"' _n
@@ -1800,3 +1432,56 @@ prog def brewscheme, rclass
 // End of Program		
 end
 
+
+// Defines a subroutine used to check saturation parameter values
+prog def checkSat, rclass
+
+	// Defines the syntax the program uses
+	syntax, [ INTensity(integer 100) ] 
+	
+	return clear
+
+	// If color intensity is not a valid value
+	if !inlist(`intensity', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+		90, 100, 200) {
+		
+		// If if invalid value is <= 104
+		if `intensity' <= 104 {
+		
+			// Set the value to the nearest decile in [0, 100]
+			loc saturation = round(`intensity', 10)
+			
+		} // End IF Block testing for saturation <= 104
+		
+		// If saturation is > 104 
+		else if `intensity' > 104 {
+		
+			// Set to max valid saturation value
+			loc saturation = 200
+			
+		} // End of ELSEIF Block for saturation > 104
+		
+		// For some other cases 
+		else {
+		
+			// Print message to the results screen
+			di "Setting saturation to 100"
+			
+			// Set value to full saturation
+			loc saturation = 100
+			
+		} // End ELSE Block for some other values of saturation
+		
+	} // End IF Block for somesaturation value validation
+	
+	// IF the value is one of the integers defined in the IF Block set the return
+	// macro to the value
+	else loc saturation = `intensity'
+
+	// Return the corrected value
+	ret loc saturation = `saturation'
+
+// End of subroutine to check intensity values	
+end
+
+	
