@@ -25,8 +25,8 @@
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.6
-*! 04JAN2016
+*! v 0.0.7
+*! 07JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -67,7 +67,7 @@ prog def brewtheme
 						LOADThemedata brewscheme ]
 						
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 	
 	// Stores the root file path for theme files
 	loc themeroot `c(sysdir_personal)'b/theme/theme
@@ -84,7 +84,7 @@ prog def brewtheme
 		} // End IF Block to initialize brewcolors object	
 			
 		// Get the list of unique meta names
-		mata: brewc.getNames(1, 1)
+		qui: mata: brewc.getNames(1, 1)
 		
 		// Build dataset with classes, arguments, and parameter values
 		qui: themedata
@@ -130,7 +130,7 @@ prog def brewtheme
 					if `"`: list arg in `v'args'"' != "" {
 
 						// Search for the RGB values
-						mata: brewc.brewNameSearch("`val'")
+						qui: mata: brewc.brewNameSearch("`val'")
 						
 						foreach x in rgb achromatopsia protanopia deuteranopia tritanopia { 
 						

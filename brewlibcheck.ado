@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewlibcheck
-*! v 0.0.2
-*! 18DEC2015
+*! v 0.0.3
+*! 07JAN2016
 
 // Drop the program if already loaded in memory
 cap prog drop brewlibcheck
@@ -34,7 +34,7 @@ prog def brewlibcheck
 	if _rc == 0 {
 	
 		// Compile the file for the first time
-		libbrewscheme, replace size(2048)
+		qui: libbrewscheme, replace size(2048)
 		
 	} // End IF Block for non-existent Mata library	
 	
@@ -49,7 +49,7 @@ prog def brewlibcheck
 		if `r(creatednum)' < clock("18dec2015 00:00:00", "YMDhms") {
 			
 			// Recompile the library
-			libbrewscheme, replace size(2048)
+			qui: libbrewscheme, replace size(2048)
 			
 		} // End IF Block for fresh recompile
 	

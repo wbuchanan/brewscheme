@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 0.0.4
-*! 06JAN2016
+*! v 0.0.5
+*! 07JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -38,7 +38,7 @@ prog def brewcolors, rclass
 	syntax anything(name = source) [, MAke INSTall COLors(string asis) REFresh ]
 	
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 	
 	// Check for any optional arguments to add a comma to the command string
 	if `"`make'`install'`colors'"' == "" loc optstring ","

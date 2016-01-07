@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewcbsim
-*! v 0.0.2
-*! 18DEC2015
+*! v 0.0.3
+*! 07JAN2016
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim
@@ -31,7 +31,7 @@ prog def brewcbsim, rclass
 	syntax anything(name = colors id = "Red, Green, Blue Color or named color styles")
 	
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 
 	// Clear existing returned value
 	return clear

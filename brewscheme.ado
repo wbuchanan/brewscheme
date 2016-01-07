@@ -55,7 +55,7 @@ prog def brewscheme, rclass
 		REFResh DBug THEMEFile(string asis) SYMBols(string asis) ]
 		
 		// Check for brewscheme Mata library
-		brewlibcheck
+		qui: brewlibcheck
 	
 		// Define local with valid symbols arguments
 		loc validsymbols circle diamond triangle square plus smcircle 		 ///   

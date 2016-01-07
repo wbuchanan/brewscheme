@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! libbrewscheme
-*! v 0.0.3
-*! 18DEC2015
+*! v 0.0.4
+*! 07JAN2016
 
 // Drop program if loaded in memory
 cap prog drop libbrewscheme
@@ -47,7 +47,7 @@ prog def libbrewscheme
 	brewcolors(), complete
 
 	// Prints the current search path for mata functions/libraries to the console
-	mata: mata mlib index
+	qui: mata: mata mlib index
 	
 	// The display option also opens the help file for the program
 	if `"`display'"' != ""  help libbrewscheme

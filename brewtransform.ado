@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewtransform
-*! v 0.0.2
-*! 16DEC2015
+*! v 0.0.3
+*! 07JAN2016
 
 // Drop the program if already loaded in memory
 cap prog drop brewtransform
@@ -37,7 +37,7 @@ prog def brewtransform
 	syntax varlist(max=1 string)
 	
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 	
 	// Get all unique rgb values
 	qui: levelsof `varlist', loc(colors)
