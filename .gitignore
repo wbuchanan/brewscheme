@@ -2,5 +2,5 @@ bystd.pkg
 *.csv
 *.dta
 *.log
-
+*.smcl
 
