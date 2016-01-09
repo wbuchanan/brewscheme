@@ -58,6 +58,8 @@ prog def brewterpolate, rclass
 			loc cmod ""
 
 		} // End IF Block for color modification parameter
+		
+		if mi("`cmod'") loc cmod `""'
 
 		// Check input color space
 		if !inlist(`"`icspace'"', "rgb", "rgba", "srgb", "srgba", "hsb") & 	 ///   
@@ -145,7 +147,7 @@ prog def brewterpolate, rclass
 
 		// Call the java program to interpolate the colors
 		javacall org.paces.stata.ColorTerp interpcolors, 					 ///   
-		args(`icspace' `rcspace' "`scolor'" "`ecolor'" `colors' `cmod' 		 ///   
+		args(`icspace' `rcspace' "`scolor'" "`ecolor'" `colors' "`cmod'" 	 ///   
 		`inverse' `grayscale')
 
 		// Clear existing return valies
