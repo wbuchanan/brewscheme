@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1485                                                                     *
+*     1486                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.16
-*! 07JAN2016
+*! v 0.0.17
+*! 10JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -822,7 +822,8 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `"color sunflowerlf "`sunflowerlf`j''""' _n
 				file write `scheme`j'' `"color sunflowerdb "0 0 0""' _n
 				file write `scheme`j'' `"color sunflowerdf "`sunflowerdf`j''""' _n(2)
-			
+				file write `scheme`j'' `"color p       gs6"' _n
+				
 			} // End Loop over theme/scheme pairs
 			
 			/* Add generic color loop here */
@@ -985,13 +986,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 				
-				// Loop over lines 435-495 of the theme file
-				forv i = 435/495 {
+				// Loop over lines 435-494 of the theme file
+				forv i = 435/494 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 435-495 of the theme file
+				} // End loop over lines 435-494 of the theme file
 			
 				// Settings for color saturation
 				file write `scheme`j'' `"intensity            full"' _n
@@ -1027,13 +1028,13 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `"fillpattern foreground pattern10"' _n
 				file write `scheme`j'' `"fillpattern background pattern10"' _n(3)
 				
-				// Loop over lines 496-537 of the theme file
-				forv i = 496/537 {
+				// Loop over lines 495-536 of the theme file
+				forv i = 495/536 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 
-				} // End loop over lines 496-537 of the theme file
+				} // End loop over lines 495-536 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "boxlabel" {
@@ -1053,13 +1054,13 @@ prog def brewscheme, rclass
 				
 				file write `scheme`j'' `"* textboxstyle p15label     xyz"' _n(3)
 
-				// Loop over lines 538-591 of the theme file
-				forv i = 538/591 {
+				// Loop over lines 537-590 of the theme file
+				forv i = 537/590 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 538-591 of the theme file
+				} // End loop over lines 537-590 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "bar" "box" "pie" "area" "sunflowerlight" 		 ///   
@@ -1091,13 +1092,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 				
-				// Loop over lines 592-771 of the theme file
-				forv i = 592/771 {
+				// Loop over lines 591-770 of the theme file
+				forv i = 591/770 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 592-771 of the theme file
+				} // End loop over lines 591-770 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "box" {
@@ -1117,13 +1118,13 @@ prog def brewscheme, rclass
 				
 				file write `scheme`j'' `""' _n
 				
-				// Loop over lines 772-912 of the theme file
-				forv i = 772/912 {
+				// Loop over lines 771-911 of the theme file
+				forv i = 771/911 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 772-912 of the theme file
+				} // End loop over lines 771-911 of the theme file
 				
 				// Loop over color cycles
 				forv i = 1/`pcycles' {
@@ -1156,13 +1157,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 
-				// Loop over lines 913-977 of the theme file
-				forv i = 913/977 {
+				// Loop over lines 912-976 of the theme file
+				forv i = 912/976 {
 				
 					// Write each line from the theme file to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End Loop over lines 913-977 of the theme file
+				} // End Loop over lines 912-976 of the theme file
 				
 				// Set generic parameters
 				forv i = 1/`pcycles' {
