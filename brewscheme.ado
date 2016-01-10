@@ -17,7 +17,7 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1486                                                                     *
+*     1530                                                                     *
 *                                                                              *
 ********************************************************************************
 		
@@ -219,7 +219,7 @@ prog def brewscheme, rclass
 					
 					// Loop over graph types and assign the all styles to them
 					foreach stile in "bar" "scat" "area" "line" "box" 		 ///   
-						"dot" "pie" "sun" "hist" "ci" "mat" "con" "refl" "refm" {
+						"dot" "pie" "sun" "hist" "ci" "mat" "refl" "refm" {
 						
 						/* Assign the all style, color, and saturation levels to the 
 						individual graph types. */
@@ -228,6 +228,12 @@ prog def brewscheme, rclass
 						loc `stile'saturation  `allsaturation'
 
 					} // End Loop over graph types
+					
+					// Sets the palette for the starting color for contourplots
+					loc constart `allstyle'
+					
+					// Sets the palette for the ending color for contourplots
+					loc conend `allstyle'
 					
 				} // End IF Block to check if the # of colors is valid for the style
 
@@ -306,8 +312,9 @@ prog def brewscheme, rclass
 				// Loop over # available colors per graph
 				foreach stile in `grstyles' {
 					
-					// Skip validation for contour plot type
-					if `"`stile'"' == "con" continue
+					// Check contour plot scheme arguments
+					if `"``stile'start'"' == "" loc constart "`somestyle'"
+					if `"``stile'end'"' == "" loc conend "`somestyle'"
 						
 					// If the style is missing and valid # colors for default
 					if "``stile'style'" == "" {
@@ -438,6 +445,21 @@ prog def brewscheme, rclass
 				loc symbolseq `"`symbolseq' "`: word `symb' of `symbols''""'
 				
 			} // End Loop over symbol sequence
+			
+			// Get the first value from the palette as the start of the contour
+			qui: levelsof rgb if palette == `"`constart'"' & 				 ///   
+			pcolor == maxcolors, loc(cstart)
+			
+			// Overwrite the local macro with the RGB value
+			loc constart `: word 1 of `cstart''
+
+			// Get the first value from the palette as the end of the contour
+			qui: levelsof rgb if palette == `"`conend'"' & 				 ///   
+			pcolor == maxcolors, loc(cend)
+						
+			// Overwrite the local macro with the RGB value second word used here 
+			// to prevent same color issue if the allstyle option is used.
+			loc conend `: word 2 of `cend''			
 			
 			// Loop over color macros
 			foreach color in bar scat area line box dot pie hist ci mat		 ///   
@@ -758,8 +780,30 @@ prog def brewscheme, rclass
 				// Store all the translated RGB values
 				loc sunflowerdf`rfs' ``: word `rfs' of `ctyperefs'''
 
-			} // End Loop over macro reassignments		
-		
+			} // End Loop over macro reassignments	
+			
+			// Search for contour start values
+			mata: brewc.brewColorSearch("`constart'")
+			
+			// Store the contour start values
+			forv rfs = 1/5 {
+			
+				// Index values like other graph types
+				loc constart`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over contour plot starting values
+			
+			// Search for contour end values
+			mata: brewc.brewColorSearch("`conend'")
+			
+			// Store the contour end values
+			forv rfs = 1/5 {
+			
+				// Index values like other graph types
+				loc conend`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over contour plot ending values
+				
 			// Loop over scheme/theme file pairs
 			forv j = 1/5 {
 			
@@ -806,15 +850,15 @@ prog def brewscheme, rclass
 				} // End loop over lines 183-192 of the theme file
 				
 				// Check for values for starting/ending contour plots
-				if "`constart'" == "" {
+				if "`constart`j''" == "" {
 					loc constart blue
 				} 
-				if "`conend'" == "" {
+				if "`conend`j''" == "" {
 					loc conend orange
 				}
 			
-				file write `scheme`j'' `"color contour_begin `constart'"' _n
-				file write `scheme`j'' `"color contour_end `conend'"' _n
+				file write `scheme`j'' `"color contour_begin "`constart`j''""' _n
+				file write `scheme`j'' `"color contour_end "`conend`j''""' _n
 				file write `scheme`j'' `"color zyx2 "0 0 0""' _n(2)
 			
 				file write `scheme`j'' `"color sunflower "`sunflower`j''""' _n
