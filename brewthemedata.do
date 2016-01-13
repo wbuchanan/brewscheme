@@ -280,7 +280,7 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "* symbol " "p15    " "smx" "_n(3)"    
 "linepattern " "" "solid" "_n"    
 "linepattern " "foreground " "blank" "_n"    
-"linepattern " "background " "blank" "_n"    
+"linepattern " "background " "solid" "_n"    
 "linepattern " "ci " "solid" "_n"    
 "linepattern " "ci_area " "solid" "_n"    
 "linepattern " "histogram " "solid" "_n"    
