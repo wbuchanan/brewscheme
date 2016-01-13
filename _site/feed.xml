@@ -5,19 +5,19 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 18 Dec 2015 10:01:55 -0600</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2015 10:01:55 -0600</lastBuildDate>
+    <pubDate>Wed, 13 Jan 2016 17:08:56 -0600</pubDate>
+    <lastBuildDate>Wed, 13 Jan 2016 17:08:56 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
         <title>Version 1.0 Release Candidate available</title>
         <description>&lt;h1 id=&quot;news&quot;&gt;NEWS&lt;/h1&gt;
-&lt;p&gt;It’s almost that time for a version 1 release.  There is currently no additional development planned for the current version of brewscheme.  All features that were previously posted on todo lists for the project have been implemented and the bug that have been reported have been corrected/addressed.  &lt;/p&gt;
+&lt;p&gt;It’s almost that time for a version 1 release.  There is currently no additional development planned for the current version of brewscheme.  All features that were previously posted on todo lists for the project have been implemented and the bug that have been reported have been corrected/addressed.&lt;/p&gt;
 
-&lt;p&gt;The most recent release brings a few minor changes to some of the functionality of the brewcbsim program, but the remaining changes take place on the backend and/or here on the project page.  &lt;/p&gt;
+&lt;p&gt;The most recent release brings a few minor changes to some of the functionality of the brewcbsim program, but the remaining changes take place on the backend and/or here on the project page.&lt;/p&gt;
 
 &lt;h2 id=&quot;brewcbsim-updates&quot;&gt;brewcbsim updates&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;brewcbsim&lt;/code&gt; now handles multiple colors and is allows users to pass either a named color style or an RGB string.  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brewcbsim&lt;/code&gt; now handles multiple colors and is allows users to pass either a named color style or an RGB string.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;brewcbsim xkcd119 &quot;63 210 142&quot; &quot;8 151 233&quot; &quot;182 33 43&quot; bluishgray8
 &lt;/code&gt;&lt;/pre&gt;
@@ -40,7 +40,7 @@
       <item>
         <title>Bug fixes and minor feature additions prior to version 1.0</title>
         <description>&lt;h1 id=&quot;using-symbol-types&quot;&gt;Using symbol types&lt;/h1&gt;
-&lt;p&gt;As a way to remind myself to get around to adding this, I submitted a &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/18&quot;&gt;feature/enhancement request&lt;/a&gt; for handling symbol types in scheme files.  There is now a fix for this on the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/tree/symbols&quot;&gt;symbols branch&lt;/a&gt; in brewscheme.ado.  There is an example of how the feature can be used on the &lt;a href=&quot;http://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt; page and with a few more tests I anticipate this making it into the release.  &lt;/p&gt;
+&lt;p&gt;As a way to remind myself to get around to adding this, I submitted a &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/18&quot;&gt;feature/enhancement request&lt;/a&gt; for handling symbol types in scheme files.  There is now a fix for this on the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/tree/symbols&quot;&gt;symbols branch&lt;/a&gt; in brewscheme.ado.  There is an example of how the feature can be used on the &lt;a href=&quot;http://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt; page and with a few more tests I anticipate this making it into the release.&lt;/p&gt;
 
 &lt;h2 id=&quot;other-updates&quot;&gt;Other Updates&lt;/h2&gt;
 &lt;p&gt;A few users have had issues with the installation process.  I’ve tried adding a fix to for this particular issue (caused when there is no personal subdirectory on the ADOPATH) in the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/tree/personaldirectory&quot;&gt;personaldirectory branch&lt;/a&gt;.  If you have issues getting things installed please submit an issue using these instructions:&lt;/p&gt;
@@ -105,7 +105,7 @@ log c _all
       <item>
         <title>Getting ready for version 1 release</title>
         <description>&lt;h1 id=&quot;new-feature-addition&quot;&gt;New feature addition&lt;/h1&gt;
-&lt;p&gt;The &lt;code&gt;brewproof&lt;/code&gt; prefix command has finally been added to the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme&quot;&gt;brewscheme&lt;/a&gt; collection of programs.  &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; is a command that allows users to quickly and easily create proofs of their data visualizations that simulate the appearance of the graph to individuals with achromatopsia (complete color vision loss), protanopia (red color vision impairment), deuteranopia (green color vision impairment), and tritanopia (blue color vision impairment) without having to modify their existing syntax beyond the addition of &lt;code&gt;brewproof, scheme(brewscheme generated scheme name):&lt;/code&gt; to the start of the command.  For additional information, examples, and to see the output of the command, please visit the &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; page.  &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;brewproof&lt;/code&gt; prefix command has finally been added to the &lt;a href=&quot;https://github.com/wbuchanan/brewscheme&quot;&gt;brewscheme&lt;/a&gt; collection of programs.  &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; is a command that allows users to quickly and easily create proofs of their data visualizations that simulate the appearance of the graph to individuals with achromatopsia (complete color vision loss), protanopia (red color vision impairment), deuteranopia (green color vision impairment), and tritanopia (blue color vision impairment) without having to modify their existing syntax beyond the addition of &lt;code&gt;brewproof, scheme(brewscheme generated scheme name):&lt;/code&gt; to the start of the command.  For additional information, examples, and to see the output of the command, please visit the &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewproof/&quot;&gt;brewproof&lt;/a&gt; page.&lt;/p&gt;
 
 &lt;h1 id=&quot;other-newsupdates&quot;&gt;Other news/updates&lt;/h1&gt;
 &lt;p&gt;The addition of the &lt;code&gt;brewproof&lt;/code&gt; command marks the end of development for the v 1.0.0 release.  No new features will be added prior to the release of this first major version.  However, some of the plans for the next release include:&lt;/p&gt;
@@ -128,7 +128,7 @@ log c _all
     
       <item>
         <title>New addition to the brewscheme family</title>
-        <description>&lt;p&gt;&lt;code&gt;brewscheme&lt;/code&gt; now includes new Mata classes/methods to simulate the color that would be perceived by individuals with varying types of color sightedness impairments.  Additionally, similar to &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewviewer/&quot;&gt;brewviewer&lt;/a&gt; there is also an analogous program available to show how the simulated color values would appear called &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewcbsim/&quot;&gt;brewcbsim&lt;/a&gt;.  Future development will exapand the options of both brewcbview (e.g., to handle multiple color tuples and display them in a single graph), brewviewer (e.g., to show a preview of specific palette combinations under varying forms of color sightedness impairment), to add the simulated colors to lookup tables used by &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewscheme/&quot;&gt;brewscheme&lt;/a&gt; and &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt;, and to create a proofer for Stata graphs that would show how they would appear under different forms of color sight impairment.  &lt;/p&gt;
+        <description>&lt;p&gt;&lt;code&gt;brewscheme&lt;/code&gt; now includes new Mata classes/methods to simulate the color that would be perceived by individuals with varying types of color sightedness impairments.  Additionally, similar to &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewviewer/&quot;&gt;brewviewer&lt;/a&gt; there is also an analogous program available to show how the simulated color values would appear called &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewcbsim/&quot;&gt;brewcbsim&lt;/a&gt;.  Future development will exapand the options of both brewcbview (e.g., to handle multiple color tuples and display them in a single graph), brewviewer (e.g., to show a preview of specific palette combinations under varying forms of color sightedness impairment), to add the simulated colors to lookup tables used by &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewscheme/&quot;&gt;brewscheme&lt;/a&gt; and &lt;a href=&quot;https://wbuchanan.github.io/brewscheme/brewtheme/&quot;&gt;brewtheme&lt;/a&gt;, and to create a proofer for Stata graphs that would show how they would appear under different forms of color sight impairment.&lt;/p&gt;
 
 &lt;p&gt;As always, comments, requests, and collaborators are always welcome.&lt;/p&gt;
 

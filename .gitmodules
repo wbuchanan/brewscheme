@@ -1,0 +1,9 @@
+[submodule "StataFileSystem"]
+	path = StataFileSystem
+	url = http://github.com/wbuchanan/StataFileSystem
+[submodule "brewthemehelp"]
+	path = brewthemehelp
+	url = http://github.com/wbuchanan/brewthemehelp
+[submodule "recycle"]
+	path = recycle
+	url = http://github.com/wbuchanan/recycle

@@ -1,0 +1,7 @@
+*! TOC File
+v 3
+d File system properties from Stata
+
+p filesys A Java-plugin to access file system properties/attributes from Stata
+
+

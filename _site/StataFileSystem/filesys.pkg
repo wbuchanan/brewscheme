@@ -1,0 +1,32 @@
+d 'FILESYS': A Java-plugin for Stata to access and set file system attributes
+d
+d This is a Java-plugin for Stata that allows you to access file system
+d attributes from the current Stata session.  This includes indicators for
+d the read, write, executable, and hidden properties; setters for the read,
+d write, and executable properties; file creation, modification, and access
+d times; the file owner name; and more.  In particular, this can be useful for
+d user programmers who need to abstract maintenance tasks away from the user
+d (e.g., recompiling a mata library on the user's system when the library is
+d updated, etc...).  It can also be helpful if the user needs/wants to access
+d file system attributes for routine data access/distribution, etc...
+d
+d KW: File System
+d KW: Files
+d KW: IO
+d KW: OS
+d
+d Requires: Stata version 13.1, Java 8 or later
+d
+d Distribution-Date: 20151223
+d
+d Author: Billy Buchanan
+d         Data Scientist
+d         Office of Research, Evaluation, and Assessment
+d         Minneapolis Public Schools
+d
+d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
+d
+f filesys.ado
+f filesys.sthlp
+f StataFileSys-jar-with-dependencies.jar
+

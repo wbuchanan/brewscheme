@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.paces-consulting</groupId>
+	<artifactId>stata-filesystem</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>StataFileSys</name>
+	<description>Java plugins used to extend capabilities in Stata
+		statical software platform.</description>
+
+	<!-- Information regarding Source Control Management
+	<scm>
+		<connection>scm:git:git@github.com:wbuchanan/StataJavaUtilities.git</connection>
+		<developerConnection>scm:git:git@github.com:wbuchanan/StataJavaUtilities.git</developerConnection>
+		<url>git@github.com:wbuchanan/StataJavaUtilities.git</url>
+	</scm>
+	-->
+
+	<!-- Information regarding organization publishing the plugin -->
+	<organization>
+		<name>Performing Arts and Creative Education Solutions Consulting</name>
+		<url>http://www.paces-consulting.org</url>
+	</organization>
+
+
+	<!-- Information about project developers -->
+	<developers>
+		<developer>
+			<id>billybass</id>
+			<name>William Buchanan, Ph.D.</name>
+			<url>https://github.com/wbuchanan</url>
+			<roles>
+				<role>project lead</role>
+				<role>developer</role>
+				<role>owner</role>
+				<role>creator</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<!-- Reserved for potential future collaborators -->
+	<contributors>
+	</contributors>
+
+
+	<!-- Overall properties -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<!-- Defines how Maven should build the Java binaries -->
+	<build>
+	<defaultGoal>jar</defaultGoal>
+	<finalName>StataFileSys</finalName>
+	<plugins>
+	<!-- Sets the JDK to 1.8 -->
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.3</version>
+		<configuration>
+			<source>1.8</source>
+			<target>1.8</target>
+		</configuration>
+	</plugin>
+
+
+	<!-- Plugin used to build the JAR file -->
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<version>2.6</version>
+		<configuration>
+			<archive>
+				<manifest>
+					<addClasspath>true</addClasspath>
+					<mainClass>StataFileSystem</mainClass>
+				</manifest>
+			</archive>
+		</configuration>
+		<executions>
+			<execution>
+				<goals>
+					<goal>jar</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
+
+		<!-- Used to build a JAR with all necessary dependencies included -->
+		<plugin>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<version>2.5.5</version>
+			<configuration>
+				<descriptorRefs>
+					<descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs>
+			</configuration>
+			<executions>
+				<execution>
+					<id>make-assembly</id>
+					<phase>package</phase>
+					<goals>
+						<goal>single</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+
+	</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.stata</groupId>
+			<artifactId>sfi</artifactId>
+			<version>14</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.paces-consulting</groupId>
+			<artifactId>stata-java</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+</project>
