@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1530                                                                     *
+*     1561                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.17
-*! 10JAN2016
+*! v 0.0.18
+*! 13JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -173,10 +173,11 @@ prog def brewscheme, rclass
 			/* Validate arguments (if all graph types are null, an all parameter 
 			must be specified */
 			if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
-			mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 		 ///  
+			mi("`linestyle'") & mi("`constart'") & mi("`boxstyle'") & 		 ///  
 			mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 		 ///   
 			mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 		 ///   
-			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") {
+			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") & 		 ///   
+			mi("`conend'") {
 			
 				// Print error message to the screen
 				di as err "Must include either arguments for the all "		 ///   
@@ -193,7 +194,8 @@ prog def brewscheme, rclass
 			mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 		 ///   
 			mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 		 ///   
 			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 		 ///   
-			mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
+			mi("`refmstyle'") & mi("`constart'") & mi("`conend'") & 		 ///   
+			!mi("`allstyle'")  {
 
 				// Checks the saturation values and returns valid value if 
 				// invalid argument is passed
@@ -446,20 +448,49 @@ prog def brewscheme, rclass
 				
 			} // End Loop over symbol sequence
 			
-			// Get the first value from the palette as the start of the contour
-			qui: levelsof rgb if palette == `"`constart'"' & 				 ///   
-			pcolor == maxcolors, loc(cstart)
-			
-			// Overwrite the local macro with the RGB value
-			loc constart `: word 1 of `cstart''
+			// Check to see if start and end contour color palettes are the same
+			if `"`constart'"' == `"`conend'"' {
+				
+				// Get version of palette w/minimum number of colors
+				qui: su pcolor if palette == `"`constart'"'
+				
+				// Get the first value from the palette as the start of the contour
+				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
+				pcolor == `r(min)', loc(cstart)
+				
+				// Overwrite the local macro with the RGB value
+				loc constart `: word 1 of `cstart''
 
-			// Get the first value from the palette as the end of the contour
-			qui: levelsof rgb if palette == `"`conend'"' & 				 ///   
-			pcolor == maxcolors, loc(cend)
-						
-			// Overwrite the local macro with the RGB value second word used here 
-			// to prevent same color issue if the allstyle option is used.
-			loc conend `: word 2 of `cend''			
+				// Overwrite the local macro with the RGB value
+				loc conend `: word 2 of `cstart''
+				
+			} // End IF Block for case where contour start/end use same palette	
+
+			// If they use different palettes 
+			else {
+			
+				// Get version of palette with minimum number of colors for start
+				qui: su pcolor if palette == `"`constart'"'
+				
+				// Get the first value from the palette as the start of the contour
+				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
+				pcolor == `r(min)', loc(cstart)
+				
+				// Overwrite the local macro with the RGB value
+				loc constart `: word 1 of `cstart''
+
+				// Get version of palette with minimum number of colors for start
+				qui: su pcolor if palette == `"`conend'"'
+				
+				// Get the first value from the palette as the end of the contour
+				qui: levelsof rgb if palette == `"`conend'"' & 				 ///   
+				pcolor == `r(min)', loc(cend)
+							
+				// Overwrite the local macro with the RGB value second word used here 
+				// to prevent same color issue if the allstyle option is used.
+				loc conend `: word 2 of `cend''			
+
+			} // End ELSE Block for separate start/end contour palettes
 			
 			// Loop over color macros
 			foreach color in bar scat area line box dot pie hist ci mat		 ///   
@@ -851,7 +882,7 @@ prog def brewscheme, rclass
 				
 				// Check for values for starting/ending contour plots
 				if "`constart`j''" == "" {
-					loc constart blue
+					loc constart purple
 				} 
 				if "`conend`j''" == "" {
 					loc conend orange
