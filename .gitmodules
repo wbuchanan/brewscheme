@@ -4,6 +4,3 @@
 [submodule "brewthemehelp"]
 	path = brewthemehelp
 	url = https://github.com/wbuchanan/brewthemehelp
-[submodule "recycle"]
-	path = recycle
-	url = https://github.com/wbuchanan/recycle
