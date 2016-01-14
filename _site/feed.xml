@@ -5,9 +5,64 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 13 Jan 2016 17:08:56 -0600</pubDate>
-    <lastBuildDate>Wed, 13 Jan 2016 17:08:56 -0600</lastBuildDate>
+    <pubDate>Thu, 14 Jan 2016 03:55:47 -0600</pubDate>
+    <lastBuildDate>Thu, 14 Jan 2016 03:55:47 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Significant bug fixed prior to V 1.0.0 Release</title>
+        <description>&lt;p&gt;In the most recent push to the repository I was finally able to fix an issue that had gone unresolved for quite some time.  Although contour plots may not be used with much regularity, users of brewscheme may have noticed that contour plots created with schemes generated using &lt;code&gt;brewscheme&lt;/code&gt; returned blank plot regions (e.g., everything but the data would be displayed).  With the most recent patch, this functionality has been corrected.  Additionally, the handling of the palettes passed to the &lt;code&gt;constart()&lt;/code&gt; and &lt;code&gt;conend()&lt;/code&gt; options has been improved.  Previously, the program would select the first two values from the version of the palette containing the maximum number of colors (e.g., it would select the first two values from the palette of ggplot2 that contained 24 values).  Because Stata uses a color interpolator for the values of the contourplots, this could lead to cases where the starting and ending colors were too proximal in the color space to be easily perceived (e.g., trying to differentiate between slightly different shades of blue).  Now, &lt;code&gt;brewscheme&lt;/code&gt; uses the opposite behavior (e.g., selects the version of the palette with the fewest number of colors) as a way to potentially safe guard against this proximity issue.  The example below shows the new functionality using a theme created to emulate the aesthetics of the ggplot2 package in R.&lt;/p&gt;
+
+&lt;h2 id=&quot;example-1-contour-plot-example-with-brewscheme&quot;&gt;Example 1. &lt;em&gt;Contour plot example with &lt;code&gt;brewscheme&lt;/code&gt;.&lt;/em&gt;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;// Change the end of line delimiter 
+#d ;
+
+// Generate the theme file used to simulate ggplot2 aesthetics
+brewtheme ggtheme, numticks(&quot;major 5&quot; &quot;horizontal_major 5&quot; &quot;vertical_major 5&quot;     
+&quot;horizontal_minor 10&quot; &quot;vertical_minor 10&quot;) color(&quot;plotregion gs15&quot; 			    
+&quot;matrix_plotregion gs15&quot; &quot;background gs15&quot; &quot;textbox gs15&quot; &quot;legend gs15&quot; 	    
+&quot;box gs15&quot; &quot;mat_label_box gs15&quot; &quot;text_option_fill gs15&quot; &quot;clegend gs15&quot; 		    
+&quot;histback gs15&quot; &quot;pboxlabelfill gs15&quot; &quot;plabelfill gs15&quot; &quot;pmarkbkfill gs15&quot;	     
+&quot;pmarkback gs15&quot;) linew(&quot;major_grid medthick&quot; &quot;minor_grid thin&quot; &quot;legend medium&quot;    
+&quot;clegend medium&quot;) clockdir(&quot;legend_position 3&quot;) yesno(&quot;draw_major_grid yes&quot;     
+&quot;draw_minor_grid yes&quot; &quot;legend_force_draw yes&quot; &quot;legend_force_nodraw no&quot; 		    
+&quot;draw_minor_vgrid yes&quot; &quot;draw_minor_hgrid yes&quot; &quot;extend_grid_low yes&quot; 		    
+&quot;extend_grid_high yes&quot; &quot;extend_axes_low no&quot; &quot;extend_axes_high no&quot;) 			    
+gridsty(&quot;minor minor&quot;) axissty(&quot;horizontal_default horizontal_withgrid&quot; 	    
+&quot;vertical_default vertical_withgrid&quot;) linepattern(&quot;major_grid solid&quot; 		    
+&quot;minor_grid solid&quot;) linesty(&quot;major_grid major_grid&quot; &quot;minor_grid minor_grid&quot;)     
+ticksty(&quot;minor minor_notick&quot; &quot;minor_notick minor_notick&quot;) 					    
+ticksetsty(&quot;minor_vert_default minor_vert_wgridnolab&quot;) gsize(&quot;minortick_label minuscule&quot; 		    
+&quot;minortick tiny&quot;) numsty(&quot;legend_cols 1&quot; &quot;legend_rows 0&quot; &quot;zyx2rows 0&quot; &quot;zyx2cols 1&quot;) 					    
+verticaltext(&quot;legend top&quot;);
+
+// Change end of line delimiter back to carriage return
+#d cr
+
+// Now five colors from same palette using the ggplot2 inspired theme
+brewscheme, scheme(ggplot2ex1) allsty(ggplot2) allc(3)  ///   
+themef(ggtheme)
+
+// Load example data
+sysuse sandstone.dta, clear
+
+// Create contour plot with brewscheme generated scheme file
+tw contour depth northing easting, scheme(ggplot2ex1)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../img/contourExample1.png&quot; alt=&quot;contour plot example&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 13 Jan 2016 21:40:00 -0600</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
     
       <item>
         <title>Version 1.0 Release Candidate available</title>
@@ -22,7 +77,7 @@
 &lt;pre&gt;&lt;code&gt;brewcbsim xkcd119 &quot;63 210 142&quot; &quot;8 151 233&quot; &quot;182 33 43&quot; bluishgray8
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;../img/brewcbsimex4.png&quot; alt=&quot;brewcbsim&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../../../../img/brewcbsimex4.png&quot; alt=&quot;brewcbsim&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;other-updates&quot;&gt;Other updates&lt;/h2&gt;
 &lt;p&gt;The other updates that have been made are intended to make it easier for the end user to install/maintain the software.  &lt;code&gt;brewlibcheck&lt;/code&gt; leverages &lt;code&gt;filesys.ado&lt;/code&gt; and the associated Java plugin to test whether or not the &lt;code&gt;libbrewscheme&lt;/code&gt; Mata library is up to date - and if not to compile the Mata source code into the library for you.&lt;/p&gt;

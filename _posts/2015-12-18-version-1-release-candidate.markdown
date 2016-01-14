@@ -17,7 +17,7 @@ The most recent release brings a few minor changes to some of the functionality 
 brewcbsim xkcd119 "63 210 142" "8 151 233" "182 33 43" bluishgray8
 ```   
 
-![brewcbsim](../img/brewcbsimex4.png)
+![brewcbsim](../../../../img/brewcbsimex4.png)
 
 ## Other updates
 The other updates that have been made are intended to make it easier for the end user to install/maintain the software.  `brewlibcheck` leverages `filesys.ado` and the associated Java plugin to test whether or not the `libbrewscheme` Mata library is up to date - and if not to compile the Mata source code into the library for you.

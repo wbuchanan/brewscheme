@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</loc>
+    <lastmod>2016-01-13T21:40:00-06:00</lastmod>
+  </url>
+  <url>
     <loc>https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</loc>
     <lastmod>2015-12-18T03:00:00-06:00</lastmod>
   </url>
