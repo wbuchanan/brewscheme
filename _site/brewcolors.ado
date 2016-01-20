@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 0.0.3
-*! 16DEC2015
+*! v 0.0.5
+*! 07JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -35,16 +35,16 @@ prog def brewcolors, rclass
 	version 13.1
 	
 	// Syntax for program (make adds to color DB, install install's colors)
-	syntax anything(name = source) [, MAke INSTall COLors(passthru) REFresh ]
+	syntax anything(name = source) [, MAke INSTall COLors(string asis) REFresh ]
 	
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 	
 	// Check for any optional arguments to add a comma to the command string
 	if `"`make'`install'`colors'"' == "" loc optstring ","
 	
 	// Build local macro with the command string
-	loc cmdstring brewcolors `source'`optstring' `make' `install' `colors' `refresh'
+	loc cmdstring brewcolors `source'`optstring' `make' `install' colors(`colors') `refresh'
 	
 	// Preserve current state of the data
 	preserve 
@@ -62,7 +62,7 @@ prog def brewcolors, rclass
 		if `"`source'"' == "xkcd" {
 
 			// Load and parse the xkcd data
-			xkcd, `make' `install' `colors' `refresh' cmd(`cmdstring')
+			xkcd, `make' `install' colors(`colors') `refresh' cmd(`cmdstring')
 			
 			// Loop over each of the return name macros
 			foreach nm in `r(colnms)' { 
@@ -78,7 +78,7 @@ prog def brewcolors, rclass
 		else if `"`source'"' == "new" {
 		
 			// Call color blind routine
-			colorinstaller, `make' `install' `colors' `refresh' cmd(`cmdstring')
+			colorinstaller, `make' `install' colors(`colors') `refresh' cmd(`cmdstring')
 			
 			// Return the sub routine's return value
 			ret loc colorpath `r(colorpath)'
@@ -114,13 +114,13 @@ prog def colorinstaller, rclass
 		loc wrd `"`: word `i' of `colors''"'
 		
 		// If single word, assume it is RGB string
-		if `: word count `wrd'' == 1 {
+		if `: word count "`wrd'"' == 1 {
 				
 			// Get the palette name
 			loc palname "uc`: subinstr loc wrd `" "' "", all'"
 		
 			// Get the color string
-			loc colorstring "`wrd'"
+			loc colorstring : list retoken wrd
 			
 			// Create a meta string
 			loc metastring "User Defined Color - "
@@ -131,10 +131,10 @@ prog def colorinstaller, rclass
 		else {
 		
 			// Get the palette name
-			loc palname "`: word 1 of `wrd'"
+			gettoken palname colorstring : wrd  
 			
-			// Get the color string
-			loc colorstring "`: word 2 of `wrd''"
+			// Clean up the quotation marks around the color string
+			loc colorstring : list retoken colorstring
 			
 			// Create a meta string
 			loc metastring "User Defined Color - "
@@ -676,8 +676,13 @@ prog def brewcolorvars
 	// Add variables to existing file
 	foreach v in colorblind lcd photocopy print {
 	
+		// Check if variable already exists
+		cap confirm v `v'
+			
 		// Initialize variables w/extended missing values
-		qui: g `v' = .n
+		if _rc != 0 qui: g `v' = .n
+		
+		else qui: replace `v' = .n
 		
 	} // End Loop for meta variables
 	

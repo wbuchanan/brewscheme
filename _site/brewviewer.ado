@@ -9,8 +9,8 @@
 ********************************************************************************
 		
 *! brewviewer
-*! v 0.0.2
-*! 16DEC2015
+*! v 0.0.4
+*! 08JAN2016
 
 // Drop program if already loaded in memory
 cap prog drop brewviewer
@@ -35,13 +35,6 @@ prog def brewviewer
 		err 198
 		
 	} // End IF Block for invalid number of color arguments
-	
-	// Check number of colors and sequential option is turned on
-	if inrange(`colors', 2, 6) & `"`seq'"' != "" loc labsize medsmall
-	else if inrange(`colors', 7, 12) & `"`seq'"' != "" loc labsize small
-	else if inrange(`colors', 13, 18) & `"`seq'"' != "" loc labsize vsmall
-	else if `colors' >= 19 & `"`seq'"' != "" loc labsize tiny
-	else loc labsize medsmall
 	
 	// Check impairment option to add subtitle to graph
 	if `"`impaired'"' != "" loc xtralab `""with simulated total, red, green, and blue colorblindness""'
@@ -303,7 +296,7 @@ prog def brewviewer
 						else { 
 						
 							// Build the command for graphing this individual color/label
-							loc scat`i' `scat`i'' (scatteri `j' `i', mc("`col`i''") ///   
+							loc scat`i' `scat`i'' (scatteri `j' `i', mc("`col'") ///   
 							mlabc(black) msize(`sze' `sze') mlc(black) ms(S))
 
 						} // End ELSE Block for no color impairment simulation
@@ -332,7 +325,7 @@ prog def brewviewer
 			if `"`impaired'"' != "" {
 			
 				// Adjust label angle and size 
-				loc xax `xax', labsize(`labsize') angle(0)
+				loc xax `xax', angle(0)
 				
 				// Remove x-axis title to make room for the additional labeling
 				loc xaxti ""
@@ -348,7 +341,7 @@ prog def brewviewer
 				// Remove any duplicate values
 				loc xax : list uniq xax
 			
-				loc xax `xax', labsize(`labsize')
+				loc xax `xax', angle(0)
 			
 				// Set the x-axis title
 				loc xaxti "# Colors"
@@ -459,4 +452,3 @@ prog def brewviewer
 	
 // End the program
 end
-

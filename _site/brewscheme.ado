@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1801                                                                     *
+*     1561                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.15
-*! 16DEC2015
+*! v 0.0.18
+*! 13JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -55,7 +55,7 @@ prog def brewscheme, rclass
 		REFResh DBug THEMEFile(string asis) SYMBols(string asis) ]
 		
 		// Check for brewscheme Mata library
-		brewlibcheck
+		qui: brewlibcheck
 	
 		// Define local with valid symbols arguments
 		loc validsymbols circle diamond triangle square plus smcircle 		 ///   
@@ -173,10 +173,11 @@ prog def brewscheme, rclass
 			/* Validate arguments (if all graph types are null, an all parameter 
 			must be specified */
 			if mi("`barstyle'") & mi("`scatstyle'") & mi("`areastyle'") & 	 ///   
-			mi("`linestyle'") & mi("`constyle'") & mi("`boxstyle'") & 		 ///  
+			mi("`linestyle'") & mi("`constart'") & mi("`boxstyle'") & 		 ///  
 			mi("`dotstyle'") & mi("`piestyle'") & mi("`sunstyle'") & 		 ///   
 			mi("`histstyle'") & mi("`cistyle'") & mi("`matstyle'") & 		 ///   
-			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") {
+			mi("`reflstyle'") & mi("`refmstyle'") & mi("`allstyle'") & 		 ///   
+			mi("`conend'") {
 			
 				// Print error message to the screen
 				di as err "Must include either arguments for the all "		 ///   
@@ -193,7 +194,15 @@ prog def brewscheme, rclass
 			mi("`linestyle'") & mi("`boxstyle'") & mi("`dotstyle'") & 		 ///   
 			mi("`piestyle'") & mi("`sunstyle'") & mi("`histstyle'") & 		 ///   
 			mi("`cistyle'") & mi("`matstyle'") & mi("`reflstyle'") & 		 ///   
-			mi("`refmstyle'") & mi("`constyle'") & !mi("`allstyle'")  {
+			mi("`refmstyle'") & mi("`constart'") & mi("`conend'") & 		 ///   
+			!mi("`allstyle'")  {
+
+				// Checks the saturation values and returns valid value if 
+				// invalid argument is passed
+				checkSat, int(`allsaturation')
+				
+				// Resets the local to the corrected value
+				loc allsaturation = `r(saturation)'
 
 				// Set the style parameters for all graph types to the values in the 
 				// all parameters
@@ -212,7 +221,7 @@ prog def brewscheme, rclass
 					
 					// Loop over graph types and assign the all styles to them
 					foreach stile in "bar" "scat" "area" "line" "box" 		 ///   
-						"dot" "pie" "sun" "hist" "ci" "mat" "con" "refl" "refm" {
+						"dot" "pie" "sun" "hist" "ci" "mat" "refl" "refm" {
 						
 						/* Assign the all style, color, and saturation levels to the 
 						individual graph types. */
@@ -221,6 +230,12 @@ prog def brewscheme, rclass
 						loc `stile'saturation  `allsaturation'
 
 					} // End Loop over graph types
+					
+					// Sets the palette for the starting color for contourplots
+					loc constart `allstyle'
+					
+					// Sets the palette for the ending color for contourplots
+					loc conend `allstyle'
 					
 				} // End IF Block to check if the # of colors is valid for the style
 
@@ -257,13 +272,14 @@ prog def brewscheme, rclass
 			} // End ELSEIF Block for missing types w/o some argument
 			
 			// If missing some graph types and defaults provided
-			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		   	 ///   
+			else if ("`barstyle'" == "" |  "`scatstyle'" == "" |   		     ///   
 				"`areastyle'" == "" |  "`linestyle'" == "" |  		    	 ///   
-				"`dotstyle'" == "" |  "`boxstyle'" == "" |  				 ///
+				"`boxstyle'" == "" |  "`dotstyle'" == "" |					 ///
 				"`piestyle'" == "" |  "`sunstyle'" == "" |   		    	 ///   
 				"`histstyle'" == "" |  "`cistyle'" == "" |  		    	 ///   
-				"`matstyle'" == "" | "`reflstyle'" == "" |  		    	 ///   
-				"`refmstyle'" == "" | "`constyle'" == "") & "`somestyle'" != "" {
+				"`matstyle'" == "" | "`reflstyle'" == "" |  		   		 ///   
+				"`refmstyle'" == "" | "`constart'" == "" | "`conend'" == "") & 	 ///   
+				"`somestyle'" != "" {
 				
 				// Check to see if some style was an available palette
 				if `: list somestyle in palettes' != 1 {
@@ -276,499 +292,114 @@ prog def brewscheme, rclass
 					
 				} // End IF Block to check for valid color palette
 				
+				// Tests the saturation value for the some option
+				checkSat, int(`somesaturation')
+				
+				// Returns the corrected values to the same local
+				loc somesaturation = `r(saturation)'
+				
+				// If more colors specified for default than available
+				if `somecolors' > ``somestyle'c' & `somecolors' != . {
+					
+					// Print error message to screen
+					di as err `"More colors (``stile'colors') than "'	 ///   
+					`"available (``stile'style') in the palette "' 		 ///  
+					`""`stile'style" = ``somestyle'c'"'
+					
+					// Kill the program
+					err 198
+					
+				} // End ELSEIF Block for # colors > available for defaults
+	
+				// Loop over # available colors per graph
+				foreach stile in `grstyles' {
+					
+					// Check contour plot scheme arguments
+					if `"``stile'start'"' == "" loc constart "`somestyle'"
+					if `"``stile'end'"' == "" loc conend "`somestyle'"
+						
+					// If the style is missing and valid # colors for default
+					if "``stile'style'" == "" {
+							
+						// Assign the default styles to the graph type
+						loc `stile'style "`somestyle'"
+						loc `stile'colors `somecolors'
+						loc `stile'saturation `somesaturation'
+							
+					} // End IF Block for unspecified graphs
+							
+					// If the graph type has a style specified
+					else {
+						
+						// Check to see if there are the requested number of colors
+						if ``stile'colors' > ```stile'style'c' {
+						
+							// If not print error to screen
+							di as err `"Too many colors specified in "' 	 ///   
+							`"`stile'colors(``stile'colors') for the "'		 ///   
+							`"``stile'style' palette."' _n 					 ///   
+							`"Maximum number of colors allowed is ```stile'style'c'"'
+							
+							// Issue error code and exit
+							err 198
+							
+						} // End IF Block for more colors than available
+						
+						// If there are an appropriate number of colors requested
+						else {
+							
+							// Check the saturation values
+							checkSat, int(``stile'saturation')
+
+							// And replace the passed argument with the validated value
+							loc `stile'saturation = `r(saturation)'
+							
+						} // End ELSE Block for sufficient colors
+						
+					} // End ELSE Block for graphs with specified color palettes
+					
+				} // End Loop over graph types
+						
+			} // End ELSEIF Block for valid parameters
+			
+			// For cases where all styles are specified
+			else {
+			
 				// Loop over # available colors per graph
 				foreach stile in `grstyles' {
 				
-					// If the style is missing and valid # colors for default
-					if "``stile'style'" == "" & `somecolors' <= ``somestyle'c' {
+					// Skip over contour plot case
+					if `"`stile'"' == "con" continue
 					
-						// Loop over the individual graph types
-						foreach x in "bar" "scat" "area" "line" "box" "dot"  ///   
-						"pie" "sun" "hist" "ci" "mat" "refl" "con" "refm" {
-						
-							// If the graph type does not have a style specified
-							if "``x'style'" == "" {
-							
-								// Assign the default styles to the graph type
-								loc `x'style "`somestyle'"
-								loc `x'colors `somecolors'
-								loc `x'saturation `somesaturation'
-								
-								
-							} // End IF Block for unspecified graphs
-							
-							// If the graph type has a style specified
-							else {
-							
-								// Continue on to next graph type
-								continue
-								
-							} // End ELSE Block for graphs with specified colors
-							
-						} // End Loop over graph types
-						
-						exit
-						
-					} // End IF Block checking # colors available for default
+					// Check to see if there are the requested number of colors
+					else if ``stile'colors' > ```stile'style'c' {
 					
-					// If more colors specified for default than available
-					else if "``stile'style'" == "" & `somecolors' > ``somestyle'c' {
-					
-						// Print error message to screen
-						di as err `"More colors (``stile'colors') than "'	 ///   
-						`"available (``stile'style') in the palette "`stile'style""'
+						// If not print error to screen
+						di as err `"Too many colors specified in "' 	 ///   
+						`"`stile'colors(``stile'colors') for the "'		 ///   
+						`"``stile'style' palette."' _n 					 ///   
+						`"Maximum number of colors allowed is ```stile'style'c'"'
 						
-						// Kill the program
+						// Issue error code and exit
 						err 198
 						
-					} // End ELSEIF Block for # colors > available for defaults
+					} // End ELSEIF Block for more colors than available
 					
-					// Check for # colors available for specific graph types
-					else if "``stile'style'" != "" &						 ///   
-						``stile'colors' > ```stile'style'c' {
+					// If there are an appropriate number of colors requested
+					else {
 						
-						// Print error message to the screen
-						di as err `"More colors (``stile'colors') than "'	 ///   
-						`"available (``stile'style') in the palette "`stile'style""'
-						
-						// Kill the program
-						err 198
-						
-					} // End ELSEIF Block for # colors > available for graph types
-					
-				} // End Loop over # colors for specified styles
-				
-			} // End ELSE Block for valid parameters
-				
-			// If color intensity is not a valid value
-			if !inlist(`allsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 	///   
-				100, 200) {
-				
-				// If if invalid value is <= 104
-				if `allsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc allsaturation = round(`allsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `allsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc allsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For all other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting ALL saturation to 100"
-					
-					// Set value to full saturation
-					loc allsaturation 100
-					
-				} // End ELSE Block for all other values of saturation
-				
-			} // End IF Block for allsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`barsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `barsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc barsaturation = round(`barsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `barsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc barsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For bar other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting bar graph saturation to 100"
-					
-					// Set value to full saturation
-					loc barsaturation 100
-					
-				} // End ELSE Block for bar other values of saturation
-				
-			} // End IF Block for barsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`areasaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `areasaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc areasaturation = round(`areasaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `areasaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc areasaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For area other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting area graph saturation to 100"
-					
-					// Set value to full saturation
-					loc areasaturation 100
-					
-				} // End ELSE Block for area other values of saturation
-				
-			} // End IF Block for areasaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`consaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `consaturation' <= 104 {
-				
-					// Set the value to the nearest deconle in [0, 100]
-					loc consaturation = round(`consaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `consaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc consaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For con other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting contour plot saturation to 100"
-					
-					// Set value to full saturation
-					loc consaturation 100
-					
-				} // End ELSE Block for con other values of saturation
-				
-			} // End IF Block for consaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`boxsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `boxsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc boxsaturation = round(`boxsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `boxsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc boxsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For box other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting box plot saturation to 100"
-					
-					// Set value to full saturation
-					loc boxsaturation 100
-					
-				} // End ELSE Block for box other values of saturation
-				
-			} // End IF Block for boxsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`piesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `piesaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc piesaturation = round(`piesaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `piesaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc piesaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For pie other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting pie graph saturation to 100"
-					
-					// Set value to full saturation
-					loc piesaturation 100
-					
-				} // End ELSE Block for pie other values of saturation
-				
-			} // End IF Block for piesaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`sunsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `sunsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc sunsaturation = round(`sunsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `sunsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc sunsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For sun other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting sunflower plot saturation to 100"
-					
-					// Set value to full saturation
-					loc sunsaturation 100
-					
-				} // End ELSE Block for sun other values of saturation
-				
-			} // End IF Block for sunsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`histsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `histsaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc histsaturation = round(`histsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `histsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc histsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For hist other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting histogram saturation to 100"
-					
-					// Set value to full saturation
-					loc histsaturation 100
-					
-				} // End ELSE Block for hist other values of saturation
-				
-			} // End IF Block for histsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`cisaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,    ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `cisaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc cisaturation = round(`cisaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `cisaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc cisaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For ci other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting confidence interval saturation to 100"
-					
-					// Set value to full saturation
-					loc cisaturation 100
-					
-				} // End ELSE Block for ci other values of saturation
-				
-			} // End IF Block for cisaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`matsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,   ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `matsaturation' <= 104 {
-				
-					// Set the value to the nearest dematle in [0, 100]
-					loc matsaturation = round(`matsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `matsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc matsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For mat other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting scatterplot matrix saturation to 100"
-					
-					// Set value to full saturation
-					loc matsaturation 100
-					
-				} // End ELSE Block for mat other values of saturation
-				
-			} // End IF Block for matsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`reflsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `reflsaturation' <= 104 {
-				
-					// Set the value to the nearest dereflle in [0, 100]
-					loc reflsaturation = round(`reflsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `reflsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc reflsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For refl other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting reference line saturation to 100"
-					
-					// Set value to full saturation
-					loc reflsaturation 100
-					
-				} // End ELSE Block for refl other values of saturation
-				
-			} // End IF Block for reflsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`refmsaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `refmsaturation' <= 104 {
-				
-					// Set the value to the nearest derefmle in [0, 100]
-					loc refmsaturation = round(`refmsaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `refmsaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc refmsaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For refm other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting reference marker saturation to 100"
-					
-					// Set value to full saturation
-					loc refmsaturation 100
-					
-				} // End ELSE Block for refm other values of saturation
-				
-			} // End IF Block for refmsaturation value validation
-			
-			// If color intensity is not a valid value
-			if !inlist(`somesaturation', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
-				90, 100, 200) {
-				
-				// If if invalid value is <= 104
-				if `somesaturation' <= 104 {
-				
-					// Set the value to the nearest decile in [0, 100]
-					loc somesaturation = round(`somesaturation', 10)
-					
-				} // End IF Block testing for saturation <= 104
-				
-				// If saturation is > 104 
-				else if `somesaturation' > 104 {
-				
-					// Set to max valid saturation value
-					loc somesaturation 200
-					
-				} // End of ELSEIF Block for saturation > 104
-				
-				// For some other cases 
-				else {
-				
-					// Print message to the results screen
-					di "Setting some saturation to 100"
-					
-					// Set value to full saturation
-					loc somesaturation 100
-					
-				} // End ELSE Block for some other values of saturation
-				
-			} // End IF Block for somesaturation value validation
+						// Check the saturation values
+						checkSat, int(``stile'saturation')
 
+						// And replace the passed argument with the validated value
+						loc `stile'saturation = `r(saturation)'
+						
+					} // End ELSE Block for sufficient colors
+					
+				} // End Loop over graph types
+				
+			} // End ELSE Block for cases with all graph types specified	
+			
 			// Line saturation gets defined as a color multiplier
 			// loc linesaturation = `linesaturation'/100
 			
@@ -817,6 +448,62 @@ prog def brewscheme, rclass
 				
 			} // End Loop over symbol sequence
 			
+			// Check to see if start and end contour color palettes are the same
+			if `"`constart'"' == `"`conend'"' {
+				
+				// Get version of palette w/minimum number of colors
+				qui: su pcolor if palette == `"`constart'"'
+				
+				// Get the first value from the palette as the start of the contour
+				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
+				pcolor == `r(min)', loc(cstart)
+				
+				// Overwrite the local macro with the RGB value
+				loc constart `: word 1 of `cstart''
+
+				// Overwrite the local macro with the RGB value
+				loc conend `: word 2 of `cstart''
+				
+			} // End IF Block for case where contour start/end use same palette	
+
+			// If they use different palettes 
+			else {
+			
+				// Get version of palette with minimum number of colors for start
+				qui: su pcolor if palette == `"`constart'"'
+				
+				// Get the first value from the palette as the start of the contour
+				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
+				pcolor == `r(min)', loc(cstart)
+				
+				// Overwrite the local macro with the RGB value
+				loc constart `: word 1 of `cstart''
+
+				// Get version of palette with minimum number of colors for start
+				qui: su pcolor if palette == `"`conend'"'
+				
+				// Get the first value from the palette as the end of the contour
+				qui: levelsof rgb if palette == `"`conend'"' & 				 ///   
+				pcolor == `r(min)', loc(cend)
+							
+				// Overwrite the local macro with the RGB value second word used here 
+				// to prevent same color issue if the allstyle option is used.
+				loc conend `: word 2 of `cend''			
+
+			} // End ELSE Block for separate start/end contour palettes
+			
+			// Recycle the number of symbols
+			qui: mata: recycle(`numsymbols', `pcycles')
+			
+			// Loop over the sequence of symbols
+			foreach symb in `sequence' {
+			
+				// Build a string with each of the symbols corresponding to the 
+				// appropriate cycle number
+				loc symbolseq `"`symbolseq' "`: word `symb' of `symbols''""'
+				
+			} // End Loop over symbol sequence
+			
 			// Loop over color macros
 			foreach color in bar scat area line box dot pie hist ci mat		 ///   
 			refl refm sun {
@@ -832,17 +519,27 @@ prog def brewscheme, rclass
 				qui: levelsof rgb if palette == "``color'style'" & 			 ///   
 				pcolor == ``color'colors', loc(rgbs)
 				
+				// If the RGB value macro is null get the values for the maxmimum
+				// number of colors available for the palette
+				if `"`rgbs'"' == "" {
+				
+					// Gets the same palette but with the maximum number of colors
+					qui: levelsof rgb if palette == "``color'style'" &		 ///   
+					pcolor == ```color'style'c', loc(rgbs)
+					
+				} // End IF Block for palettes that only have a single set of colors	
+
+				// Developer option to print debug messages
 				if "`dbug'" != "" {
 					
-					levelsof rgb if palette == "``color'style'" & pcolor == ``color'colors'
-					
+					// Prints the graph type with data that follows
 					di "Graph type = `color'"
 					
 					// Print debugging message
 					di "Color: `color'" _n "Number of colors: ``color''" _n  ///   
 					`"Color sequence: ``color'seq'"'
 				
-				}
+				} // End Debug messages
 				
 				// Loop over the rgb values to construct the graph specific  
 				// rgb values
@@ -1111,6 +808,7 @@ prog def brewscheme, rclass
 
 			// Loop over macros
 			forv rfs = 1/5 {
+<<<<<<< HEAD
 			
 				// Store all the translated RGB values
 				loc sunflowerlf`rfs' ``: word `rfs' of `ctyperefs'''
@@ -1346,6 +1044,265 @@ prog def brewscheme, rclass
 						
 						} // End ELSE Block for sunflower plots
 						
+=======
+			
+				// Store all the translated RGB values
+				loc sunflowerlf`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over macro reassignments		
+
+			// Search for generic dark flower
+			mata: brewc.brewColorSearch("`: word 3 of `sunrgb''") 
+
+			// Loop over macros
+			forv rfs = 1/5 {
+			
+				// Store all the translated RGB values
+				loc sunflowerdf`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over macro reassignments	
+			
+			// Search for contour start values
+			mata: brewc.brewColorSearch("`constart'")
+			
+			// Store the contour start values
+			forv rfs = 1/5 {
+			
+				// Index values like other graph types
+				loc constart`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over contour plot starting values
+			
+			// Search for contour end values
+			mata: brewc.brewColorSearch("`conend'")
+			
+			// Store the contour end values
+			forv rfs = 1/5 {
+			
+				// Index values like other graph types
+				loc conend`rfs' ``: word `rfs' of `ctyperefs'''
+
+			} // End Loop over contour plot ending values
+				
+			// Loop over scheme/theme file pairs
+			forv j = 1/5 {
+			
+				file write `scheme`j'' `"color ci_line        "0 0 0""' _n
+				file write `scheme`j'' `"color ci_arealine    "0 0 0""' _n
+				file write `scheme`j'' `"color ci_area        "`ci_area`j''" "' _n
+				file write `scheme`j'' `"color ci_symbol      "`ci_symbol`j''" "' _n
+				file write `scheme`j'' `"color ci2_line       "0 0 0""' _n
+				file write `scheme`j'' `"color ci2_arealine   "0 0 0""' _n
+				file write `scheme`j'' `"color ci2_area       "`ci2_area`j''" "' _n
+				file write `scheme`j'' `"color ci2_symbol     "`ci2_symbol`j''" "' _n(2)
+				
+				file write `scheme`j'' `"color pieline        "0 0 0""' _n(2)
+			
+				// Writes line 180 from the theme file
+				file write `scheme`j'' `theme`j'_180'
+						
+				// Writes line 181 from the theme file
+				file write `scheme`j'' `theme`j'_181'
+				
+				file write `scheme`j'' `"color refmarker      "0 0 0""' _n
+				file write `scheme`j'' `"color refmarkline    "0 0 0""' _n
+				file write `scheme`j'' `"color histogram      "`histogram`j''" "' _n
+
+				// Writes line 182 from the theme file
+				file write `scheme`j'' `theme`j'_182'
+				
+				file write `scheme`j'' `"color histogram_line "0 0 0""' _n
+				file write `scheme`j'' `"color dot_line       "0 0 0""' _n
+				file write `scheme`j'' `"color dot_arealine   "0 0 0""' _n
+				file write `scheme`j'' `"color dot_area       "`ci_area`j''" "' _n
+				file write `scheme`j'' `"color dotmarkline    "0 0 0""' _n(2)
+				
+				file write `scheme`j'' `"color xyline         "0 0 0""' _n
+				file write `scheme`j'' `"color refline        "0 0 0""' _n
+				file write `scheme`j'' `"color dots           "0 0 0""' _n(2)
+				
+				// Loop over lines 183-192 of the theme file
+				forv i = 183/192 {
+				
+					// Write each line to the scheme file
+					file write `scheme`j'' `theme`j'_`i''
+					
+				} // End loop over lines 183-192 of the theme file
+				
+				// Check for values for starting/ending contour plots
+				if "`constart`j''" == "" {
+					loc constart purple
+				} 
+				if "`conend`j''" == "" {
+					loc conend orange
+				}
+			
+				file write `scheme`j'' `"color contour_begin "`constart`j''""' _n
+				file write `scheme`j'' `"color contour_end "`conend`j''""' _n
+				file write `scheme`j'' `"color zyx2 "0 0 0""' _n(2)
+			
+				file write `scheme`j'' `"color sunflower "`sunflower`j''""' _n
+				file write `scheme`j'' `"color sunflowerlb "0 0 0""' _n
+				file write `scheme`j'' `"color sunflowerlf "`sunflowerlf`j''""' _n
+				file write `scheme`j'' `"color sunflowerdb "0 0 0""' _n
+				file write `scheme`j'' `"color sunflowerdf "`sunflowerdf`j''""' _n(2)
+				file write `scheme`j'' `"color p       gs6"' _n
+				
+			} // End Loop over theme/scheme pairs
+			
+			/* Add generic color loop here */
+			forv i = 1/`: word count `gencolor'' {
+
+				// Look up color value
+				mata: brewc.brewColorSearch("`: word `i' of `gencolor''")
+			
+				// Loop over macros / theme/scheme file pairs
+				forv rfs = 1/5 {
+				
+					// Add entry to scheme files
+					file write `scheme`rfs'' `"color p`i' "``: word `rfs' of `ctyperefs'''""' _n
+
+				} // End Loop over theme/scheme file pairs
+				
+			} // End Loop for generic colors
+			
+			// Loop over theme/scheme file pairs
+			forv j = 1/5 {
+			
+				// Write blank line to scheme file
+				file write `scheme`j'' `""' _n
+				
+				// Loop over lines 193-331 of the theme file
+				forv i = 193/331 {
+				
+					// Write each line to the scheme file
+					file write `scheme`j'' `theme`j'_`i''
+					
+				} // End loop over lines 193-331 of the theme file
+				
+				file write `scheme`j'' `"markerstyle p1"' _n
+				file write `scheme`j'' `"markerstyle dots dots"' _n
+				file write `scheme`j'' `"markerstyle star star"' _n
+				file write `scheme`j'' `"markerstyle histogram histogram"' _n
+				file write `scheme`j'' `"markerstyle ci ci"' _n
+				file write `scheme`j'' `"markerstyle ci2 ci2"' _n
+				file write `scheme`j'' `"markerstyle ilabel ilabel"' _n
+				file write `scheme`j'' `"markerstyle matrix matrix"' _n
+				file write `scheme`j'' `"markerstyle box_marker refmarker"' _n
+				file write `scheme`j'' `"markerstyle editor editor"' _n
+				file write `scheme`j'' `"markerstyle editor_arrow ed_arrow"' _n
+				file write `scheme`j'' `"markerstyle sunflower sunflower"' _n(2)
+				
+				// Write generic marker styles
+				foreach i in "" "box" "dot" "arrow" {
+				
+					// Loop over cycle numbers
+					forv v = 1/`pcycles' {
+					
+						// Add entry to scheme file
+						file write `scheme`j'' `"markerstyle p`v'`i'  p`v'`i'"' _n
+					
+					} // End Loop over cycle number
+					
+					// Write blank line between each of the types
+					file write `scheme`j'' `""' _n
+				
+				} // End Loop over marker style generic types
+
+				// Add extra space after p#arrow
+				file write `scheme`j'' `""' _n
+			
+				// Loop over lines 332-382 of the theme file
+				forv i = 332/382 {
+				
+					// Write each line to the scheme file
+					file write `scheme`j'' `theme`j'_`i''
+
+				} // End loop over lines 332-382 of the theme file
+			
+				// Shade/fill settings
+				file write `scheme`j'' `"shadestyle foreground"' _n
+				file write `scheme`j'' `"shadestyle background background"' _n
+				file write `scheme`j'' `"shadestyle foreground foreground"' _n(2)
+				file write `scheme`j'' `"shadestyle ci ci"' _n
+				file write `scheme`j'' `"shadestyle ci2 ci2"' _n
+				file write `scheme`j'' `"shadestyle histogram histogram"' _n
+				file write `scheme`j'' `"shadestyle dendrogram dendrogram"' _n
+				file write `scheme`j'' `"shadestyle dotchart dotchart"' _n
+				file write `scheme`j'' `"shadestyle legend legend"' _n
+				file write `scheme`j'' `"shadestyle clegend_outer clegend_outer"' _n
+				file write `scheme`j'' `"shadestyle clegend_inner clegend_inner"' _n
+				file write `scheme`j'' `"shadestyle clegend_preg none"' _n
+				file write `scheme`j'' `"shadestyle plotregion plotregion"' _n
+				file write `scheme`j'' `"shadestyle matrix_plotregion matrix_plotregion"' _n
+				file write `scheme`j'' `"shadestyle sunflower sunflower"' _n
+				file write `scheme`j'' `"shadestyle sunflowerlb sunflowerlb"' _n
+				file write `scheme`j'' `"shadestyle sunflowerdb sunflowerdb"' _n
+				file write `scheme`j'' `"shadestyle contour_begin contour_begin"' _n
+				file write `scheme`j'' `"shadestyle contour_end contour_end"' _n(2)
+				file write `scheme`j'' `"shadestyle p foreground"' _n(2)
+				
+				// Write generic marker styles
+				foreach i in "" "bar" "box" "pie" "area" {
+				
+					// Loop over cycle numbers
+					forv v = 1/`pcycles' {
+					
+						// Add entry to scheme file
+						file write `scheme`j'' `"shadestyle p`v'`i'  p`v'`i'"' _n
+					
+					} // End Loop over cycle number
+					
+					// Spaces between graph types
+					if "`i'" != "area" {
+					
+						// Write blank line between each of the types
+						file write `scheme`j'' `""' _n
+
+					} // End IF Block for other graphtypes
+					
+					// For area shade styles
+					else {
+					
+						// This line files final area entry
+						file write `scheme`j'' `"* shadestyle p#other  p1"' _n(3)
+						
+					} // End Else Block for area shade styles
+						
+				} // End Loop over marker style generic types
+
+				// Loop over lines 383-434 of the theme file
+				forv i = 383/434 {
+				
+					// Write each line to the scheme file
+					file write `scheme`j'' `theme`j'_`i''
+					
+				} // End loop over lines 383-434 of the theme file
+				
+				// Write generic marker styles
+				foreach i in "" "bar" "box" "area" "line" "other" "mark" 		 ///   
+				"boxmark" "dotmark" "arrow" "arrowline" "sunflowerlight" 		 ///   
+				"sunflowerdark" {
+				
+					// Loop over cycle numbers
+					forv v = 1/`pcycles' {
+
+						// Check for sunflower cases
+						if !inlist(`"`i'"', "sunflowerlight", "sunflowerdark") {
+
+							// Add entry to scheme file
+							file write `scheme`j'' `"linestyle p`v'`i'  p`v'`i'"' _n
+						
+						} // End If Block for non sunflower plots
+						
+						// For the sunflower caes
+						else {
+						
+							// Use the generic line style for the sunflower plots
+							file write `scheme`j'' `"linestyle p`v'`i' p`v'"' _n
+						
+						} // End ELSE Block for sunflower plots
+						
 					} // End Loop over cycle number
 					
 					// Write blank line between each of the types
@@ -1353,13 +1310,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 				
-				// Loop over lines 435-495 of the theme file
-				forv i = 435/495 {
+				// Loop over lines 435-494 of the theme file
+				forv i = 435/494 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 435-495 of the theme file
+				} // End loop over lines 435-494 of the theme file
 			
 				// Settings for color saturation
 				file write `scheme`j'' `"intensity            full"' _n
@@ -1395,13 +1352,13 @@ prog def brewscheme, rclass
 				file write `scheme`j'' `"fillpattern foreground pattern10"' _n
 				file write `scheme`j'' `"fillpattern background pattern10"' _n(3)
 				
-				// Loop over lines 496-537 of the theme file
-				forv i = 496/537 {
+				// Loop over lines 495-536 of the theme file
+				forv i = 495/536 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 
-				} // End loop over lines 496-537 of the theme file
+				} // End loop over lines 495-536 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "boxlabel" {
@@ -1421,13 +1378,13 @@ prog def brewscheme, rclass
 				
 				file write `scheme`j'' `"* textboxstyle p15label     xyz"' _n(3)
 
-				// Loop over lines 538-591 of the theme file
-				forv i = 538/591 {
+				// Loop over lines 537-590 of the theme file
+				forv i = 537/590 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 538-591 of the theme file
+				} // End loop over lines 537-590 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "bar" "box" "pie" "area" "sunflowerlight" 		 ///   
@@ -1459,13 +1416,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 				
-				// Loop over lines 592-771 of the theme file
-				forv i = 592/771 {
+				// Loop over lines 591-770 of the theme file
+				forv i = 591/770 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 592-771 of the theme file
+				} // End loop over lines 591-770 of the theme file
 				
 				// Write generic marker styles
 				foreach i in "" "box" {
@@ -1485,13 +1442,13 @@ prog def brewscheme, rclass
 				
 				file write `scheme`j'' `""' _n
 				
-				// Loop over lines 772-912 of the theme file
-				forv i = 772/912 {
+				// Loop over lines 771-911 of the theme file
+				forv i = 771/911 {
 				
 					// Write each line to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End loop over lines 772-912 of the theme file
+				} // End loop over lines 771-911 of the theme file
 				
 				// Loop over color cycles
 				forv i = 1/`pcycles' {
@@ -1524,13 +1481,13 @@ prog def brewscheme, rclass
 
 				} // End Loop over marker style generic types
 
-				// Loop over lines 913-977 of the theme file
-				forv i = 913/977 {
+				// Loop over lines 912-976 of the theme file
+				forv i = 912/976 {
 				
 					// Write each line from the theme file to the scheme file
 					file write `scheme`j'' `theme`j'_`i''
 					
-				} // End Loop over lines 913-977 of the theme file
+				} // End Loop over lines 912-976 of the theme file
 				
 				// Set generic parameters
 				forv i = 1/`pcycles' {
@@ -1723,7 +1680,7 @@ prog def brewscheme, rclass
 
 					/* Connected Plots */
 					// Primary connected plot entries
-					file write `scheme`j'' `"color p`i'dotmarkfill "`dotcolor`j''"' _n
+					file write `scheme`j'' `"color p`i'dotmarkfill "`dotcolor`j''""' _n
 					file write `scheme`j'' `"linewidth p`i'dotmark vthin"' _n
 					file write `scheme`j'' `"symbol p`i'dot `thissymbol'"' _n
 					file write `scheme`j'' `"symbolsize p`i'dot medium"' _n
@@ -1800,3 +1757,56 @@ prog def brewscheme, rclass
 // End of Program		
 end
 
+
+// Defines a subroutine used to check saturation parameter values
+prog def checkSat, rclass
+
+	// Defines the syntax the program uses
+	syntax, [ INTensity(integer 100) ] 
+	
+	return clear
+
+	// If color intensity is not a valid value
+	if !inlist(`intensity', 0, 10, 20, 30, 40, 50, 60, 70, 80,  ///   
+		90, 100, 200) {
+		
+		// If if invalid value is <= 104
+		if `intensity' <= 104 {
+		
+			// Set the value to the nearest decile in [0, 100]
+			loc saturation = round(`intensity', 10)
+			
+		} // End IF Block testing for saturation <= 104
+		
+		// If saturation is > 104 
+		else if `intensity' > 104 {
+		
+			// Set to max valid saturation value
+			loc saturation = 200
+			
+		} // End of ELSEIF Block for saturation > 104
+		
+		// For some other cases 
+		else {
+		
+			// Print message to the results screen
+			di "Setting saturation to 100"
+			
+			// Set value to full saturation
+			loc saturation = 100
+			
+		} // End ELSE Block for some other values of saturation
+		
+	} // End IF Block for somesaturation value validation
+	
+	// IF the value is one of the integers defined in the IF Block set the return
+	// macro to the value
+	else loc saturation = `intensity'
+
+	// Return the corrected value
+	ret loc saturation = `saturation'
+
+// End of subroutine to check intensity values	
+end
+
+	

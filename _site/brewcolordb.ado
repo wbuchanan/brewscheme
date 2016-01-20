@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! brewcolordb
-*! v 0.0.6
-*! 18DEC2015
+*! v 0.0.7
+*! 06JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -38,6 +38,15 @@ prog def brewcolordb, rclass
 	
 		// Clear data from memory
 		clear
+		
+		// Store personal directory
+		loc personal `"`c(sysdir_personal)'"'
+		
+		// Remove tilde and replace with HOME environmental variable for color db subdirectory
+		qui: dirfile, p(`"`: subinstr loc personal `"~"' `"`:environment HOME'"', all'brewcolors"')
+		
+		// Remove tilde and replace with HOME environmental variable for color db subdirectory
+		qui: dirfile, p(`"`: subinstr loc personal `"~"' `"`:environment HOME'"', all'style"')
 
 		// Check for file
 		cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
@@ -312,4 +321,3 @@ prog def getColorName, rclass
 	
 // End of subroutine
 end
-

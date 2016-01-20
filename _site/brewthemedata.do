@@ -6,8 +6,8 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "numstyle " "grid_outer_tol   " "0.23" "_n"    
 "numstyle " "legend_rows      " "0" "_n"    
 "numstyle " "legend_cols      " "5" "_n"    
-"numstyle " "zyx2rows         " "0" "_n"    
-"numstyle " "zyx2cols         " "1" "_n(2)"    
+"numstyle " "zyx2rows         " "4" "_n"    
+"numstyle " "zyx2cols         " "2" "_n(2)"    
 "numstyle " "graph_aspect     " "0" "_n(2)"    
 "numstyle " "max_wted_symsize " "10" "_n(2)"    
 "numstyle " "bar_num_dots    " "100" "_n"    
@@ -38,9 +38,9 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "gsize " "subheading      " "medium" "_n"    
 "gsize " "axis_title      " "small" "_n"    
 "gsize " "matrix_label    " "medium" "_n"    
-"gsize " "label           " "medsmall" "_n"    
-"gsize " "small_label     " "small" "_n"    
-"gsize " "matrix_marklbl  " "medsmall" "_n"    
+"gsize " "label           " "small" "_n"    
+"gsize " "small_label     " "vsmall" "_n"    
+"gsize " "matrix_marklbl  " "small" "_n"    
 "gsize " "key_label       " "small" "_n"    
 "gsize " "note            " "vsmall" "_n"    
 "gsize " "star            " "small" "_n"    
@@ -280,7 +280,7 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "* symbol " "p15    " "smx" "_n(3)"    
 "linepattern " "" "solid" "_n"    
 "linepattern " "foreground " "blank" "_n"    
-"linepattern " "background " "blank" "_n"    
+"linepattern " "background " "solid" "_n"    
 "linepattern " "ci " "solid" "_n"    
 "linepattern " "ci_area " "solid" "_n"    
 "linepattern " "histogram " "solid" "_n"    
@@ -453,7 +453,6 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "linewidth " "minor_grid " "none" "_n"    
 "linewidth " "axisline " "thin" "_n"    
 "linewidth " "tick " "vthin" "_n"    
-"linewidth " "tickline " "vthin" "_n"    
 "linewidth " "minortick " "vvthin" "_n"    
 "linewidth " "ci " "medium" "_n"    
 "linewidth " "ci_area " "medthin" "_n"    
@@ -788,7 +787,7 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "yesno " "draw_minor_hgrid " "no" "_n"    
 "yesno " "draw_majornl_hgrid " "no" "_n"    
 "yesno " "draw_minornl_hgrid " "no" "_n"    
-"yesno " "draw_major_vgrid " "yes" "_n"    
+"yesno " "draw_major_vgrid " "no" "_n"    
 "yesno " "draw_minor_vgrid " "no" "_n"    
 "yesno " "draw_majornl_vgrid " "no" "_n"    
 "yesno " "draw_minornl_vgrid " "no" "_n"    
@@ -832,7 +831,7 @@ input str15 classnm str25 argnm str40 value str5 newlines
 "yesno " "alt_yaxes " "no" "_n"    
 "yesno " "x2axis_ontop " "yes" "_n"    
 "yesno " "y2axis_onright " "yes" "_n(2)"    
-"yesno " "use_labels_on_ticks " "no" "_n(2)"    
+"yesno " "use_labels_on_ticks " "yes" "_n(2)"    
 "yesno " "alternate_labels " "no" "_n"    
 "yesno " "swap_bar_scaleaxis " "no" "_n"    
 "yesno " "swap_bar_groupaxis " "no" "_n"    
@@ -1005,7 +1004,7 @@ mata: brewc.getNames(1, 1)
 
 // Prepopulate the transformed values so only changes required are those from 
 // User supplied arguments in brewtheme
-forv i = 1/977 {
+forv i = 1/976 {
 
 	// Get value
 	loc val `"`: di value[`i']'"'

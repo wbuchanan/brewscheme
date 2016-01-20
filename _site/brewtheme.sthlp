@@ -49,6 +49,7 @@ scheme file entries for graph independent aesthetics. {p_end}
 {help brewtheme##relsize:{ul:relsi}ze}{hi:(}{it:string}{hi:)}
 {help brewtheme##special:{ul:spec}ial}{hi:(}{it:string}{hi:)}
 {help brewtheme##starstyle:{ul:starsty}le}{hi:(}{it:string}{hi:)}
+{help brewtheme##sunflowerstyle:{ul:sunflowersty}le}{hi:(}{it:string}{hi:)}
 {help brewtheme##symbol:{ul:symb}ol}{hi:(}{it:string}{hi:)}
 {help brewtheme##symbolsize:{ul:symbolsi}ze}{hi:(}{it:string}{hi:)}
 {help brewtheme##orientstyle:{ul:orientsty}le}{hi:(}{it:string}{hi:)}
@@ -56,7 +57,6 @@ scheme file entries for graph independent aesthetics. {p_end}
 {help brewtheme##tickposition:{ul:tickp}osition}{hi:(}{it:string}{hi:)}
 {help brewtheme##tickstyle:{ul:ticksty}le}{hi:(}{it:string}{hi:)}
 {help brewtheme##ticksetstyle:{ul:ticksetsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##vertical:{ul:vertical}}{hi:(}{it:string}{hi:)}
 {help brewtheme##verticaltext:{ul:verticalt}ext}{hi:(}{it:string}{hi:)}
 {help brewtheme##yesno:{ul:yesn}o}{hi:(}{it:string}{hi:)}
 {help brewtheme##zyx2rule:{ul:zyx2r}ule}{hi:(}{it:string}{hi:)}
@@ -71,115 +71,115 @@ Given the number of potential arguments for some of these options, they are each
 described below briefly and in greater detail in their respective helpfiles.{p_end}
 
 {title:Options}{break}
-{marker abovebelow}{title: {help abovebelow}}{break}
+{marker abovebelow}{title: {help btabovebelow}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker anglestyle}{title: {help anglestyle}}{break}
+{marker anglestyle}{title: {help btanglestyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker areastyle}{title: {help areastyle}}{break}
+{marker areastyle}{title: {help btareastyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker arrowstyle}{title: {help arrowstyle}}{break}
+{marker arrowstyle}{title: {help btarrowstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker axisstyle}{title: {help axisstyle}}{break}
+{marker axisstyle}{title: {help btaxisstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker barlabelpos}{title: {help barlabelpos}}{break}
+{marker barlabelpos}{title: {help btbarlabelpos}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker barlabelstyle}{title: {help barlabelstyle}}{break}
+{marker barlabelstyle}{title: {help btbarlabelstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker barstyle}{title: {help barstyle}}{break}
+{marker barstyle}{title: {help btbarstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker bygraphstyle}{title: {help bygraphstyle}}{break}
+{marker bygraphstyle}{title: {help btbygraphstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker clegendstyle}{title: {help clegendstyle}}{break}
+{marker clegendstyle}{title: {help btclegendstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker clockdir}{title: {help clockdir}}{break}
+{marker clockdir}{title: {help btclockdir}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker color}{title: {help color}}{break}
+{marker color}{title: {help btcolor}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker compass2dir}{title: {help compass2dir}}{break}
+{marker compass2dir}{title: {help btcompass2dir}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker compass3dir}{title: {help compass3dir}}{break}
+{marker compass3dir}{title: {help btcompass3dir}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker connectstyle}{title: {help connectstyle}}{break}
+{marker connectstyle}{title: {help btconnectstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker dottypestyle}{title: {help dottypestyle}}{break}
+{marker dottypestyle}{title: {help btdottypestyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker graphsize}{title: {help graphsize}}{break}
+{marker graphsize}{title: {help btgraphsize}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker graphstyle}{title: {help graphstyle}}{break}
+{marker graphstyle}{title: {help btgraphstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker gridlinestyle}{title: {help gridlinestyle}}{break}
+{marker gridlinestyle}{title: {help btgridlinestyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker gridringstyle}{title: {help gridringstyle}}{break}
+{marker gridringstyle}{title: {help btgridringstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker gridstyle}{title: {help gridstyle}}{break}
+{marker gridstyle}{title: {help btgridstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker gsize}{title: {help gsize}}{break}
+{marker gsize}{title: {help btgsize}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker horizontal}{title: {help horizontal}}{break}
+{marker horizontal}{title: {help bthorizontal}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker labelstyle}{title: {help labelstyle}}{break}
+{marker labelstyle}{title: {help btlabelstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker legendstyle}{title: {help legendstyle}}{break}
+{marker legendstyle}{title: {help btlegendstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker linepattern}{title: {help linepattern}}{break}
+{marker linepattern}{title: {help btlinepattern}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker linestyle}{title: {help linestyle}}{break}
+{marker linestyle}{title: {help btlinestyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker linewidth}{title: {help linewidth}}{break}
+{marker linewidth}{title: {help btlinewidth}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
@@ -187,91 +187,87 @@ described below briefly and in greater detail in their respective helpfiles.{p_e
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker medtypestyle}{title: {help medtypestyle}}{break}
+{marker medtypestyle}{title: {help btmedtypestyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker numstyle}{title: {help numstyle}}{break}
+{marker numstyle}{title: {help btnumstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker numticks}{title: {help numticks}}{break}
+{marker numticks}{title: {help btnumticks}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker piegraphstyle}{title: {help piegraphstyle}}{break}
+{marker piegraphstyle}{title: {help btpiegraphstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker pielabelstyle}{title: {help pielabelstyle}}{break}
+{marker pielabelstyle}{title: {help btpielabelstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker plotregionstyle}{title: {help plotregionstyle}}{break}
+{marker plotregionstyle}{title: {help btplotregionstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker relativepos}{title: {help relativepos}}{break}
+{marker relativepos}{title: {help btrelativepos}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker relsize}{title: {help relsize}}{break}
+{marker relsize}{title: {help btrelsize}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker special}{title: {help special}}{break}
+{marker special}{title: {help btspecial}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker starstyle}{title: {help starstyle}}{break}
+{marker starstyle}{title: {help btstarstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker symbol}{title: {help symbol}}{break}
+{marker sunflowerstyle}{title: {help btsunflowerstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker symbolsize}{title: {help symbolsize}}{break}
+{marker symbol}{title: {help btsymbol}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker orientstyle}{title: {help orientstyle}}{break}
+{marker symbolsize}{title: {help btsymbolsize}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker textboxstyle}{title: {help textboxstyle}}{break}
+{marker textboxstyle}{title: {help bttextboxstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker tickposition}{title: {help tickposition}}{break}
+{marker tickposition}{title: {help bttickposition}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker tickstyle}{title: {help tickstyle}}{break}
+{marker tickstyle}{title: {help bttickstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker ticksetstyle}{title: {help ticksetstyle}}{break}
+{marker ticksetstyle}{title: {help btticksetstyle}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker vertical}{title: {help vertical}}{break}
+{marker verticaltext}{title: {help btverticaltext}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker verticaltext}{title: {help verticaltext}}{break}
+{marker yesno}{title: {help btyesno}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker yesno}{title: {help yesno}}{break}
+{marker zyx2rule}{title: {help btzyx2rule}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
-{marker zyx2rule}{title: {help zyx2rule}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker zyx2style}{title: {help zyx2style}}{break}
+{marker zyx2style}{title: {help btzyx2style}}{break}
 {p 4 4 8}{p_end}
 {p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
 
