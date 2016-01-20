@@ -20,13 +20,13 @@
 *	  theme-[theme file name]_tritanopia.theme - Full Colorblind version	   *
 *                                                                              *
 * Lines -                                                                      *
-*     379                                                                      *
+*     391                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewtheme
-*! v 0.0.5
-*! 16DEC2015
+*! v 0.0.7
+*! 07JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -59,15 +59,15 @@ prog def brewtheme
 						PLOTREGIONSTYle(string asis) RELATIVEPos(string asis) ///   
 						RELSIze(string asis) SPECial(string asis)			 ///   
 						STARSTYle(string asis) SYMBol(string asis)			 ///   
-						SYMBOLSIze(string asis) ORIENTSTYle(string asis)	 ///   
+						SYMBOLSIze(string asis) SUNFLOWERSTYle(string asis)	 ///   
 						TEXTBOXSTYle(string asis) TICKPosition(string asis)  ///   
 						TICKSTYle(string asis) TICKSETSTYle(string asis)	 ///   
-						VERTICAL(string asis) VERTICALText(string asis)		 ///   
-						YESNo(string asis) ZYX2Rule(string asis) 			 ///   
-						ZYX2STYle(string asis) LOADThemedata brewscheme ]
+						VERTICALText(string asis) YESNo(string asis) 		 ///   
+						ZYX2Rule(string asis) ZYX2STYle(string asis) 		 ///   
+						LOADThemedata brewscheme ]
 						
 	// Check for brewscheme Mata library
-	brewlibcheck
+	qui: brewlibcheck
 	
 	// Stores the root file path for theme files
 	loc themeroot `c(sysdir_personal)'b/theme/theme
@@ -84,7 +84,7 @@ prog def brewtheme
 		} // End IF Block to initialize brewcolors object	
 			
 		// Get the list of unique meta names
-		mata: brewc.getNames(1, 1)
+		qui: mata: brewc.getNames(1, 1)
 		
 		// Build dataset with classes, arguments, and parameter values
 		qui: themedata
@@ -114,11 +114,23 @@ prog def brewtheme
 					
 					loc val `: word 2 of `indi''
 					
+					// Block used to handle cases with unbalanced quotation marks
+					// in the value of the key-value pair.
+					if 	substr(`"`val'"', 1, 1) != `"""' & 					 ///   
+						substr(`"`val'"', -1, 1) == `"""' {
+						
+						// If the first character isn't a " but the last 
+						// character is a " replace all instances of " with 
+						// nothing in the value string
+						loc val `: subinstr loc val `"""' "", all'
+
+					} // End IF Block for unbalanced quotation mark handling
+					
 					// Check if valid argument
-					if `"`: list indivarg in `v'args'"' != "" {
+					if `"`: list arg in `v'args'"' != "" {
 
 						// Search for the RGB values
-						mata: brewc.brewNameSearch(`"`val'"')
+						qui: mata: brewc.brewNameSearch("`val'")
 						
 						foreach x in rgb achromatopsia protanopia deuteranopia tritanopia { 
 						

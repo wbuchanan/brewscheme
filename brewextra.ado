@@ -17,13 +17,13 @@
 *     r(brewextras) - File path/name where extras dataset is located		   *
 *                                                                              *
 * Lines -                                                                      *
-*     1342                                                                     *
+*     1408                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.12
-*! 01DEC2015
+*! v 0.0.13
+*! 10JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -1099,6 +1099,72 @@ prog def brewextra, rclass
 			qui: replace rgb = "255 108 145" in 499
 			qui: replace colorid = 24 in 499
 			
+			// Add an additional 15 observations for the s2color defaults
+			qui: set obs 514
+			qui: replace palette = "s2color" in 500/514
+			qui: replace pcolor = 15 in 500/514
+			qui: replace maxcolors = 15 in 500/514
+			
+			// navy
+			qui: replace rgb = "26 71 111" in 500
+			qui: replace colorid = 1 in 500
+			
+			// maroon
+			qui: replace rgb = "144 53 59" in 501
+			qui: replace colorid = 2 in 501
+			
+			// forest_green
+			qui: replace rgb = "85 117 47" in 502
+			qui: replace colorid = 3 in 502
+			
+			// dkorange
+			qui: replace rgb = "227 126 0" in 503
+			qui: replace colorid = 4 in 503
+			
+			// teal
+			qui: replace rgb = "110 142 132" in 504
+			qui: replace colorid = 5 in 504
+			
+			// cranberry
+			qui: replace rgb = "193 5 52" in 505
+			qui: replace colorid = 6 in 505
+			
+			// lavender
+			qui: replace rgb = "147 141 210" in 506
+			qui: replace colorid = 7 in 506
+			
+			// khaki
+			qui: replace rgb = "202 194 126" in 507
+			qui: replace colorid = 8 in 507
+			
+			// sienna
+			qui: replace rgb = "160 82 45" in 508
+			qui: replace colorid = 9 in 508
+			
+			// emidblue
+			qui: replace rgb = "123 146 168" in 509
+			qui: replace colorid = 10 in 509
+			
+			// emerald
+			qui: replace rgb = "45 109 102" in 510
+			qui: replace colorid = 11 in 510
+			
+			// brown
+			qui: replace rgb = "156 136 71" in 511
+			qui: replace colorid = 12 in 511
+			
+			// erose
+			qui: replace rgb = "191 161 156" in 512
+			qui: replace colorid = 13 in 512
+			
+			// gold
+			qui: replace rgb = "255 210 0" in 513
+			qui: replace colorid = 14 in 513
+			
+			// bluishgray
+			qui: replace rgb = "217 230 235" in 514
+			qui: replace colorid = 15 in 514
+			
 			// Create a sequence ID for the Data set 
 			qui: egen seqid = concat(palette pcolor colorid)
 			
@@ -1106,8 +1172,9 @@ prog def brewextra, rclass
 			loc sem1 "carsa, carse, foodsa, foodse, featuresa, featurese"
 			loc sem2 "activitiesa, activitiese, fruita, fruite, veggiesa"
 			loc sem3 "veggiese, brandsa, brandse, drinksa, drinkse"
-			loc others "mdebar, mdepoint, tableau"
-			loc extrapalettes `"`sem1', `sem2', `sem3', `others'"'
+			loc sem4 "mdebar, mdepoint, tableau, category10, category20"
+			loc others "category20b, category20c, ggplot2, s2color"
+			loc extrapalettes `"`sem1', `sem2', `sem3', `sem4', `others'"'
 			
 			// Return all added palette names in single local
 			ret loc brewextrapalettes = `"`extrapalettes'"'

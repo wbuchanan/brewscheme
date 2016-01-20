@@ -1,8 +1,6 @@
 bystd.pkg
-tableau-palettes.csv
+*.csv
 *.dta
-.idea/*
-.idea*
-.idea/
 *.log
+*.smcl
 

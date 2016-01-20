@@ -18,13 +18,13 @@
 *     r(terpcolor#) - The ith interpolated color between start and end		   *
 *                                                                              *
 * Lines -                                                                      *
-*     216                                                                      *
+*     205                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewterpolate
-*! v 0.0.3
-*! 15DEC2015
+*! v 0.0.4
+*! 09JAN2016
 
 // Drop the program from memory if loaded
 cap prog drop brewterpolate
@@ -37,20 +37,33 @@ prog def brewterpolate, rclass
 
 	// Set the syntax for the program
 	syntax, SColor(string) EColor(string) Colors(integer) 					 ///   
-			[ LUMinance(string) ICSpace(string) RCSpace(string) INVerse ]
+			[ CMod(string) ICSpace(string) RCSpace(string) INVerse Grayscale ]
 
-		// Check arguments passed to luminance parameter
-		if !inlist(`"`luminance'"', "brighter", "darker", "") {
+		// If user specified grayscale set the boolean for that macro
+		if `"`grayscale'"' != "" loc grayscale true
+		
+		// If not set to false to prevent the returned colors coming back in 
+		// grayscale
+		else loc grayscale false
+			
+		// Check arguments passed to color modification parameter
+		if !inlist(`"`cmod'"', "brighter", "darker", "saturated", 		 ///   
+		"desaturated", "") {
 
 			// Print error message to screen
-			di as err `"Argument `luminance' not allowed for the "' 		 ///   
-			"luminance parameter.  Ignoring this argument." 
+			di as err `"Argument `cmod' not allowed for the color "' 		 ///   
+			"modification parameter.  Ignoring this argument." 
+			
+			// Reset color modification to a nullstring
+			loc cmod ""
 
-		} // End IF Block for luminance parameter
+		} // End IF Block for color modification parameter
+		
+		if mi("`cmod'") loc cmod `""'
 
 		// Check input color space
-		if !inlist(`"`icspace'"', "rgb", "rgba", "srgb", "srgba", "hsb", 	 ///   
-		"hsba", "web", "") {
+		if !inlist(`"`icspace'"', "rgb", "rgba", "srgb", "srgba", "hsb") & 	 ///   
+		!inlist(`"`icspace'"', "hsba", "web", "weba", "hex", "hexa", "") {
 
 			// Print error message to screen
 			di as err `"Illegal input color space `icspace'."' _n			 ///   
@@ -62,41 +75,41 @@ prog def brewterpolate, rclass
 
 		} // End IF Block for invalid input color space
 
-		else if inlist(`"`icspace'"', "rgb", "rgba", "srgb", "srgba",  		 ///   
-		"hsb", "hsba") {
-
-			// Remove ',' characters and replace with spaces
-			loc scolor : subinstr loc scolor "," " ", all
-
-			// Remove double spaces and replace with single space
-			loc scolor : subinstr loc scolor "  " " ", all
-
-		} // End ELSEIF Block for input colorspace
-
 		// Check for web-based color values
-		else if `"`icspace'"' == "web" {
+		else if inlist(`"`icspace'"', "weba", "hexa") {
 
-			loc scolor `scolor'
+			// Check for a sufficient number of characters in the string
+			if (length(`"`scolor'"') < 8) {
+			
+				// Print error message
+				di as err "Hexademical values with alpha transparency must have be >= 8 characters in length"
 
+				// Set error message
+				err 119
+				
+			} // End IF Block for too few characters
+			
+			// Check for valid specification using a decimal valued alpha parameter 
+			// requires a space delimiter between the hexstring and decimal values
+			// which may or may not include a leading zero/one
+			else if !regexm(`"`scolor'"', "^([a-zA-Z0-9].*) ([0-1]\.[0-9.*])|(\.[0-9])$") {
+			
+				// Print error message
+				di as err "Must use a single space between the hex string and decimal valued alpha parameter"
+
+				// Set error message
+				err 119
+				
+			} // End ELSE Block for malformed alpha param
+						
 		} // End ELSEIF Block for web-based colors
 
 		// Check for web-based color values
-		else if `"`icspace'"' == "" {
-
-			// Set default input color space
-			loc icspace "rgb"
-
-			// Remove ',' characters and replace with spaces
-			loc scolor : subinstr loc scolor "," " ", all
-
-			// Remove double spaces and replace with single space
-			loc scolor : subinstr loc scolor "  " " ", all
-
-		} // End ELSEIF Block for default color space
+		else if `"`icspace'"' == "" loc icspace "rgb"
 
 		// Check returned color space
-		if !inlist(`"`rcspace'"', "rgb", "rgba", "srgb", "srgba", "hsb", 	 ///   
-					"hsba", "") {
+		if !inlist(`"`rcspace'"', "rgb", "rgba", "srgb", "srgba", "hsb") &   ///   
+		!inlist(`"`rcspace'"', "hsba", "hex", "hexa", "web", "weba", "") {
 
 			// Print error message to screen
 			di as err `"Illegal input color space `icspace'."' _n			 ///   
@@ -108,60 +121,34 @@ prog def brewterpolate, rclass
 
 		} // End IF Block for invalid input color space
 
-		// If return color space is acceptable value
-		else if inlist(`"`rcspace'"', "rgb", "rgba", "srgb", "srgba",  		 ///   
-		"hsb", "hsba") {
-
-			// Remove ',' characters and replace with spaces
-			loc ecolor : subinstr loc ecolor "," " ", all
-
-			// Remove double spaces and replace with single space
-			loc ecolor : subinstr loc ecolor "  " " ", all
+		// Check for null return spaces
+		else if `"`rcspace'"' == "" loc rcspace "rgb"
 		
-		} // End ELSEIF Block for return color space
-		
-		// Check for web-based color values
-		else if `"`rcspace'"' == "web" {
+		// Remove ',' characters and replace with spaces
+		loc ecolor : subinstr loc ecolor "," " ", all
 
-			loc ecolor `ecolor'
+		// Remove double spaces and replace with single space
+		loc ecolor : subinstr loc ecolor "  " " ", all
 
-		} // End ELSEIF Block for web-based colors
+		// Remove ',' characters and replace with spaces
+		loc scolor : subinstr loc scolor "," " ", all
 
-		// Check for null return colorspace
-		else if `"`rcspace'"' == "" {
-
-			// Set default return color space
-			loc rcspace "rgb"
-
-			// Remove ',' characters and replace with spaces
-			loc ecolor : subinstr loc ecolor "," " ", all
-
-			// Remove double spaces and replace with single space
-			loc ecolor : subinstr loc ecolor "  " " ", all
-
-		} // End ELSEIF Block for default returned color space
+		// Remove double spaces and replace with single space
+		loc scolor : subinstr loc scolor "  " " ", all
 
 		// Set boolean value for no inverted colors
-		if "`inverse'" == "" {
-
-			// Java boolean string for no inverted colors
-			loc inverse false
-
-		} // End IF Block for inverted colors
+		if "`inverse'" == "" loc inverse false
 
 		// If user wants inverted colors
-		else {
-
-			// Set java boolean to return inverted colors
-			loc inverse true
+		else loc inverse true
  
-		} // End ELSE Block for inverted colors
-
-		// Incremented by 1 so there will be `colors' points between start and end
-		loc icolors `= `colors' + 1'
+		// Incremented by 1 in the Java plugin
+		loc icolors = `colors'
 
 		// Call the java program to interpolate the colors
-		javacall org.paces.Stata.ColorTerp.ColorTerp interpcolors, args()
+		javacall org.paces.stata.ColorTerp interpcolors, 					 ///   
+		args(`icspace' `rcspace' "`scolor'" "`ecolor'" `colors' "`cmod'" 	 ///   
+		`inverse' `grayscale')
 
 		// Clear existing return valies
 		return clear
@@ -211,6 +198,10 @@ prog def brewterpolate, rclass
 		// Return range for interpolated colors
 		ret loc interpstart 2
 		ret loc interpend `= `retcolors' - 1'
+		
+		// Return all the colors in a single macro
+		ret loc colorstring `scolorstring'
+		ret loc colorsdelim `: subinstr loc scolorstring `"" ""' `"", ""', all'
 
 // End Program definition
 end

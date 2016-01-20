@@ -1,4 +1,7 @@
 
+*! brewsearch
+*! 07JAN2016
+*! v 0.0.2
 
 // Drop program from memory if previously loaded
 cap prog drop brewsearch
@@ -15,12 +18,15 @@ prog def brewsearch, rclass
 	// Allowable arguments for return parameter
 	loc validreturns rgb achromatopsia protanopia deuteranopia tritanopia 
 	
+	// Create a new instance of a brewcolors object
+	qui: mata: brewsearch = brewcolors()
+	
 	// For single word
 	if `: word count `color'' == 1 & regexm(`"`: word 1 of `color''"', 		 ///   
 	"[a-zA-Z]") == 0 {
 	
 		// Search for the RGB values
-		mata: brewColorSearch("`: word 1 of `color''")
+		qui: mata: brewsearch.brewColorSearch("`: word 1 of `color''")
 
 	} // End IF Block for single RGB string 
 	
@@ -29,7 +35,7 @@ prog def brewsearch, rclass
 	"[a-zA-Z]") == 1 {
 	
 		// Search for the RGB values
-		mata: brewNameSearch("`: word 1 of `color''")
+		qui: mata: brewsearch.brewNameSearch("`: word 1 of `color''")
 
 	} // End IF Block for single RGB string 
 		
@@ -46,7 +52,7 @@ prog def brewsearch, rclass
 			if regexm(`"`theword'"', "[a-zA-Z]") == 0 {
 			
 				// Search for the RGB values
-				mata: brewColorSearch("`theword'")
+				qui: mata: brewsearch.brewColorSearch("`theword'")
 			
 			} // End IF Block for RGB string
 			
@@ -54,7 +60,7 @@ prog def brewsearch, rclass
 			else {
 			
 				// Search for the RGB values
-				mata: brewNameSearch("`theword'")
+				qui: mata: brewsearch.brewNameSearch("`theword'")
 			
 			} // End ELSE Block for named colors
 		
