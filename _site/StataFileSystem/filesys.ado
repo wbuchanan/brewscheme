@@ -15,7 +15,7 @@
 ********************************************************************************
 
 *! filesys
-*! 09JAN2016
+*! 20jan2016
 *! v 0.0.3
 
 // Drop the program if it exists in memory
@@ -38,6 +38,9 @@ prog def filesys, rclass
     // If OS is DOS based
     if `"`c(os)'"' == "Windows" loc os "Windoze"
 	
+    // If OS isn't a horrible atrocity designed to cause pain and suffering
+    else loc os "POSIX"
+
 	if !inlist(`"`readable'"', "on", "off", "") loc r ""
 	else loc r "`readable'"
 	
@@ -47,9 +50,6 @@ prog def filesys, rclass
 	if !inlist(`"`xecutable'"', "on", "off", "") loc x ""
 	else loc x "`xecutable'"
 	
-    // If OS isn't a horrible atrocity designed to cause pain and suffering
-    else loc os "POSIX"
-
     // Check for a tilde in the first character on OSX
     if substr(`"`file'"', 1, 1) == "~" & `"`c(os)'"' == "MacOSX" {
 

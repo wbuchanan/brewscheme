@@ -15,8 +15,8 @@
 ********************************************************************************
 
 *! filesys
-*! 16dec2015
-*! v 0.0.1
+*! 20jan2016
+*! v 0.0.3
 
 // Drop the program if it exists in memory
 cap prog drop filesys
@@ -38,6 +38,9 @@ prog def filesys, rclass
     // If OS is DOS based
     if `"`c(os)'"' == "Windows" loc os "Windoze"
 	
+    // If OS isn't a horrible atrocity designed to cause pain and suffering
+    else loc os "POSIX"
+
 	if !inlist(`"`readable'"', "on", "off", "") loc r ""
 	else loc r "`readable'"
 	
@@ -47,14 +50,11 @@ prog def filesys, rclass
 	if !inlist(`"`xecutable'"', "on", "off", "") loc x ""
 	else loc x "`xecutable'"
 	
-    // If OS isn't a horrible atrocity designed to cause pain and suffering
-    else loc os "POSIX"
-
     // Check for a tilde in the first character on OSX
     if substr(`"`file'"', 1, 1) == "~" & `"`c(os)'"' == "MacOSX" {
 
         // Replace the tilde with the standard expansion
-        loc file `"`: subinstr loc file `"~"' `"/Users/`c(username)'"', all'"'
+        loc file `"`: subinstr loc file `"~"' `"`: environment HOME'"', all'"'
 
     } // End IF Block for tilde expansion on OSX
 
@@ -148,7 +148,7 @@ prog def filesys, rclass
 	ret loc filesize `"`filesize'"'
 
 	// Returns the absolute path
-	ret loc absoluepath `"`absolutepath'"'
+	ret loc absolutepath `"`absolutepath'"'
 
 	// Returns the canonical path
 	ret loc canonicalpath `"`canonicalpath'"'
@@ -174,9 +174,9 @@ prog def filesys, rclass
 	// If Display option is enabled, print the file attributes on the screen
 	if `"`display'"' != "" {
 
-		di as res _n(2) "{hline 100}" _continue
+		di as res _n(2) "{hline 80}" _continue
 		di as res "{p2colset 5 30 30 5}{p2col:Attribute}File Attribute Value{p_end}" 
-		di as res "{hline 100}" _continue
+		di as res "{hline 80}" _continue
 		di as res "{p2colset 5 30 30 5}{p2col:Created Date}`createdon'{p_end}" 
 		di as res "{p2colset 5 30 30 5}{p2col:Modified Date}`modifiedon'{p_end}" 
 		di as res "{p2colset 5 30 30 5}{p2col:Last Accessed Date}`accessedon'{p_end}" 
@@ -190,7 +190,7 @@ prog def filesys, rclass
 		di as res "{p2colset 5 30 30 5}{p2col:Is Hidden}`hidden'{p_end}" 
 		di as res "{p2colset 5 30 30 5}{p2col:Is Readable}`readable'{p_end}" 
 		di as res "{p2colset 5 30 30 5}{p2col:Is Writable}`writable'{p_end}" 
-		di as res "{hline 100}" _n
+		di as res "{hline 80}" _n
 
 	} // End IF block for display option
 
