@@ -991,7 +991,7 @@ void translateColor(real scalar red, real scalar green, real scalar blue) {
 	x.getRgbStrings()
 	
 	// Destroy the variable
-	x = NULL
+	x = J(0, 0, .)
 	
 } // End of Mata wrapper for simple color transforms
 
