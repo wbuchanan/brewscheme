@@ -70,207 +70,62 @@ for Stata graphs (with a few exceptions related to bar graphs and/or pie graphs)
 Given the number of potential arguments for some of these options, they are each 
 described below briefly and in greater detail in their respective helpfiles.{p_end}
 
+{p 4 4 4}Additionally, when developing new schemes/themes, it is important to 
+follow the guidance provided in the {help scheme_files##remarks6:scheme files} 
+help documentation.  Notably: {p_end}{break}
+
+{p 8 8 12}It is critical that you issue the {help discard} command each time 
+before you reissue your graph command.  {help discard} reinitializes the 
+graphics system, and that includes clearing the graphics scheme.  If you do not 
+type {help discard}, {hi graph} will note that you are using the same scheme 
+each time and will use the already loaded scheme - ignoring the
+changes you made in the scheme file.{p_end}
+
+{p 4 4 4}For additional information about the different options and entries that 
+are used in scheme files, see {help scheme entries}.  If you try a value that 
+does not work when creating a {hi .theme} file, {browse "https://github.com/wbuchanan/brewscheme/issues":submit an issue} 
+to the project's repository or you can modify the corresponding help file for 
+that option noting that the value didn't work and submit a pull request to 
+merge your changes with the project's repository.  The entries on the topic 
+specific help files below are my best guesses regarding the set of possible 
+values.  {p_end}
+
+
 {title:Options}{break}
-{marker abovebelow}{title: {help btabovebelow}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
+{p 4 4 4}The links below point to topic specific help files.  These are still a 
+work in progress, but will contain information about specific entries and as 
+much information as possible about how their values effect the appearance of 
+graphs.{p_end}
 
-{marker anglestyle}{title: {help btanglestyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
+{p 4 4 4}{it:The options below are listed with the 'bt' prefix to differentiate them from cases where there may be official Stata help files with the same namespace.}{p_end}
 
-{marker areastyle}{title: {help btareastyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker arrowstyle}{title: {help btarrowstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker axisstyle}{title: {help btaxisstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker barlabelpos}{title: {help btbarlabelpos}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker barlabelstyle}{title: {help btbarlabelstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker barstyle}{title: {help btbarstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker bygraphstyle}{title: {help btbygraphstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker clegendstyle}{title: {help btclegendstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker clockdir}{title: {help btclockdir}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker color}{title: {help btcolor}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker compass2dir}{title: {help btcompass2dir}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker compass3dir}{title: {help btcompass3dir}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker connectstyle}{title: {help btconnectstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker dottypestyle}{title: {help btdottypestyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker graphsize}{title: {help btgraphsize}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker graphstyle}{title: {help btgraphstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker gridlinestyle}{title: {help btgridlinestyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker gridringstyle}{title: {help btgridringstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker gridstyle}{title: {help btgridstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker gsize}{title: {help btgsize}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker horizontal}{title: {help bthorizontal}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker labelstyle}{title: {help btlabelstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker legendstyle}{title: {help btlegendstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker linepattern}{title: {help btlinepattern}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker linestyle}{title: {help btlinestyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker linewidth}{title: {help btlinewidth}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker btmargin}{title: {help btmargin:margin}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker medtypestyle}{title: {help btmedtypestyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker numstyle}{title: {help btnumstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker numticks}{title: {help btnumticks}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker piegraphstyle}{title: {help btpiegraphstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker pielabelstyle}{title: {help btpielabelstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker plotregionstyle}{title: {help btplotregionstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker relativepos}{title: {help btrelativepos}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker relsize}{title: {help btrelsize}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker special}{title: {help btspecial}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker starstyle}{title: {help btstarstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker sunflowerstyle}{title: {help btsunflowerstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker symbol}{title: {help btsymbol}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker symbolsize}{title: {help btsymbolsize}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker textboxstyle}{title: {help bttextboxstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker tickposition}{title: {help bttickposition}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker tickstyle}{title: {help bttickstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker ticksetstyle}{title: {help btticksetstyle}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker verticaltext}{title: {help btverticaltext}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker yesno}{title: {help btyesno}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker zyx2rule}{title: {help btzyx2rule}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
-{marker zyx2style}{title: {help btzyx2style}}{break}
-{p 4 4 8}{p_end}
-{p 4 4 8}{help brewtheme##bttop:Back to the Top}{p_end}
-
+{col 15}{hline 55}
+{p2colset 20 50 50 20}{p2col:{marker abovebelow}{title: {help btabovebelow}}}{marker anglestyle}{title: {help btanglestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker areastyle}{title: {help btareastyle}}}{marker arrowstyle}{title: {help btarrowstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker axisstyle}{title: {help btaxisstyle}}}{marker barlabelpos}{title: {help btbarlabelpos}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker barlabelstyle}{title: {help btbarlabelstyle}}}{marker barstyle}{title: {help btbarstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker bygraphstyle}{title: {help btbygraphstyle}}}{marker clegendstyle}{title: {help btclegendstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker clockdir}{title: {help btclockdir}}}{marker color}{title: {help btcolor}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker compass2dir}{title: {help btcompass2dir}}}{marker compass3dir}{title: {help btcompass3dir}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker connectstyle}{title: {help btconnectstyle}}}{marker dottypestyle}{title: {help btdottypestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker graphsize}{title: {help btgraphsize}}}{marker graphstyle}{title: {help btgraphstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker gridlinestyle}{title: {help btgridlinestyle}}}{marker gridringstyle}{title: {help btgridringstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker gridstyle}{title: {help btgridstyle}}}{marker gsize}{title: {help btgsize}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker horizontal}{title: {help bthorizontal}}}{marker labelstyle}{title: {help btlabelstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker legendstyle}{title: {help btlegendstyle}}}{marker linepattern}{title: {help btlinepattern}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker linestyle}{title: {help btlinestyle}}}{marker linewidth}{title: {help btlinewidth}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker btmargin}{title: {help btmargin:margin}}}{marker medtypestyle}{title: {help btmedtypestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker numstyle}{title: {help btnumstyle}}}{marker numticks}{title: {help btnumticks}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker piegraphstyle}{title: {help btpiegraphstyle}}}{marker pielabelstyle}{title: {help btpielabelstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker plotregionstyle}{title: {help btplotregionstyle}}}{marker relativepos}{title: {help btrelativepos}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker relsize}{title: {help btrelsize}}}{marker special}{title: {help btspecial}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker starstyle}{title: {help btstarstyle}}}{marker sunflowerstyle}{title: {help btsunflowerstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker symbol}{title: {help btsymbol}}}{marker symbolsize}{title: {help btsymbolsize}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker textboxstyle}{title: {help bttextboxstyle}}}{marker tickposition}{title: {help bttickposition}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker tickstyle}{title: {help bttickstyle}}}{marker ticksetstyle}{title: {help btticksetstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker verticaltext}{title: {help btverticaltext}}}{marker yesno}{title: {help btyesno}}{p_end}
+{p2colset 20 50 50 20}{p2col:{marker zyx2rule}{title: {help btzyx2rule}}}{marker zyx2style}{title: {help btzyx2style}}{p_end}
+{col 15}{hline 55}
 
 {title: Author}{break}
 {p 1 1 1} William R. Buchanan, Ph.D. {break}
