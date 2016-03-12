@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.1  29NOV2015}{...}
+{* *! version 0.0.5  12MAR2016}{...}
 {cmd:help brewtheme}
 {hline}
 
@@ -10,57 +10,57 @@ scheme file entries for graph independent aesthetics. {p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewtheme} {it:themeName} [, {help brewtheme##abovebelow:{ul:abo}vebelow}{hi:(}{it:string}{hi:)}
-{help brewtheme##anglestyle:{ul:anglesty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##areastyle:{ul:areasty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##arrowstyle:{ul:arrowsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##axisstyle:{ul:axissty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##barlabelpos:{ul:barlabelp}os}{hi:(}{it:string}{hi:)}
-{help brewtheme##barlabelstyle:{ul:barlabelsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##barstyle:{ul:barsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##bygraphstyle:{ul:bygraphsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##clegendstyle:{ul:clegendsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##clockdir:{ul:clock}dir}{hi:(}{it:string}{hi:)}
-{help brewtheme##color:{ul:col}or}{hi:(}{it:string}{hi:)}
-{help brewtheme##compass2dir:{ul:compass2}dir}{hi:(}{it:string}{hi:)}
-{help brewtheme##compass3dir:{ul:compass3}dir}{hi:(}{it:string}{hi:)}
-{help brewtheme##connectstyle:{ul:connectsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##dottypestyle:{ul:dottypesty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##graphsize:{ul:graphsi}ze}{hi:(}{it:string}{hi:)}
-{help brewtheme##graphstyle:{ul:graphsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##gridlinestyle:{ul:gridlinesty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##gridringstyle:{ul:gridringsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##gridstyle:{ul:gridsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##gsize:{ul:gsize}}{hi:(}{it:string}{hi:)}
-{help brewtheme##horizontal:{ul:horiz}ontal}{hi:(}{it:string}{hi:)}
-{help brewtheme##labelstyle:{ul:labelsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##legendstyle:{ul:legendsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##linepattern:{ul:linepat}tern}{hi:(}{it:string}{hi:)}
-{help brewtheme##linestyle:{ul:linesty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##linewidth:{ul:linew}idth}{hi:(}{it:string}{hi:)}
-{help brewtheme##btmargin:{ul:marg}in}{hi:(}{it:string}{hi:)}
-{help brewtheme##medtypestyle:{ul:medtypesty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##numstyle:{ul:numsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##numticks:{ul:numticks}}{hi:(}{it:string}{hi:)}
-{help brewtheme##piegraphstyle:{ul:piegraphsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##pielabelstyle:{ul:pielabelsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##plotregionstyle:{ul:plotregionsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##relativepos:{ul:relativep}os}{hi:(}{it:string}{hi:)}
-{help brewtheme##relsize:{ul:relsi}ze}{hi:(}{it:string}{hi:)}
-{help brewtheme##special:{ul:spec}ial}{hi:(}{it:string}{hi:)}
-{help brewtheme##starstyle:{ul:starsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##sunflowerstyle:{ul:sunflowersty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##symbol:{ul:symb}ol}{hi:(}{it:string}{hi:)}
-{help brewtheme##symbolsize:{ul:symbolsi}ze}{hi:(}{it:string}{hi:)}
-{help brewtheme##orientstyle:{ul:orientsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##textboxstyle:{ul:textboxsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##tickposition:{ul:tickp}osition}{hi:(}{it:string}{hi:)}
-{help brewtheme##tickstyle:{ul:ticksty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##ticksetstyle:{ul:ticksetsty}le}{hi:(}{it:string}{hi:)}
-{help brewtheme##verticaltext:{ul:verticalt}ext}{hi:(}{it:string}{hi:)}
-{help brewtheme##yesno:{ul:yesn}o}{hi:(}{it:string}{hi:)}
-{help brewtheme##zyx2rule:{ul:zyx2r}ule}{hi:(}{it:string}{hi:)}
-{help brewtheme##zyx2style:{ul:zyx2sty}le}{hi:(}{it:string}{hi:)} ]{break}
+{p 4 4 4}{cmd:brewtheme} {it:themeName} [, {help btabovebelow:{ul:abo}vebelow}{hi:(}{it:string}{hi:)}
+{help btanglestyle:{ul:anglesty}le}{hi:(}{it:string}{hi:)}
+{help btareastyle:{ul:areasty}le}{hi:(}{it:string}{hi:)}
+{help btarrowstyle:{ul:arrowsty}le}{hi:(}{it:string}{hi:)}
+{help btaxisstyle:{ul:axissty}le}{hi:(}{it:string}{hi:)}
+{help btbarlabelpos:{ul:barlabelp}os}{hi:(}{it:string}{hi:)}
+{help btbarlabelstyle:{ul:barlabelsty}le}{hi:(}{it:string}{hi:)}
+{help btbarstyle:{ul:barsty}le}{hi:(}{it:string}{hi:)}
+{help btbygraphstyle:{ul:bygraphsty}le}{hi:(}{it:string}{hi:)}
+{help btclegendstyle:{ul:clegendsty}le}{hi:(}{it:string}{hi:)}
+{help btclockdir:{ul:clock}dir}{hi:(}{it:string}{hi:)}
+{help btcolor:{ul:col}or}{hi:(}{it:string}{hi:)}
+{help btcompass2dir:{ul:compass2}dir}{hi:(}{it:string}{hi:)}
+{help btcompass3dir:{ul:compass3}dir}{hi:(}{it:string}{hi:)}
+{help btconnectstyle:{ul:connectsty}le}{hi:(}{it:string}{hi:)}
+{help btdottypestyle:{ul:dottypesty}le}{hi:(}{it:string}{hi:)}
+{help btgraphsize:{ul:graphsi}ze}{hi:(}{it:string}{hi:)}
+{help btgraphstyle:{ul:graphsty}le}{hi:(}{it:string}{hi:)}
+{help btgridlinestyle:{ul:gridlinesty}le}{hi:(}{it:string}{hi:)}
+{help btgridringstyle:{ul:gridringsty}le}{hi:(}{it:string}{hi:)}
+{help btgridstyle:{ul:gridsty}le}{hi:(}{it:string}{hi:)}
+{help btgsize:{ul:gsize}}{hi:(}{it:string}{hi:)}
+{help bthorizontal:{ul:horiz}ontal}{hi:(}{it:string}{hi:)}
+{help btlabelstyle:{ul:labelsty}le}{hi:(}{it:string}{hi:)}
+{help btlegendstyle:{ul:legendsty}le}{hi:(}{it:string}{hi:)}
+{help btlinepattern:{ul:linepat}tern}{hi:(}{it:string}{hi:)}
+{help btlinestyle:{ul:linesty}le}{hi:(}{it:string}{hi:)}
+{help btlinewidth:{ul:linew}idth}{hi:(}{it:string}{hi:)}
+{help btbtmargin:{ul:marg}in}{hi:(}{it:string}{hi:)}
+{help btmedtypestyle:{ul:medtypesty}le}{hi:(}{it:string}{hi:)}
+{help btnumstyle:{ul:numsty}le}{hi:(}{it:string}{hi:)}
+{help btnumticks:{ul:numticks}}{hi:(}{it:string}{hi:)}
+{help btpiegraphstyle:{ul:piegraphsty}le}{hi:(}{it:string}{hi:)}
+{help btpielabelstyle:{ul:pielabelsty}le}{hi:(}{it:string}{hi:)}
+{help btplotregionstyle:{ul:plotregionsty}le}{hi:(}{it:string}{hi:)}
+{help btrelativepos:{ul:relativep}os}{hi:(}{it:string}{hi:)}
+{help btrelsize:{ul:relsi}ze}{hi:(}{it:string}{hi:)}
+{help btspecial:{ul:spec}ial}{hi:(}{it:string}{hi:)}
+{help btstarstyle:{ul:starsty}le}{hi:(}{it:string}{hi:)}
+{help btsunflowerstyle:{ul:sunflowersty}le}{hi:(}{it:string}{hi:)}
+{help btsymbol:{ul:symb}ol}{hi:(}{it:string}{hi:)}
+{help btsymbolsize:{ul:symbolsi}ze}{hi:(}{it:string}{hi:)}
+{help btorientstyle:{ul:orientsty}le}{hi:(}{it:string}{hi:)}
+{help bttextboxstyle:{ul:textboxsty}le}{hi:(}{it:string}{hi:)}
+{help bttickposition:{ul:tickp}osition}{hi:(}{it:string}{hi:)}
+{help bttickstyle:{ul:ticksty}le}{hi:(}{it:string}{hi:)}
+{help btticksetstyle:{ul:ticksetsty}le}{hi:(}{it:string}{hi:)}
+{help btverticaltext:{ul:verticalt}ext}{hi:(}{it:string}{hi:)}
+{help btyesno:{ul:yesn}o}{hi:(}{it:string}{hi:)}
+{help btzyx2rule:{ul:zyx2r}ule}{hi:(}{it:string}{hi:)}
+{help btzyx2style:{ul:zyx2sty}le}{hi:(}{it:string}{hi:)} ]{break}
 
 {marker bttop}{title:Description}
 
@@ -100,31 +100,31 @@ graphs.{p_end}
 {p 4 4 4}{it:The options below are listed with the 'bt' prefix to differentiate them from cases where there may be official Stata help files with the same namespace.}{p_end}
 
 {col 15}{hline 55}
-{p2colset 20 50 50 20}{p2col:{marker abovebelow}{title: {help btabovebelow}}}{marker anglestyle}{title: {help btanglestyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker areastyle}{title: {help btareastyle}}}{marker arrowstyle}{title: {help btarrowstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker axisstyle}{title: {help btaxisstyle}}}{marker barlabelpos}{title: {help btbarlabelpos}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker barlabelstyle}{title: {help btbarlabelstyle}}}{marker barstyle}{title: {help btbarstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker bygraphstyle}{title: {help btbygraphstyle}}}{marker clegendstyle}{title: {help btclegendstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker clockdir}{title: {help btclockdir}}}{marker color}{title: {help btcolor}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker compass2dir}{title: {help btcompass2dir}}}{marker compass3dir}{title: {help btcompass3dir}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker connectstyle}{title: {help btconnectstyle}}}{marker dottypestyle}{title: {help btdottypestyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker graphsize}{title: {help btgraphsize}}}{marker graphstyle}{title: {help btgraphstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker gridlinestyle}{title: {help btgridlinestyle}}}{marker gridringstyle}{title: {help btgridringstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker gridstyle}{title: {help btgridstyle}}}{marker gsize}{title: {help btgsize}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker horizontal}{title: {help bthorizontal}}}{marker labelstyle}{title: {help btlabelstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker legendstyle}{title: {help btlegendstyle}}}{marker linepattern}{title: {help btlinepattern}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker linestyle}{title: {help btlinestyle}}}{marker linewidth}{title: {help btlinewidth}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker btmargin}{title: {help btmargin:margin}}}{marker medtypestyle}{title: {help btmedtypestyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker numstyle}{title: {help btnumstyle}}}{marker numticks}{title: {help btnumticks}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker piegraphstyle}{title: {help btpiegraphstyle}}}{marker pielabelstyle}{title: {help btpielabelstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker plotregionstyle}{title: {help btplotregionstyle}}}{marker relativepos}{title: {help btrelativepos}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker relsize}{title: {help btrelsize}}}{marker special}{title: {help btspecial}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker starstyle}{title: {help btstarstyle}}}{marker sunflowerstyle}{title: {help btsunflowerstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker symbol}{title: {help btsymbol}}}{marker symbolsize}{title: {help btsymbolsize}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker textboxstyle}{title: {help bttextboxstyle}}}{marker tickposition}{title: {help bttickposition}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker tickstyle}{title: {help bttickstyle}}}{marker ticksetstyle}{title: {help btticksetstyle}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker verticaltext}{title: {help btverticaltext}}}{marker yesno}{title: {help btyesno}}{p_end}
-{p2colset 20 50 50 20}{p2col:{marker zyx2rule}{title: {help btzyx2rule}}}{marker zyx2style}{title: {help btzyx2style}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btabovebelow}}}{title: {help btanglestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btareastyle}}}{title: {help btarrowstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btaxisstyle}}}{title: {help btbarlabelpos}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btbarlabelstyle}}}{title: {help btbarstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btbygraphstyle}}}{title: {help btclegendstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btclockdir}}}{title: {help btcolor}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btcompass2dir}}}{title: {help btcompass3dir}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btconnectstyle}}}{title: {help btdottypestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btgraphsize}}}{title: {help btgraphstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btgridlinestyle}}}{title: {help btgridringstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btgridstyle}}}{title: {help btgsize}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help bthorizontal}}}{title: {help btlabelstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btlegendstyle}}}{title: {help btlinepattern}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btlinestyle}}}{title: {help btlinewidth}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btmargin:margin}}}{title: {help btmedtypestyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btnumstyle}}}{title: {help btnumticks}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btpiegraphstyle}}}{title: {help btpielabelstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btplotregionstyle}}}{title: {help btrelativepos}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btrelsize}}}{title: {help btspecial}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btstarstyle}}}{title: {help btsunflowerstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btsymbol}}}{title: {help btsymbolsize}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help bttextboxstyle}}}{title: {help bttickposition}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help bttickstyle}}}{title: {help btticksetstyle}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btverticaltext}}}{title: {help btyesno}}{p_end}
+{p2colset 20 50 50 20}{p2col:{title: {help btzyx2rule}}}{title: {help btzyx2style}}{p_end}
 {col 15}{hline 55}
 
 {title: Author}{break}
