@@ -278,10 +278,11 @@ graph types.  Use the default values of colors and intensity for each.{p_end}
 {p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} 
 of the ColorBrewer copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
 
-{marker contact}{p 4 4 4}{title:{ul:Author}}{p_end}{break}
-{p 4 4 4}William R. Buchanan, Ph.D. {p_end}
-{p 4 4 4}Data Scientist{p_end}
-{p 4 4 4}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{title: Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
 
 {marker notes}{p 4 4 4}{title:{ul:Notes}}{p_end}{break}
 {p 4 4 4}Development of this program began while I was a Strategic Data Fellow at the {browse "http://mde.k12.ms.us":Mississippi Department of Education}.{p_end}

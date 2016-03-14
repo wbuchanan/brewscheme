@@ -1,20 +1,30 @@
 {smcl}
 {* *! version 0.0.2  29NOV2015}{...}
-{cmd:help libbrewscheme}
+
+{hline}
+Mata library for {help brewscheme}
 {hline}
 
-{title:Title}
+{title:help for libbrewscheme}
 
 {p 4 4 4}{hi:libbrewscheme {hline 2}} compiles the libbrewscheme Mata library and displays this help file.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:libbrewscheme}{break}
+{p 4 4 4}{cmd:libbrewscheme} [, {cmdab:dis:play} {cmdab:rep:lace} {cmdab:si:ze(}{it:integer}{opt )} ]{break}
 
 {title:Description}
 
 {p 4 4 4}{cmd:libbrewscheme} wrapper used to compile libbrewscheme.mlib locally.  
 This help file defines the objects and methods defined in the library.{p_end}
+
+{title:Options}
+
+{p 4 4 8}{cmdab:dis:play} is an optional argument to display this help file after compiling the Mata library.{p_end}
+
+{p 4 4 8}{cmdab:rep:lace} is an optional argument used to overwrite an existing copy of the library. {p_end}
+
+{p 4 4 8}{cmdab:si:ze} is an optional argument passed to {help mata_mlib:mata mlib create} to set the maximum number of members of the library. {p_end}
 
 {marker cbtype}{dlgtab 4 8:Colorblindness Type Class}{break}
 {p 4 4 8}An object type used in a way that is analogous to an interface class in Java.{p_end}
@@ -155,7 +165,7 @@ Retrieved on: 24nov2015.{p_end}
 {marker lindbloom}{p 4 8 8}Lindbloom, B. (2001).  RGB working space information. Retrieved from: {browse "http://www.brucelindbloom.com/WorkingSpaceInfo.html"}.  Retrieved on 24nov2015.{p_end}
 
 {title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

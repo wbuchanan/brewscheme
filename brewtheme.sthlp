@@ -1,9 +1,11 @@
 {smcl}
 {* *! version 0.0.5  12MAR2016}{...}
-{cmd:help brewtheme}
+
+{hline}
+{cmd:help for brewtheme}
 {hline}
 
-{title:Title}
+{title:brewtheme}
 
 {p 4 4 4}{hi:brewtheme {hline 2}} a program to generate theme files containing 
 scheme file entries for graph independent aesthetics. {p_end}
@@ -128,7 +130,7 @@ graphs.{p_end}
 {col 15}{hline 55}
 
 {title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

@@ -99,7 +99,7 @@ interpolated color, invert it, and then transform it to a gray scale value. {p_e
 {p 4 4 4}{browse "http://docs.oracle.com/javafx/2/api/javafx/scene/paint/Color.html":Java Color Documentation}{p_end}
  
 {title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

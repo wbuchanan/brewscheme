@@ -26,7 +26,7 @@ prog def brewcolordb, rclass
 	version 13.1
 
 	// Defines syntax structure of program
-	syntax [, DISplay REFresh]
+	syntax [, DISplay REPlace ]
 	
 	// Print warning message
 	di as res "This program needs to clear all data currently in memory. "	 ///   
@@ -52,7 +52,7 @@ prog def brewcolordb, rclass
 		cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
 		
 		// If file does not exist or refresh option passed
-		if _rc == 0 | `"`refresh'"' != "" {
+		if _rc == 0 | `"`replace'"' != "" {
 	
 			// Get list of color style file names
 			loc colors `: dir `"`c(sysdir_base)'/style/"' files "color*.style", respect'

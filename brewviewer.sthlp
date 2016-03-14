@@ -47,10 +47,9 @@ brewscheme for examples of this program.{p_end}
 {marker acknowledgements}{title:Acknowledgements}{break}
 This subroutine for {help brewscheme} was inspired and influenced by {browse "http://github.com/matthieugomez/stata-colorscheme":Mattieu Gomez's} program stata-colorscheme.
 
-
 {title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
 

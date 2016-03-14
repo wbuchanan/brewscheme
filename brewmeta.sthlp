@@ -1,19 +1,19 @@
 {smcl}
-{* *! version 0.0.3  08NOV2015}{...}
-{cmd:help brewmeta}
+{* *! version 0.0.4 14MAR2016}{...}
+
+{hline}
+Command to look up meta characteristics for colors/palettes available to {help brewscheme}
 {hline}
 
-{title:Title}
+{title:help for brewmeta}
 
-{hi:brewmeta {hline 2}} A Stata interface to color property palettes developed 
-by Cynthia Brewer ({browse "http://colorbrewer.org/": Color Brewer}).  
+{p 4 4 8}{hi:brewmeta {hline 2}} A Stata interface to color property palettes developed 
+by Cynthia Brewer ({browse "http://colorbrewer.org/": Color Brewer}). {p_end}
 
 {title:Syntax}
 
 {p 4 4 4}{cmd:brewmeta} {it:palette name}, {cmd:colorid(}{it:integer}{opt )} 
-[ {cmd:colors(}{it:integer}{opt )}{cmdab:prop:erties[(}
-{it:"", "all", "colorblind", "lcd", "print", "photocopy", "meta"}{cmd:)]} 
- {cmdab:ref:resh} ] {break}
+[ {cmd:colors(}{it:integer}{opt )} {cmdab:prop:erties(}{it:"", "all", "colorblind", "lcd", "print", "photocopy", "meta"}{cmd:)} ] {p_end}
 
 {title:Description}
 
@@ -22,7 +22,8 @@ by Cynthia Brewer ({browse "http://colorbrewer.org/": Color Brewer}).
 to look up those meta data on the fly.   {p_end}
 
 {title:Options}
-{p 4 4 8}{cmd:colors} is a required argument indicating the number of the colors  
+
+{p 4 4 8}{cmd:colorid} is a required argument indicating the number of the colors  
 within the palette for which you would like to know about the meta data 
 properties. For additional control, users may specify a specific number of colors 
 within a palette to look up these values.{break}
@@ -32,23 +33,24 @@ colors from the specified palette from which to look up the properties of the
 color identified by {cmd:colorid}. If no value is passed to this argument, the 
 maximum number of colors available in the palette are assumed. {it:Note: this is particularly important for divergent color palettes where colors may be added/subtracted from the palette in order to preserve balance across the palette.}  {break}
  
-{p 4 4 8}{cmdab:prop:erties[(}{it:"", "all", "colorblind", "lcd", "print", "photocopy", "meta"}{cmd:)]} is an optional arguement used to look up a specific property for the 
+{p 4 4 8}{cmdab:prop:erties} is an optional arguement used to look up a specific property for the 
 color palette.  If nothing is specified, the program will assume you would like 
 to see the results for all of the properties. The table below illustrates the 
 types of results that can be expected to be retrieved from this functionality: {break}{p_end}
 
-{col 10}{hline 70}
-{col 10}{hi:Argument} {col 35}{hi: Result}
-{col 10}{hline 70}
-{col 10}{hi:all}{col 35}{Will display all of the characteristics below.}
-{col 10}{hi:colorblind}{col 35}{Displays indicator of colorblind friendliness - if available}
-{col 10}{hi:lcd}{col 35}{Displays indicator of LCD friendliness - if available}
-{col 10}{hi:print}{col 35}{Displays indicator of Printed friendliness - if available}
-{col 10}{hi:photocopy}{col 35}{Displays indicator of Photocopying friendliness - if available}
-{col 10}{hi:meta}{col 35}{Provides information about the scale type for the palette (e.g., qualitative, sequential, divergent) or provides labelling/other miscellaneous data from the published research}
-{col 10}{hline 70}{break}
-
-{marker examples}{title:Examples}{break}
+    {hline 80}
+{p2colset 8 30 30 8}{p2col:Argument}Result{p_end}
+    {hline 80}
+{p2colset 8 30 30 8}{p2col:all{hi:*}}Displays all information below{p_end}
+{p2colset 8 30 30 8}{p2col:colorblind{hi:*}}Colorblind friendliness indicator{p_end}
+{p2colset 8 30 30 8}{p2col:lcd{hi:*}}LCD friendliness indicator{p_end}
+{p2colset 8 30 30 8}{p2col:print{hi:*}}Print friendliness indicator{p_end}
+{p2colset 8 30 30 8}{p2col:photocopy{hi:*}}Photocopier friendliness indicator{p_end}
+{p2colset 8 30 30 8}{p2col:meta{hi:*}}Additional information about colors/palette{p_end}
+    {hline 80}
+{p 4 4 8}{hi:* }{it:Information is displayed if available for the given color/palette}{p_end}
+	
+{marker examples}{title:Examples}
 
 {p 4 4 4} Determine if a color palette with 9 colors (of a potential 12 total) 
 from the paired ColorBrewer palette is colorblind, lcd, print, or photocopy 
@@ -64,7 +66,8 @@ refresh option are used, you should expect to see the performance dip slightly.
 Look ups take < 1 second on my system and will likely take a similar amount of 
 time on others as well. {p_end}
 
-{marker refs}{p 4 4 4}{title:{ul:References}}{p_end}{break}
+{marker refs}{title:References}
+
 {marker bostock}{p 4 8 8}Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. {it: IEEE Transactions on Visualization & Computer Graphics. 17(12)} pp 2301 - 2309. Retrieved from 
 {browse "http://vis.stanford.edu/papers/d3":Stanford Vis Group}.{p_end}  
 
@@ -73,12 +76,13 @@ time on others as well. {p_end}
 {marker linetal}{p 4 8 8}Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013).{browse "http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf":  Selecting Semantically-Resonant Colors for Data Visualization}. In 
 {it:Computer Graphics Forum} (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.{p_end}
 
-{marker license}{p 4 4 4}{title:{ul:License}}{p_end}{break}
+{marker license}{title:License}
+
 {p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} 
 of the ColorBrewer copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
 
 {title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
