@@ -57,7 +57,7 @@ Retrieved on: 24nov2015.{p_end}
 
 {marker lindbloom}{p 4 8 8}Lindbloom, B. (2001).  RGB working space information. Retrieved from: {browse "http://www.brucelindbloom.com/WorkingSpaceInfo.html"}.  Retrieved on 24nov2015.{p_end}
 
-{title: Author}{break}
+{title:Author}{break}
 {p 4 4 8}William R. Buchanan, Ph.D.{p_end}
 {p 4 4 8}Data Scientist{p_end}
 {p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}

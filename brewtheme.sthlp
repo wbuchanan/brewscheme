@@ -2,10 +2,10 @@
 {* *! version 0.0.5  12MAR2016}{...}
 
 {hline}
-{cmd:help for brewtheme}
+Command used to generate .theme files used by {help brewscheme}
 {hline}
 
-{title:brewtheme}
+{title:help for brewtheme}
 
 {p 4 4 4}{hi:brewtheme {hline 2}} a program to generate theme files containing 
 scheme file entries for graph independent aesthetics. {p_end}
@@ -74,7 +74,7 @@ described below briefly and in greater detail in their respective helpfiles.{p_e
 
 {p 4 4 4}Additionally, when developing new schemes/themes, it is important to 
 follow the guidance provided in the {help scheme_files##remarks6:scheme files} 
-help documentation.  Notably: {p_end}{break}
+help documentation.  Notably: {p_end}
 
 {p 8 8 12}It is critical that you issue the {help discard} command each time 
 before you reissue your graph command.  {help discard} reinitializes the 
@@ -92,8 +92,8 @@ merge your changes with the project's repository.  The entries on the topic
 specific help files below are my best guesses regarding the set of possible 
 values.  {p_end}
 
+{title:Options}
 
-{title:Options}{break}
 {p 4 4 4}The links below point to topic specific help files.  These are still a 
 work in progress, but will contain information about specific entries and as 
 much information as possible about how their values effect the appearance of 
@@ -129,7 +129,7 @@ graphs.{p_end}
 {p2colset 20 50 50 20}{p2col:{title: {help btzyx2rule}}}{title: {help btzyx2style}}{p_end}
 {col 15}{hline 55}
 
-{title: Author}{break}
+{title:Author}{break}
 {p 4 4 8}William R. Buchanan, Ph.D.{p_end}
 {p 4 4 8}Data Scientist{p_end}
 {p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}

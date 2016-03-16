@@ -32,7 +32,7 @@ color sight impairments.{p_end}
 
 {p 8 8 12}brewcolordb, dis{p_end}
 
-{title: Author}{break}
+{title:Author}{break}
 {p 4 4 4}William R. Buchanan, Ph.D.{p_end}
 {p 4 4 4}Data Scientist{p_end}
 {p 4 4 4}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}

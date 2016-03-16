@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.6
-*! 25NOV2015
+*! v 0.0.7
+*! 16MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -34,7 +34,7 @@ prog def brewdb
 	version 13.1
 
 	// Define the syntax structure of the program
-	syntax, [REFresh]
+	syntax, [REPlace]
 		
 	// Preserve the data in memory
 	preserve
@@ -46,7 +46,7 @@ prog def brewdb
 		cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
-		if _rc == 0 | `"`refresh'"' != "" {
+		if _rc == 0 | `"`replace'"' != "" {
 			
 			// Create a tempfile to read the JS into
 			tempfile brewjs
@@ -465,7 +465,7 @@ prog def brewdb
 			
 		} // End IF Block to build new look up database
 		
-		// If the file exists and refresh was not called
+		// If the file exists and replace was not called
 		else {
 		
 			// Print status message to screen
@@ -474,7 +474,7 @@ prog def brewdb
 			`"already exists and will not be rebuilt."'
 			
 			// Print help message to screen
-			di `"To rebuild the database pass the refresh option to brewscheme."'
+			di `"To rebuild the database pass the replace option to brewscheme."'
 			
 		} // End ELSE Block for non over write
 		

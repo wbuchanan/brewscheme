@@ -8,7 +8,7 @@ Command to look up meta characteristics for colors/palettes available to {help b
 {title:help for brewmeta}
 
 {p 4 4 8}{hi:brewmeta {hline 2}} A Stata interface to color property palettes developed 
-by Cynthia Brewer ({browse "http://colorbrewer.org/": Color Brewer}). {p_end}
+by Cynthia Brewer ({browse "http://colorbrewer.org/":Color Brewer}). {p_end}
 
 {title:Syntax}
 
@@ -81,7 +81,7 @@ time on others as well. {p_end}
 {p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} 
 of the ColorBrewer copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
 
-{title: Author}{break}
+{title:Author}{break}
 {p 4 4 8}William R. Buchanan, Ph.D.{p_end}
 {p 4 4 8}Data Scientist{p_end}
 {p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
