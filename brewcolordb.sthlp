@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  13MAR2016}{...}
+{* *! version 0.0.3  16MAR2016}{...}
 
 {hline}
 Command to build local dataset of named colors and simulated color values
@@ -13,7 +13,7 @@ as well as transformed RGB values that simulate varying forms of color sight imp
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewcolordb} [, {cmdab:dis:play} {cmdab:rep:lace} ] {break}
+{p 4 4 4}{cmd:brewcolordb} [, {cmdab:dis:play} {cmdab:rep:lace} {cmdab:over:ride} ] {break}
 
 {title:Description}
 
@@ -27,7 +27,10 @@ color sight impairments.{p_end}
 
 {p 4 4 8}{cmdab:rep:lace} is an optional argument used to overwrite an existing copy of the library. {p_end}
 
-{marker examples}{title:Examples}{break}
+{p 4 4 8}{cmdab:over:ride} is an optional argument used to override a user prompt before clearing data from memory. {p_end}
+
+{marker examples}{title:Examples}
+
 {p 4 4 4}Build the database and display the results{p_end}
 
 {p 8 8 12}brewcolordb, dis{p_end}

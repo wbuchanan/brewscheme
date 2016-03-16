@@ -35,7 +35,8 @@ prog def brewcolors, rclass
 	version 13.1
 	
 	// Syntax for program (make adds to color DB, install install's colors)
-	syntax anything(name = source) [, MAke INSTall COLors(string asis) REPlace ]
+	syntax anything(name = source) [, MAke INSTall COLors(string asis) 		///   
+	REPlace OVERride ]
 	
 	// Check for brewscheme Mata library
 	qui: brewlibcheck
@@ -44,7 +45,8 @@ prog def brewcolors, rclass
 	if `"`make'`install'`colors'"' == "" loc optstring ","
 	
 	// Build local macro with the command string
-	loc cmdstring brewcolors `source'`optstring' `make' `install' colors(`colors') `replace'
+	loc cmdstring brewcolors `source'`optstring' `make' `install' 			 ///   
+	colors(`colors') `replace' `override'
 	
 	// Preserve current state of the data
 	preserve 
@@ -62,7 +64,7 @@ prog def brewcolors, rclass
 		if `"`source'"' == "xkcd" {
 
 			// Load and parse the xkcd data
-			xkcd, `make' `install' colors(`colors') `replace' cmd(`cmdstring')
+			xkcd, `make' `install' colors(`colors') `replace' cmd(`cmdstring') `override'
 			
 			// Loop over each of the return name macros
 			foreach nm in `r(colnms)' { 
@@ -78,7 +80,7 @@ prog def brewcolors, rclass
 		else if `"`source'"' == "new" {
 		
 			// Call color blind routine
-			colorinstaller, `make' `install' colors(`colors') `replace' cmd(`cmdstring')
+			colorinstaller, `make' `install' colors(`colors') `replace' cmd(`cmdstring') `override'
 			
 			// Return the sub routine's return value
 			ret loc colorpath `r(colorpath)'
@@ -98,7 +100,7 @@ cap prog drop colorinstaller
 prog def colorinstaller, rclass
 
 	// Syntax for sub routine
-	syntax, colors(string asis) [ make install cmd(passthru) replace ]
+	syntax, colors(string asis) [ make install cmd(passthru) replace override ]
 	
 	// Set the number of observations
 	qui: set obs `: word count `colors''
@@ -192,7 +194,7 @@ prog def colorinstaller, rclass
 		// Save the dataset with the colors
 		qui: save `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"', replace
 
-		brewColorMaker `c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta, `replace'
+		brewColorMaker `c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta, `replace' `override'
 		
 		// Return the file path for the colors created by the user
 		ret loc colorpath `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
@@ -209,7 +211,7 @@ cap prog drop xkcd
 prog def xkcd, rclass
 	
 	// Define syntax
-	syntax [, make install colors(string asis) replace cmd(passthru) ]
+	syntax [, make install colors(string asis) replace cmd(passthru) override ]
 	
 	// For the xkcd colors
 	import delimited using "http://xkcd.com/color/rgb.txt", delim("#") clear
@@ -328,7 +330,7 @@ prog def xkcd, rclass
 	qui: save `"`c(sysdir_personal)'brewcolors/brewxkcd.dta"', replace
 	
 	// Check make option
-	if `"`make'"' != "" brewColorMaker `c(sysdir_personal)'brewcolors/brewxkcd.dta, `replace'
+	if `"`make'"' != "" brewColorMaker `c(sysdir_personal)'brewcolors/brewxkcd.dta, `replace' `override'
 
 // End of program
 end
@@ -444,16 +446,16 @@ cap prog drop brewColorMaker
 prog def brewColorMaker
 
 	// Syntax
-	syntax anything(name = filename id = "Colors to install") [, replace ]
+	syntax anything(name = filename id = "Colors to install") [, replace override ]
 	
 	// Append to existing colordb if it exists
 	cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
 	
-	// If file exists
+	// If file does not exist
 	if _rc == 0 | `"`replace'"' != "" {
 	
 		// Call the color database program
-		brewcolordb, `replace'
+		brewcolordb, `replace' `override'
 		
 		// Load colordb file
 		qui: use `"`c(sysdir_personal)'brewcolors/colordb.dta"', clear
@@ -469,7 +471,7 @@ prog def brewColorMaker
 		
 	} // End ELSE Block for non-existent color database
 	
-	// If file does not exist
+	// If file exists
 	else {
 			
 		// Append existing data
@@ -485,5 +487,4 @@ prog def brewColorMaker
 		
 // End of program definition
 end
-
 

@@ -461,7 +461,7 @@ prog def brewdb
 			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"', replace
 			
 			// Call brewextras to add additional color palettes to the data set
-			qui: brewextra, ref 
+			qui: brewextra, replace
 			
 		} // End IF Block to build new look up database
 		
@@ -483,4 +483,3 @@ prog def brewdb
 	
 // End of function definition
 end
-
