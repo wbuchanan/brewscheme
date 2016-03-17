@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.3  16MAR2016}{...}
+{* *! version 0.0.4  17MAR2016}{...}
 
 {hline}
 Command to build local dataset of named colors and simulated color values
@@ -23,7 +23,7 @@ color sight impairments.{p_end}
 
 {title:Options}
 
-{p 4 4 8}{cmdab:dis:play} is an optional argument to display this help file after compiling the Mata library.{p_end}
+{p 4 4 8}{cmdab:dis:play} is an optional argument to display the color information in the results window during the program's execution.{p_end}
 
 {p 4 4 8}{cmdab:rep:lace} is an optional argument used to overwrite an existing copy of the library. {p_end}
 

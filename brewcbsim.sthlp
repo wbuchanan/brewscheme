@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  13MAR2016}{...}
+{* *! version 0.0.3  17MAR2016}{...}
 
 {hline}
 Simulating color sight impairments on one or more colors
@@ -13,7 +13,7 @@ tritanopia.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewcbsim} {it:red green blue|{hi:named color style}} {break}
+{p 4 4 4}{cmd:brewcbsim} {it:red green blue} {hi:|} {it:named color style} {break}
 
 {title:Description}
 

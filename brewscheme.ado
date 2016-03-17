@@ -435,7 +435,7 @@ prog def brewscheme, rclass
 								`piecolors', `suncolors', `histcolors', 	 ///   
 								`cicolors', `matcolors', `reflcolors', 		 ///   
 								`refmcolors')
-			
+								
 			// Recycle the number of symbols
 			qui: mata: recycle(`numsymbols', `pcycles')
 			

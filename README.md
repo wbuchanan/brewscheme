@@ -1,5 +1,5 @@
 # NEWS
-This update to the development branch concludes the last commit with any feature additions and/or enhancements.  There is still documentation needing completion for the `brewtheme` program, but there should not be any significant changes beyond that.  Bugs will still be fixed before the version 1 release, but this version can generally be considered representative of what the stable release will look like and demonstrate the features that will be available.  
+A help file was added for the `brewcolors` command and all `brewtheme` specific and `brewscheme` documentation has been updated.  There have been some minor refactorings implemented to change instances of the option `refresh` to the more typical Stata syntax `replace`.  
 
 # brewscheme
 A data visualization toolkit for Stata.  This package contains Stata programs; Mata functions, classes, and methods; and Java plugins to make customizing graphs in Stata easier.  The major functionality is provided by the `brewtheme` and `brewscheme` programs which generate a `.theme` file (for aesthetic settings that are not specific to a graph/plot type) and `.scheme` files (which inherit the `.theme` files and set aesthetic properties specific to plot/graph types).  In addition to the user specified/requested aesthetics, these programs also leverage the `libbrewscheme` Mata library to generate parallel versions of these files with values that simulate the appearance to individuals with achromatopsia (complete color blindness), protanopia (red color sight impairment), deuteranopia (green color sight impairment), and tritanopia (blue color sight impairment).  
@@ -10,10 +10,6 @@ Together, this provides users with a powerful toolkit to customize their data vi
 
 ## Examples
 To view examples, please see the [project website](https://wbuchanan.github.io/brewscheme).
-
- 
-## Other examples
-For other examples of graphs created with brewscheme visit the examples from a related project [eda](https://github.com/wbuchanan/eda/blob/master/eda-example.pdf).
  
 ## References
 [Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  

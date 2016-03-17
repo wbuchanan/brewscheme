@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.1  16MAR2016}{...}
+{* *! version 0.0.2  17MAR2016}{...}
 
 {hline}
 Command to create new named color styles and add to existing color dataset.
@@ -15,7 +15,7 @@ to create these colors manually or to add colors from the
 {title:Syntax}
 
 {p 4 4 4}{cmd:brewcolors} {it:xkcd}|{it:new} [, {cmdab:ma:ke} {cmdab:inst:all} 
-{cmdab:col:ors(}{it:string}{opt })} {cmdab:rep:lace} {cmdab:over:ride} ] {break}
+{cmdab:col:ors(}{it:string}{opt )} {cmdab:rep:lace} {cmdab:over:ride} ] {break}
 
 {title:Description}
 
