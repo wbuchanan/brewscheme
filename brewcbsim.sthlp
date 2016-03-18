@@ -1,9 +1,11 @@
 {smcl}
-{* *! version 0.0.1  25NOV2015}{...}
-{cmd:help brewcbsim}
+{* *! version 0.0.3  17MAR2016}{...}
+
+{hline}
+Simulating color sight impairments on one or more colors
 {hline}
 
-{title:Title}
+{title:help for brewcbsim}
 
 {p 4 4 4}{hi:brewcbsim {hline 2}} a program to simulate how a given color would 
 be perceived by individuals with achromatopsia, protanopia, deuteranopia, or 
@@ -11,7 +13,7 @@ tritanopia.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewcbsim} {it:red green blue} {break}
+{p 4 4 4}{cmd:brewcbsim} {it:red green blue} {hi:|} {it:named color style} {break}
 
 {title:Description}
 
@@ -32,6 +34,17 @@ tritanopia.{p_end}
 
 {p 4 4 4}These examples can be viewed {browse "http://wbuchanan.github.io/brewscheme/brewcbsim/":here}.{p_end}{break}
 
+{marker retvals}{title:Returned Values}{break}
+  {hline 100}
+{p2colset 8 30 30 8}{p2col:Macro}Value{p_end}
+  {hline 100}
+{p2colset 8 30 30 8}{p2col:r(original#)}The RGB value for the nth color passed to the command{p_end}
+{p2colset 8 30 30 8}{p2col:r(achromatopsic#)}Transformed RGB value for the nth color (Complete Color Vision Loss){p_end}
+{p2colset 8 30 30 8}{p2col:r(protanopic#)}Transformed RGB value for the nth color (Red Color Impairment){p_end}
+{p2colset 8 30 30 8}{p2col:r(deuteranopic#)}Transformed RGB value for the nth color (Green Color Impairment){p_end}
+{p2colset 8 30 30 8}{p2col:r(tritanopic#)}Transformed RGB value for the nth color (Blue Color Impairment){p_end}
+  {hline 100}
+
 {marker refs}{title:{ul:References}}{break}
 {marker wickline}{p 4 8 8}Wickline, M. (2014). {it:Color.Vision.Simulate, Version 0.1}.  Retrieved from: 
 {browse "http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js"}. 
@@ -44,8 +57,9 @@ Retrieved on: 24nov2015.{p_end}
 
 {marker lindbloom}{p 4 8 8}Lindbloom, B. (2001).  RGB working space information. Retrieved from: {browse "http://www.brucelindbloom.com/WorkingSpaceInfo.html"}.  Retrieved on 24nov2015.{p_end}
 
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
+

@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.13
-*! 10JAN2016
+*! v 0.0.14
+*! 14MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -35,7 +35,7 @@ prog def brewextra, rclass
 	version 13.1
 	
 	// Define syntax structure for program
-	syntax [, files(string asis) REFresh]
+	syntax [, files(string asis) REPlace]
 	
 	// Preserve pre-existing state of the data
 	preserve
@@ -43,11 +43,11 @@ prog def brewextra, rclass
 		// Check for/build directory
 		dirfile, p(`"`c(sysdir_personal)'brewuser"')
 		
-		// Check for refresh option
+		// Check for replace option
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
 		
-		// Check for existing extras file or refresh option
-		if _rc == 0 | "`refresh'" != "" {
+		// Check for existing extras file or replace option
+		if _rc == 0 | "`replace'" != "" {
 		
 			// Clear existing data from memory
 			clear
@@ -1188,7 +1188,7 @@ prog def brewextra, rclass
 			// Push the extras file through check file spec sub routine
 			checkfilespec 
 			
-		} // End IF Block for refresh/no extras file
+		} // End IF Block for replace/no extras file
 									
 		// If the files parameter contains an argument 								
 		if `"`files'"' != "" {

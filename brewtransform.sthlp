@@ -1,9 +1,11 @@
 {smcl}
-{* *! version 0.0.1  25NOV2015}{...}
-{cmd:help brewtransform}
+{* *! version 0.0.2  15MAR2016}{...}
+
+{hline}
+Command to transform a variable of RGB strings into color sight impaired variables
 {hline}
 
-{title:Title}
+{title:help for brewtransform}
 
 {p 4 4 4}{hi:brewtransform {hline 2}} a program to transform a Stata formatted RGB string 
 into RGB values that simulate the conditions of achromatopsia, protanopia, deuteranopia, and tritanopia.{p_end}
@@ -20,12 +22,14 @@ blue color perception impairments.  The program takes a single variable formatte
 as str11 as the sole argument and creates/returns four variables: achromatopsia, 
 protanopia, deuteranopia, and tritanopia. {p_end}
 
-{marker examples}{title:Examples}{break}
+{marker examples}{title:Examples}
+
 {p 4 4 4} Transform the RGB Strings contained in the variable rgb. {p_end}
 
 {p 8 8 12}brewtransform rgb{p_end}{break}
 
-{marker refs}{title:{ul:References}}{break}
+{marker refs}{title:{ul:References}}
+
 {marker wickline}{p 4 8 8}Wickline, M. (2014). {it:Color.Vision.Simulate, Version 0.1}.  Retrieved from: 
 {browse "http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js"}. 
 Retrieved on: 24nov2015.{p_end} 
@@ -37,8 +41,8 @@ Retrieved on: 24nov2015.{p_end}
 
 {marker lindbloom}{p 4 8 8}Lindbloom, B. (2001).  RGB working space information. Retrieved from: {browse "http://www.brucelindbloom.com/WorkingSpaceInfo.html"}.  Retrieved on 24nov2015.{p_end}
 
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

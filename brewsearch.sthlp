@@ -1,9 +1,11 @@
 {smcl}
-{* *! version 0.0.1  26NOV2015}{...}
-{cmd:help brewsearch}
+{* *! version 0.0.2  14MAR2016}{...}
+
+{hline}
+Query color sight impairment values that were previously computed and return in macros.
 {hline}
 
-{title:Title}
+{title:help for brewsearch}
 
 {p 4 4 4}{hi:brewsearch {hline 2}} is a program used to query {help brewscheme} 
 data sources to retrieve RGB values and/or simulated RGB values for different forms 
@@ -29,8 +31,20 @@ protanopia, deuteranopia, and tritanopia. {p_end}
 
 {p 8 8 12}brewsearch "255 127 14"{p_end}{break}
 
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{marker retval}{title:Returned Values}
+
+    {hline 80}
+{p2colset 8 30 30 8}{p2col:Macro Name}Contents{p_end}
+    {hline 80}
+{p2colset 8 30 30 8}{p2col:r(rgb)}RGB value looked up by command{p_end}	
+{p2colset 8 30 30 8}{p2col:r(achromatopsia)}Achromatopsia simulated RGB value{p_end}	
+{p2colset 8 30 30 8}{p2col:r(protanopia)}Protanopia simulated RGB value{p_end}	
+{p2colset 8 30 30 8}{p2col:r(deuteranopia)}Deuteranopia simulated RGB value{p_end}	
+{p2colset 8 30 30 8}{p2col:r(tritanopia)}Tritanopia simulated RGB value{p_end}	
+    {hline 80}
+	
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

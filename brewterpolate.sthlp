@@ -1,27 +1,31 @@
 {smcl}
-{* *! version 0.0.2  09JAN2016}{...}
-{cmd:help brewterpolate}
+{* *! version 0.0.3  14MAR2016}{...}
+
+{hline}
+Interpolation of colors between starting and ending color values.
 {hline}
 
-{title:Title}
+{title:help for brewterpolate}
 
-{hi:brewterpolate {hline 2}} Stata program to interpolate an arbitrary number of 
-colors between a starting and ending color.   
+{p 4 4 8}{hi:brewterpolate {hline 2}} Stata program to interpolate an arbitrary number of 
+colors between a starting and ending color.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewterpolate} , {cmdab:sc:olor(}{it:string}{opt )} 
+{p 4 4 4}{cmd:brewterpolate}, {cmdab:sc:olor(}{it:string}{opt )} 
 {cmdab:ec:olor(}{it:string}{opt )} {cmdab:c:olors(}{it:int}{opt )} 
-[{cmdab:lum:inance(}{it:string}{opt )} {cmdab:ics:pace(}{it:string}{opt )} 
+[{cmdab:cm:od(}{it:string}{opt )} {cmdab:ics:pace(}{it:string}{opt )} 
 {cmdab:rcs:pace(}{it:string}{opt )} {cmdab:inv:erse} {cmdab:g:rayscale} ] {break}
 
 {title:Description}
+
 {p 4 4 4}{cmd:brewterpolate} is a program used to interpolate color values between 
 the start and end colors for an arbitrary number of points.  The program can 
 accept input in several formats and provides output in rgb, rgba, srgb, srgba, 
 hsv, and hsva formats. {p_end}
 
-{marker required}{title: Required Arguments}
+{marker required}{title:Options}
+
 {p 4 4 8}{cmdab:sc:olor} is a required argument that takes a value conforming to 
 one of the formats listed in {help brewterpolate##icspace:Input Color Spaces}.{p_end}
 
@@ -31,7 +35,6 @@ one of the formats listed in {help brewterpolate##icspace:Input Color Spaces}.{p
 {p 4 4 8}{cmd:colors} is a required argument that takes a value to define the 
 number of points between the starting and ending colors to interpolate. {p_end}
 
-{marker optional}{title: Optional Arguments}
 {p 4 4 8}{cmdab:cm:od} is an optional argument that can take one of the 
 following values:  brighter, darker, saturated, desaturated, or nothing and is 
 used to modify the interpolated colors.  A value of "brighter" will return 
@@ -83,9 +86,9 @@ interpolated color, invert it, and then transform it to a gray scale value. {p_e
 {col 10}{hi:srgba}{col 35}{it:Web sRGB w/Alpha (ex., )}
 {col 10}{hi:hsl}{col 35}{it:Hue, Saturation, Lightness (ex., hex, rgb, hsl)}
 {col 10}{hi:hsla}{col 35}{it:Hue, Saturation, Lightness w/Alpha (ex., hex, rgb, hsl)}
-{col 10}{hline 80}{break}
+{col 10}{hline 80}
  
-{marker examples}{title:Examples}{break}
+{marker examples}{title:Examples}
 
 {p 4 4 8}{stata brewterpolate, sc("197 115 47") ec("5, 37, 249") c(4)}{p_end}
 {p 4 4 8}{stata brewterpolate, sc("197 115 47") ec("5, 37, 249") c(9) inv}{p_end}
@@ -95,11 +98,12 @@ interpolated color, invert it, and then transform it to a gray scale value. {p_e
 {p 4 4 8}{stata brewterpolate, sc("197 115 47") ec("5, 37, 249") c(18) rcs(hsb)}{p_end}
 {p 4 4 8}{stata brewterpolate, sc("197 115 47") ec("5, 37, 249") c(37) inv cm(brighter) rcs(hsb)}{p_end}
  
-{marker references}{title:References}{break}
-{p 4 4 4}{browse "http://docs.oracle.com/javafx/2/api/javafx/scene/paint/Color.html":Java Color Documentation}{p_end}
+{marker references}{title:References}
+
+{p 4 4 4}{browse "https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html":Java Color Documentation}{p_end}
  
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
