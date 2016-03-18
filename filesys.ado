@@ -36,7 +36,7 @@ prog def filesys, rclass
 	return clear
 	
     // If OS is DOS based
-    if `"`c(os)'"' == "Windows" loc os "Windoze"
+    if lower(`"`c(os)'"') == "windows" loc os "Windoze"
 	
     // If OS isn't a horrible atrocity designed to cause pain and suffering
     else loc os "POSIX"
@@ -70,7 +70,7 @@ prog def filesys, rclass
     else {
 
         // Replace the tilde with a standard Windoze expansion
-        loc file `"`: subinstr loc file `"~"' `"C:/Users/`c(username)'"', all'"'
+        loc file `"`: subinstr loc file `"~"' `"`: environment HOME'"', all'"'
 
     } // End IF Block for tilde expansion on OSX
 
