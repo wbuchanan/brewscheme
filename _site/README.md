@@ -1,5 +1,60 @@
+<<<<<<< HEAD
+# BREWTHEME HELP
+This submodule contains parameter specific Stata help files for the `brewtheme` command.  Due to the number of optional parameters and valid arguments within each of the parameters, it should make it easier for end users to navigate the helpfile with each parameter having it's own sub-help page.  
+
+# Help File TODO List
+- [x] btabovebelow  
+- [x] btanglestyle  
+- [x] btareastyle  
+- [x] btarrowstyle  
+- [x] btaxisstyle  
+- [x] btbarlabelpos  
+- [x] btbarlabelstyle  
+- [x] btbarstyle  
+- [x] btbygraphstyle  
+- [x] btclegendstyle  
+- [x] btclockdir  
+- [x] btcolor  
+- [x] btcompass2dir  
+- [x] btcompass3dir  
+- [x] btconnectstyle  
+- [x] btdottypestyle  
+- [x] btgraphsize  
+- [x] btgridlinestyle  
+- [x] btgridringstyle  
+- [x] btgridstyle  
+- [x] btgsize  
+- [x] bthorizontal  
+- [x] btlabelstyle  
+- [x] btlegendstyle  
+- [x] btlinepatternstyle  
+- [x] btlinestyle  
+- [x] btlinewidthstyle  
+- [x] btmargin  
+- [x] btmedtypestyle  
+- [x] btnumstyle  
+- [x] btnumticks  
+- [x] btpiegraphstyle  
+- [x] btpielabelstyle  
+- [x] btplotregionstyle  
+- [x] btrelativepos  
+- [x] btrelsize  
+- [x] btspecial  
+- [x] btstarstyle  
+- [x] btsymbol  
+- [x] btsymbolsize  
+- [x] btsunflowerstyle  
+- [x] bttextboxstyle  
+- [x] bttickposition  
+- [x] btticksetstyle  
+- [x] bttickstyle  
+- [x] btverticaltext  
+- [x] btyesno  
+- [x] btzyx2rule  
+- [x] btzyx2style  
+=======
 # NEWS
-This update to the development branch concludes the last commit with any feature additions and/or enhancements.  There is still documentation needing completion for the `brewtheme` program, but there should not be any significant changes beyond that.  Bugs will still be fixed before the version 1 release, but this version can generally be considered representative of what the stable release will look like and demonstrate the features that will be available.  
+A help file was added for the `brewcolors` command and all `brewtheme` specific and `brewscheme` documentation has been updated.  There have been some minor refactorings implemented to change instances of the option `refresh` to the more typical Stata syntax `replace`.  
 
 # brewscheme
 A data visualization toolkit for Stata.  This package contains Stata programs; Mata functions, classes, and methods; and Java plugins to make customizing graphs in Stata easier.  The major functionality is provided by the `brewtheme` and `brewscheme` programs which generate a `.theme` file (for aesthetic settings that are not specific to a graph/plot type) and `.scheme` files (which inherit the `.theme` files and set aesthetic properties specific to plot/graph types).  In addition to the user specified/requested aesthetics, these programs also leverage the `libbrewscheme` Mata library to generate parallel versions of these files with values that simulate the appearance to individuals with achromatopsia (complete color blindness), protanopia (red color sight impairment), deuteranopia (green color sight impairment), and tritanopia (blue color sight impairment).  
@@ -10,10 +65,6 @@ Together, this provides users with a powerful toolkit to customize their data vi
 
 ## Examples
 To view examples, please see the [project website](https://wbuchanan.github.io/brewscheme).
-
- 
-## Other examples
-For other examples of graphs created with brewscheme visit the examples from a related project [eda](https://github.com/wbuchanan/eda/blob/master/eda-example.pdf).
  
 ## References
 [Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  
@@ -40,3 +91,4 @@ Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyrig
 ## Additional Info
 For additional information/examples about the brewscheme package see [Buchanan, W. R. (2015). Brewing color schemes in Stata: Making it easier for end users to customize Stata graphs.  Presented 31jul2015 at the  2015 Stata North American Users' Group Meeting.  Columbus, OH.](http://www.stata.com/meeting/columbus15/abstracts/materials/columbus15_buchanan.pdf)
 
+>>>>>>> be98667559504771da835a9b64d38e9458b8755e

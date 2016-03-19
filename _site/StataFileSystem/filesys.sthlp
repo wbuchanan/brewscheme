@@ -1,11 +1,13 @@
 {smcl}
-{* *! version 0.0.1  16DEC2015}{...}
-{cmd:help filesys}
+{* *! version 0.0.2  15MAR2016}{...}
+
+{hline}
+Command to access and manipulate file properties
 {hline}
 
-{title:Title}
+{title:help for filesys}
 
-{hi:filesys {hline 2}} a Java plugin to access filesystem properties of files.{p_end}
+{p 4 4 8}{hi:filesys {hline 2}} a Java plugin to access filesystem properties of files.{p_end}
 
 {title:Syntax}
 
@@ -23,6 +25,7 @@ See {help filesys##return:return values} for additional information regarding th
 attributes that are exposed from this program.{p_end}
 
 {title:Options}
+
 {p 4 4 8}{cmdab:attr:ibutes} this option is used to retrieve the properties of a 
 file and {hi:does not} make any modifications to the file system properties for 
 the file.  {break}
@@ -47,7 +50,7 @@ property for the current user only.{p_end}
 
 {p 4 4 8}{cmdab:reado:nly} is an option used to set the file to readonly mode. There is no option to apply this globally vs locally. {p_end}
 
-{marker examples}{title:Examples}{break}
+{marker examples}{title:Examples}
 
 {p 8 8 8} View the properties of the auto.dta dataset {p_end}
 {p 8 8 8}{stata filesys `c(sysdir_base)'a/auto.dta, attr dis}{p_end}
@@ -124,7 +127,8 @@ property for the current user only.{p_end}
 {p 8 8 8} Turn off the readable property {p_end}
 {p 8 8 8}{stata filesys `c(sysdir_base)'a/auto.dta, glo r(off) dis}{p_end}
 
-{marker return}{title:Returned values}{break}
+{marker return}{title:Returned values}
+
 {p2colset 10 35 35 10}
 {p2line 0 0}{p2col:Macro Name}Value{p_end}
 {p2line 0 0}{p2colset 10 35 35 10}{p2col:r(iswritable)}Boolean indicator if file is writable{p_end}
@@ -146,9 +150,8 @@ property for the current user only.{p_end}
 {p2colset 10 35 35 10}{p2col:r(created)}String containing the created date{p_end}
 {p2line 0 0}
 
-
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}

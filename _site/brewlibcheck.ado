@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewlibcheck
-*! v 0.0.3
-*! 07JAN2016
+*! v 0.0.4
+*! 18MAR2016
 
 // Drop the program if already loaded in memory
 cap prog drop brewlibcheck
@@ -46,7 +46,7 @@ prog def brewlibcheck
 		
 		// If the existing version of the library is lower than the distro date
 		// recompile the library
-		if `r(creatednum)' < clock("18dec2015 00:00:00", "YMDhms") {
+		if `r(creatednum)' < clock("17mar2016 00:00:00", "YMDhms") {
 			
 			// Recompile the library
 			qui: libbrewscheme, replace size(2048)

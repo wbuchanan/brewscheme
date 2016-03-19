@@ -1,61 +1,81 @@
 ---
 layout: page
 title: brewcbsim
-permalink: /brewcbsim/
+permalink: /help/brewcbsim/
 ---
 
-# Updates
-The functionality previously mentioned on this page has been implemented.  Below are a couple of examples (based on the previous examples) that show how the program handles multiple color - and color type - arguments now.  
+<hr>
+Simulating color sight impairments on one or more colors
+<hr>
+  
+__brewcbsim__ -- a program to simulate how a given color would be perceived by individuals with achromatopsia, protanopia, deuteranopia, or tritanopia.
+ 
+## Syntax
+ 
+brewcbsim red green blue | named color style
+ 
+## Description
+ 
+brewcbsim is used to simulate how a given color (specified as an RGB tuple in [0,255]) would be perceived by individuals with color sight impairments.
+ 
+## Examples
+ 
+### Ex 1.
+Green channel dominant color.
 
-## Ex 1. An XKCD named color style, with green, blue, and red dominant colors, and a StataCorp named colorstyle
-
-```   
-brewcbsim xkcd119 "63 210 142" "8 151 233" "182 33 43" bluishgray8
-```   
-
-![brewcbsim Example 1](../img/brewcbsimex4.png)
-
-
-## Ex 2. Colors that are typically associated with sensitivity to color perception
-
-```   
-brewcbsim red green blue yellow
-```   
-
-![brewcbsim Example 2](../img/brewcbsimex5.png)
-
-
-
-# Deprecated info
-
-This program is analogous to [brewviewer](https://wbuchanan.github.io/brewscheme/brewviewer) but with a focus on illustrating the way color may be perceived by individuals with various types of color sightedness impairments.  The current iteration of the program only shows a single color at a time, but future versions will expand on this capability.  The use of the program is fairly simple:
-
-## Ex 3. Green channel dominant color
-
-```   
+```Stata 
 brewcbsim 63 210 142
-```   
+```
 
-![brewcbsim Example 3](../img/brewcbsimex1.png)
+![brewcbsimEx1](../../img/brewcbsimex1.png)
 
+### Ex 2.
+Blue channel dominant color.
 
-## Ex 4. Blue channel dominant color
-
-```   
+```Stata 
 brewcbsim 8 151 233
-```   
+```
 
-![brewcbsim Example 4](../img/brewcbsimex2.png)
+![brewcbsimEx2](../../img/brewcbsimex2.png)
 
+### Ex 3. 
+Red channel dominant color
 
-## Ex 5. Red channel dominant color
-
-```   
+```Stata 
 brewcbsim 182 33 43
 ```   
 
-![brewcbsim Example 5](../img/brewcbsimex3.png)
+![brewcbsimEx3](../../img/brewcbsimex3.png)
 
+### Ex 4. 
+An XKCD named color style, with green, blue, and red dominant colors, and a StataCorp named colorstyle
+
+```Stata
+brewcbsim xkcd119 "63 210 142" "8 151 233" "182 33 43" bluishgray8
+```   
+
+![brewcbsimEx4](../../img/brewcbsimex4.png)
+
+### Ex 5.
+Colors that are typically associated with sensitivity to color perception
+
+```Stata
+brewcbsim red green blue yellow
+```
+
+![brewcbsimEx5](../../img/brewcbsimex5.png)
+
+## Returned Values
+
+<table>
+<th>Macro Name</th><th>Value</th> 
+<tr><td>r(original#)</td><td>The RGB value for the nth color passed to the command</td></tr>
+<tr><td>r(achromatopsic#)</td><td>Transformed RGB value for the nth color (Complete Color Vision Loss)</td></tr>
+<tr><td>r(protanopic#)</td><td>Transformed RGB value for the nth color (Red Color Impairment)</td></tr>
+<tr><td>r(deuteranopic#)</td><td>Transformed RGB value for the nth color (Green Color Impairment)</td></tr>
+<tr><td>r(tritanopic#)</td><td>Transformed RGB value for the nth color (Blue Color Impairment)</td></tr>
+</table>
+ 
 ## References
 [Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.](http://www.brucelindbloom.com/WorkingSpaceInfo.html)
 

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>brewviewer</title>
+    <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
+
+    <link rel="stylesheet" href="/brewscheme/css/main.css">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewviewer/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/brewscheme/">brewscheme</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/brewscheme/about.html">about</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/brewscheme/more/">more</a>
+          
+        
+      </div>    
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">brewviewer</h1>
+  </header>
+
+  <article class="post-content">
+    <hr />
+
+<p>A command to preview one or more brewscheme color palettes</p>
+<hr />
+
+<p><a name="top"></a><br />
+<strong>brewviewer</strong> – A utility for brewscheme to preview color palettes available.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p><strong>brewviewer</strong> <em>palette names</em> [, <u>c</u>olors(numlist) <u>comb</u>ine <u>s</u>eq <u>im</u>paired ]</p>
+
+<h2 id="description">Description</h2>
+
+<p>brewviewer is a utility for the brewscheme program that provides you with a way to preview different combinations of palettes and numbers of colors.  You can view examples of each of the palettes distributed with <a href="https://github.com/wbuchanan/brewscheme">brewscheme</a> in the <a href="#gallery">Gallery</a> below.  The table below is provided for more immediate access to a specific color palette preview:</p>
+
+<table>
+<th>Color Palettes</th><th>Color Palettes</th>
+<tr><td><a name="accent">accent</a></td><td><a name="activitiesa">activitiesa</a></td></tr>
+<tr><td><a name="activitiest">activitiest</a></td><td><a name="blues">blues</a></td></tr>
+<tr><td><a name="brandsa">brandsa</a></td><td><a name="brandse">brandse</a></td></tr>
+<tr><td><a name="brbg">brbg</a></td><td><a name="bugn">bugn</a></td></tr>
+<tr><td><a name="bupu">bupu</a></td><td><a name="carsa">carsa</a></td></tr>
+<tr><td><a name="carse">carse</a></td><td><a name="category10">category10</a></td></tr>
+<tr><td><a name="category20">category20</a></td><td><a name="category20b">category20b</a></td></tr>
+<tr><td><a name="category20c">category20c</a></td><td><a name="dark2">dark2</a></td></tr>
+<tr><td><a name="drinksa">drinksa</a></td><td><a name="drinkse">drinkse</a></td></tr>
+<tr><td><a name="featuresa">featuresa</a></td><td><a name="featurest">featurest</a></td></tr>
+<tr><td><a name="fooda">fooda</a></td><td><a name="foode">foode</a></td></tr>
+<tr><td><a name="fruita">fruita</a></td><td><a name="fruite">fruite</a></td></tr>
+<tr><td><a name="ggplot2">ggplot2</a></td><td><a name="gnbu">gnbu</a></td></tr>
+<tr><td><a name="greens">greens</a></td><td><a name="greys">greys</a></td></tr>
+<tr><td><a name="mdebar">mdebar</a></td><td><a name="mdepoint">mdepoint</a></td></tr>
+<tr><td><a name="oranges">oranges</a></td><td><a name="orrd">orrd</a></td></tr>
+<tr><td><a name="paired">paired</a></td><td><a name="pastel1">pastel1</a></td></tr>
+<tr><td><a name="pastel2">pastel2</a></td><td><a name="piyg">piyg</a></td></tr>
+<tr><td><a name="prgn">prgn</a></td><td><a name="pubu">pubu</a></td></tr>
+<tr><td><a name="pubugn">pubugn</a></td><td><a name="puor">puor</a></td></tr>
+<tr><td><a name="purd">purd</a></td><td><a name="purples">purples</a></td></tr>
+<tr><td><a name="rdbu">rdbu</a></td><td><a name="rdgy">rdgy</a></td></tr>
+<tr><td><a name="rdpu">rdpu</a></td><td><a name="rdylbu">rdylbu</a></td></tr>
+<tr><td><a name="rdylgn">rdylgn</a></td><td><a name="reds">reds</a></td></tr>
+<tr><td><a name="set1">set1</a></td><td><a name="set2">set2</a></td></tr>
+<tr><td><a name="set3">set3</a></td><td><a name="spectral">spectral</a></td></tr>
+<tr><td><a name="tableau">tableau</a></td><td><a name="veggiesa">veggiesa</a></td></tr>
+<tr><td><a name="veggiese">veggiese</a></td><td><a name="ylgn">ylgn</a></td></tr>
+<tr><td><a name="ylgnbu">ylgnbu</a></td><td><a name="ylorbr">ylorbr</a></td></tr>
+<tr><td><a name="ylorrd">ylorrd</a></td><td></td></tr>
+
+</table>
+
+<p>For additional information about the palettes and/or transformations, <a href="#references">see the references listed below</a>.</p>
+
+<h2 id="options">Options</h2>
+
+<p><u>c</u>olors is a required argument and is used to specify the number of colors to preview.  If a single argument is passed it is used for all palettes.  If the number of color values passed is the same as the number of palettes the program will treat the values as being specific to the corresponding palette specified.  If there are fewer colors than palettes, the maximum value of the colors parameter will be used for the graphs if the seq option is passed, else the same colors are recycled for each of the graphs.  Lastly, if the number of colors passed is greater than the number of palettes, it will override the seq option and treat each of the numbers as discrete for all palettes.</p>
+
+<p><u>comb</u>ine is an optional argument used to generate a single combined graph with each of the graphs combined in a single image.</p>
+
+<p><u>s</u>eq is an optional argument used to tell the program that you want to treat the number of colors as the maximum number of sequences to graph.  For example, if a value of 5 is passed to colors and seq is selected, the resulting graph will contain columns showing colors 1-3, 1-4, and 1-5.  If this option is not selected, it will only show a single column of colors from 1-5.</p>
+
+<p><u>im</u>paired is an optional argument to display the palette(s) along with color sight impaired transformations of the colors.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="ex-1">Ex 1.</h3>
+<p>Show the <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#categorical-colors">D3js category10</a> palette with up to 6 colors with color sight impaired transformed colors</p>
+
+<pre><code>brewviewer category10, im seq c(6)
+</code></pre>
+<p><img src="../../img/brewviewerEx1.png" alt="brewviewerEx1" /></p>
+
+<h3 id="ex-2">Ex 2.</h3>
+<p>Display colors from multiple palettes with varying numbers of colors for each palette.</p>
+
+<pre><code>brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
+</code></pre>
+<p><img src="../../img/brewviewerEx2.png" alt="brewviewerEx2" /></p>
+
+<h3 id="ex-3">Ex 3.</h3>
+<p>Preview sequences for color palettes with 3-5 colors for multiple palettes simultaneously and combine in a single image.</p>
+
+<pre><code>brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) seq comb
+</code></pre>
+<p><img src="../../img/brewviewerEx3.png" alt="brewviewerEx3" /></p>
+
+<h3 id="ex-4">Ex 4.</h3>
+<p>Similar to example above, but only show instances with the colors 1-5 for each of the color palettes:</p>
+
+<pre><code>brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) comb
+</code></pre>
+<p><img src="../../img/brewviewerEx4.png" alt="brewviewerEx4" /></p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>This subroutine for brewscheme was inspired and influenced by <a href="https://github.com/matthieugomez">Mattieu Gomez’s</a> program <a href="https://github.com/matthieugomez/stata-colorscheme">stata-colorscheme</a>.</p>
+
+<p><a name="gallery"></a></p>
+
+<h2 id="gallery">Gallery</h2>
+<p>The full set of palettes (based on the maximum number of colors available in the palette), displayed with the sequential option and impaired options is available below.</p>
+
+<h3 id="accent">accent</h3>
+<p><a name="accent"></a><br />
+<img src="../../img/accent_7.png" alt="galleryEx4." /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="activitiesa">activitiesa</h3>
+<p><a name="activitiesa"></a><br />
+<img src="../../img/activitiesa_5.png" alt="galleryEx1" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="activitiest">activitiest</h3>
+<p><a name="activitiest"></a><br />
+<img src="../../img/activitiest_5.png" alt="galleryEx2" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="blues">blues</h3>
+<p><a name="blues"></a><br />
+<img src="../../img/blues_8.png" alt="galleryEx3" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="brandsa">brandsa</h3>
+<p><a name="brnadsa"></a><br />
+<img src="../../img/brandsa_7.png" alt="galleryEx4" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="brandse">brandse</h3>
+<p><a name="brandse"></a><br />
+<img src="../../img/brandse_7.png" alt="galleryEx5" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="brbg">brbg</h3>
+<p><a name="brbg"></a><br />
+<img src="../../img/brbg_10.png" alt="galleryEx6" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="bugn">bugn</h3>
+<p><a name="bugn"></a><br />
+<img src="../../img/bugn_8.png" alt="galleryEx7" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="bupu">bupu</h3>
+<p><a name="bupu"></a><br />
+<img src="../../img/bupu_8.png" alt="galleryEx8" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="carsa">carsa</h3>
+<p><a name="carsa"></a><br />
+<img src="../../img/carsa_6.png" alt="galleryEx9" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="carse">carse</h3>
+<p><a name="carse"></a><br />
+<img src="../../img/carse_6.png" alt="galleryEx10" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="category10">category10</h3>
+<p><a name="category10"></a><br />
+<img src="../../img/category10_10.png" alt="galleryEx11" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="category20">category20</h3>
+<p><a name="category20"></a><br />
+<img src="../../img/category20_20.png" alt="galleryEx12" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="category20b">category20b</h3>
+<p><a name="category20b"></a><br />
+<img src="../../img/category20b_20.png" alt="galleryEx13" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="category20c">category20c</h3>
+<p><a name="category20c"></a><br />
+<img src="../../img/category20c_20.png" alt="galleryEx14" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="dark2">dark2</h3>
+<p><a name="dark2"></a><br />
+<img src="../../img/dark2_7.png" alt="galleryEx15" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="drinksa">drinksa</h3>
+<p><a name="drinksa"></a><br />
+<img src="../../img/drinksa_7.png" alt="galleryEx16" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="drinkse">drinkse</h3>
+<p><a name="drinkse"></a><br />
+<img src="../../img/drinkse_7.png" alt="galleryEx17" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="featuresa">featuresa</h3>
+<p><a name="featuresa"></a><br />
+<img src="../../img/featuresa_5.png" alt="galleryEx18" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="featurest">featurest</h3>
+<p><a name="featurest"></a><br />
+<img src="../../img/featurest_5.png" alt="galleryEx19" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="fooda">fooda</h3>
+<p><a name="fooda"></a><br />
+<img src="../../img/fooda_7.png" alt="galleryEx20" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="foode">foode</h3>
+<p><a name="foode"></a><br />
+<img src="../../img/foode_7.png" alt="galleryEx21" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="fruita">fruita</h3>
+<p><a name="fruita"></a><br />
+<img src="../../img/fruita_7.png" alt="galleryEx22" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="fruite">fruite</h3>
+<p><a name="fruite"></a><br />
+<img src="../../img/fruite_7.png" alt="galleryEx23" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="ggplot2">ggplot2</h3>
+<p><a name="ggplot2"></a><br />
+<img src="../../img/ggplot2_24.png" alt="galleryEx24" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="gnbu">gnbu</h3>
+<p><a name="gnbu"></a><br />
+<img src="../../img/gnbu_8.png" alt="galleryEx25" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="greens">greens</h3>
+<p><a name="greens"></a><br />
+<img src="../../img/greens_8.png" alt="galleryEx26" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="greys">greys</h3>
+<p><a name="greys"></a><br />
+<img src="../../img/greys_8.png" alt="galleryEx27" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="mdebar">mdebar</h3>
+<p><a name="mdebar"></a><br />
+<img src="../../img/mdebar_5.png" alt="galleryEx28" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="mdepoint">mdepoint</h3>
+<p><a name="mdepoint"></a><br />
+<img src="../../img/mdepoint_3.png" alt="galleryEx29" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="oranges">oranges</h3>
+<p><a name="oranges"></a><br />
+<img src="../../img/oranges_8.png" alt="galleryEx30" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="orrd">orrd</h3>
+<p><a name="orrd"></a><br />
+<img src="../../img/orrd_8.png" alt="galleryEx31" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="paired">paired</h3>
+<p><a name="paired"></a><br />
+<img src="../../img/paired_12.png" alt="galleryEx32" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="pastel1">pastel1</h3>
+<p><a name="pastel1"></a><br />
+<img src="../../img/pastel1_8.png" alt="galleryEx33" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="pastel2">pastel2</h3>
+<p><a name="pastel2"></a><br />
+<img src="../../img/pastel2_7.png" alt="galleryEx34" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="piyg">piyg</h3>
+<p><a name="piyg"></a><br />
+<img src="../../img/piyg_10.png" alt="galleryEx35" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="prgn">prgn</h3>
+<p><a name="prgn"></a><br />
+<img src="../../img/prgn_10.png" alt="galleryEx36" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="pubu">pubu</h3>
+<p><a name="pubu"></a><br />
+<img src="../../img/pubu_8.png" alt="galleryEx37" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="pubugn">pubugn</h3>
+<p><a name="pubugn"></a><br />
+<img src="../../img/pubugn_8.png" alt="galleryEx38" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="puor">puor</h3>
+<p><a name="puor"></a><br />
+<img src="../../img/puor_10.png" alt="galleryEx39" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="purd">purd</h3>
+<p><a name="purd"></a><br />
+<img src="../../img/purd_8.png" alt="galleryEx40" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="purples">purples</h3>
+<p><a name="purples"></a><br />
+<img src="../../img/purples_8.png" alt="galleryEx41" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="rdbu">rdbu</h3>
+<p><a name="rdbu"></a><br />
+<img src="../../img/rdbu_10.png" alt="galleryEx42" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="rdgy">rdgy</h3>
+<p><a name="rdgy"></a><br />
+<img src="../../img/rdgy_10.png" alt="galleryEx43" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="rdpu">rdpu</h3>
+<p><a name="rdpu"></a><br />
+<img src="../../img/rdpu_8.png" alt="galleryEx44" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="rdylbu">rdylbu</h3>
+<p><a name="rdylbu"></a><br />
+<img src="../../img/rdylbu_10.png" alt="galleryEx45" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="rdylgn">rdylgn</h3>
+<p><a name="rdylgn"></a><br />
+<img src="../../img/rdylgn_10.png" alt="galleryEx46" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="reds">reds</h3>
+<p><a name="reds"></a><br />
+<img src="../../img/reds_8.png" alt="galleryEx47" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="set1">set1</h3>
+<p><a name="set1"></a><br />
+<img src="../../img/set1_8.png" alt="galleryEx48" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="set2">set2</h3>
+<p><a name="set2"></a><br />
+<img src="../../img/set2_7.png" alt="galleryEx49" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="set3">set3</h3>
+<p><a name="set3"></a><br />
+<img src="../../img/set3_12.png" alt="galleryEx50" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="spectral">spectral</h3>
+<p><a name="spectral"></a><br />
+<img src="../../img/spectral_10.png" alt="galleryEx51" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="tableau">tableau</h3>
+<p><a name="tableau"></a><br />
+<img src="../../img/tableau_20.png" alt="galleryEx52" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="veggiesa">veggiesa</h3>
+<p><a name="veggiesa"></a><br />
+<img src="../../img/veggiesa_7.png" alt="galleryEx53" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="veggiese">veggiese</h3>
+<p><a name="veggiese"></a><br />
+<img src="../../img/veggiese_7.png" alt="galleryEx54" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="ylgn">ylgn</h3>
+<p><a name="ylgn"></a><br />
+<img src="../../img/ylgn_8.png" alt="galleryEx55" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="ylgnbu">ylgnbu</h3>
+<p><a name="ylgnbu"></a><br />
+<img src="../../img/ylgnbu_8.png" alt="galleryEx56" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="ylorbr">ylorbr</h3>
+<p><a name="ylorbr"></a><br />
+<img src="../../img/ylorbr_8.png" alt="galleryEx57" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<h3 id="ylorrd">ylorrd</h3>
+<p><a name="ylorrd"></a><br />
+<img src="../../img/ylorrd_8.png" alt="galleryEx58" /><br />
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="references"></a><br />
+## References<br />
+<a href="http://vis.stanford.edu/papers/d3">Bostock, M., Ogievetsky, V., &amp; Heer, J. (2011).  D3: data driven documents. <em>IEEE Transactions on Visualization &amp; Computer Graphics. 17(12)</em> pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3</a></p>
+
+<p><a href="http://www.ColorBrewer2.org">Brewer, C. A. (2002). Color Brewer 2. [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University</a></p>
+
+<p><a href="http://mkweb.bcgsc.ca/colorblind/">Krzywinski, M. (2015). <em>Color palettes for color blindness</em>.  Retrieved on: 22nov2015.  Retrieved from: http://mkweb.bcgsc.ca/colorblind/</a></p>
+
+<p><a href="http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf">Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013). Selecting Semantically-Resonant Colors for Data Visualization. <em>Computer Graphics Forum 32(3)</em> pp. 401-410.  Retrieved from http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf</a></p>
+
+<p><a href="http://www.brucelindbloom.com/WorkingSpaceInfo.html">Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.</a></p>
+
+<p><a href="http://www-users.cs.umn.edu/~meyer/papers/meyer-greenberg-cga-1988.pdf">Meyer, G. W., &amp; Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. <em>Computer Graphics and Applications, IEEE 8(5),</em> pp. 28-40.</a></p>
+
+<p><a href="http://macboy.uchicago.edu/~eye1/PDF%20files/Smith%20Pokorny%2075.pdf">Smith, V. C., &amp; Pokorny, J. (2005).  Spectral sensitivity of the foveal cone photopigments between 400 and 500nm.  <em>Journal of the Optical Society of America A, 22(10),</em> pp. 2060-2071.</a></p>
+
+<p><a href="http://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403">Wickham, H. (2009).  <em>ggplot2: Elegant Graphics for Data Analysis</em>.  New York City, NY: Springer Science+Business Media LLC.</a></p>
+
+<p><a href="http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js">Wickline, M. (2014).  Color.Vision.Simulate, Version 0.1.  Retrieved from: http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js.  Retrieved on: 24nov2015</a><br />
+<a href="#top">back to the top</a></p>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">brewscheme</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>brewscheme</li>
+          <li><a href="mailto:William.Buchanan@mpls.k12.mn.us">William.Buchanan@mpls.k12.mn.us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/wbuchanan">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">wbuchanan</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/PACESconsulting">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">PACESconsulting</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

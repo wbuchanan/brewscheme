@@ -1,15 +1,17 @@
 {smcl}
-{* *! version 0.0.1  25SEP2015}{...}
-{cmd:help brewextra}
+{* *! version 0.0.2  14MAR2016}{...}
+
+{hline}
+Command used to build data set containing additional color palettes used by {help brewscheme}.
 {hline}
 
-{title:Title}
+{title:help for brewextra}
 
 {hi:brewextra {hline 2}} A utility for {help brewscheme} that allows users to add data to their local {help brewscheme} database for use creating new {help scheme files}.
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewextra} [, {cmd:files(}{it:string}{opt )} {cmdab:ref:resh} ] {break}
+{p 4 4 4}{cmd:brewextra} [, {cmd:files(}{it:string}{opt )} {cmdab:rep:lace} ] {break}
 
 {title:Description}
 
@@ -22,6 +24,7 @@ automatically call the {help brewextra} program to add the other available
 research-based color palettes to the file when constructed. {p_end}
 
 {title:Options}
+
 {p 4 4 8}{cmd:files} is an optional argument used to pass filenames to the 
 program to be added to the local {help brewscheme} data base.  The program also 
 includes some simple validation to hopefully prevent breaking the functionality 
@@ -46,19 +49,18 @@ construction of files to add to the brewscheme database. {p_end}{break}
 {col 5}{hline 100}
 {break}
 
-{p 4 4 8}{cmdab:ref:resh} is an optional argument used to override the default 
-behavior of the program once the brewextras.dta file is built.  This forces the 
-program to rebuild the additional palettes. {p_end}
+{p 4 4 8}{cmdab:rep:lace} is an optional argument used to rebuild and overwrite 
+the brewextras.dta file containing the additional palettes used by {help brewscheme}.{p_end}
 
-{marker examples}{title:Examples}{break}
+{marker examples}{title:Examples}
 
 {p 4 4 4} Rebuild the additional palettes included in {help brewscheme} {p_end}
 
-{p 8 8 12}brewextra, ref {p_end}
+{p 8 8 12}brewextra, rep {p_end}
 
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
 

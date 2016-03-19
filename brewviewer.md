@@ -1,282 +1,409 @@
 ---
 layout: page
 title: brewviewer
-permalink: /brewviewer/
+permalink: /help/brewviewer/
 ---
 
-Preview sequences of 3-5, 3-8, 3-10, and 3-12 color palettes for the [D3js](http://www.d3js.org) ordinal scales [d3.scale.category10()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10), [d3.scale.category20()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20), [d3.scale.category20b()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20b), and [d3.scale.category20c()](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c) respectively.
+<hr>
+A command to preview one or more brewscheme color palettes
+<hr>
+<a name="top"></a>
+__brewviewer__ -- A utility for brewscheme to preview color palettes available.
 
-# Beta feature
-A new feature recently added to this program is an option to show palettes under differing conditions of colorblindness.  There is still a decent amount of testing/checking to be done, but here is an early preview of what the feature does:
+## Syntax
+
+__brewviewer__ <em>palette names</em> [, <u>c</u>olors(numlist) <u>comb</u>ine <u>s</u>eq <u>im</u>paired ]
+
+## Description
+
+brewviewer is a utility for the brewscheme program that provides you with a way to preview different combinations of palettes and numbers of colors.  You can view examples of each of the palettes distributed with [brewscheme](https://github.com/wbuchanan/brewscheme) in the <a href="#gallery">Gallery</a> below.  The table below is provided for more immediate access to a specific color palette preview:
+
+<table>
+<th>Color Palettes</th><th>Color Palettes</th>
+<tr><td><a name="accent">accent</a></td><td><a name="activitiesa">activitiesa</a></td></tr>
+<tr><td><a name="activitiest">activitiest</a></td><td><a name="blues">blues</a></td></tr>
+<tr><td><a name="brandsa">brandsa</a></td><td><a name="brandse">brandse</a></td></tr>
+<tr><td><a name="brbg">brbg</a></td><td><a name="bugn">bugn</a></td></tr>
+<tr><td><a name="bupu">bupu</a></td><td><a name="carsa">carsa</a></td></tr>
+<tr><td><a name="carse">carse</a></td><td><a name="category10">category10</a></td></tr>
+<tr><td><a name="category20">category20</a></td><td><a name="category20b">category20b</a></td></tr>
+<tr><td><a name="category20c">category20c</a></td><td><a name="dark2">dark2</a></td></tr>
+<tr><td><a name="drinksa">drinksa</a></td><td><a name="drinkse">drinkse</a></td></tr>
+<tr><td><a name="featuresa">featuresa</a></td><td><a name="featurest">featurest</a></td></tr>
+<tr><td><a name="fooda">fooda</a></td><td><a name="foode">foode</a></td></tr>
+<tr><td><a name="fruita">fruita</a></td><td><a name="fruite">fruite</a></td></tr>
+<tr><td><a name="ggplot2">ggplot2</a></td><td><a name="gnbu">gnbu</a></td></tr>
+<tr><td><a name="greens">greens</a></td><td><a name="greys">greys</a></td></tr>
+<tr><td><a name="mdebar">mdebar</a></td><td><a name="mdepoint">mdepoint</a></td></tr>
+<tr><td><a name="oranges">oranges</a></td><td><a name="orrd">orrd</a></td></tr>
+<tr><td><a name="paired">paired</a></td><td><a name="pastel1">pastel1</a></td></tr>
+<tr><td><a name="pastel2">pastel2</a></td><td><a name="piyg">piyg</a></td></tr>
+<tr><td><a name="prgn">prgn</a></td><td><a name="pubu">pubu</a></td></tr>
+<tr><td><a name="pubugn">pubugn</a></td><td><a name="puor">puor</a></td></tr>
+<tr><td><a name="purd">purd</a></td><td><a name="purples">purples</a></td></tr>
+<tr><td><a name="rdbu">rdbu</a></td><td><a name="rdgy">rdgy</a></td></tr>
+<tr><td><a name="rdpu">rdpu</a></td><td><a name="rdylbu">rdylbu</a></td></tr>
+<tr><td><a name="rdylgn">rdylgn</a></td><td><a name="reds">reds</a></td></tr>
+<tr><td><a name="set1">set1</a></td><td><a name="set2">set2</a></td></tr>
+<tr><td><a name="set3">set3</a></td><td><a name="spectral">spectral</a></td></tr>
+<tr><td><a name="tableau">tableau</a></td><td><a name="veggiesa">veggiesa</a></td></tr>
+<tr><td><a name="veggiese">veggiese</a></td><td><a name="ylgn">ylgn</a></td></tr>
+<tr><td><a name="ylgnbu">ylgnbu</a></td><td><a name="ylorbr">ylorbr</a></td></tr>
+<tr><td><a name="ylorrd">ylorrd</a></td><td></td></tr>
+
+</table>
+
+For additional information about the palettes and/or transformations, <a href="#references">see the references listed below</a>.
+
+## Options
+
+<u>c</u>olors is a required argument and is used to specify the number of colors to preview.  If a single argument is passed it is used for all palettes.  If the number of color values passed is the same as the number of palettes the program will treat the values as being specific to the corresponding palette specified.  If there are fewer colors than palettes, the maximum value of the colors parameter will be used for the graphs if the seq option is passed, else the same colors are recycled for each of the graphs.  Lastly, if the number of colors passed is greater than the number of palettes, it will override the seq option and treat each of the numbers as discrete for all palettes.
+
+<u>comb</u>ine is an optional argument used to generate a single combined graph with each of the graphs combined in a single image.
+
+<u>s</u>eq is an optional argument used to tell the program that you want to treat the number of colors as the maximum number of sequences to graph.  For example, if a value of 5 is passed to colors and seq is selected, the resulting graph will contain columns showing colors 1-3, 1-4, and 1-5.  If this option is not selected, it will only show a single column of colors from 1-5.
+
+<u>im</u>paired is an optional argument to display the palette(s) along with color sight impaired transformations of the colors.
+
+## Examples
+
+### Ex 1.
+Show the [D3js category10](https://github.com/mbostock/d3/wiki/Ordinal-Scales#categorical-colors) palette with up to 6 colors with color sight impaired transformed colors
 
 ```
 brewviewer category10, im seq c(6)
 ```
-![brewviewer Example 4beta](../img/brewviewerex4.png)
+![brewviewerEx1](../../img/brewviewerEx1.png)
 
-The feature is enabled by specifying the `IMpaired` option (abbreviated as `im` above).
-
+### Ex 2.
+Display colors from multiple palettes with varying numbers of colors for each palette.
 
 ```
 brewviewer category10 category20 category20b category20c, c(5 8 10 12)  comb seq
 ```
-![brewviewer Example 1](../img/brewviewerex1.png)
+![brewviewerEx2](../../img/brewviewerEx2.png)
 
-
+### Ex 3.
 Preview sequences for color palettes with 3-5 colors for multiple palettes simultaneously and combine in a single image.
+
 ```
 brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) seq comb
 ```
-![brewviewer Example 2](../img/brewviewerex2.png)
+![brewviewerEx3](../../img/brewviewerEx3.png)
 
+### Ex 4.
 Similar to example above, but only show instances with the colors 1-5 for each of the color palettes:
+
 ``` 
 brewviewer dark2 mdebar accent pastel2 set1 tableau, c(5) comb
 ```
-![brewviewer Example 3](../img/brewviewerex3.png)
+![brewviewerEx4](../../img/brewviewerEx4.png)
 
+## Acknowledgements
 
-## Gallery
+This subroutine for brewscheme was inspired and influenced by [Mattieu Gomez's](https://github.com/matthieugomez) program [stata-colorscheme](https://github.com/matthieugomez/stata-colorscheme).
+
+<a name="gallery"></a>
+
+## Gallery 
 The full set of palettes (based on the maximum number of colors available in the palette), displayed with the sequential option and impaired options is available below.  
 
 ### accent
-
-![brewviewer Example 4.](../img/accent_7.png)
+<a name="accent"></a>
+![galleryEx4.](../../img/accent_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### activitiesa
-
-![brewviewer Example 5.](../img/activitiesa_5.png)
+<a name="activitiesa"></a>
+![galleryEx1](../../img/activitiesa_5.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### activitiest
-
-![brewviewer Example 6.](../img/activitiest_5.png)
+<a name="activitiest"></a>
+![galleryEx2](../../img/activitiest_5.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### blues
-
-![brewviewer Example 7.](../img/blues_8.png)
+<a name="blues"></a>
+![galleryEx3](../../img/blues_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### brandsa
-
-![brewviewer Example 8.](../img/brandsa_7.png)
+<a name="brnadsa"></a>
+![galleryEx4](../../img/brandsa_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### brandse
-
-![brewviewer Example 9.](../img/brandse_7.png)
+<a name="brandse"></a>
+![galleryEx5](../../img/brandse_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### brbg
-
-![brewviewer Example 10.](../img/brbg_10.png)
+<a name="brbg"></a>
+![galleryEx6](../../img/brbg_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### bugn
-
-![brewviewer Example 11.](../img/bugn_8.png)
+<a name="bugn"></a>
+![galleryEx7](../../img/bugn_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### bupu
-
-![brewviewer Example 12.](../img/bupu_8.png)
+<a name="bupu"></a>
+![galleryEx8](../../img/bupu_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### carsa
-
-![brewviewer Example 13.](../img/carsa_6.png)
+<a name="carsa"></a>
+![galleryEx9](../../img/carsa_6.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### carse
-
-![brewviewer Example 14.](../img/carse_6.png)
+<a name="carse"></a>
+![galleryEx10](../../img/carse_6.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### category10
-
-![brewviewer Example 15.](../img/category10_10.png)
+<a name="category10"></a>
+![galleryEx11](../../img/category10_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### category20
-
-![brewviewer Example 16.](../img/category20_20.png)
+<a name="category20"></a>
+![galleryEx12](../../img/category20_20.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### category20b
-
-![brewviewer Example 17.](../img/category20b_20.png)
+<a name="category20b"></a>
+![galleryEx13](../../img/category20b_20.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### category20c
-
-![brewviewer Example 18.](../img/category20c_20.png)
+<a name="category20c"></a>
+![galleryEx14](../../img/category20c_20.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### dark2
-
-![brewviewer Example 19.](../img/dark2_7.png)
+<a name="dark2"></a>
+![galleryEx15](../../img/dark2_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### drinksa
-
-![brewviewer Example 20.](../img/drinksa_7.png)
+<a name="drinksa"></a>
+![galleryEx16](../../img/drinksa_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### drinkse
-
-![brewviewer Example 21.](../img/drinkse_7.png)
+<a name="drinkse"></a>
+![galleryEx17](../../img/drinkse_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### featuresa
-
-![brewviewer Example 22.](../img/featuresa_5.png)
+<a name="featuresa"></a>
+![galleryEx18](../../img/featuresa_5.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### featurest
-
-![brewviewer Example 23.](../img/featurest_5.png)
+<a name="featurest"></a>
+![galleryEx19](../../img/featurest_5.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### fooda
-
-![brewviewer Example 24.](../img/fooda_7.png)
+<a name="fooda"></a>
+![galleryEx20](../../img/fooda_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### foode
-
-![brewviewer Example 25.](../img/foode_7.png)
+<a name="foode"></a>
+![galleryEx21](../../img/foode_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### fruita
-
-![brewviewer Example 26.](../img/fruita_7.png)
+<a name="fruita"></a>
+![galleryEx22](../../img/fruita_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### fruite
-
-![brewviewer Example 27.](../img/fruite_7.png)
+<a name="fruite"></a>
+![galleryEx23](../../img/fruite_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### ggplot2
-
-![brewviewer Example 28.](../img/ggplot2_24.png)
+<a name="ggplot2"></a>
+![galleryEx24](../../img/ggplot2_24.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### gnbu
-
-![brewviewer Example 29.](../img/gnbu_8.png)
+<a name="gnbu"></a>
+![galleryEx25](../../img/gnbu_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### greens
-
-![brewviewer Example 30.](../img/greens_8.png)
+<a name="greens"></a>
+![galleryEx26](../../img/greens_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### greys
-
-![brewviewer Example 31.](../img/greys_8.png)
+<a name="greys"></a>
+![galleryEx27](../../img/greys_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### mdebar
-
-![brewviewer Example 32.](../img/mdebar_5.png)
+<a name="mdebar"></a>
+![galleryEx28](../../img/mdebar_5.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### mdepoint
-
-![brewviewer Example 33.](../img/mdepoint_3.png)
+<a name="mdepoint"></a>
+![galleryEx29](../../img/mdepoint_3.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### oranges
-
-![brewviewer Example 34.](../img/oranges_8.png)
+<a name="oranges"></a>
+![galleryEx30](../../img/oranges_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### orrd
-
-![brewviewer Example 35.](../img/orrd_8.png)
+<a name="orrd"></a>
+![galleryEx31](../../img/orrd_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### paired
-
-![brewviewer Example 36.](../img/paired_12.png)
+<a name="paired"></a>
+![galleryEx32](../../img/paired_12.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### pastel1
-
-![brewviewer Example 37.](../img/pastel1_8.png)
+<a name="pastel1"></a>
+![galleryEx33](../../img/pastel1_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### pastel2
-
-![brewviewer Example 38.](../img/pastel2_7.png)
+<a name="pastel2"></a>
+![galleryEx34](../../img/pastel2_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### piyg
-
-![brewviewer Example 39.](../img/piyg_10.png)
+<a name="piyg"></a>
+![galleryEx35](../../img/piyg_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### prgn
-
-![brewviewer Example 40.](../img/prgn_10.png)
+<a name="prgn"></a>
+![galleryEx36](../../img/prgn_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### pubu
-
-![brewviewer Example 41.](../img/pubu_8.png)
+<a name="pubu"></a>
+![galleryEx37](../../img/pubu_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### pubugn
-
-![brewviewer Example 42.](../img/pubugn_8.png)
+<a name="pubugn"></a>
+![galleryEx38](../../img/pubugn_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### puor
-
-![brewviewer Example 43.](../img/puor_10.png)
+<a name="puor"></a>
+![galleryEx39](../../img/puor_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### purd
-
-![brewviewer Example 44.](../img/purd_8.png)
+<a name="purd"></a>
+![galleryEx40](../../img/purd_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### purples
-
-![brewviewer Example 45.](../img/purples_8.png)
+<a name="purples"></a>
+![galleryEx41](../../img/purples_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### rdbu
-
-![brewviewer Example 46.](../img/rdbu_10.png)
+<a name="rdbu"></a>
+![galleryEx42](../../img/rdbu_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### rdgy
-
-![brewviewer Example 47.](../img/rdgy_10.png)
+<a name="rdgy"></a>
+![galleryEx43](../../img/rdgy_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### rdpu
-
-![brewviewer Example 48.](../img/rdpu_8.png)
+<a name="rdpu"></a>
+![galleryEx44](../../img/rdpu_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### rdylbu
-
-![brewviewer Example 49.](../img/rdylbu_10.png)
+<a name="rdylbu"></a>
+![galleryEx45](../../img/rdylbu_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### rdylgn
-
-![brewviewer Example 50.](../img/rdylgn_10.png)
+<a name="rdylgn"></a>
+![galleryEx46](../../img/rdylgn_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### reds
-
-![brewviewer Example 51.](../img/reds_8.png)
+<a name="reds"></a>
+![galleryEx47](../../img/reds_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### set1
-
-![brewviewer Example 52.](../img/set1_8.png)
+<a name="set1"></a>
+![galleryEx48](../../img/set1_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### set2
-
-![brewviewer Example 53.](../img/set2_7.png)
+<a name="set2"></a>
+![galleryEx49](../../img/set2_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### set3
-
-![brewviewer Example 54.](../img/set3_12.png)
+<a name="set3"></a>
+![galleryEx50](../../img/set3_12.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### spectral
-
-![brewviewer Example 55.](../img/spectral_10.png)
+<a name="spectral"></a>
+![galleryEx51](../../img/spectral_10.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### tableau
-
-![brewviewer Example 56.](../img/tableau_20.png)
+<a name="tableau"></a>
+![galleryEx52](../../img/tableau_20.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### veggiesa
-
-![brewviewer Example 57.](../img/veggiesa_7.png)
+<a name="veggiesa"></a>
+![galleryEx53](../../img/veggiesa_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### veggiese
-
-![brewviewer Example 58.](../img/veggiese_7.png)
+<a name="veggiese"></a>
+![galleryEx54](../../img/veggiese_7.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### ylgn
-
-![brewviewer Example 59.](../img/ylgn_8.png)
+<a name="ylgn"></a>
+![galleryEx55](../../img/ylgn_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### ylgnbu
-
-![brewviewer Example 60.](../img/ylgnbu_8.png)
+<a name="ylgnbu"></a>
+![galleryEx56](../../img/ylgnbu_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### ylorbr
-
-![brewviewer Example 61.](../img/ylorbr_8.png)
+<a name="ylorbr"></a>
+![galleryEx57](../../img/ylorbr_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 ### ylorrd
+<a name="ylorrd"></a>
+![galleryEx58](../../img/ylorrd_8.png)
+<a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-![brewviewer Example 62.](../img/ylorrd_8.png)
-
-
-
+<a name="references"></a>
 ## References
 [Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  
 
@@ -295,3 +422,5 @@ The full set of palettes (based on the maximum number of colors available in the
 [Wickham, H. (2009).  *ggplot2: Elegant Graphics for Data Analysis*.  New York City, NY: Springer Science+Business Media LLC.](http://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403)
 
 [Wickline, M. (2014).  Color.Vision.Simulate, Version 0.1.  Retrieved from: http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js.  Retrieved on: 24nov2015](http://galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js)
+<a href="#top">back to the top</a>
+

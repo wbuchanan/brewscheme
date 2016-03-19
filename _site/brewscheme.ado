@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewscheme
-*! v 0.0.18
-*! 13JAN2016
+*! v 0.0.19
+*! 16MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -52,7 +52,7 @@ prog def brewscheme, rclass
 		REFMSTyle(string asis) REFMColors(real 3) REFMSATuration(real 100) 	 ///   
 		CONSTart(string asis) CONEnd(string asis) CONSATuration(real 100)	 ///   
 		SOMESTyle(string asis) SOMEColors(real 3) SOMESATuration(real 100)	 ///   
-		REFResh DBug THEMEFile(string asis) SYMBols(string asis) ]
+		REPlace DBug THEMEFile(string asis) SYMBols(string asis) ]
 		
 		// Check for brewscheme Mata library
 		qui: brewlibcheck
@@ -119,7 +119,7 @@ prog def brewscheme, rclass
 			if inlist(_rc, 0, 603) {
 			
 				// Call brewmeta to build lookup data set
-				qui: brewdb, `refresh'
+				qui: brewdb, `replace'
 				
 				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear			
@@ -130,10 +130,10 @@ prog def brewscheme, rclass
 			cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 				
 			// If file doesn't exist
-			if inlist(_rc, 0, 603) | "`refresh'" != "" {
+			if inlist(_rc, 0, 603) | "`replace'" != "" {
 			
 				// Call brewmeta to build lookup data set
-				qui: brewdb, `refresh'
+				qui: brewdb, `replace'
 				
 				// Load the lookup table
 				qui: use `"`c(sysdir_personal)'b/brewmeta.dta"', clear			
@@ -435,7 +435,7 @@ prog def brewscheme, rclass
 								`piecolors', `suncolors', `histcolors', 	 ///   
 								`cicolors', `matcolors', `reflcolors', 		 ///   
 								`refmcolors')
-			
+								
 			// Recycle the number of symbols
 			qui: mata: recycle(`numsymbols', `pcycles')
 			

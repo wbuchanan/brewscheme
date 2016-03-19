@@ -40,11 +40,11 @@ prog def brewterpolate, rclass
 			[ CMod(string) ICSpace(string) RCSpace(string) INVerse Grayscale ]
 
 		// If user specified grayscale set the boolean for that macro
-		if `"`grayscale'"' != "" loc grayscale true
+		if `"`grayscale'"' != "" loc grayscale "true"
 		
 		// If not set to false to prevent the returned colors coming back in 
 		// grayscale
-		else loc grayscale false
+		else loc grayscale "false"
 			
 		// Check arguments passed to color modification parameter
 		if !inlist(`"`cmod'"', "brighter", "darker", "saturated", 		 ///   
@@ -137,10 +137,10 @@ prog def brewterpolate, rclass
 		loc scolor : subinstr loc scolor "  " " ", all
 
 		// Set boolean value for no inverted colors
-		if "`inverse'" == "" loc inverse false
+		if "`inverse'" == "" loc inverse "false"
 
 		// If user wants inverted colors
-		else loc inverse true
+		else loc inverse "true"
  
 		// Incremented by 1 in the Java plugin
 		loc icolors = `colors'
