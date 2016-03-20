@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewviewer/">
 </head>
 
-
   <body>
 
     <header class="site-header">
@@ -22,7 +21,7 @@
 
     <a class="site-title" href="/brewscheme/">brewscheme</a>
 
-    <nav class="site-nav">
+   <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
@@ -31,85 +30,38 @@
         </svg>
       </a>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/brewscheme/about.html">about</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/more/">more</a>
-          
-        
-      </div>    
-    </nav>
+        <ul>
+          <li><a href="/brewscheme/about/">About</a></li>
+          <li class="dropdown">
+            <div class="dropdown">
+                <a href="/brewscheme/help/" class="dropbtn">Help</a>
+                  <div class="dropdown-content">
+                    <a href="/brewscheme/help/brewscheme/">brewscheme</a>
+                    <a href="/brewscheme/help/brewtheme/">brewtheme</a>
+                    <a href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+                    <a href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+                    <a href="/brewscheme/help/brewcolors/">brewcolors</a>
+                    <a href="/brewscheme/help/brewextra/">brewextra</a>
+                    <a href="/brewscheme/help/brewmeta/">brewmeta</a>
+                    <a href="/brewscheme/help/brewproof/">brewproof</a>
+                    <a href="/brewscheme/help/brewsearch/">brewsearch</a>
+                    <a href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+                    <a href="/brewscheme/help/brewviewer/">brewviewer</a>
+                    <a href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+                    <a href="/brewscheme/help/filesys/">filesys</a>
+                    <a href="/brewscheme/help/hextorgb/">hextorgb</a>
+                  </div>
+            </div>
+          </li>
+          <li><a href="/brewscheme/more/">Additional Information</a></li>
+        </ul> 
+           
+     
+   </nav>  
 
   </div>
 
 </header>
-
 
     <div class="page-content">
       <div class="wrapper">
@@ -125,7 +77,8 @@
 <p>A command to preview one or more brewscheme color palettes</p>
 <hr />
 
-<p><a name="top"></a><br />
+<p><br /><br />
+<a name="top"></a><br />
 <strong>brewviewer</strong> – A utility for brewscheme to preview color palettes available.</p>
 
 <h2 id="syntax">Syntax</h2>
@@ -136,39 +89,28 @@
 
 <p>brewviewer is a utility for the brewscheme program that provides you with a way to preview different combinations of palettes and numbers of colors.  You can view examples of each of the palettes distributed with <a href="https://github.com/wbuchanan/brewscheme">brewscheme</a> in the <a href="#gallery">Gallery</a> below.  The table below is provided for more immediate access to a specific color palette preview:</p>
 
-<table>
-<th>Color Palettes</th><th>Color Palettes</th>
-<tr><td><a name="accent">accent</a></td><td><a name="activitiesa">activitiesa</a></td></tr>
-<tr><td><a name="activitiest">activitiest</a></td><td><a name="blues">blues</a></td></tr>
-<tr><td><a name="brandsa">brandsa</a></td><td><a name="brandse">brandse</a></td></tr>
-<tr><td><a name="brbg">brbg</a></td><td><a name="bugn">bugn</a></td></tr>
-<tr><td><a name="bupu">bupu</a></td><td><a name="carsa">carsa</a></td></tr>
-<tr><td><a name="carse">carse</a></td><td><a name="category10">category10</a></td></tr>
-<tr><td><a name="category20">category20</a></td><td><a name="category20b">category20b</a></td></tr>
-<tr><td><a name="category20c">category20c</a></td><td><a name="dark2">dark2</a></td></tr>
-<tr><td><a name="drinksa">drinksa</a></td><td><a name="drinkse">drinkse</a></td></tr>
-<tr><td><a name="featuresa">featuresa</a></td><td><a name="featurest">featurest</a></td></tr>
-<tr><td><a name="fooda">fooda</a></td><td><a name="foode">foode</a></td></tr>
-<tr><td><a name="fruita">fruita</a></td><td><a name="fruite">fruite</a></td></tr>
-<tr><td><a name="ggplot2">ggplot2</a></td><td><a name="gnbu">gnbu</a></td></tr>
-<tr><td><a name="greens">greens</a></td><td><a name="greys">greys</a></td></tr>
-<tr><td><a name="mdebar">mdebar</a></td><td><a name="mdepoint">mdepoint</a></td></tr>
-<tr><td><a name="oranges">oranges</a></td><td><a name="orrd">orrd</a></td></tr>
-<tr><td><a name="paired">paired</a></td><td><a name="pastel1">pastel1</a></td></tr>
-<tr><td><a name="pastel2">pastel2</a></td><td><a name="piyg">piyg</a></td></tr>
-<tr><td><a name="prgn">prgn</a></td><td><a name="pubu">pubu</a></td></tr>
-<tr><td><a name="pubugn">pubugn</a></td><td><a name="puor">puor</a></td></tr>
-<tr><td><a name="purd">purd</a></td><td><a name="purples">purples</a></td></tr>
-<tr><td><a name="rdbu">rdbu</a></td><td><a name="rdgy">rdgy</a></td></tr>
-<tr><td><a name="rdpu">rdpu</a></td><td><a name="rdylbu">rdylbu</a></td></tr>
-<tr><td><a name="rdylgn">rdylgn</a></td><td><a name="reds">reds</a></td></tr>
-<tr><td><a name="set1">set1</a></td><td><a name="set2">set2</a></td></tr>
-<tr><td><a name="set3">set3</a></td><td><a name="spectral">spectral</a></td></tr>
-<tr><td><a name="tableau">tableau</a></td><td><a name="veggiesa">veggiesa</a></td></tr>
-<tr><td><a name="veggiese">veggiese</a></td><td><a name="ylgn">ylgn</a></td></tr>
-<tr><td><a name="ylgnbu">ylgnbu</a></td><td><a name="ylorbr">ylorbr</a></td></tr>
-<tr><td><a name="ylorrd">ylorrd</a></td><td></td></tr>
-
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Color</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Palette</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Names</th>
+<tr><td><a href="#accent">accent</a></td><td><a href="#activitiesa">activitiesa</a></td><td><a href="#activitiest">activitiest</a></td></tr>
+<tr><td><a href="#blues">blues</a></td><td><a href="#brandsa">brandsa</a></td><td><a href="#brandse">brandse</a></td></tr>
+<tr><td><a href="#brbg">brbg</a></td><td><a href="#bugn">bugn</a></td><td><a href="#bupu">bupu</a></td></tr>
+<tr><td><a href="#carsa">carsa</a></td><td><a href="#carse">carse</a></td><td><a href="#category10">category10</a></td></tr>
+<tr><td><a href="#category20">category20</a></td><td><a href="#category20b">category20b</a></td><td><a href="#category20c">category20c</a></td></tr>
+<tr><td><a href="#dark2">dark2</a></td><td><a href="#drinksa">drinksa</a></td><td><a href="#drinkse">drinkse</a></td></tr>
+<tr><td><a href="#featuresa">featuresa</a></td><td><a href="#featurest">featurest</a></td><td><a href="#fooda">fooda</a></td></tr>
+<tr><td><a href="#foode">foode</a></td><td><a href="#fruita">fruita</a></td><td><a href="#fruite">fruite</a></td></tr>
+<tr><td><a href="#ggplot2">ggplot2</a></td><td><a href="#gnbu">gnbu</a></td><td><a href="#greens">greens</a></td></tr>
+<tr><td><a href="#greys">greys</a></td><td><a href="#mdebar">mdebar</a></td><td><a href="#mdepoint">mdepoint</a></td></tr>
+<tr><td><a href="#oranges">oranges</a></td><td><a href="#orrd">orrd</a></td><td><a href="#paired">paired</a></td></tr>
+<tr><td><a href="#pastel1">pastel1</a></td><td><a href="#pastel2">pastel2</a></td><td><a href="#piyg">piyg</a></td></tr>
+<tr><td><a href="#prgn">prgn</a></td><td><a href="#pubu">pubu</a></td><td><a href="#pubugn">pubugn</a></td></tr>
+<tr><td><a href="#puor">puor</a></td><td><a href="#purd">purd</a></td><td><a href="#purples">purples</a></td></tr>
+<tr><td><a href="#rdbu">rdbu</a></td><td><a href="#rdgy">rdgy</a></td><td><a href="#rdpu">rdpu</a></td></tr>
+<tr><td><a href="#rdylbu">rdylbu</a></td><td><a href="#rdylgn">rdylgn</a></td><td><a href="#reds">reds</a></td></tr>
+<tr><td><a href="#set1">set1</a></td><td><a href="#set2">set2</a></td><td><a href="#set3">set3</a></td></tr>
+<tr><td><a href="#spectral">spectral</a></td><td><a href="#tableau">tableau</a></td><td><a href="#veggiesa">veggiesa</a></td></tr>
+<tr><td><a href="#veggiese">veggiese</a></td><td><a href="#ylgn">ylgn</a></td><td><a href="#ylgnbu">ylgnbu</a></td></tr>
+<tr><td style="border-bottom: 1px solid black"><a href="#ylorbr">ylorbr</a></td><td style="border-bottom: 1px solid black"><a href="#ylorrd">ylorrd</a></td><td style="border-bottom: 1px solid black"></td></tr>
 </table>
 
 <p>For additional information about the palettes and/or transformations, <a href="#references">see the references listed below</a>.</p>
@@ -222,304 +164,424 @@
 <h2 id="gallery">Gallery</h2>
 <p>The full set of palettes (based on the maximum number of colors available in the palette), displayed with the sequential option and impaired options is available below.</p>
 
+<p><a name="accent"></a></p>
+
 <h3 id="accent">accent</h3>
-<p><a name="accent"></a><br />
-<img src="../../img/accent_7.png" alt="galleryEx4." /><br />
+
+<p><img src="../../img/accent_7.png" alt="galleryEx4." /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="activitiesa"></a></p>
 
 <h3 id="activitiesa">activitiesa</h3>
-<p><a name="activitiesa"></a><br />
-<img src="../../img/activitiesa_5.png" alt="galleryEx1" /><br />
+
+<p><img src="../../img/activitiesa_5.png" alt="galleryEx1" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="activitiest"></a></p>
 
 <h3 id="activitiest">activitiest</h3>
-<p><a name="activitiest"></a><br />
-<img src="../../img/activitiest_5.png" alt="galleryEx2" /><br />
+
+<p><img src="../../img/activitiest_5.png" alt="galleryEx2" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="blues"></a></p>
 
 <h3 id="blues">blues</h3>
-<p><a name="blues"></a><br />
-<img src="../../img/blues_8.png" alt="galleryEx3" /><br />
+
+<p><img src="../../img/blues_8.png" alt="galleryEx3" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="brnadsa"></a></p>
 
 <h3 id="brandsa">brandsa</h3>
-<p><a name="brnadsa"></a><br />
-<img src="../../img/brandsa_7.png" alt="galleryEx4" /><br />
+
+<p><img src="../../img/brandsa_7.png" alt="galleryEx4" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="brandse"></a></p>
 
 <h3 id="brandse">brandse</h3>
-<p><a name="brandse"></a><br />
-<img src="../../img/brandse_7.png" alt="galleryEx5" /><br />
+
+<p><img src="../../img/brandse_7.png" alt="galleryEx5" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="brbg"></a></p>
 
 <h3 id="brbg">brbg</h3>
-<p><a name="brbg"></a><br />
-<img src="../../img/brbg_10.png" alt="galleryEx6" /><br />
+
+<p><img src="../../img/brbg_10.png" alt="galleryEx6" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="bugn"></a></p>
 
 <h3 id="bugn">bugn</h3>
-<p><a name="bugn"></a><br />
-<img src="../../img/bugn_8.png" alt="galleryEx7" /><br />
+
+<p><img src="../../img/bugn_8.png" alt="galleryEx7" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="bupu"></a></p>
 
 <h3 id="bupu">bupu</h3>
-<p><a name="bupu"></a><br />
-<img src="../../img/bupu_8.png" alt="galleryEx8" /><br />
+
+<p><img src="../../img/bupu_8.png" alt="galleryEx8" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="carsa"></a></p>
 
 <h3 id="carsa">carsa</h3>
-<p><a name="carsa"></a><br />
-<img src="../../img/carsa_6.png" alt="galleryEx9" /><br />
+
+<p><img src="../../img/carsa_6.png" alt="galleryEx9" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="carse"></a></p>
 
 <h3 id="carse">carse</h3>
-<p><a name="carse"></a><br />
-<img src="../../img/carse_6.png" alt="galleryEx10" /><br />
+
+<p><img src="../../img/carse_6.png" alt="galleryEx10" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="category10"></a></p>
 
 <h3 id="category10">category10</h3>
-<p><a name="category10"></a><br />
-<img src="../../img/category10_10.png" alt="galleryEx11" /><br />
+
+<p><img src="../../img/category10_10.png" alt="galleryEx11" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="category20"></a></p>
 
 <h3 id="category20">category20</h3>
-<p><a name="category20"></a><br />
-<img src="../../img/category20_20.png" alt="galleryEx12" /><br />
+
+<p><img src="../../img/category20_20.png" alt="galleryEx12" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="category20b"></a></p>
 
 <h3 id="category20b">category20b</h3>
-<p><a name="category20b"></a><br />
-<img src="../../img/category20b_20.png" alt="galleryEx13" /><br />
+
+<p><img src="../../img/category20b_20.png" alt="galleryEx13" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="category20c"></a></p>
 
 <h3 id="category20c">category20c</h3>
-<p><a name="category20c"></a><br />
-<img src="../../img/category20c_20.png" alt="galleryEx14" /><br />
+
+<p><img src="../../img/category20c_20.png" alt="galleryEx14" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="dark2"></a></p>
 
 <h3 id="dark2">dark2</h3>
-<p><a name="dark2"></a><br />
-<img src="../../img/dark2_7.png" alt="galleryEx15" /><br />
+
+<p><img src="../../img/dark2_7.png" alt="galleryEx15" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="drinksa"></a></p>
 
 <h3 id="drinksa">drinksa</h3>
-<p><a name="drinksa"></a><br />
-<img src="../../img/drinksa_7.png" alt="galleryEx16" /><br />
+
+<p><img src="../../img/drinksa_7.png" alt="galleryEx16" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="drinkse"></a></p>
 
 <h3 id="drinkse">drinkse</h3>
-<p><a name="drinkse"></a><br />
-<img src="../../img/drinkse_7.png" alt="galleryEx17" /><br />
+
+<p><img src="../../img/drinkse_7.png" alt="galleryEx17" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="featuresa"></a></p>
 
 <h3 id="featuresa">featuresa</h3>
-<p><a name="featuresa"></a><br />
-<img src="../../img/featuresa_5.png" alt="galleryEx18" /><br />
+
+<p><img src="../../img/featuresa_5.png" alt="galleryEx18" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="featurest"></a></p>
 
 <h3 id="featurest">featurest</h3>
-<p><a name="featurest"></a><br />
-<img src="../../img/featurest_5.png" alt="galleryEx19" /><br />
+
+<p><img src="../../img/featurest_5.png" alt="galleryEx19" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="fooda"></a></p>
 
 <h3 id="fooda">fooda</h3>
-<p><a name="fooda"></a><br />
-<img src="../../img/fooda_7.png" alt="galleryEx20" /><br />
+
+<p><img src="../../img/fooda_7.png" alt="galleryEx20" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="foode"></a></p>
 
 <h3 id="foode">foode</h3>
-<p><a name="foode"></a><br />
-<img src="../../img/foode_7.png" alt="galleryEx21" /><br />
+
+<p><img src="../../img/foode_7.png" alt="galleryEx21" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="fruita"></a></p>
 
 <h3 id="fruita">fruita</h3>
-<p><a name="fruita"></a><br />
-<img src="../../img/fruita_7.png" alt="galleryEx22" /><br />
+
+<p><img src="../../img/fruita_7.png" alt="galleryEx22" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="fruite"></a></p>
 
 <h3 id="fruite">fruite</h3>
-<p><a name="fruite"></a><br />
-<img src="../../img/fruite_7.png" alt="galleryEx23" /><br />
+
+<p><img src="../../img/fruite_7.png" alt="galleryEx23" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="ggplot2"></a></p>
 
 <h3 id="ggplot2">ggplot2</h3>
-<p><a name="ggplot2"></a><br />
-<img src="../../img/ggplot2_24.png" alt="galleryEx24" /><br />
+
+<p><img src="../../img/ggplot2_24.png" alt="galleryEx24" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="gnbu"></a></p>
 
 <h3 id="gnbu">gnbu</h3>
-<p><a name="gnbu"></a><br />
-<img src="../../img/gnbu_8.png" alt="galleryEx25" /><br />
+
+<p><img src="../../img/gnbu_8.png" alt="galleryEx25" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="greens"></a></p>
 
 <h3 id="greens">greens</h3>
-<p><a name="greens"></a><br />
-<img src="../../img/greens_8.png" alt="galleryEx26" /><br />
+
+<p><img src="../../img/greens_8.png" alt="galleryEx26" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="greys"></a></p>
 
 <h3 id="greys">greys</h3>
-<p><a name="greys"></a><br />
-<img src="../../img/greys_8.png" alt="galleryEx27" /><br />
+
+<p><img src="../../img/greys_8.png" alt="galleryEx27" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="mdebar"></a></p>
 
 <h3 id="mdebar">mdebar</h3>
-<p><a name="mdebar"></a><br />
-<img src="../../img/mdebar_5.png" alt="galleryEx28" /><br />
+
+<p><img src="../../img/mdebar_5.png" alt="galleryEx28" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="mdepoint"></a></p>
 
 <h3 id="mdepoint">mdepoint</h3>
-<p><a name="mdepoint"></a><br />
-<img src="../../img/mdepoint_3.png" alt="galleryEx29" /><br />
+
+<p><img src="../../img/mdepoint_3.png" alt="galleryEx29" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="oranges"></a></p>
 
 <h3 id="oranges">oranges</h3>
-<p><a name="oranges"></a><br />
-<img src="../../img/oranges_8.png" alt="galleryEx30" /><br />
+
+<p><img src="../../img/oranges_8.png" alt="galleryEx30" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="orrd"></a></p>
 
 <h3 id="orrd">orrd</h3>
-<p><a name="orrd"></a><br />
-<img src="../../img/orrd_8.png" alt="galleryEx31" /><br />
+
+<p><img src="../../img/orrd_8.png" alt="galleryEx31" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="paired"></a></p>
 
 <h3 id="paired">paired</h3>
-<p><a name="paired"></a><br />
-<img src="../../img/paired_12.png" alt="galleryEx32" /><br />
+
+<p><img src="../../img/paired_12.png" alt="galleryEx32" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="pastel1"></a></p>
 
 <h3 id="pastel1">pastel1</h3>
-<p><a name="pastel1"></a><br />
-<img src="../../img/pastel1_8.png" alt="galleryEx33" /><br />
+
+<p><img src="../../img/pastel1_8.png" alt="galleryEx33" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="pastel2"></a></p>
 
 <h3 id="pastel2">pastel2</h3>
-<p><a name="pastel2"></a><br />
-<img src="../../img/pastel2_7.png" alt="galleryEx34" /><br />
+
+<p><img src="../../img/pastel2_7.png" alt="galleryEx34" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="piyg"></a></p>
 
 <h3 id="piyg">piyg</h3>
-<p><a name="piyg"></a><br />
-<img src="../../img/piyg_10.png" alt="galleryEx35" /><br />
+
+<p><img src="../../img/piyg_10.png" alt="galleryEx35" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="prgn"></a></p>
 
 <h3 id="prgn">prgn</h3>
-<p><a name="prgn"></a><br />
-<img src="../../img/prgn_10.png" alt="galleryEx36" /><br />
+
+<p><img src="../../img/prgn_10.png" alt="galleryEx36" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="pubu"></a></p>
 
 <h3 id="pubu">pubu</h3>
-<p><a name="pubu"></a><br />
-<img src="../../img/pubu_8.png" alt="galleryEx37" /><br />
+
+<p><img src="../../img/pubu_8.png" alt="galleryEx37" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="pubugn"></a></p>
 
 <h3 id="pubugn">pubugn</h3>
-<p><a name="pubugn"></a><br />
-<img src="../../img/pubugn_8.png" alt="galleryEx38" /><br />
+
+<p><img src="../../img/pubugn_8.png" alt="galleryEx38" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="puor"></a></p>
 
 <h3 id="puor">puor</h3>
-<p><a name="puor"></a><br />
-<img src="../../img/puor_10.png" alt="galleryEx39" /><br />
+
+<p><img src="../../img/puor_10.png" alt="galleryEx39" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="purd"></a></p>
 
 <h3 id="purd">purd</h3>
-<p><a name="purd"></a><br />
-<img src="../../img/purd_8.png" alt="galleryEx40" /><br />
+
+<p><img src="../../img/purd_8.png" alt="galleryEx40" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="purples"></a></p>
 
 <h3 id="purples">purples</h3>
-<p><a name="purples"></a><br />
-<img src="../../img/purples_8.png" alt="galleryEx41" /><br />
+
+<p><img src="../../img/purples_8.png" alt="galleryEx41" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="rdbu"></a></p>
 
 <h3 id="rdbu">rdbu</h3>
-<p><a name="rdbu"></a><br />
-<img src="../../img/rdbu_10.png" alt="galleryEx42" /><br />
+
+<p><img src="../../img/rdbu_10.png" alt="galleryEx42" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="rdgy"></a></p>
 
 <h3 id="rdgy">rdgy</h3>
-<p><a name="rdgy"></a><br />
-<img src="../../img/rdgy_10.png" alt="galleryEx43" /><br />
+
+<p><img src="../../img/rdgy_10.png" alt="galleryEx43" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="rdpu"></a></p>
 
 <h3 id="rdpu">rdpu</h3>
-<p><a name="rdpu"></a><br />
-<img src="../../img/rdpu_8.png" alt="galleryEx44" /><br />
+
+<p><img src="../../img/rdpu_8.png" alt="galleryEx44" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="rdylbu"></a></p>
 
 <h3 id="rdylbu">rdylbu</h3>
-<p><a name="rdylbu"></a><br />
-<img src="../../img/rdylbu_10.png" alt="galleryEx45" /><br />
+
+<p><img src="../../img/rdylbu_10.png" alt="galleryEx45" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="rdylgn"></a></p>
 
 <h3 id="rdylgn">rdylgn</h3>
-<p><a name="rdylgn"></a><br />
-<img src="../../img/rdylgn_10.png" alt="galleryEx46" /><br />
+
+<p><img src="../../img/rdylgn_10.png" alt="galleryEx46" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="reds"></a></p>
 
 <h3 id="reds">reds</h3>
-<p><a name="reds"></a><br />
-<img src="../../img/reds_8.png" alt="galleryEx47" /><br />
+
+<p><img src="../../img/reds_8.png" alt="galleryEx47" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="set1"></a></p>
 
 <h3 id="set1">set1</h3>
-<p><a name="set1"></a><br />
-<img src="../../img/set1_8.png" alt="galleryEx48" /><br />
+
+<p><img src="../../img/set1_8.png" alt="galleryEx48" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="set2"></a></p>
 
 <h3 id="set2">set2</h3>
-<p><a name="set2"></a><br />
-<img src="../../img/set2_7.png" alt="galleryEx49" /><br />
+
+<p><img src="../../img/set2_7.png" alt="galleryEx49" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="set3"></a></p>
 
 <h3 id="set3">set3</h3>
-<p><a name="set3"></a><br />
-<img src="../../img/set3_12.png" alt="galleryEx50" /><br />
+
+<p><img src="../../img/set3_12.png" alt="galleryEx50" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="spectral"></a></p>
 
 <h3 id="spectral">spectral</h3>
-<p><a name="spectral"></a><br />
-<img src="../../img/spectral_10.png" alt="galleryEx51" /><br />
+
+<p><img src="../../img/spectral_10.png" alt="galleryEx51" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="tableau"></a></p>
 
 <h3 id="tableau">tableau</h3>
-<p><a name="tableau"></a><br />
-<img src="../../img/tableau_20.png" alt="galleryEx52" /><br />
+
+<p><img src="../../img/tableau_20.png" alt="galleryEx52" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="veggiesa"></a></p>
 
 <h3 id="veggiesa">veggiesa</h3>
-<p><a name="veggiesa"></a><br />
-<img src="../../img/veggiesa_7.png" alt="galleryEx53" /><br />
+
+<p><img src="../../img/veggiesa_7.png" alt="galleryEx53" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="veggiese"></a></p>
 
 <h3 id="veggiese">veggiese</h3>
-<p><a name="veggiese"></a><br />
-<img src="../../img/veggiese_7.png" alt="galleryEx54" /><br />
+
+<p><img src="../../img/veggiese_7.png" alt="galleryEx54" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="ylgn"></a></p>
 
 <h3 id="ylgn">ylgn</h3>
-<p><a name="ylgn"></a><br />
-<img src="../../img/ylgn_8.png" alt="galleryEx55" /><br />
+
+<p><img src="../../img/ylgn_8.png" alt="galleryEx55" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="ylgnbu"></a></p>
 
 <h3 id="ylgnbu">ylgnbu</h3>
-<p><a name="ylgnbu"></a><br />
-<img src="../../img/ylgnbu_8.png" alt="galleryEx56" /><br />
+
+<p><img src="../../img/ylgnbu_8.png" alt="galleryEx56" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="ylorbr"></a></p>
 
 <h3 id="ylorbr">ylorbr</h3>
-<p><a name="ylorbr"></a><br />
-<img src="../../img/ylorbr_8.png" alt="galleryEx57" /><br />
+
+<p><img src="../../img/ylorbr_8.png" alt="galleryEx57" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
+
+<p><a name="ylorrd"></a></p>
 
 <h3 id="ylorrd">ylorrd</h3>
-<p><a name="ylorrd"></a><br />
-<img src="../../img/ylorrd_8.png" alt="galleryEx58" /><br />
+
+<p><img src="../../img/ylorrd_8.png" alt="galleryEx58" /><br />
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a></p>
 
-<p><a name="references"></a><br />
-## References<br />
-<a href="http://vis.stanford.edu/papers/d3">Bostock, M., Ogievetsky, V., &amp; Heer, J. (2011).  D3: data driven documents. <em>IEEE Transactions on Visualization &amp; Computer Graphics. 17(12)</em> pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3</a></p>
+<p><a name="references"></a></p>
+
+<h2 id="references">References</h2>
+
+<p><a href="http://vis.stanford.edu/papers/d3">Bostock, M., Ogievetsky, V., &amp; Heer, J. (2011).  D3: data driven documents. <em>IEEE Transactions on Visualization &amp; Computer Graphics. 17(12)</em> pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3</a></p>
 
 <p><a href="http://www.ColorBrewer2.org">Brewer, C. A. (2002). Color Brewer 2. [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University</a></p>
 

@@ -9,6 +9,7 @@ permalink: /help/brewextra/
 Command used to build data set containing additional color palettes used by brewscheme.
 <hr>
  
+<br> 
 __brewextra__ -- A utility for brewscheme that allows users to add data to their local brewscheme database for use creating new scheme files.
  
 ## Syntax
@@ -23,9 +24,9 @@ __brewextra__ is used to build a look-up table of RGB values for palettes as par
  
 files is an optional argument used to pass filenames to the program to be added to the local brewscheme data base.  The program also includes some simple validation to hopefully prevent breaking the functionality of `brewscheme`.  Below is the file specification that should guide your construction of files to add to the brewscheme database.
  
-<table> 
-<th>variable</th><th>storage</th><th>display</th><th>value</th><th></th>
-<th>name</th><th>type</th><th>format</th><th>label</th><th>variable label</th> 
+<table style="width:100%"> 
+<tr><td style="border-top: 1px solid black"><strong>variable</strong></td><td style="border-top: 1px solid black"><strong>storage</strong></td><td style="border-top: 1px solid black"><strong>display</strong></td><td style="border-top: 1px solid black"><strong>value</strong></td><td style="border-top: 1px solid black"><strong>variable</strong></td></tr>
+<tr><td style="border-bottom: 1px solid black"><strong>name</strong></td><td style="border-bottom: 1px solid black"><strong>type</strong></td><td style="border-bottom: 1px solid black"><strong>format</strong></td><td style="border-bottom: 1px solid black"><strong>label</strong></td><td style="border-bottom: 1px solid black"><strong>label</strong></td></tr>
 <tr><td>palette</td><td>str11</td><td>%11s</td><td></td><td>Name of Color Palette</td></tr>
 <tr><td>colorblind</td><td>byte</td><td>%10.0g</td><td>colorblind</td><td>Colorblind Indicator</td></tr>
 <tr><td>print</td><td>byte</td><td>%10.0g</td><td>print</td><td>Print Indicator</td></tr>
@@ -36,9 +37,9 @@ files is an optional argument used to pass filenames to the program to be added 
 <tr><td>rgb</td><td>str11</td><td>%11s</td><td></td><td>Red-Green-Blue Values to Build Scheme Files</td></tr>
 <tr><td>maxcolors</td><td>byte</td><td>%10.0g</td><td></td><td>Maximum number of colors allowed for the palette</td></tr>
 <tr><td>seqid</td><td>str13</td><td>%13s</td><td></td><td>Sequential ID for property lookups</td></tr>
-<tr><td>meta</td><td>str13</td><td>%13s</td><td></td><td>Meta-Data Palette Characteristics</td></tr>
+<tr><td style="border-bottom: 1px solid black">meta</td><td style="border-bottom: 1px solid black">str13</td><td style="border-bottom: 1px solid black">%13s</td><td style="border-bottom: 1px solid black"></td><td style="border-bottom: 1px solid black">Meta-Data Palette Characteristics</td></tr>
 </table> 
- 
+<br>
 <u>rep</u>lace is an optional argument used to rebuild and overwrite the brewextras.dta file containing the additional palettes used by `brewscheme`.
  
 ## Examples

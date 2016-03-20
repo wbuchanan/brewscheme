@@ -8,7 +8,8 @@ permalink: /help/brewcolors/
 <hr>
 Command to create new named color styles and add to existing color dataset.
 <hr>
-  
+
+<br>  
 __brewcolors__ -- is a program used to create new named color styles and/or add colors to the color dataset.  The program includes sub-commands to create these colors manually or to add colors from the XKCD color survey.
  
 ## Syntax
@@ -49,4 +50,20 @@ And will also have access to versions of the colors that simulate their appearan
 ![brewcolorsEx2](http://wbuchanan.github.io/brewscheme/img/brewcolorsex2.png)
 
 Once you've done this you should be all set.  If the look up database is not present when `brewscheme` is called it will build the file automatically for you, but before you can create a scheme/theme file you'll need to have the data set and modified named color styles created by `brewcolordb`.
+
+### Ex 2.
+Add a new color style to the color database and make it available in Stata using the default name constructor
+
+```Stata
+brewcolors new, ma inst colors("117 200 47")
+```
+
+### Ex 3.
+Add a new named color style to the color database using a user specified name
+
+```Stata
+brewcolors new, ma inst colors(`""mycolor 117 200 47""')
+```
+
+
 

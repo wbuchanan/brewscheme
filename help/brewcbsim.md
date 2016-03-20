@@ -7,12 +7,13 @@ permalink: /help/brewcbsim/
 <hr>
 Simulating color sight impairments on one or more colors
 <hr>
-  
+
+<br>  
 __brewcbsim__ -- a program to simulate how a given color would be perceived by individuals with achromatopsia, protanopia, deuteranopia, or tritanopia.
  
 ## Syntax
  
-brewcbsim red green blue | named color style
+brewcbsim <em>RGB value</em> \| <em>named color style</em>
  
 ## Description
  
@@ -24,7 +25,7 @@ brewcbsim is used to simulate how a given color (specified as an RGB tuple in [0
 Green channel dominant color.
 
 ```Stata 
-brewcbsim 63 210 142
+brewcbsim "63 210 142"
 ```
 
 ![brewcbsimEx1](../../img/brewcbsimex1.png)
@@ -33,7 +34,7 @@ brewcbsim 63 210 142
 Blue channel dominant color.
 
 ```Stata 
-brewcbsim 8 151 233
+brewcbsim "8 151 233"
 ```
 
 ![brewcbsimEx2](../../img/brewcbsimex2.png)
@@ -42,7 +43,7 @@ brewcbsim 8 151 233
 Red channel dominant color
 
 ```Stata 
-brewcbsim 182 33 43
+brewcbsim "182 33 43"
 ```   
 
 ![brewcbsimEx3](../../img/brewcbsimex3.png)
@@ -67,15 +68,16 @@ brewcbsim red green blue yellow
 
 ## Returned Values
 
-<table>
-<th>Macro Name</th><th>Value</th> 
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th> 
 <tr><td>r(original#)</td><td>The RGB value for the nth color passed to the command</td></tr>
 <tr><td>r(achromatopsic#)</td><td>Transformed RGB value for the nth color (Complete Color Vision Loss)</td></tr>
 <tr><td>r(protanopic#)</td><td>Transformed RGB value for the nth color (Red Color Impairment)</td></tr>
 <tr><td>r(deuteranopic#)</td><td>Transformed RGB value for the nth color (Green Color Impairment)</td></tr>
-<tr><td>r(tritanopic#)</td><td>Transformed RGB value for the nth color (Blue Color Impairment)</td></tr>
+<tr><td style="border-bottom: 1px solid black">r(tritanopic#)</td><td style="border-bottom: 1px solid black">Transformed RGB value for the nth color (Blue Color Impairment)</td></tr>
 </table>
- 
+<br> 
+
 ## References
 [Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.](http://www.brucelindbloom.com/WorkingSpaceInfo.html)
 

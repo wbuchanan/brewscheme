@@ -25,7 +25,7 @@
     <lastmod>2015-11-17T23:30:31-06:00</lastmod>
   </url>
   <url>
-    <loc>https://wbuchanan.github.io/brewscheme/about.html</loc>
+    <loc>https://wbuchanan.github.io/brewscheme/about/</loc>
   </url>
   <url>
     <loc>https://wbuchanan.github.io/brewscheme/help/brewcbsim/</loc>
@@ -62,6 +62,9 @@
   </url>
   <url>
     <loc>https://wbuchanan.github.io/brewscheme/help/filesys/</loc>
+  </url>
+  <url>
+    <loc>https://wbuchanan.github.io/brewscheme/help/</loc>
   </url>
   <url>
     <loc>https://wbuchanan.github.io/brewscheme/help/hextorgb/</loc>

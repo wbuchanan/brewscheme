@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/libbrewscheme/">
 </head>
 
-
   <body>
 
     <header class="site-header">
@@ -22,7 +21,7 @@
 
     <a class="site-title" href="/brewscheme/">brewscheme</a>
 
-    <nav class="site-nav">
+   <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
@@ -31,85 +30,38 @@
         </svg>
       </a>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/brewscheme/about.html">about</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/more/">more</a>
-          
-        
-      </div>    
-    </nav>
+        <ul>
+          <li><a href="/brewscheme/about/">About</a></li>
+          <li class="dropdown">
+            <div class="dropdown">
+                <a href="/brewscheme/help/" class="dropbtn">Help</a>
+                  <div class="dropdown-content">
+                    <a href="/brewscheme/help/brewscheme/">brewscheme</a>
+                    <a href="/brewscheme/help/brewtheme/">brewtheme</a>
+                    <a href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+                    <a href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+                    <a href="/brewscheme/help/brewcolors/">brewcolors</a>
+                    <a href="/brewscheme/help/brewextra/">brewextra</a>
+                    <a href="/brewscheme/help/brewmeta/">brewmeta</a>
+                    <a href="/brewscheme/help/brewproof/">brewproof</a>
+                    <a href="/brewscheme/help/brewsearch/">brewsearch</a>
+                    <a href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+                    <a href="/brewscheme/help/brewviewer/">brewviewer</a>
+                    <a href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+                    <a href="/brewscheme/help/filesys/">filesys</a>
+                    <a href="/brewscheme/help/hextorgb/">hextorgb</a>
+                  </div>
+            </div>
+          </li>
+          <li><a href="/brewscheme/more/">Additional Information</a></li>
+        </ul> 
+           
+     
+   </nav>  
 
   </div>
 
 </header>
-
 
     <div class="page-content">
       <div class="wrapper">
@@ -126,9 +78,7 @@
 <hr />
 
 <p><br /><br />
-<br /></p>
-
-<p><strong>libbrewscheme</strong> – compiles the libbrewscheme Mata library and displays this help file.</p>
+<strong>libbrewscheme</strong> – compiles the libbrewscheme Mata library and displays this help file.</p>
 
 <h2 id="syntax">Syntax</h2>
 
@@ -146,90 +96,70 @@
 
 <p><u>si</u>ze is an optional argument passed to mata mlib create to set the maximum number of members of the library.</p>
 
-<div>
+<h2>Mata Object and Method Information</h2>
 
-<span><h2>Mata Object and Method Information</h2></span>
+<h2>Colorblindness Type Class</h2>
 
-<div>
+<p>An object type used in a way that is analogous to an interface class in Java.</p>
 
-<span><h2>Colorblindness Type Class</h2></span>
+<h3>Colorblindness Type Members</h3>
 
-An object type used in a way that is analogous to an interface class in Java.
-
-<span><h3>Colorblindness Type Members</h3></span>
-
-<strong>x</strong> a member variable used for transforming RGB values for different forms of color sight impairments.<br />
+<p><strong>x</strong> a member variable used for transforming RGB values for different forms of color sight impairments.<br />
 <strong>y</strong> a member variable used for transforming RGB values for different forms of color sight impairments.<br />
 <strong>m</strong> a member variable containing the slope used for transforming RGB values for different forms of color sight impairments.<br />
-<strong>yint</strong> a member variable containing the intercept used for transforming RGB values for different forms of color sight impairments.<br />
+<strong>yint</strong> a member variable containing the intercept used for transforming RGB values for different forms of color sight impairments.</p>
 
-<span><h3>Colorblindness Type Methods</h3></span>
+<h3>Colorblindness Type Methods</h3>
 
-<em>getConfuseX()</em> method used to access/retrieve the x member variable.<br />
+<p><em>getConfuseX()</em> method used to access/retrieve the x member variable.<br />
 <em>getConfuseY()</em> method used to access/retrieve the x member variable.<br />
 <em>getConfuseM()</em> method used to access/retrieve the x member variable.<br />
 <em>getConfuseYint()</em> method used to access/retrieve the x member variable.<br />
 <em>setConfuseX()</em> method used to set the x member variable.<br />
 <em>setConfuseY()</em> method used to set the y member variable.<br />
 <em>setConfuseM()</em> method used to set the slope member variable.<br />
-<em>setConfuseYint()</em> method used to set the intercept member variable.<br />
+<em>setConfuseYint()</em> method used to set the intercept member variable.</p>
 
-</div>
+<h2>Protanopia Class</h2>
 
-<div>
+<p>An object inheriting from the cbtype class with data specific to red color blindness.</p>
 
-<span><h2>Protanopia Class</h2></span>
+<h3>Protanopia Members</h3>
 
-An object inheriting from the cbtype class with data specific to red color blindness.
-
-<span><h3>Protanopia Members</h3></span>
-
-<strong>x</strong> 0.7465<br />
+<p><strong>x</strong> 0.7465<br />
 <strong>y</strong> 0.2535<br />
 <strong>m</strong> 1.273463<br />
-<strong>yint</strong> -0.073894<br />
+<strong>yint</strong> -0.073894</p>
 
-</div>
+<h2>Deuteranopia Class</h2>
 
-<div>
+<p>An object inheriting from the cbtype class with data specific to green color blindness.</p>
 
-<span><h2>Deuteranopia Class</h2></span>
+<h3>Deuteranopia Members</h3>
 
-An object inheriting from the cbtype class with data specific to green color blindness.
-
-<span><h3>Deuteranopia Members</h3></span>
-
-<strong>x</strong> 1.4<br />
+<p><strong>x</strong> 1.4<br />
 <strong>y</strong> -0.4<br />
 <strong>m</strong> 0.968437<br />
-<strong>yint</strong> 0.003331<br />
+<strong>yint</strong> 0.003331</p>
 
-</div>
+<h2>Tritanopia Class</h2>
 
-<div>
+<p>An object inheriting from the cbtype class with data specific to blue color blindness.</p>
 
-<span><h2>Tritanopia Class</h2></span>
+<h3>Tritanopia Members</h3>
 
-An object inheriting from the cbtype class with data specific to blue color blindness.
-
-<span><h3>Tritanopia Members</h3></span>
-
-<strong>x</strong> 0.1748<br />
+<p><strong>x</strong> 0.1748<br />
 <strong>y</strong> 0.0<br />
 <strong>m</strong> 0.062921<br />
-<strong>yint</strong> 0.292119<br />
+<strong>yint</strong> 0.292119</p>
 
-</div>
+<h2>Colorblindness Simulation Class</h2>
 
-<div>
+<p>An object used to simulate RGB values under varying forms of color blindness.</p>
 
-<span><h2>Colorblindness Simulation Class</h2></span>
+<h3>Colorblindness Simulation Members - Private</h3>
 
-An object used to simulate RGB values under varying forms of color blindness.
-
-<span><h3>Colorblindness Simulation Members - Private</h3></span>
-
-<strong>types</strong> contains the name of the types of colorblindness.<br />
+<p><strong>types</strong> contains the name of the types of colorblindness.<br />
 <strong>typelabs</strong> contains strings used to label the RGB values for specific forms of color blindness.<br />
 <strong>inputR</strong> the red channel that will be transformed.<br />
 <strong>inputG</strong> the green channel that will be transformed.<br />
@@ -241,11 +171,11 @@ An object used to simulate RGB values under varying forms of color blindness.
 <strong>specified</strong> value and any types of transforms requested.<br />
 <strong>protanope</strong> a Protanopia class object.<br />
 <strong>deuteranope</strong> a Deuteranopia class object.<br />
-<strong>tritanope</strong> a Tritanopia class object.<br />
+<strong>tritanope</strong> a Tritanopia class object.</p>
 
-<span><h3>Colorblindness Simulation Methods</h3></span>
+<h3>Colorblindness Simulation Methods</h3>
 
-<em>new()</em> constructor method (cannot be called directly).<br />
+<p><em>new()</em> constructor method (cannot be called directly).<br />
 <em>achromatopsia()</em> a method to transform the user RGB members to simulate the color perceived by individuals with achromatopsia.<br />
 <em>setR()</em> method used to set the red channel parameter.<br />
 <em>setG()</em> method used to set the green channel parameter.<br />
@@ -272,34 +202,26 @@ An object used to simulate RGB values under varying forms of color blindness.
 <em>getTransformedRgb()</em> method used to retrieve a single transformed RGB value.<br />
 <em>checkRange()</em> method used to enforce RGB values stay in [0, 255].<br />
 <em>getRgbString()</em> method used to return a single transformed RGB string to Stata as a local macro.<br />
-<em>getRgbStrings()</em> method used to return all transformed RGB strings to Stata in local macros.<br />
+<em>getRgbStrings()</em> method used to return all transformed RGB strings to Stata in local macros.</p>
 
-</div>
+<h3>Wrappers</h3>
 
-<div>
+<p><em>translateColor()</em> a wrapper around the colorblind object that simulates the RGB arguments under all conditions of color sightedness impairment.</p>
 
-<span><h3>Wrappers</h3></span>
+<h2>brewcolor class</h2>
 
-<em>translateColor()</em> a wrapper around the colorblind object that simulates the RGB arguments under all conditions of color sightedness impairment.<br />
+<p>This class loads the meta and colordb files to enable faster searching of local databases for specified RGB values and existing transformed values. The intended use here is in the internals of brewscheme and brewtheme to provide a consistent format for scheme files generated by these programs.  Additionally, it also facilitates the automation of scheme files with simulated values for different forms of color sight impairment using the same stub name with an additional identifier in the file name for the type of color sight impairment.</p>
 
-<span><h2>brewcolor class</h2></span>
+<h3>brewcolor members</h3>
 
-This class loads the meta and colordb files to enable faster searching of local databases for specified RGB values and existing transformed values. The intended use here is in the internals of brewscheme and brewtheme to provide a consistent format for scheme files generated by these programs.  Additionally, it also facilitates the automation of scheme files with simulated values for different forms of color sight impairment using the same stub name with an additional identifier in the file name for the type of color sight impairment.
+<p><strong>color</strong> A private string matrix containing the required data from the database created by brewcolordb.<br />
+<strong>meta</strong> A private string matrix containing the required data from the database created by brewdb and brewextra.</p>
 
-<span><h3>brewcolor members</h3></span>
+<h3>brewcolor methods</h3>
 
-<strong>color</strong> A private string matrix containing the required data from the database created by brewcolordb.<br />
-<strong>meta</strong> A private string matrix containing the required data from the database created by brewdb and brewextra.<br />
-
-<span><h3>brewcolor methods</h3></span>
-
-<em>brewNameSearch()</em> a method used to search for colorblind transformed RGB values given the color's name or meta property. This method searches the palette and meta variables in the color member of the brewcolor class.<br />
+<p><em>brewNameSearch()</em> a method used to search for colorblind transformed RGB values given the color’s name or meta property. This method searches the palette and meta variables in the color member of the brewcolor class.<br />
 <em>brewColorSearch()</em> a method used to search for colorblind transformed RGB values given an RGB string. This method searches the rgb variable in the color and meta members of the brewcolor class.<br />
-<em>getNames()</em> a method used to retrieve the full list of all values in the palette or meta variables of the color and meta databases.<br />
-
-</div>
-
-</div>
+<em>getNames()</em> a method used to retrieve the full list of all values in the palette or meta variables of the color and meta databases.</p>
 
 <h2 id="references">References</h2>
 <p><a href="http://vis.stanford.edu/papers/d3">Bostock, M., Ogievetsky, V., &amp; Heer, J. (2011).  D3: data driven documents. <em>IEEE Transactions on Visualization &amp; Computer Graphics. 17(12)</em> pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3</a></p>

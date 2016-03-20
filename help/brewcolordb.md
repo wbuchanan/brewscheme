@@ -8,7 +8,7 @@ permalink: /help/brewcolordb/
 Command to build local dataset of named colors and simulated color values
 <hr>
 
-
+<br>
 __brewcolordb__ -- is a program to build a database of locally installed colors defined by StataCorp.  It includes the RGB values for each color as well as transformed RGB values that simulate varying forms of color sight impairments.
 
 ## Syntax

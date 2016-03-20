@@ -5,9 +5,10 @@ permalink: /help/hextorgb/
 ---
 
 <hr>
-# help for hextorgb
+help for hextorgb
 <hr>
- 
+
+<br> 
 __hextorgb__ -- A utility to convert Hexadecimal encoded RGB values to decimal encoded RGB values.
  
 ## Syntax

@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/filesys/">
 </head>
 
-
   <body>
 
     <header class="site-header">
@@ -22,7 +21,7 @@
 
     <a class="site-title" href="/brewscheme/">brewscheme</a>
 
-    <nav class="site-nav">
+   <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
@@ -31,85 +30,38 @@
         </svg>
       </a>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/brewscheme/about.html">about</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/more/">more</a>
-          
-        
-      </div>    
-    </nav>
+        <ul>
+          <li><a href="/brewscheme/about/">About</a></li>
+          <li class="dropdown">
+            <div class="dropdown">
+                <a href="/brewscheme/help/" class="dropbtn">Help</a>
+                  <div class="dropdown-content">
+                    <a href="/brewscheme/help/brewscheme/">brewscheme</a>
+                    <a href="/brewscheme/help/brewtheme/">brewtheme</a>
+                    <a href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+                    <a href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+                    <a href="/brewscheme/help/brewcolors/">brewcolors</a>
+                    <a href="/brewscheme/help/brewextra/">brewextra</a>
+                    <a href="/brewscheme/help/brewmeta/">brewmeta</a>
+                    <a href="/brewscheme/help/brewproof/">brewproof</a>
+                    <a href="/brewscheme/help/brewsearch/">brewsearch</a>
+                    <a href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+                    <a href="/brewscheme/help/brewviewer/">brewviewer</a>
+                    <a href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+                    <a href="/brewscheme/help/filesys/">filesys</a>
+                    <a href="/brewscheme/help/hextorgb/">hextorgb</a>
+                  </div>
+            </div>
+          </li>
+          <li><a href="/brewscheme/more/">Additional Information</a></li>
+        </ul> 
+           
+     
+   </nav>  
 
   </div>
 
 </header>
-
 
     <div class="page-content">
       <div class="wrapper">
@@ -125,16 +77,16 @@
 <h1 id="help-for-filesys">help for filesys</h1>
 <hr />
 
-<p><strong>filesys</strong> – a Java plugin to access filesystem properties of files.</p>
+<p><br /><br />
+<strong>filesys</strong> – a Java plugin to access filesystem properties of files.</p>
 
 <h2 id="syntax">Syntax</h2>
 
-<p><strong>filesys</strong> <em>filename</em>, [ <u>attr</u>ibutes <u>dis</u>play <u>glo</u>bal <u>r</u>eadable(string) <u>w</u>ritable(string)<br />
-<u>x</u>ecutable(string) <u>reado</u>nly ]</p>
+<p><strong>filesys</strong> <em>filename</em>, [ <u>attr</u>ibutes <u>dis</u>play <u>glo</u>bal <u>r</u>eadable(string) <u>w</u>ritable(string) <u>x</u>ecutable(string) <u>reado</u>nly ]</p>
 
 <h2 id="description">Description</h2>
 
-<p>filesys is designed to provide access to basic file system properties.  In addition, it provides some basic functionality to allow setting properties on files without having to write OS specific code to do the same from the shell.  See return values for additional information regarding the attributes that are exposed from this program.</p>
+<p><strong>filesys</strong> is designed to provide access to basic file system properties.  In addition, it provides some basic functionality to allow setting properties on files without having to write OS specific code to do the same from the shell.  See return values for additional information regarding the attributes that are exposed from this program.</p>
 
 <h2 id="options">Options</h2>
 
@@ -144,32 +96,11 @@
 
 <p><u>glo</u>bal is an option used in conjunction with readable, writable, or xecutable to set the property on/off for all users.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td><u>r</u>eadable(on</td>
-      <td>off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.</td>
-    </tr>
-  </tbody>
-</table>
+<p><u>r</u>eadable(on|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td><u>w</u>ritable(on</td>
-      <td>off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.</td>
-    </tr>
-  </tbody>
-</table>
+<p><u>w</u>ritable(on|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td><u>x</u>ecutable(on</td>
-      <td>off) is an option used to set the executable property for the file on or off.  (Note: the misspelling here is intended to reflect the way the properties are declared in *nix based systems).  If the global option is not specified it will set this property for the current user only.</td>
-    </tr>
-  </tbody>
-</table>
+<p><u>x</u>ecutable(on|off) is an option used to set the executable property for the file on or off.  (Note: the misspelling here is intended to reflect the way the properties are declared in *nix based systems).  If the global option is not specified it will set this property for the current user only.</p>
 
 <p><u>reado</u>nly is an option used to set the file to readonly mode. There is no option to apply this globally vs locally.</p>
 
@@ -178,7 +109,7 @@
 <h3 id="ex-1">Ex 1.</h3>
 <p>View the properties of the auto.dta dataset</p>
 
-<pre><code>. filesys `c(sysdir_base)'a/auto.dta, attr dis
+<pre><code class="language-Stata">. filesys `c(sysdir_base)'a/auto.dta, attr dis
 
 ------------------------------------
 Attribute                File Attribute Value
@@ -202,7 +133,7 @@ Is Writable              true
 <h3 id="ex-2">Ex 2.</h3>
 <p>Make the file globally executable</p>
 
-<pre><code>. filesys `c(sysdir_base)'a/auto.dta, glo x(on) dis
+<pre><code class="language-Stata">. filesys `c(sysdir_base)'a/auto.dta, glo x(on) dis
 
 ------------------------------------
 Attribute                File Attribute Value
@@ -226,7 +157,7 @@ Is Writable              true
 <h3 id="ex-3">Ex 3.</h3>
 <p>Turn off the executable property</p>
 
-<pre><code>. filesys `c(sysdir_base)'a/auto.dta, glo x(off) dis
+<pre><code class="language-Stata">. filesys `c(sysdir_base)'a/auto.dta, glo x(off) dis
 
 ------------------------------------
 Attribute                File Attribute Value
@@ -250,7 +181,7 @@ Is Writable              true
 <h3 id="ex-4">Ex 4.</h3>
 <p>A few other examples of modifying the attributes of an individual file</p>
 
-<pre><code>// Turn on the writable property
+<pre><code class="language-Stata">// Turn on the writable property
 . filesys `c(sysdir_base)'a/auto.dta, glo w(on) 
  
 // Turn off the writable property
@@ -268,8 +199,8 @@ Is Writable              true
 
 <h2 id="returned-values">Returned values</h2>
 
-<table>
-<th>Macro Name</th><th>Value</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th>
 <tr><td>r(iswritable)</td><td>Boolean indicator if file is writable</td></tr>
 <tr><td>r(isreadable)</td><td>Boolean indicator if file is readable</td></tr>
 <tr><td>r(parentpath)</td><td>String with path to parent directory</td></tr>
@@ -286,8 +217,9 @@ Is Writable              true
 <tr><td>r(creatednum)</td><td>SIF Value of the created date use %tc for the display format</td></tr>
 <tr><td>r(accessed)</td><td>String containing the date last modified</td></tr>
 <tr><td>r(modified)</td><td>String containing the modified date</td></tr>
-<tr><td>r(created)</td><td>String containing the created date</td></tr>
+<tr><td style="border-bottom: 1px solid black">r(created)</td><td style="border-bottom: 1px solid black">String containing the created date</td></tr>
 </table>
+<p><br /></p>
 
 
   </article>

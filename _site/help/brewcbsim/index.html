@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewcbsim/">
 </head>
 
-
   <body>
 
     <header class="site-header">
@@ -22,7 +21,7 @@
 
     <a class="site-title" href="/brewscheme/">brewscheme</a>
 
-    <nav class="site-nav">
+   <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
@@ -31,85 +30,38 @@
         </svg>
       </a>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/brewscheme/about.html">about</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/more/">more</a>
-          
-        
-      </div>    
-    </nav>
+        <ul>
+          <li><a href="/brewscheme/about/">About</a></li>
+          <li class="dropdown">
+            <div class="dropdown">
+                <a href="/brewscheme/help/" class="dropbtn">Help</a>
+                  <div class="dropdown-content">
+                    <a href="/brewscheme/help/brewscheme/">brewscheme</a>
+                    <a href="/brewscheme/help/brewtheme/">brewtheme</a>
+                    <a href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+                    <a href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+                    <a href="/brewscheme/help/brewcolors/">brewcolors</a>
+                    <a href="/brewscheme/help/brewextra/">brewextra</a>
+                    <a href="/brewscheme/help/brewmeta/">brewmeta</a>
+                    <a href="/brewscheme/help/brewproof/">brewproof</a>
+                    <a href="/brewscheme/help/brewsearch/">brewsearch</a>
+                    <a href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+                    <a href="/brewscheme/help/brewviewer/">brewviewer</a>
+                    <a href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+                    <a href="/brewscheme/help/filesys/">filesys</a>
+                    <a href="/brewscheme/help/hextorgb/">hextorgb</a>
+                  </div>
+            </div>
+          </li>
+          <li><a href="/brewscheme/more/">Additional Information</a></li>
+        </ul> 
+           
+     
+   </nav>  
 
   </div>
 
 </header>
-
 
     <div class="page-content">
       <div class="wrapper">
@@ -125,18 +77,12 @@
 <p>Simulating color sight impairments on one or more colors</p>
 <hr />
 
-<p><strong>brewcbsim</strong> – a program to simulate how a given color would be perceived by individuals with achromatopsia, protanopia, deuteranopia, or tritanopia.</p>
+<p><br />  <br />
+<strong>brewcbsim</strong> – a program to simulate how a given color would be perceived by individuals with achromatopsia, protanopia, deuteranopia, or tritanopia.</p>
 
 <h2 id="syntax">Syntax</h2>
 
-<table>
-  <tbody>
-    <tr>
-      <td>brewcbsim red green blue</td>
-      <td>named color style</td>
-    </tr>
-  </tbody>
-</table>
+<p>brewcbsim <em>RGB value</em> | <em>named color style</em></p>
 
 <h2 id="description">Description</h2>
 
@@ -147,7 +93,7 @@
 <h3 id="ex-1">Ex 1.</h3>
 <p>Green channel dominant color.</p>
 
-<pre><code class="language-Stata">brewcbsim 63 210 142
+<pre><code class="language-Stata">brewcbsim "63 210 142"
 </code></pre>
 
 <p><img src="../../img/brewcbsimex1.png" alt="brewcbsimEx1" /></p>
@@ -155,7 +101,7 @@
 <h3 id="ex-2">Ex 2.</h3>
 <p>Blue channel dominant color.</p>
 
-<pre><code class="language-Stata">brewcbsim 8 151 233
+<pre><code class="language-Stata">brewcbsim "8 151 233"
 </code></pre>
 
 <p><img src="../../img/brewcbsimex2.png" alt="brewcbsimEx2" /></p>
@@ -163,7 +109,7 @@
 <h3 id="ex-3">Ex 3.</h3>
 <p>Red channel dominant color</p>
 
-<pre><code class="language-Stata">brewcbsim 182 33 43
+<pre><code class="language-Stata">brewcbsim "182 33 43"
 </code></pre>
 
 <p><img src="../../img/brewcbsimex3.png" alt="brewcbsimEx3" /></p>
@@ -186,14 +132,15 @@
 
 <h2 id="returned-values">Returned Values</h2>
 
-<table>
-<th>Macro Name</th><th>Value</th> 
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th> 
 <tr><td>r(original#)</td><td>The RGB value for the nth color passed to the command</td></tr>
 <tr><td>r(achromatopsic#)</td><td>Transformed RGB value for the nth color (Complete Color Vision Loss)</td></tr>
 <tr><td>r(protanopic#)</td><td>Transformed RGB value for the nth color (Red Color Impairment)</td></tr>
 <tr><td>r(deuteranopic#)</td><td>Transformed RGB value for the nth color (Green Color Impairment)</td></tr>
-<tr><td>r(tritanopic#)</td><td>Transformed RGB value for the nth color (Blue Color Impairment)</td></tr>
+<tr><td style="border-bottom: 1px solid black">r(tritanopic#)</td><td style="border-bottom: 1px solid black">Transformed RGB value for the nth color (Blue Color Impairment)</td></tr>
 </table>
+<p><br /></p>
 
 <h2 id="references">References</h2>
 <p><a href="http://www.brucelindbloom.com/WorkingSpaceInfo.html">Lindbloom, B. (2001).  RGB working space information. Retrieved from: http://www.brucelindbloom.com/WorkingSpaceInfo.html.  Retrieved on 24nov2015.</a></p>

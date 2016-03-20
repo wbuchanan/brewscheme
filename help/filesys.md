@@ -7,17 +7,17 @@ permalink: /help/filesys/
 <hr>
 # help for filesys
 <hr>
- 
+
+<br>
 __filesys__ -- a Java plugin to access filesystem properties of files.
  
 ## Syntax
  
-__filesys__ <em>filename</em>, [ <u>attr</u>ibutes <u>dis</u>play <u>glo</u>bal <u>r</u>eadable(string) <u>w</u>ritable(string)
-<u>x</u>ecutable(string) <u>reado</u>nly ]
+__filesys__ <em>filename</em>, [ <u>attr</u>ibutes <u>dis</u>play <u>glo</u>bal <u>r</u>eadable(string) <u>w</u>ritable(string) <u>x</u>ecutable(string) <u>reado</u>nly ]
  
 ## Description
  
-filesys is designed to provide access to basic file system properties.  In addition, it provides some basic functionality to allow setting properties on files without having to write OS specific code to do the same from the shell.  See return values for additional information regarding the attributes that are exposed from this program.
+__filesys__ is designed to provide access to basic file system properties.  In addition, it provides some basic functionality to allow setting properties on files without having to write OS specific code to do the same from the shell.  See return values for additional information regarding the attributes that are exposed from this program.
  
 ## Options
  
@@ -27,11 +27,11 @@ filesys is designed to provide access to basic file system properties.  In addit
  
 <u>glo</u>bal is an option used in conjunction with readable, writable, or xecutable to set the property on/off for all users.
  
-<u>r</u>eadable(on|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.
+<u>r</u>eadable(on\|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.
  
-<u>w</u>ritable(on|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.
+<u>w</u>ritable(on\|off) is an option used to set the readable property for the file on or off.  If the global option is not specified it will set this property for the current user only.
  
-<u>x</u>ecutable(on|off) is an option used to set the executable property for the file on or off.  (Note: the misspelling here is intended to reflect the way the properties are declared in *nix based systems).  If the global option is not specified it will set this property for the current user only.
+<u>x</u>ecutable(on\|off) is an option used to set the executable property for the file on or off.  (Note: the misspelling here is intended to reflect the way the properties are declared in *nix based systems).  If the global option is not specified it will set this property for the current user only.
  
 <u>reado</u>nly is an option used to set the file to readonly mode. There is no option to apply this globally vs locally.
  
@@ -40,7 +40,7 @@ filesys is designed to provide access to basic file system properties.  In addit
 ### Ex 1.
 View the properties of the auto.dta dataset
 
-```
+```Stata
 . filesys `c(sysdir_base)'a/auto.dta, attr dis
 
 ------------------------------------
@@ -65,7 +65,7 @@ Is Writable              true
 ### Ex 2. 
 Make the file globally executable
 
-```
+```Stata
 . filesys `c(sysdir_base)'a/auto.dta, glo x(on) dis
 
 ------------------------------------
@@ -90,7 +90,7 @@ Is Writable              true
 ### Ex 3. 
 Turn off the executable property
 
-```
+```Stata
 . filesys `c(sysdir_base)'a/auto.dta, glo x(off) dis
 
 ------------------------------------
@@ -115,7 +115,7 @@ Is Writable              true
 ### Ex 4.
 A few other examples of modifying the attributes of an individual file
 
-```
+```Stata
 // Turn on the writable property
 . filesys `c(sysdir_base)'a/auto.dta, glo w(on) 
  
@@ -134,8 +134,8 @@ A few other examples of modifying the attributes of an individual file
 
 ## Returned values
  
-<table>
-<th>Macro Name</th><th>Value</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th>
 <tr><td>r(iswritable)</td><td>Boolean indicator if file is writable</td></tr>
 <tr><td>r(isreadable)</td><td>Boolean indicator if file is readable</td></tr>
 <tr><td>r(parentpath)</td><td>String with path to parent directory</td></tr>
@@ -152,6 +152,7 @@ A few other examples of modifying the attributes of an individual file
 <tr><td>r(creatednum)</td><td>SIF Value of the created date use %tc for the display format</td></tr>
 <tr><td>r(accessed)</td><td>String containing the date last modified</td></tr>
 <tr><td>r(modified)</td><td>String containing the modified date</td></tr>
-<tr><td>r(created)</td><td>String containing the created date</td></tr>
+<tr><td style="border-bottom: 1px solid black">r(created)</td><td style="border-bottom: 1px solid black">String containing the created date</td></tr>
 </table>
+<br>
 

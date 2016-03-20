@@ -7,6 +7,8 @@ permalink: /help/brewviewer/
 <hr>
 A command to preview one or more brewscheme color palettes
 <hr>
+
+<br>
 <a name="top"></a>
 __brewviewer__ -- A utility for brewscheme to preview color palettes available.
 
@@ -18,39 +20,28 @@ __brewviewer__ <em>palette names</em> [, <u>c</u>olors(numlist) <u>comb</u>ine <
 
 brewviewer is a utility for the brewscheme program that provides you with a way to preview different combinations of palettes and numbers of colors.  You can view examples of each of the palettes distributed with [brewscheme](https://github.com/wbuchanan/brewscheme) in the <a href="#gallery">Gallery</a> below.  The table below is provided for more immediate access to a specific color palette preview:
 
-<table>
-<th>Color Palettes</th><th>Color Palettes</th>
-<tr><td><a name="accent">accent</a></td><td><a name="activitiesa">activitiesa</a></td></tr>
-<tr><td><a name="activitiest">activitiest</a></td><td><a name="blues">blues</a></td></tr>
-<tr><td><a name="brandsa">brandsa</a></td><td><a name="brandse">brandse</a></td></tr>
-<tr><td><a name="brbg">brbg</a></td><td><a name="bugn">bugn</a></td></tr>
-<tr><td><a name="bupu">bupu</a></td><td><a name="carsa">carsa</a></td></tr>
-<tr><td><a name="carse">carse</a></td><td><a name="category10">category10</a></td></tr>
-<tr><td><a name="category20">category20</a></td><td><a name="category20b">category20b</a></td></tr>
-<tr><td><a name="category20c">category20c</a></td><td><a name="dark2">dark2</a></td></tr>
-<tr><td><a name="drinksa">drinksa</a></td><td><a name="drinkse">drinkse</a></td></tr>
-<tr><td><a name="featuresa">featuresa</a></td><td><a name="featurest">featurest</a></td></tr>
-<tr><td><a name="fooda">fooda</a></td><td><a name="foode">foode</a></td></tr>
-<tr><td><a name="fruita">fruita</a></td><td><a name="fruite">fruite</a></td></tr>
-<tr><td><a name="ggplot2">ggplot2</a></td><td><a name="gnbu">gnbu</a></td></tr>
-<tr><td><a name="greens">greens</a></td><td><a name="greys">greys</a></td></tr>
-<tr><td><a name="mdebar">mdebar</a></td><td><a name="mdepoint">mdepoint</a></td></tr>
-<tr><td><a name="oranges">oranges</a></td><td><a name="orrd">orrd</a></td></tr>
-<tr><td><a name="paired">paired</a></td><td><a name="pastel1">pastel1</a></td></tr>
-<tr><td><a name="pastel2">pastel2</a></td><td><a name="piyg">piyg</a></td></tr>
-<tr><td><a name="prgn">prgn</a></td><td><a name="pubu">pubu</a></td></tr>
-<tr><td><a name="pubugn">pubugn</a></td><td><a name="puor">puor</a></td></tr>
-<tr><td><a name="purd">purd</a></td><td><a name="purples">purples</a></td></tr>
-<tr><td><a name="rdbu">rdbu</a></td><td><a name="rdgy">rdgy</a></td></tr>
-<tr><td><a name="rdpu">rdpu</a></td><td><a name="rdylbu">rdylbu</a></td></tr>
-<tr><td><a name="rdylgn">rdylgn</a></td><td><a name="reds">reds</a></td></tr>
-<tr><td><a name="set1">set1</a></td><td><a name="set2">set2</a></td></tr>
-<tr><td><a name="set3">set3</a></td><td><a name="spectral">spectral</a></td></tr>
-<tr><td><a name="tableau">tableau</a></td><td><a name="veggiesa">veggiesa</a></td></tr>
-<tr><td><a name="veggiese">veggiese</a></td><td><a name="ylgn">ylgn</a></td></tr>
-<tr><td><a name="ylgnbu">ylgnbu</a></td><td><a name="ylorbr">ylorbr</a></td></tr>
-<tr><td><a name="ylorrd">ylorrd</a></td><td></td></tr>
-
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Color</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Palette</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Names</th>
+<tr><td><a href="#accent">accent</a></td><td><a href="#activitiesa">activitiesa</a></td><td><a href="#activitiest">activitiest</a></td></tr>
+<tr><td><a href="#blues">blues</a></td><td><a href="#brandsa">brandsa</a></td><td><a href="#brandse">brandse</a></td></tr>
+<tr><td><a href="#brbg">brbg</a></td><td><a href="#bugn">bugn</a></td><td><a href="#bupu">bupu</a></td></tr>
+<tr><td><a href="#carsa">carsa</a></td><td><a href="#carse">carse</a></td><td><a href="#category10">category10</a></td></tr>
+<tr><td><a href="#category20">category20</a></td><td><a href="#category20b">category20b</a></td><td><a href="#category20c">category20c</a></td></tr>
+<tr><td><a href="#dark2">dark2</a></td><td><a href="#drinksa">drinksa</a></td><td><a href="#drinkse">drinkse</a></td></tr>
+<tr><td><a href="#featuresa">featuresa</a></td><td><a href="#featurest">featurest</a></td><td><a href="#fooda">fooda</a></td></tr>
+<tr><td><a href="#foode">foode</a></td><td><a href="#fruita">fruita</a></td><td><a href="#fruite">fruite</a></td></tr>
+<tr><td><a href="#ggplot2">ggplot2</a></td><td><a href="#gnbu">gnbu</a></td><td><a href="#greens">greens</a></td></tr>
+<tr><td><a href="#greys">greys</a></td><td><a href="#mdebar">mdebar</a></td><td><a href="#mdepoint">mdepoint</a></td></tr>
+<tr><td><a href="#oranges">oranges</a></td><td><a href="#orrd">orrd</a></td><td><a href="#paired">paired</a></td></tr>
+<tr><td><a href="#pastel1">pastel1</a></td><td><a href="#pastel2">pastel2</a></td><td><a href="#piyg">piyg</a></td></tr>
+<tr><td><a href="#prgn">prgn</a></td><td><a href="#pubu">pubu</a></td><td><a href="#pubugn">pubugn</a></td></tr>
+<tr><td><a href="#puor">puor</a></td><td><a href="#purd">purd</a></td><td><a href="#purples">purples</a></td></tr>
+<tr><td><a href="#rdbu">rdbu</a></td><td><a href="#rdgy">rdgy</a></td><td><a href="#rdpu">rdpu</a></td></tr>
+<tr><td><a href="#rdylbu">rdylbu</a></td><td><a href="#rdylgn">rdylgn</a></td><td><a href="#reds">reds</a></td></tr>
+<tr><td><a href="#set1">set1</a></td><td><a href="#set2">set2</a></td><td><a href="#set3">set3</a></td></tr>
+<tr><td><a href="#spectral">spectral</a></td><td><a href="#tableau">tableau</a></td><td><a href="#veggiesa">veggiesa</a></td></tr>
+<tr><td><a href="#veggiese">veggiese</a></td><td><a href="#ylgn">ylgn</a></td><td><a href="#ylgnbu">ylgnbu</a></td></tr>
+<tr><td style="border-bottom: 1px solid black"><a href="#ylorbr">ylorbr</a></td><td style="border-bottom: 1px solid black"><a href="#ylorrd">ylorrd</a></td><td style="border-bottom: 1px solid black"></td></tr>
 </table>
 
 For additional information about the palettes and/or transformations, <a href="#references">see the references listed below</a>.
@@ -108,303 +99,423 @@ This subroutine for brewscheme was inspired and influenced by [Mattieu Gomez's](
 ## Gallery 
 The full set of palettes (based on the maximum number of colors available in the palette), displayed with the sequential option and impaired options is available below.  
 
-### accent
 <a name="accent"></a>
+
+### accent
+
 ![galleryEx4.](../../img/accent_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### activitiesa
 <a name="activitiesa"></a>
+
+### activitiesa
+
 ![galleryEx1](../../img/activitiesa_5.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### activitiest
 <a name="activitiest"></a>
+
+### activitiest
+
 ![galleryEx2](../../img/activitiest_5.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### blues
 <a name="blues"></a>
+
+### blues
+
 ![galleryEx3](../../img/blues_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### brandsa
 <a name="brnadsa"></a>
+
+### brandsa
+
 ![galleryEx4](../../img/brandsa_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### brandse
 <a name="brandse"></a>
+
+### brandse
+
 ![galleryEx5](../../img/brandse_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### brbg
 <a name="brbg"></a>
+
+### brbg
+
 ![galleryEx6](../../img/brbg_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### bugn
 <a name="bugn"></a>
+
+### bugn
+
 ![galleryEx7](../../img/bugn_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### bupu
 <a name="bupu"></a>
+
+### bupu
+
 ![galleryEx8](../../img/bupu_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### carsa
 <a name="carsa"></a>
+
+### carsa
+
 ![galleryEx9](../../img/carsa_6.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### carse
 <a name="carse"></a>
+
+### carse
+
 ![galleryEx10](../../img/carse_6.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### category10
 <a name="category10"></a>
+
+### category10
+
 ![galleryEx11](../../img/category10_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### category20
 <a name="category20"></a>
+
+### category20
+
 ![galleryEx12](../../img/category20_20.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### category20b
 <a name="category20b"></a>
+
+### category20b
+
 ![galleryEx13](../../img/category20b_20.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### category20c
 <a name="category20c"></a>
+
+### category20c
+
 ![galleryEx14](../../img/category20c_20.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### dark2
 <a name="dark2"></a>
+
+### dark2
+
 ![galleryEx15](../../img/dark2_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### drinksa
 <a name="drinksa"></a>
+
+### drinksa
+
 ![galleryEx16](../../img/drinksa_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### drinkse
 <a name="drinkse"></a>
+
+### drinkse
+
 ![galleryEx17](../../img/drinkse_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### featuresa
 <a name="featuresa"></a>
+
+### featuresa
+
 ![galleryEx18](../../img/featuresa_5.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### featurest
 <a name="featurest"></a>
+
+### featurest
+
 ![galleryEx19](../../img/featurest_5.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### fooda
 <a name="fooda"></a>
+
+### fooda
+
 ![galleryEx20](../../img/fooda_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### foode
 <a name="foode"></a>
+
+### foode
+
 ![galleryEx21](../../img/foode_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### fruita
 <a name="fruita"></a>
+
+### fruita
+
 ![galleryEx22](../../img/fruita_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### fruite
 <a name="fruite"></a>
+
+### fruite
+
 ![galleryEx23](../../img/fruite_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### ggplot2
 <a name="ggplot2"></a>
+
+### ggplot2
+
 ![galleryEx24](../../img/ggplot2_24.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### gnbu
 <a name="gnbu"></a>
+
+### gnbu
+
 ![galleryEx25](../../img/gnbu_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### greens
 <a name="greens"></a>
+
+### greens
+
 ![galleryEx26](../../img/greens_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### greys
 <a name="greys"></a>
+
+### greys
+
 ![galleryEx27](../../img/greys_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### mdebar
 <a name="mdebar"></a>
+
+### mdebar
+
 ![galleryEx28](../../img/mdebar_5.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### mdepoint
 <a name="mdepoint"></a>
+
+### mdepoint
+
 ![galleryEx29](../../img/mdepoint_3.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### oranges
 <a name="oranges"></a>
+
+### oranges
+
 ![galleryEx30](../../img/oranges_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### orrd
 <a name="orrd"></a>
+
+### orrd
+
 ![galleryEx31](../../img/orrd_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### paired
 <a name="paired"></a>
+
+### paired
+
 ![galleryEx32](../../img/paired_12.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### pastel1
 <a name="pastel1"></a>
+
+### pastel1
+
 ![galleryEx33](../../img/pastel1_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### pastel2
 <a name="pastel2"></a>
+
+### pastel2
+
 ![galleryEx34](../../img/pastel2_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### piyg
 <a name="piyg"></a>
+
+### piyg
+
 ![galleryEx35](../../img/piyg_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### prgn
 <a name="prgn"></a>
+
+### prgn
+
 ![galleryEx36](../../img/prgn_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### pubu
 <a name="pubu"></a>
+
+### pubu
+
 ![galleryEx37](../../img/pubu_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### pubugn
 <a name="pubugn"></a>
+
+### pubugn
+
 ![galleryEx38](../../img/pubugn_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### puor
 <a name="puor"></a>
+
+### puor
+
 ![galleryEx39](../../img/puor_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### purd
 <a name="purd"></a>
+
+### purd
+
 ![galleryEx40](../../img/purd_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### purples
 <a name="purples"></a>
+
+### purples
+
 ![galleryEx41](../../img/purples_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### rdbu
 <a name="rdbu"></a>
+
+### rdbu
+
 ![galleryEx42](../../img/rdbu_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### rdgy
 <a name="rdgy"></a>
+
+### rdgy
+
 ![galleryEx43](../../img/rdgy_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### rdpu
 <a name="rdpu"></a>
+
+### rdpu
+
 ![galleryEx44](../../img/rdpu_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### rdylbu
 <a name="rdylbu"></a>
+
+### rdylbu
+
 ![galleryEx45](../../img/rdylbu_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### rdylgn
 <a name="rdylgn"></a>
+
+### rdylgn
+
 ![galleryEx46](../../img/rdylgn_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### reds
 <a name="reds"></a>
+
+### reds
+
 ![galleryEx47](../../img/reds_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### set1
 <a name="set1"></a>
+
+### set1
+
 ![galleryEx48](../../img/set1_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### set2
 <a name="set2"></a>
+
+### set2
+
 ![galleryEx49](../../img/set2_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### set3
 <a name="set3"></a>
+
+### set3
+
 ![galleryEx50](../../img/set3_12.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### spectral
 <a name="spectral"></a>
+
+### spectral
+
 ![galleryEx51](../../img/spectral_10.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### tableau
 <a name="tableau"></a>
+
+### tableau
+
 ![galleryEx52](../../img/tableau_20.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### veggiesa
 <a name="veggiesa"></a>
+
+### veggiesa
+
 ![galleryEx53](../../img/veggiesa_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### veggiese
 <a name="veggiese"></a>
+
+### veggiese
+
 ![galleryEx54](../../img/veggiese_7.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### ylgn
 <a name="ylgn"></a>
+
+### ylgn
+
 ![galleryEx55](../../img/ylgn_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### ylgnbu
 <a name="ylgnbu"></a>
+
+### ylgnbu
+
 ![galleryEx56](../../img/ylgnbu_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### ylorbr
 <a name="ylorbr"></a>
+
+### ylorbr
+
 ![galleryEx57](../../img/ylorbr_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
-### ylorrd
 <a name="ylorrd"></a>
+
+### ylorrd
+
 ![galleryEx58](../../img/ylorrd_8.png)
 <a href="#gallery">top of the gallery</a>     <a href="#top">back to the top</a>
 
 <a name="references"></a>
+
 ## References
+
 [Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. *IEEE Transactions on Visualization & Computer Graphics. 17(12)* pp 2301 - 2309. Retrieved from http://vis.stanford.edu/papers/d3](http://vis.stanford.edu/papers/d3)  
 
 [Brewer, C. A. (2002). Color Brewer 2. [Computer Software]. State College, PA: Cynthia Brewer, Mark Harrower, and The Pennsylvania State University](http://www.ColorBrewer2.org)

@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewterpolate/">
 </head>
 
-
   <body>
 
     <header class="site-header">
@@ -22,7 +21,7 @@
 
     <a class="site-title" href="/brewscheme/">brewscheme</a>
 
-    <nav class="site-nav">
+   <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
@@ -31,85 +30,38 @@
         </svg>
       </a>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/brewscheme/about.html">about</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcbsim/">brewcbsim</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolordb/">brewcolordb</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewcolors/">brewcolors</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewextra/">brewextra</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewmeta/">brewmeta</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewproof/">brewproof</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewscheme/">brewscheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewsearch/">brewsearch</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewterpolate/">brewterpolate</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewtheme/">brewtheme</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/brewviewer/">brewviewer</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/filesys/">filesys</a>
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/hextorgb/">hextorgb</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
-          
-        
-          
-        
-          
-          <a class="page-link" href="/brewscheme/more/">more</a>
-          
-        
-      </div>    
-    </nav>
+        <ul>
+          <li><a href="/brewscheme/about/">About</a></li>
+          <li class="dropdown">
+            <div class="dropdown">
+                <a href="/brewscheme/help/" class="dropbtn">Help</a>
+                  <div class="dropdown-content">
+                    <a href="/brewscheme/help/brewscheme/">brewscheme</a>
+                    <a href="/brewscheme/help/brewtheme/">brewtheme</a>
+                    <a href="/brewscheme/help/brewcbsim/">brewcbsim</a>
+                    <a href="/brewscheme/help/brewcolordb/">brewcolordb</a>
+                    <a href="/brewscheme/help/brewcolors/">brewcolors</a>
+                    <a href="/brewscheme/help/brewextra/">brewextra</a>
+                    <a href="/brewscheme/help/brewmeta/">brewmeta</a>
+                    <a href="/brewscheme/help/brewproof/">brewproof</a>
+                    <a href="/brewscheme/help/brewsearch/">brewsearch</a>
+                    <a href="/brewscheme/help/brewterpolate/">brewterpolate</a>
+                    <a href="/brewscheme/help/brewviewer/">brewviewer</a>
+                    <a href="/brewscheme/help/libbrewscheme/">libbrewscheme</a>
+                    <a href="/brewscheme/help/filesys/">filesys</a>
+                    <a href="/brewscheme/help/hextorgb/">hextorgb</a>
+                  </div>
+            </div>
+          </li>
+          <li><a href="/brewscheme/more/">Additional Information</a></li>
+        </ul> 
+           
+     
+   </nav>  
 
   </div>
 
 </header>
-
 
     <div class="page-content">
       <div class="wrapper">
@@ -120,17 +72,18 @@
   </header>
 
   <article class="post-content">
-    <hr />
+    <p><a name="top"></a></p>
+<hr />
 
 <p>Interpolation of colors between starting and ending color values.</p>
 <hr />
 
-<p><strong>brewterpolate</strong> – Stata program to interpolate an arbitrary number of colors between a starting and ending color.</p>
+<p><br /><br />
+<strong>brewterpolate</strong> – Stata program to interpolate an arbitrary number of colors between a starting and ending color.</p>
 
 <h2 id="syntax">Syntax</h2>
 
-<p>brewterpolate, scolor(string) ecolor(string) colors(int) [cmod(string)<br />
-icspace(string) rcspace(string) inverse grayscale ]</p>
+<p>brewterpolate, <u>sc</u>olor(string) <u>ec</u>olor(string) <u>c</u>olors(int) [ <u>cm</u>od(string) <u>ics</u>pace(string) <u>rcs</u>pace(string) <u>inv</u>erse <u>g</u>rayscale ]</p>
 
 <h2 id="description">Description</h2>
 
@@ -138,44 +91,21 @@ icspace(string) rcspace(string) inverse grayscale ]</p>
 
 <h2 id="options">Options</h2>
 
-<p>scolor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.</p>
+<p><u>sc</u>olor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.</p>
 
-<p>scolor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.</p>
+<p><u>ec</u>olor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.</p>
 
-<p>colors is a required argument that takes a value to define the number of points between the starting and ending colors to interpolate.</p>
+<p><u>c</u>olors is a required argument that takes a value to define the number of points between the starting and ending colors to interpolate.</p>
 
-<p>cmod is an optional argument that can take one of the following values: brighter, darker, saturated, desaturated, or nothing and is used to modify the interpolated colors.  A value of “brighter” will return colors that are arbitrarily brighter than the normal interpolated value, “darker” will return colors that are arbitrarily darker than the normal interpolated colors,  “saturated” will return arbitrarily more saturated colors, and “desaturated” will return arbitrarily less saturated colors.  If no argument is passed to this parameter, the colors are interpolated without modification.</p>
+<p><u>cm</u>od is an optional argument that can take one of the following values: brighter, darker, saturated, desaturated, or nothing and is used to modify the interpolated colors.  A value of “brighter” will return colors that are arbitrarily brighter than the normal interpolated value, “darker” will return colors that are arbitrarily darker than the normal interpolated colors,  “saturated” will return arbitrarily more saturated colors, and “desaturated” will return arbitrarily less saturated colors.  If no argument is passed to this parameter, the colors are interpolated without modification.</p>
 
-<p>icspace is an optional argument used to specify the input color space used for the starting and ending colors.  If no argument is passed, RGB is assumed.</p>
+<p><u>ics</u>pace is an optional argument used to specify the input color space used for the starting and ending colors.  If no argument is passed, RGB is assumed.</p>
 
-<p>rcspace is an optional argument used to specify the return color space used for passing the interpolated colors back to Stata.  This can be any of the values listed in Input Color Spaces except for the web-based formats.</p>
+<p><u>rcs</u>pace is an optional argument used to specify the return color space used for passing the interpolated colors back to Stata.  This can be any of the values listed in <a href="#cspaceTable">Input Color Spaces</a> except for the web-based formats.</p>
 
-<p>inverse is an optional argument used to return the inverse of the interpolated colors.  This is implemented after any of the luminance modifications have been made to the colors.</p>
+<p><u>inv</u>erse is an optional argument used to return the inverse of the interpolated colors.  This is implemented after any of the luminance modifications have been made to the colors.</p>
 
-<p>grayscale is an optional argument used to force the returned color values into a grayscale.  This is the last transformation that is applied to the colors. In other words, if you requested the inverse of the colors that are arbitrarily less saturated, the method would first get the less saturated interpolated color, invert it, and then transform it to a gray scale value.</p>
-
-<table>
-<th>Argument</th><th>Color Space</th> 
-<tr><td>rgb</td><td>Red, Green, Blue (ex., 0 0 255).</td></tr>
-<tr><td>rgba</td><td>Red, Green, Blue, Alpha (ex., 0 0 255 0.5)</td></tr>
-<tr><td>srgb</td><td>RGB Decimal (ex., 0.0 0.0 1.0).</td></tr>
-<tr><td>srgba</td><td>RGB Decimal (ex., 0.0 0.0 1.0 0.5).</td></tr>
-<tr><td>hsb</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0)</td></tr>
-<tr><td>hsba</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0 0.5)</td></tr>
-<tr><td>web</td><td>Hex string (ex., 0000FF) [returned with leading # added]</td></tr>
-<tr><td>weba</td><td>Hex string w/Decimal Alpha (ex., 0000FF .27) [returned with leading # added]</td></tr>
-<tr><td>weba</td><td>Hex string w/Hex Alpha (ex., 0000FF00)  [returned with leading # added]</td></tr>
-<tr><td>hex</td><td>Hexadecimal (ex., 0000FF)</td></tr>
-<tr><td>hexa</td><td>Hexadecimal w/Alpha (ex., 0000FF 0.5)</td></tr>
-<tr><td>hexa</td><td>Hex w/Alpha scaled as RGB Integer (e.g., 0000FFFF)</td></tr>
-<tr><td>hexa web</td><td>Web Hexadecimal w/Alpha (ex., )</td></tr>
-<tr><td>rgb web</td><td>Web RGB (ex., )</td></tr>
-<tr><td>rgba web</td><td>Web RGB w/Alpha (ex., )</td></tr>
-<tr><td>srgb</td><td>Web sRGB (ex., )</td></tr>
-<tr><td>srgba</td><td>Web sRGB w/Alpha (ex., )</td></tr>
-<tr><td>hsl</td><td>Hue, Saturation, Lightness (ex., hex, rgb, hsl)</td></tr>
-<tr><td>hsla</td><td>Hue, Saturation, Lightness w/Alpha (ex., hex, rgb, hsl)</td></tr>
-</table>
+<p><u>g</u>rayscale is an optional argument used to force the returned color values into a grayscale.  This is the last transformation that is applied to the colors. In other words, if you requested the inverse of the colors that are arbitrarily less saturated, the method would first get the less saturated interpolated color, invert it, and then transform it to a gray scale value.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -447,6 +377,36 @@ Color 4   68.160001   .53533196   .73254901
 Color 5   56.658594   .78071837   .82980394
 Color 6   52.131148        .976   .98039216
 </code></pre>
+
+<h2 id="available-color-spaces">Available Color Spaces</h2>
+
+<p><a name="cspaceTable"></a></p>
+
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Argument</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Color Space</th> 
+<tr><td>rgb</td><td>Red, Green, Blue (ex., 0 0 255).</td></tr>
+<tr><td>rgba</td><td>Red, Green, Blue, Alpha (ex., 0 0 255 0.5)</td></tr>
+<tr><td>srgb</td><td>RGB Decimal (ex., 0.0 0.0 1.0).</td></tr>
+<tr><td>srgba</td><td>RGB Decimal (ex., 0.0 0.0 1.0 0.5).</td></tr>
+<tr><td>hsb</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0)</td></tr>
+<tr><td>hsba</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0 0.5)</td></tr>
+<tr><td>web</td><td>Hex string (ex., 0000FF) [returned with leading # added]</td></tr>
+<tr><td>weba</td><td>Hex string w/Decimal Alpha (ex., 0000FF .27) [returned with leading # added]</td></tr>
+<tr><td>weba</td><td>Hex string w/Hex Alpha (ex., 0000FF00)  [returned with leading # added]</td></tr>
+<tr><td>hex</td><td>Hexadecimal (ex., 0000FF)</td></tr>
+<tr><td>hexa</td><td>Hexadecimal w/Alpha (ex., 0000FF 0.5)</td></tr>
+<tr><td>hexa</td><td>Hex w/Alpha scaled as RGB Integer (e.g., 0000FFFF)</td></tr>
+<tr><td>hexa web</td><td>Web Hexadecimal w/Alpha (ex., )</td></tr>
+<tr><td>rgb web</td><td>Web RGB (ex., )</td></tr>
+<tr><td>rgba web</td><td>Web RGB w/Alpha (ex., )</td></tr>
+<tr><td>srgb</td><td>Web sRGB (ex., )</td></tr>
+<tr><td>srgba</td><td>Web sRGB w/Alpha (ex., )</td></tr>
+<tr><td>hsl</td><td>Hue, Saturation, Lightness (ex., hex, rgb, hsl)</td></tr>
+<tr><td style="border-bottom: 1px solid black">hsla</td><td style="border-bottom: 1px solid black">Hue, Saturation, Lightness w/Alpha (ex., hex, rgb, hsl)</td></tr>
+</table>
+<p><br /></p>
+
+<p><a href="#top">back to the top</a></p>
 
 <h2 id="references">References</h2>
 <p><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html">Java Color Documentation</a></p>

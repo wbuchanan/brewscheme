@@ -7,7 +7,7 @@ permalink: /help/brewtheme/
 <hr>
 Command used to generate .theme files used by brewscheme
 <hr>
-<br>
+
 <br>
 <a name="top"></a>
 
@@ -15,7 +15,19 @@ __brewtheme__ -- a program to generate theme files containing scheme file entrie
 
 ## Syntax
 
-__brewtheme__ <em>themeName</em> [, <u>abo</u>vebelow(string) <u>anglesty</u>le(string) <u>areasty</u>le(string) <u>arrowsty</u>le(string) <u>axissty</u>le(string) <u>barlabelp</u>os(string) <u>barlabelsty</u>le(string) <u>barsty</u>le(string) <u>bygraphsty</u>le(string) <u>clegendsty</u>le(string) <u>clock</u>dir(string) <u>col</u>or(string) <u>compass2</u>dir(string) <u>compass3</u>dir(string) <u>connectsty</u>le(string) <u>dottypesty</u>le(string) <u>graphsi</u>ze(string) <u>graphsty</u>le(string) <u>gridlinesty</u>le(string) <u>gridringsty</u>le(string) <u>gridsty</u>le(string) gsize(string) <u>horiz</u>ontal(string) <u>labelsty</u>le(string) <u>legendsty</u>le(string) <u>linepat</u>tern(string) <u>linesty</u>le(string) <u>linew</u>idth(string) <u>marg</u>in(string) <u>medtypesty</u>le(string) <u>numsty</u>le(string) numticks(string) <u>piegraphsty</u>le(string) <u>pielabelsty</u>le(string) <u>plotregionsty</u>le(string) <u>relativep</u>os(string) <u>relsi</u>ze(string) <u>spec</u>ial(string) <u>starsty</u>le(string) <u>sunflowersty</u>le(string) <u>symb</u>ol(string) <u>symbolsi</u>ze(string) <u>orientsty</u>le(string) <u>textboxsty</u>le(string) <u>tickp</u>osition(string) <u>ticksty</u>le(string) <u>ticksetsty</u>le(string) <u>verticalt</u>ext(string) <u>yesn</u>o(string) <u>zyx2r</u>ule(string) <u>zyx2sty</u>le(string) ]
+__brewtheme__ <em>themeName</em> 	[, <u>abo</u>vebelow(string) <u>anglesty</u>le(string) <u>areasty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>arrowsty</u>le(string) <u>axissty</u>le(string) <u>barlabelp</u>os(string) <u>barlabelsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>barsty</u>le(string) <u>bygraphsty</u>le(string) <u>clegendsty</u>le(string) <u>clock</u>dir(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>col</u>or(string) <u>compass2</u>dir(string) <u>compass3</u>dir(string) <u>connectsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>dottypesty</u>le(string) <u>graphsi</u>ze(string) <u>graphsty</u>le(string) <u>gridlinesty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>gridringsty</u>le(string) <u>gridsty</u>le(string) gsize(string) <u>horiz</u>ontal(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>labelsty</u>le(string) <u>legendsty</u>le(string) <u>linepat</u>tern(string) <u>linesty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>linew</u>idth(string) <u>marg</u>in(string) <u>medtypesty</u>le(string) <u>numsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;numticks(string) <u>piegraphsty</u>le(string) <u>pielabelsty</u>le(string) <u>plotregionsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>relativep</u>os(string) <u>relsi</u>ze(string) <u>spec</u>ial(string) <u>starsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>sunflowersty</u>le(string) <u>symb</u>ol(string) <u>symbolsi</u>ze(string) <u>orientsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>textboxsty</u>le(string) <u>tickp</u>osition(string) <u>ticksty</u>le(string) <u>ticksetsty</u>le(string) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>verticalt</u>ext(string) <u>yesn</u>o(string) <u>zyx2r</u>ule(string) <u>zyx2sty</u>le(string) ]
 
 ## Description
 
@@ -35,7 +47,7 @@ The links below point to topic specific help files.  These are still a work in p
 
 The options below are listed with the 'bt' prefix to differentiate them from cases where there may be official Stata help files with the same namespace.
 
-<table>
+<table style="width:100%">
 <tr><td><a href="#abovebelow">btabovebelow</a></td><td><a href="#anglestyle">btanglestyle</a></td></tr>
 <tr><td><a href="#areastyle">btareastyle</a></td><td><a href="#arrowstyle">btarrowstyle</a></td></tr>
 <tr><td><a href="#axisstyle">btaxisstyle</a></td><td><a href="#barlabelpos">btbarlabelpos</a></td></tr>
@@ -63,51 +75,215 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td><a href="#zyx2rule">btzyx2rule</a></td><td><a href="#zyx2style">btzyx2style</a></td></tr>
 </table>
 
+
+<a name="examples"></a>
+
+## Examples
+
+### Ex 1.
+
+Create a theme file that emulates the aesthetics of the [ggplot2](https://github.com/hadley/ggplot2) package for the [R language](https://cran.r-project.org).   
+
+   
+```Stata
+
+// Change the end of line delimiter
+#d ;
+
+// Generate the theme file used to simulate ggplot2 aesthetics
+brewtheme ggtheme, numticks("major 5" "horizontal_major 5" "vertical_major 5"     
+"horizontal_minor 10" "vertical_minor 10") color("plotregion gs15"          
+"matrix_plotregion gs15" "background gs15" "textbox gs15" "legend gs15"       
+"box gs15" "mat_label_box gs15" "text_option_fill gs15" "clegend gs15"        
+"histback gs15" "pboxlabelfill gs15" "plabelfill gs15" "pmarkbkfill gs15"      
+"pmarkback gs15") linew("major_grid medthick" "minor_grid thin" "legend medium"    
+"clegend medium") clockdir("legend_position 3") yesno("draw_major_grid yes"     
+"draw_minor_grid yes" "legend_force_draw yes" "legend_force_nodraw no"        
+"draw_minor_vgrid yes" "draw_minor_hgrid yes" "extend_grid_low yes"         
+"extend_grid_high yes" "extend_axes_low no" "extend_axes_high no")          
+gridsty("minor minor") axissty("horizontal_default horizontal_withgrid"       
+"vertical_default vertical_withgrid") linepattern("major_grid solid"        
+"minor_grid solid") linesty("major_grid major_grid" "minor_grid minor_grid")     
+ticksty("minor minor_notick" "minor_notick minor_notick")               
+ticksetsty("major_vert_withgrid minor_vert_nolabel"                 
+"major_horiz_withgrid minor_horiz_nolabel"                      
+"major_horiz_nolabel major_horiz_default"                       
+"major_vert_nolabel major_vert_default") gsize("minortick_label minuscule"        
+"minortick tiny") numsty("legend_cols 1" "legend_rows 0" "zyx2rows 0" 
+"zyx2cols 1") verticaltext("legend top");
+
+// Change the end of line delimiter back to a carriage return
+#d cr
+
+// Create a scheme file using the theme file created with the syntax above
+brewscheme, scheme(ggtest2) const(orange) cone(blue) consat(20) scatc(5)    ///  
+scatst(ggplot2) piest(ggplot2) piec(6) barst(ggplot2) barc(2) linec(2)      ///   
+linest(ggplot2) areast(ggplot2) areac(5) somest(ggplot2) somec(24) cic(3)   ///   
+cist(ggplot2) themef(ggplot2)
+
+// Load the auto.dta data set
+sysuse auto.dta, clear
+
+// Create a graph with the scheme file above
+tw  lowess mpg weight ||                                                    ///   
+    scatter mpg weight if rep78 == 1 ||                                     ///   
+    scatter mpg weight if rep78 == 2 ||                                     ///   
+    scatter mpg weight if rep78 == 3 ||                                     ///   
+    scatter mpg weight if rep78 == 4 ||                                     ///   
+    scatter mpg weight if rep78 == 5,                                       ///   
+    legend(order(2 "1978 Repair Record = 1"                                 ///   
+    3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3"                   ///   
+    5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))                 ///   
+    scheme(ggtest2) 
+```
+
+
+![brewthemeEx1](../../img/ggthemeTest.png)
+
+### Ex 2.
+
+Uses the theme above and shows how symbol types get recycled as well
+
+```Stata
+brewscheme, scheme(ggtest2) const(orange) cone(blue) consat(20)             ///  
+scatst(ggplot2) scatc(5) piest(ggplot2) piec(6) barst(ggplot2) barc(2)      ///   
+linest(ggplot2) linec(2) areast(ggplot2) areac(5) somest(ggplot2) somec(24) ///   
+cist(ggplot2) cic(3) themef(ggplot2) symbols(diamond triangle square)
+
+// Create a graph with the scheme file above
+tw  lowess mpg weight ||                                                    ///   
+    scatter mpg weight if rep78 == 1 ||                                     ///   
+    scatter mpg weight if rep78 == 2 ||                                     ///   
+    scatter mpg weight if rep78 == 3 ||                                     ///   
+    scatter mpg weight if rep78 == 4 ||                                     ///   
+    scatter mpg weight if rep78 == 5,                                       ///   
+    legend(order(2 "1978 Repair Record = 1"                                 ///   
+    3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3"                   ///   
+    5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))                 ///   
+    scheme(ggtest2) 
+```
+
+![brewthemeEx2](../../img/ggthemeTest2.png)
+
+### Ex 3.
+Create a theme file that would emulate the original `s2color` scheme settings controlled by `brewtheme`
+
+```Stata
+// Change the end of line delimiter
+#d ;
+
+// Generates a theme in the style of s2color
+brewtheme s2theme, graphsi("x 5.5" "y 4") numsty("legend_cols 2" "legend_rows 0" 
+"zyx2rows 0" "zyx2cols 1") gsize("label medsmall" "small_label small"
+"text medium" "body medsmall" "small_body small" "heading large" 
+"axis_title medsmall" "matrix_label medlarge" "matrix_marklbl small" 
+"key_label medsmall" "note small" "star medsmall" "text_option medsmall" 
+"minor_tick half_tiny" "tick_label medsmall" "tick_biglabel medium" 
+"title_gap vsmall" "key_gap vsmall" "key_linespace vsmall" "legend_key_xsize 13" 
+"legend_key_ysize medsmall" "clegend_width huge" "pielabel_gap zero" 
+"plabel small" "pboxlabel small" "sts_risktable_space third_tiny" 
+"sts_risktable_tgap zero" "sts_risktable_lgap zero" "minortick half_tiny" 
+"pie_explode medium") relsize("bar_groupgap 67pct" "dot_supgroupgap 67pct" 
+"box_gap 33pct" "box_supgroupgap 200pct" "box_outergap 20pct" "box_fence 67pct") 
+symbolsi("smallsymbol small" "histogram medlarge" "ci medium" "ci2 medium" 
+"matrix medium" "refmarker medlarge" "parrowbarb zero") 
+color("background ltbluishgray" "foreground black" "backsymbol gs8" 
+"heading dknavy" "box bluishgray" "textbox bluishgray" 
+"mat_label_box bluishgray" "text_option_line black" 
+"text_option_fill bluishgray" "filled bluishgray" "bylabel_outline bluishgray" 
+"reverse_big navy" "reverse_big_line navy" "grid ltbluishgray" 
+"major_grid ltbluishgray" "minor_grid gs5" "matrix navy" "matrixmarkline navy" 
+"histback gold" "legend_line black" "clegend white" "clegend_line black" 
+"pboxlabelfill bluishgray" "plabelfill bluishgray") 
+linepattern("foreground solid" "background solid" "grid solid" 
+"major_grid solid" "minor_grid dot" "text_option solid") 
+linesty("textbox foreground" "grid grid" "major_grid major_grid" 
+"minor_grid minor_grid" "legend legend") linewidth("p medium" "foreground thin" 
+"background thin" "grid medium" "major_grid medium" "minor_grid thin" 
+"tick thin" "minortick thin" "ci_area medium" "ci2_area medium" 
+"histogram medium" "dendrogram medium" "xyline medium" "refmarker medium" 
+"matrixmark medium" "dots vvthin" "dot_area medium" "dotmark thin" 
+"plotregion thin" "legend thin" "clegend thin" "pie medium" "sunflower medium" 
+"text_option thin" "pbar vvvthin") textboxsty("note small_body" 
+"leg_caption body") axissty("bar_super horizontal_nolinetick" 
+"dot_super horizontal_nolinetick" "bar_scale_horiz horizontal_withgrid" 
+"bar_scale_vert vertical_withgrid" "box_scale_horiz horizontal_withgrid" 
+"box_scale_vert vertical_withgrid") clockdir("caption_position 7" 
+"legend_position 6" "by_legend_position 6" "p 3" "legend_caption_position 7")  
+gridringsty("caption_ring 5" "legend_caption_ring 5") 
+anglesty("vertical_tick vertical") yesno("extend_axes_low no" 
+"extend_axes_high no" "draw_major_vgrid yes" "use_labels_on_ticks no" 
+"title_span no" "subtitle_span no" "caption_span no" 
+"note_span no" "legend_span no") barlabelsty("bar none");
+```
+
+# Additional information
+In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the `brewtheme` and `brewscheme` programs now automatically generate color vision impaired clones of themselves: 
+
+```
+theme-ggplot2.theme
+theme-ggplot2_achromatopsia.theme
+theme-ggplot2_protanopia.theme
+theme-ggplot2_deuteranopia.theme
+theme-ggplot2_tritanopia.theme
+scheme-ggtest2.scheme
+scheme-ggtest2_achromatopsia.scheme
+scheme-ggtest2_protanopia.scheme
+scheme-ggtest2_deuteranopia.scheme
+scheme-ggtest2_tritanopia.scheme
+```
+
+<br>
 <hr>
+<a href="#top">back to the top</a>
+<hr>
+
 <br>
 <a name="abovebelow"></a>
 
-<u>abo</u>vebelow -- is an optional argument for brewtheme.
+<h3><u>abo</u>vebelow -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>star (line 1756)*</td><td>above | below</td><td>below</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">star (line 1756)*</td><td style="border-bottom: 1px solid black;">above | below</td><td style="border-bottom: 1px solid black;">below</td></tr>
 </table>
+<br>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="anglestyle"></a>
 
-<u>anglesty</u>le -- is an optional argument for brewtheme.
+<h3><u>anglesty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>clegend (line 1504)*</td><td>angle styles</td><td>horizontal</td></tr>
 <tr><td>horizontal_tick</td><td>angle styles</td><td>horizontal</td></tr>
 <tr><td>p (line 1505)*</td><td>angle styles</td><td>stdarrow</td></tr>
 <tr><td>parrow (line 1506)*</td><td>angle styles</td><td>stdarrow</td></tr>
 <tr><td>parrowbarb (line 1507)*</td><td>angle styles</td><td>zero</td></tr>
-<tr><td>vertical_tick</td><td>angle styles</td><td>horizontal</td></tr>
+<tr><td style="border-bottom: 1px solid black;">vertical_tick</td><td style="border-bottom: 1px solid black;">angle styles</td><td style="border-bottom: 1px solid black;">horizontal</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="areastyle"></a>
 
-<u>areasty</u>le -- is an optional argument for brewtheme.
+<h3><u>areasty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>background</td><td>area styles</td><td>background</td></tr>
 <tr><td>bar_iplotregion</td><td>area styles</td><td>none</td></tr>
 <tr><td>bar_plotregion</td><td>area styles</td><td>plotregion</td></tr>
@@ -160,41 +336,42 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td>sunflowerdb</td><td>area styles</td><td>sunflowerdb</td></tr>
 <tr><td>sunflowerlb</td><td>area styles</td><td>sunflowerlb</td></tr>
 <tr><td>twoway_iplotregion</td><td>area styles</td><td>none</td></tr>
-<tr><td>twoway_plotregion</td><td>area styles</td><td>plotregion</td></tr>
+<tr><td style="border-bottom: 1px solid black;">twoway_plotregion</td><td style="border-bottom: 1px solid black;">area styles</td><td style="border-bottom: 1px solid black;">plotregion</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
-
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="arrowstyle"></a>
 
-<u>arrowsty</u>le -- is an optional argument for brewtheme.
+<h3><u>arrowsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>default (line 1750)*</td><td>graph query arrowstyle</td><td>editor</td></tr>
-<tr><td>editor (line 1751)*</td><td>graph query arrowstyle</td><td>editor</td></tr>
+<tr><td style="border-bottom: 1px solid black;">editor (line 1751)*</td><td style="border-bottom: 1px solid black;">graph query arrowstyle</td><td style="border-bottom: 1px solid black;">editor</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="axisstyle"></a>
 
-<u>axissty</u>le -- is an optional argument for brewtheme.
+<h3><u>axissty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>bar_group</td><td>axis styles</td><td>horizontal_notick</td></tr>
 <tr><td>bar_scale_horiz</td><td>axis styles</td><td>horizontal_nogrid</td></tr>
 <tr><td>bar_scale_vert</td><td>axis styles</td><td>vertical_nogrid</td></tr>
@@ -214,112 +391,118 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td>matrix_vert</td><td>axis styles</td><td>vertical_nogrid</td></tr>
 <tr><td>sts_risktable (line 1393)*</td><td>axis styles</td><td>sts_risktable</td></tr>
 <tr><td>vertical_default</td><td>axis styles</td><td>vertical_default</td></tr>
-<tr><td>vertical_nogrid</td><td>axis styles</td><td>vertical_nogrid</td></tr>
+<tr><td style="border-bottom: 1px solid black;">vertical_nogrid</td><td style="border-bottom: 1px solid black;">axis styles</td><td style="border-bottom: 1px solid black;">vertical_nogrid</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="barlabelpos"></a>
 
-<u>barlabelp</u>os -- is an optional argument for brewtheme.
+<h3><u>barlabelp</u>os -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>bar</td><td>graph query barlabelpos</td><td>outside</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">bar</td><td style="border-bottom: 1px solid black;">graph query barlabelpos</td><td style="border-bottom: 1px solid black;">outside</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="barlabelstyle"></a>
 
-<u>barlabelsty</u>le -- is an optional argument for brewtheme.
+<h3><u>barlabelsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>bar</td><td>graph query barlabelstyle</td><td>bar</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">bar</td><td style="border-bottom: 1px solid black;">graph query barlabelstyle</td><td style="border-bottom: 1px solid black;">bar</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="barstyle"></a>
 
-<u>barsty</u>le -- is an optional argument for brewtheme.
+<h3><u>barsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>box</td><td>graph query barstyle</td><td>boxdefault</td></tr>
 <tr><td>default</td><td>graph query barstyle</td><td>default</td></tr>
-<tr><td>dot</td><td>graph query barstyle</td><td>dotdefault</td></tr>
+<tr><td style="border-bottom: 1px solid black;">dot</td><td style="border-bottom: 1px solid black;">graph query barstyle</td><td style="border-bottom: 1px solid black;">dotdefault</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="bygraphstyle"></a>
 
-<u>bygraphsty</u>le -- is an optional argument for brewtheme.
+<h3><u>bygraphsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>bygraph</td><td>bygraph styles</td><td>default</td></tr>
 <tr><td>combine</td><td>bygraph styles</td><td>combine</td></tr>
-<tr><td>default</td><td>bygraph styles</td><td>default</td></tr>
+<tr><td style="border-bottom: 1px solid black;">default</td><td style="border-bottom: 1px solid black;">bygraph styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="clegendstyle"></a>
 
-<u>clegendsty</u>le -- is an optional argument for brewtheme.
+<h3><u>clegendsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>default (line 1552)*</td><td>clegend styles</td><td>default</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">default (line 1552)*</td><td style="border-bottom: 1px solid black;">clegend styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>    
-<br>
+
 <br>
 <a name="clockdir"></a>
 
-<u>clock</u>dir -- is an optional argument for brewtheme.
+<h3><u>clock</u>dir -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>by_legend_position</td><td>clock position styles</td><td>12</td></tr>
 <tr><td>caption_position</td><td>clock position styles</td><td>5</td></tr>
 <tr><td>clegend_title_position (line 1478)*</td><td>clock position styles</td><td>12</td></tr>
@@ -334,21 +517,24 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td>p</td><td>clock position styles</td><td>0</td></tr>
 <tr><td>subtitle_position</td><td>clock position styles</td><td>12</td></tr>
 <tr><td>title_position</td><td>clock position styles</td><td>12</td></tr>
-<tr><td>zyx2legend_position (line 1465)*</td><td>clock position styles</td><td>3</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2legend_position (line 1465)*</td><td style="border-bottom: 1px solid black;">clock position styles</td><td style="border-bottom: 1px solid black;">3</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
+
+<br>
 <a name="color"></a>
 
-<u>col</u>or -- is an optional argument for brewtheme.
+<h3><u>col</u>or -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis_title</td><td>color styles</td><td>black</td></tr>
 <tr><td>axisline</td><td>color styles</td><td>black</td></tr>
 <tr><td>background</td><td>color styles</td><td>white</td></tr>
@@ -401,147 +587,159 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td>textbox</td><td>color styles</td><td>white</td></tr>
 <tr><td>tick</td><td>color styles</td><td>black</td></tr>
 <tr><td>tick_biglabel (line 223)*</td><td>color styles</td><td>black</td></tr>
-<tr><td>tick_label</td><td>color styles</td><td>black</td></tr>
+<tr><td style="border-bottom: 1px solid black;">tick_label</td><td style="border-bottom: 1px solid black;">color styles</td><td style="border-bottom: 1px solid black;">black</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
+
+<br>
 <a href="compass2dir"></a>
 
-<u>compass2</u>dir -- is an optional argument for brewtheme.
+<h3><u>compass2</u>dir -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>editor (line 1450)*</td><td>compass direction styles</td><td>east</td></tr>
 <tr><td>graph_aspect</td><td>compass direction styles</td><td>center</td></tr>
 <tr><td>key_label</td><td>compass direction styles</td><td>west</td></tr>
 <tr><td>legend_fillpos (line 1446)*</td><td>compass direction styles</td><td>center</td></tr>
 <tr><td>legend_key (line 1447)*</td><td>compass direction styles</td><td>default</td></tr>
 <tr><td>p (line 1444)*</td><td>compass direction styles</td><td>east</td></tr>
-<tr><td>text_option</td><td>compass direction styles</td><td>center</td></tr>
+<tr><td style="border-bottom: 1px solid black;">text_option</td><td style="border-bottom: 1px solid black;">compass direction styles</td><td style="border-bottom: 1px solid black;">center</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
+
+<br>
 <a name="compass3dir"></a>
 
-<u>compass3</u>dir -- is an optional argument for brewtheme.
+<h3><u>compass3</u>dir -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>p (line 1455)*</td><td>compass3 direction styles</td><td>east</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">p (line 1455)*</td><td style="border-bottom: 1px solid black;">compass3 direction styles</td><td style="border-bottom: 1px solid black;">east</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="connectstyle"></a>
 
-<u>connectsty</u>le -- is an optional argument for brewtheme.
+<h3><u>connectsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>p</td><td>connection styles</td><td>direct</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">p</td><td style="border-bottom: 1px solid black;">connection styles</td><td style="border-bottom: 1px solid black;">direct</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="dottypestyle"></a>
 
-<u>dottypesty</u>le -- is an optional argument for brewtheme.
+<h3><u>dottypesty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>dot</td><td>graph query dottypestyle</td><td>dot</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">dot</td><td style="border-bottom: 1px solid black;">graph query dottypestyle</td><td style="border-bottom: 1px solid black;">dot</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="graphsize"></a>
 
-<u>graphsi</u>ze -- is an optional argument for brewtheme.
+<h3><u>graphsi</u>ze -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>x</td><td>Real #</td><td>9</td></tr>
-<tr><td>y</td><td>Real #</td><td>6</td></tr>
+<tr><td style="border-bottom: 1px solid black;">y</td><td style="border-bottom: 1px solid black;">Real #</td><td style="border-bottom: 1px solid black;">6</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="graphstyle"></a>
 
-<u>graphsty</u>le -- is an optional argument for brewtheme.
+<h3><u>graphsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>default (line 1533)*</td><td>graph styles</td><td>default</td></tr>
 <tr><td>graph (line 1534)*</td><td>graph styles</td><td>default</td></tr>
-<tr><td>matrixgraph (line 1535)*</td><td>graph styles</td><td>matrixgraph</td></tr>
+<tr><td style="border-bottom: 1px solid black;">matrixgraph (line 1535)*</td><td style="border-bottom: 1px solid black;">graph styles</td><td style="border-bottom: 1px solid black;">matrixgraph</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="gridlinestyle"></a>
 
-<u>gridlinesty</u>le -- is an optional argument for brewtheme.
+<h3><u>gridlinesty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>default (line 1403)*</td><td>grid line styles</td><td>default</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">default (line 1403)*</td><td style="border-bottom: 1px solid black;">grid line styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="gridringstyle"></a>
 
-<u>gridringsty</u>le -- is an optional argument for brewtheme.
+<h3><u>gridringsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>by_legend_ring</td><td>ring position styles</td><td>3</td></tr>
 <tr><td>caption_ring</td><td>ring position styles</td><td>4</td></tr>
 <tr><td>clegend_ring (line 1491)*</td><td>ring position styles</td><td>3</td></tr>
@@ -555,41 +753,43 @@ The options below are listed with the 'bt' prefix to differentiate them from cas
 <tr><td>spacers_ring (line 1484)*</td><td>ring position styles</td><td>11</td></tr>
 <tr><td>subtitle_ring</td><td>ring position styles</td><td>6</td></tr>
 <tr><td>title_ring</td><td>ring position styles</td><td>7</td></tr>
-<tr><td>zyx2legend_ring (line 1490)*</td><td>ring position styles</td><td>4</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2legend_ring (line 1490)*</td><td style="border-bottom: 1px solid black;">ring position styles</td><td style="border-bottom: 1px solid black;">4</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="gridstyle"></a>
 
-<u>gridsty</u>le -- is an optional argument for brewtheme.
+<h3><u>gridsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>major</td><td>graph query gridstyle</td><td>major</td></tr>
-<tr><td>minor</td><td>graph query gridstyle</td><td>major</td></tr>
+<tr><td style="border-bottom: 1px solid black;">minor</td><td style="border-bottom: 1px solid black;">graph query gridstyle</td><td style="border-bottom: 1px solid black;">major</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="gsize"></a>
 
-gsize -- is an optional argument for brewtheme.
+<h3>gsize -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>alternate_gap</td><td>text size styles</td><td>zero</td></tr>
 <tr><td>axis_space</td><td>text size styles</td><td>half_tiny</td></tr>
 <tr><td>axis_title</td><td>text size styles</td><td>small</td></tr>
@@ -647,23 +847,24 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>zyx2legend_key_gap (line 121)*</td><td>text size styles</td><td>tiny</td></tr>
 <tr><td>zyx2legend_key_xsize (line 122)*</td><td>text size styles</td><td>vhuge</td></tr>
 <tr><td>zyx2legend_key_ysize (line 123)*</td><td>text size styles</td><td>medium</td></tr>
-<tr><td>zyx2rowgap (line 124)*</td><td>text size styles</td><td>zero</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2rowgap (line 124)*</td><td style="border-bottom: 1px solid black;">text size styles</td><td style="border-bottom: 1px solid black;">zero</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="horizontal"></a>
 
-<u>horiz</u>ontal -- is an optional argument for brewtheme.
+<h3><u>horiz</u>ontal -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis_title</td><td>horizontal justification styles</td><td>center</td></tr>
 <tr><td>body</td><td>horizontal justification styles</td><td>center</td></tr>
 <tr><td>editor (line 1353)*</td><td>horizontal justification styles</td><td>left</td></tr>
@@ -676,61 +877,64 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>sts_risk_label (line 1354)*</td><td>horizontal justification styles</td><td>default</td></tr>
 <tr><td>sts_risk_title (line 1355)*</td><td>horizontal justification styles</td><td>right</td></tr>
 <tr><td>subheading</td><td>horizontal justification styles</td><td>center</td></tr>
-<tr><td>text_option</td><td>horizontal justification styles</td><td>center</td></tr>
+<tr><td style="border-bottom: 1px solid black;">text_option</td><td style="border-bottom: 1px solid black;">horizontal justification styles</td><td style="border-bottom: 1px solid black;">center</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="labelstyle"></a>
 
-<u>labelsty</u>le -- is an optional argument for brewtheme.
+<h3><u>labelsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>editor (line 1558)*</td><td>label styles</td><td>editor</td></tr>
 <tr><td>ilabel (line 1556)*</td><td>label styles</td><td>ilabel</td></tr>
 <tr><td>matrix</td><td>label styles</td><td>matrix</td></tr>
-<tr><td>sunflower (line 1559)*</td><td>label styles</td><td>default</td></tr>
+<tr><td style="border-bottom: 1px solid black;">sunflower (line 1559)*</td><td style="border-bottom: 1px solid black;">label styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="legendstyle"></a>
 
-<u>legendsty</u>le -- is an optional argument for brewtheme.
+<h3><u>legendsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>default (line 1548)*</td><td>legend styles</td><td>default</td></tr>
-<tr><td>zyx2 (line 1549)*</td><td>legend styles</td><td>zyx2</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2 (line 1549)*</td><td style="border-bottom: 1px solid black;">legend styles</td><td style="border-bottom: 1px solid black;">zyx2</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="linepattern"></a>
 
-<u>linepat</u>tern -- is an optional argument for brewtheme.
+<h3><u>linepat</u>tern -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axisline</td><td>line pattern styles</td><td>solid</td></tr>
 <tr><td>background</td><td>line pattern styles</td><td>solid</td></tr>
 <tr><td>ci</td><td>line pattern styles</td><td>solid</td></tr>
@@ -760,23 +964,24 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>text_option</td><td>line pattern styles</td><td>blank</td></tr>
 <tr><td>tick</td><td>line pattern styles</td><td>solid</td></tr>
 <tr><td>xyline</td><td>line pattern styles</td><td>solid</td></tr>
-<tr><td>zyx2 (line 443)*</td><td>line pattern styles</td><td>solid</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2 (line 443)*</td><td style="border-bottom: 1px solid black;">line pattern styles</td><td style="border-bottom: 1px solid black;">solid</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="linestyle"></a>
 
-<u>linesty</u>le -- is an optional argument for brewtheme.
+<h3><u>linesty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis</td><td>line style options</td><td>axisline</td></tr>
 <tr><td>axis_withgrid</td><td>line style options</td><td>foreground</td></tr>
 <tr><td>background</td><td>line style options</td><td>background</td></tr>
@@ -831,23 +1036,24 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>tick</td><td>line style options</td><td>tick</td></tr>
 <tr><td>xyline</td><td>line style options</td><td>xyline</td></tr>
 <tr><td>zero_line (line 720)*</td><td>line style options</td><td>foreground</td></tr>
-<tr><td>zyx2 (line 763)*</td><td>line style options</td><td>zyx2</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2 (line 763)*</td><td style="border-bottom: 1px solid black;">line style options</td><td style="border-bottom: 1px solid black;">zyx2</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="linewidth"></a>
 
-<u>linew</u>idth -- is an optional argument for brewtheme.
+<h3><u>linew</u>idth -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axisline</td><td>line width styles</td><td>thin</td></tr>
 <tr><td>background</td><td>line width styles</td><td>none</td></tr>
 <tr><td>ci</td><td>line width styles</td><td>medium</td></tr>
@@ -882,23 +1088,24 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>thin (line 987)*</td><td>line width styles</td><td>thin</td></tr>
 <tr><td>tick</td><td>line width styles</td><td>vthin</td></tr>
 <tr><td>xyline</td><td>line width styles</td><td>medthin</td></tr>
-<tr><td>zyx2 (line 1020)*</td><td>line width styles</td><td>medium</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2 (line 1020)*</td><td style="border-bottom: 1px solid black;">line width styles</td><td style="border-bottom: 1px solid black;">medium</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="margin"></a>
 
-<u>marg</u>in -- is an optional argument for brewtheme.
+<h3><u>marg</u>in -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis_title</td><td>margin styles</td><td>zero</td></tr>
 <tr><td>bargraph</td><td>margin styles</td><td>bargraph</td></tr>
 <tr><td>body</td><td>margin styles</td><td>vsmall</td></tr>
@@ -942,40 +1149,42 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>text</td><td>margin styles</td><td>vsmall</td></tr>
 <tr><td>text_option</td><td>margin styles</td><td>zero</td></tr>
 <tr><td>textbox</td><td>margin styles</td><td>zero</td></tr>
-<tr><td>twoway (line 552)*</td><td>margin styles</td><td>medsmall</td></tr>
+<tr><td style="border-bottom: 1px solid black;">twoway (line 552)*</td><td style="border-bottom: 1px solid black;">margin styles</td><td style="border-bottom: 1px solid black;">medsmall</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="medtypestyle"></a>
 
-<u>medtypesty</u>le -- is an optional argument for brewtheme.
+<h3><u>medtypesty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>boxplot</td><td>graph query medtypestyle</td><td>line</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">boxplot</td><td style="border-bottom: 1px solid black;">graph query medtypestyle</td><td style="border-bottom: 1px solid black;">line</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="numstyle"></a>
 
-<u>numsty</u>le -- is an optional argument for brewtheme.
+<h3><u>numsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>bar_num_dots (line 49)*</td><td>Integer</td><td>100</td></tr>
 <tr><td>dot_extend_high</td><td>0|1</td><td>0</td></tr>
 <tr><td>dot_extend_low</td><td>0|1</td><td>0</td></tr>
@@ -987,23 +1196,24 @@ gsize -- is an optional argument for brewtheme.
 <tr><td>max_wted_symsize</td><td>Real # (Max Symbol Size in Bubble Plots)</td><td>10</td></tr>
 <tr><td>pie_angle</td><td>Real #</td><td>90</td></tr>
 <tr><td>zyx2cols (line 41)*</td><td>Integer</td><td>2</td></tr>
-<tr><td>zyx2rows (line 40)*</td><td>Integer</td><td>4</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2rows (line 40)*</td><td style="border-bottom: 1px solid black;">Integer</td><td style="border-bottom: 1px solid black;">4</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="numticks"></a>
 
-numticks -- is an optional argument for brewtheme.
+<h3>numticks -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>horizontal_major</td><td>Integer #</td><td>5</td></tr>
 <tr><td>horizontal_minor</td><td>Integer #</td><td>0</td></tr>
 <tr><td>horizontal_tmajor</td><td>Integer #</td><td>0</td></tr>
@@ -1012,57 +1222,60 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>vertical_major</td><td>Integer #</td><td>5</td></tr>
 <tr><td>vertical_minor</td><td>Integer #</td><td>0</td></tr>
 <tr><td>vertical_tmajor</td><td>Integer #</td><td>0</td></tr>
-<tr><td>vertical_tminor</td><td>Integer #</td><td>0</td></tr>
+<tr><td style="border-bottom: 1px solid black;">vertical_tminor</td><td style="border-bottom: 1px solid black;">Integer #</td><td style="border-bottom: 1px solid black;">0</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="piegraphstyle"></a>
 
-<u>piegraphsty</u>le -- is an optional argument for brewtheme.
+<h3><u>piegraphsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>piegraph</td><td>by graph styles</td><td>default</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">piegraph</td><td style="border-bottom: 1px solid black;">by graph styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="pielabelstyle"></a>
 
-<u>pielabelsty</u>le -- is an optional argument for brewtheme.
+<h3><u>pielabelsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>default (line 1748)*</td><td>pie graph label styles</td><td>none</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">default (line 1748)*</td><td style="border-bottom: 1px solid black;">pie graph label styles</td><td style="border-bottom: 1px solid black;">none</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="plotregionstyle"></a>
 
-<u>plotregionsty</u>le -- is an optional argument for brewtheme.
+<h3><u>plotregionsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>bargraph</td><td>plot region style</td><td>bargraph</td></tr>
 <tr><td>boxgraph</td><td>plot region style</td><td>boxgraph</td></tr>
 <tr><td>bygraph</td><td>plot region style</td><td>bygraph</td></tr>
@@ -1077,42 +1290,44 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>matrix_label</td><td>plot region style</td><td>matrix_label</td></tr>
 <tr><td>matrixgraph</td><td>plot region style</td><td>matrixgraph</td></tr>
 <tr><td>piegraph</td><td>plot region style</td><td>piegraph</td></tr>
-<tr><td>twoway</td><td>plot region style</td><td>twoway</td></tr>
+<tr><td style="border-bottom: 1px solid black;">twoway</td><td style="border-bottom: 1px solid black;">plot region style</td><td style="border-bottom: 1px solid black;">twoway</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="relativepos"></a>
 
-<u>relativep</u>os -- is an optional argument for brewtheme.
+<h3><u>relativep</u>os -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>clegend_axispos (line 1482)*</td><td>relative position styles</td><td>right</td></tr>
 <tr><td>clegend_pos (line 1481)*</td><td>relative position styles</td><td>right</td></tr>
-<tr><td>zyx2legend_pos (line 1480)*</td><td>relative position styles</td><td>right</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2legend_pos (line 1480)*</td><td style="border-bottom: 1px solid black;">relative position styles</td><td style="border-bottom: 1px solid black;">right</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="relsize"></a>
 
-<u>relsi</u>ze -- is an optional argument for brewtheme.
+<h3><u>relsi</u>ze -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>bar_gap</td><td>Real #pct</td><td>0pct</td></tr>
 <tr><td>bar_groupgap</td><td>Real #pct</td><td>80pct</td></tr>
 <tr><td>bar_outergap</td><td>Real #pct</td><td>20pct</td></tr>
@@ -1126,23 +1341,24 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>dot_gap</td><td>Real #pct</td><td>neg100pct</td></tr>
 <tr><td>dot_groupgap</td><td>Real #pct</td><td>0pct</td></tr>
 <tr><td>dot_outergap</td><td>Real #pct</td><td>0pct</td></tr>
-<tr><td>dot_supgroupgap</td><td>Real #pct</td><td>75pct</td></tr>
+<tr><td style="border-bottom: 1px solid black;">dot_supgroupgap</td><td style="border-bottom: 1px solid black;">Real #pct</td><td style="border-bottom: 1px solid black;">75pct</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="special"></a>
 
-<u>spec</u>ial -- is an optional argument for brewtheme.
+<h3><u>spec</u>ial -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>by_knot1</td><td>scheme by scaling</td><td>3</td></tr>
 <tr><td>by_slope1</td><td>scheme by scaling</td><td>.3</td></tr>
 <tr><td>by_slope2</td><td>scheme by scaling</td><td>1</td></tr>
@@ -1156,54 +1372,59 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>matrix_slope1</td><td>scheme by scaling</td><td>.3</td></tr>
 <tr><td>matrix_slope2</td><td>scheme by scaling</td><td>1</td></tr>
 <tr><td>matrix_xaxis</td><td>axis options</td><td>"xlabels(#3, axis(X))"</td></tr>
-<tr><td>matrix_yaxis</td><td>axis options</td><td>"ylabels(#3, angle(horizontal) axis(Y))"</td></tr>
+<tr><td style="border-bottom: 1px solid black;">matrix_yaxis</td><td style="border-bottom: 1px solid black;">axis options</td><td style="border-bottom: 1px solid black;">"ylabels(#3, angle(horizontal) axis(Y))"</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="starstyle"></a>
 
-<u>starsty</u>le -- is an optional argument for brewtheme.
+<h3><u>starsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>default (line 1754)*</td><td>star styles</td><td>default</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">default (line 1754)*</td><td style="border-bottom: 1px solid black;">star styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="sunflowerstyle"></a>
 
-<u>sunflowersty</u>le -- is an optional argument for brewtheme.
+<h3><u>sunflowersty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>sunflower</td><td>sunflower plot styles</td><td>sunflower</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">sunflower</td><td style="border-bottom: 1px solid black;">sunflower plot styles</td><td style="border-bottom: 1px solid black;">sunflower</td></tr>
 </table>
+
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="symbol"></a>
 
-<u>symb</u>ol -- is an optional argument for brewtheme.
+<h3><u>symb</u>ol -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>ci</td><td>symbol styles</td><td>circle</td></tr>
 <tr><td>ci2</td><td>symbol styles</td><td>circle</td></tr>
 <tr><td>dots</td><td>symbol styles</td><td>circle</td></tr>
@@ -1217,23 +1438,24 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>pbarback (line 387)*</td><td>symbol styles</td><td>none</td></tr>
 <tr><td>pdotback (line 388)*</td><td>symbol styles</td><td>none</td></tr>
 <tr><td>refmarker</td><td>symbol styles</td><td>circle</td></tr>
-<tr><td>sunflower</td><td>symbol styles</td><td>circle_hollow</td></tr>
+<tr><td style="border-bottom: 1px solid black;">sunflower</td><td style="border-bottom: 1px solid black;">symbol styles</td><td style="border-bottom: 1px solid black;">circle_hollow</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="symbolsize"></a>
 
-<u>symbolsi</u>ze -- is an optional argument for brewtheme.
+<h3><u>symbolsi</u>ze -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>backsymbol (line 178)*</td><td>size options</td><td>large</td></tr>
 <tr><td>backsymspace (line 179)*</td><td>size options</td><td>large</td></tr>
 <tr><td>ci</td><td>size options</td><td>medlarge</td></tr>
@@ -1250,23 +1472,24 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>smallsymbol (line 166)*</td><td>size options</td><td>medsmall</td></tr>
 <tr><td>star (line 168)*</td><td>size options</td><td>vlarge</td></tr>
 <tr><td>sunflower</td><td>size options</td><td>medium</td></tr>
-<tr><td>symbol</td><td>size options</td><td>medium</td></tr>
+<tr><td style="border-bottom: 1px solid black;">symbol</td><td style="border-bottom: 1px solid black;">size options</td><td style="border-bottom: 1px solid black;">medium</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="textboxstyle"></a>
 
-<u>textboxsty</u>le -- is an optional argument for brewtheme.
+<h3><u>textboxsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis_title</td><td>text box styles</td><td>axis_title</td></tr>
 <tr><td>b1title</td><td>text box styles</td><td>subheading</td></tr>
 <tr><td>b2title</td><td>text box styles</td><td>body</td></tr>
@@ -1307,38 +1530,42 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>t2title</td><td>text box styles</td><td>body</td></tr>
 <tr><td>text_option</td><td>text box styles</td><td>text_option</td></tr>
 <tr><td>tick</td><td>text box styles</td><td>tick_label</td></tr>
-<tr><td>title</td><td>text box styles</td><td>heading</td></tr>
+<tr><td style="border-bottom: 1px solid black;">title</td><td style="border-bottom: 1px solid black;">text box styles</td><td style="border-bottom: 1px solid black;">heading</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="tickposition"></a>
 
-<u>tickp</u>osition -- is an optional argument for brewtheme.
+<h3><u>tickp</u>osition -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>axis_tick</td><td>inside, outside, or crossing</td><td>outside</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">axis_tick</td><td style="border-bottom: 1px solid black;">inside, outside, or crossing</td><td style="border-bottom: 1px solid black;">outside</td></tr>
 </table>
+
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="ticksetstyle"></a>
 
-<u>ticksetsty</u>le -- is an optional argument for brewtheme.
+<h3><u>ticksetsty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>major_clegend (line 1437)*</td><td>tick set styles</td><td>major_clegend (line 1437)*</td></tr>
 <tr><td>major_horiz_default</td><td>tick set styles</td><td></td></tr>
 <tr><td>major_horiz_nolabel</td><td>tick set styles</td><td></td></tr>
@@ -1356,23 +1583,23 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>minor_vert_default</td><td>tick set styles</td><td></td></tr>
 <tr><td>minor_vert_nolabel</td><td>tick set styles</td><td></td></tr>
 <tr><td>minor_vert_notick</td><td>tick set styles</td><td></td></tr>
-<tr><td>sts_risktable (line 1436)*</td><td>tick set styles</td><td>sts_risktable (line 1436)*</td></tr>
+<tr><td style="border-bottom: 1px solid black;">sts_risktable (line 1436)*</td><td style="border-bottom: 1px solid black;">tick set styles</td><td style="border-bottom: 1px solid black;">sts_risktable (line 1436)*</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
-
-
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
+<br>
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="tickstyle"></a>
 
-<u>ticksty</u>le -- is an optional argument for brewtheme.
+<h3><u>ticksty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>default (line 1407)*</td><td>tick styles</td><td>default</td></tr>
 <tr><td>major</td><td>tick styles</td><td>major</td></tr>
 <tr><td>major_nolabel</td><td>tick styles</td><td>major_nolabel</td></tr>
@@ -1382,23 +1609,24 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>minor_nolabel</td><td>tick styles</td><td>minor_nolabel</td></tr>
 <tr><td>minor_notick</td><td>tick styles</td><td>minor_notick</td></tr>
 <tr><td>minor_notickbig (line 1415)*</td><td>tick styles</td><td>minor_notickbig</td></tr>
-<tr><td>sts_risktable (line 1416)*</td><td>tick styles</td><td>sts_risktable</td></tr>
+<tr><td style="border-bottom: 1px solid black;">sts_risktable (line 1416)*</td><td style="border-bottom: 1px solid black;">tick styles</td><td style="border-bottom: 1px solid black;">sts_risktable</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="verticaltext"></a>
 
-<u>verticalt</u>ext -- is an optional argument for brewtheme.
+<h3><u>verticalt</u>ext -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>axis_title</td><td>vertical justification styles</td><td>bottom</td></tr>
 <tr><td>body</td><td>vertical justification styles</td><td>bottom</td></tr>
 <tr><td>filled (line 1370)*</td><td>vertical justification styles</td><td>middle</td></tr>
@@ -1409,23 +1637,24 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>matrix_label</td><td>vertical justification styles</td><td>middle</td></tr>
 <tr><td>small_body</td><td>vertical justification styles</td><td>bottom</td></tr>
 <tr><td>subheading</td><td>vertical justification styles</td><td>bottom</td></tr>
-<tr><td>text_option</td><td>vertical justification styles</td><td>middle</td></tr>
+<tr><td style="border-bottom: 1px solid black;">text_option</td><td style="border-bottom: 1px solid black;">vertical justification styles</td><td style="border-bottom: 1px solid black;">middle</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="yesno"></a>
 
-<u>yesn</u>o -- is an optional argument for brewtheme.
+<h3><u>yesn</u>o -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>adj_xmargins (line 1722)*</td><td>yes | no</td><td>no</td></tr>
 <tr><td>adj_ymargins (line 1723)*</td><td>yes | no</td><td>no</td></tr>
 <tr><td>alt_xaxes</td><td>yes | no</td><td>no</td></tr>
@@ -1545,206 +1774,52 @@ numticks -- is an optional argument for brewtheme.
 <tr><td>xyline_extend_high</td><td>yes | no</td><td>yes</td></tr>
 <tr><td>xyline_extend_low</td><td>yes | no</td><td>yes</td></tr>
 <tr><td>y2axis_onright</td><td>yes | no</td><td>yes</td></tr>
-<tr><td>zyx2legend_span (line 1719)*</td><td>yes | no</td><td>no</td></tr>
+<tr><td style="border-bottom: 1px solid black;">zyx2legend_span (line 1719)*</td><td style="border-bottom: 1px solid black;">yes | no</td><td style="border-bottom: 1px solid black;">no</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="zyx2rule"></a>
 
-<u>zyx2r</u>ule -- is an optional argument for brewtheme.
+<h3><u>zyx2r</u>ule -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>contour (line 1758)*</td><td>zyx2 rule styles</td><td>intensity</td></tr>
-<tr><td></td><td></td><td>hue</td></tr>
+<tr><td style="border-bottom: 1px solid black;"></td><td style="border-bottom: 1px solid black;"></td><td style="border-bottom: 1px solid black;">hue</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
-<br>
+
 <br>
 <a name="zyx2style"></a>
 
-<u>zyx2sty</u>le -- is an optional argument for brewtheme.
+<h3><u>zyx2sty</u>le -- is an optional argument for brewtheme.</h3>
 
-<table>
-<th>Key(s)</th><th>Valid Values</th><th>Default Values</th>
-<tr><td>default (line 1762)*</td><td>zyx2 styles</td><td>default</td></tr>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
+<tr><td style="border-bottom: 1px solid black;">default (line 1762)*</td><td style="border-bottom: 1px solid black;">zyx2 styles</td><td style="border-bottom: 1px solid black;">default</td></tr>
 </table>
 
-(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.
-
+<br>
+<p>(line #)*: these entries are not directly documented, but the line numbers show you where these values appear in the s2color scheme file.</p>
 
 <hr>
 <a href="#top">back to top</a>
 <hr>
+<br>
+<br>
 
-
-<a name="examples"></a>
-## Examples 
-
-### Ex 1.
-Create a theme file that emulates the aesthetics of the [ggplot2](https://github.com/hadley/ggplot2) package for the [R language](https://cran.r-project.org).
-
-
-```Stata
-// Change the end of line delimiter
-#d ;
-
-// Generate the theme file used to simulate ggplot2 aesthetics
-brewtheme ggtheme, numticks("major 5" "horizontal_major 5" "vertical_major 5"     
-"horizontal_minor 10" "vertical_minor 10") color("plotregion gs15"          
-"matrix_plotregion gs15" "background gs15" "textbox gs15" "legend gs15"       
-"box gs15" "mat_label_box gs15" "text_option_fill gs15" "clegend gs15"        
-"histback gs15" "pboxlabelfill gs15" "plabelfill gs15" "pmarkbkfill gs15"      
-"pmarkback gs15") linew("major_grid medthick" "minor_grid thin" "legend medium"    
-"clegend medium") clockdir("legend_position 3") yesno("draw_major_grid yes"     
-"draw_minor_grid yes" "legend_force_draw yes" "legend_force_nodraw no"        
-"draw_minor_vgrid yes" "draw_minor_hgrid yes" "extend_grid_low yes"         
-"extend_grid_high yes" "extend_axes_low no" "extend_axes_high no")          
-gridsty("minor minor") axissty("horizontal_default horizontal_withgrid"       
-"vertical_default vertical_withgrid") linepattern("major_grid solid"        
-"minor_grid solid") linesty("major_grid major_grid" "minor_grid minor_grid")     
-ticksty("minor minor_notick" "minor_notick minor_notick")               
-ticksetsty("major_vert_withgrid minor_vert_nolabel"                 
-"major_horiz_withgrid minor_horiz_nolabel"                      
-"major_horiz_nolabel major_horiz_default"                       
-"major_vert_nolabel major_vert_default") gsize("minortick_label minuscule"        
-"minortick tiny") numsty("legend_cols 1" "legend_rows 0" "zyx2rows 0" 
-"zyx2cols 1") verticaltext("legend top");
-
-// Change the end of line delimiter back to a carriage return
-#d cr
-
-// Create a scheme file using the theme file created with the syntax above
-brewscheme, scheme(ggtest2) const(orange) cone(blue) consat(20) scatc(5)    ///  
-scatst(ggplot2) piest(ggplot2) piec(6) barst(ggplot2) barc(2) linec(2)      ///   
-linest(ggplot2) areast(ggplot2) areac(5) somest(ggplot2) somec(24) cic(3)   ///   
-cist(ggplot2) themef(ggplot2)
-
-// Load the auto.dta data set
-sysuse auto.dta, clear
-
-// Create a graph with the scheme file above
-tw  lowess mpg weight ||                                                    ///   
-    scatter mpg weight if rep78 == 1 ||                                     ///   
-    scatter mpg weight if rep78 == 2 ||                                     ///   
-    scatter mpg weight if rep78 == 3 ||                                     ///   
-    scatter mpg weight if rep78 == 4 ||                                     ///   
-    scatter mpg weight if rep78 == 5,                                       ///   
-    legend(order(2 "1978 Repair Record = 1"                                 ///   
-    3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3"                   ///   
-    5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))                 ///   
-    scheme(ggtest2) 
-```
-
-
-![brewthemeEx1](../../img/ggthemeTest.png)
-
-
-### Ex 2.
-Uses the theme above and shows how symbol types get recycled as well
-
-```Stata
-brewscheme, scheme(ggtest2) const(orange) cone(blue) consat(20)        ///  
-scatst(ggplot2) scatc(5) piest(ggplot2) piec(6) barst(ggplot2) barc(2)     ///   
-linest(ggplot2) linec(2) areast(ggplot2) areac(5) somest(ggplot2) somec(24)  ///   
-cist(ggplot2) cic(3) themef(ggplot2) symbols(diamond triangle square)
-
-// Create a graph with the scheme file above
-tw  lowess mpg weight ||                                                    ///   
-    scatter mpg weight if rep78 == 1 ||                                     ///   
-    scatter mpg weight if rep78 == 2 ||                                     ///   
-    scatter mpg weight if rep78 == 3 ||                                     ///   
-    scatter mpg weight if rep78 == 4 ||                                     ///   
-    scatter mpg weight if rep78 == 5,                                       ///   
-    legend(order(2 "1978 Repair Record = 1"                                 ///   
-    3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3"                   ///   
-    5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5"))                 ///   
-    scheme(ggtest2) 
-```
-
-![brewthemeEx2](../../img/ggthemeTest2.png)
-
-### Ex 3.
-Create a theme file that would emulate the original `s2color` scheme settings controlled by `brewtheme`
-
-```Stata
-// Change the end of line delimiter
-#d ;
-
-// Generates a theme in the style of s2color
-brewtheme s2theme, graphsi("x 5.5" "y 4") numsty("legend_cols 2" "legend_rows 0" 
-"zyx2rows 0" "zyx2cols 1") gsize("label medsmall" "small_label small"
-"text medium" "body medsmall" "small_body small" "heading large" 
-"axis_title medsmall" "matrix_label medlarge" "matrix_marklbl small" 
-"key_label medsmall" "note small" "star medsmall" "text_option medsmall" 
-"minor_tick half_tiny" "tick_label medsmall" "tick_biglabel medium" 
-"title_gap vsmall" "key_gap vsmall" "key_linespace vsmall" "legend_key_xsize 13" 
-"legend_key_ysize medsmall" "clegend_width huge" "pielabel_gap zero" 
-"plabel small" "pboxlabel small" "sts_risktable_space third_tiny" 
-"sts_risktable_tgap zero" "sts_risktable_lgap zero" "minortick half_tiny" 
-"pie_explode medium") relsize("bar_groupgap 67pct" "dot_supgroupgap 67pct" 
-"box_gap 33pct" "box_supgroupgap 200pct" "box_outergap 20pct" "box_fence 67pct") 
-symbolsi("smallsymbol small" "histogram medlarge" "ci medium" "ci2 medium" 
-"matrix medium" "refmarker medlarge" "parrowbarb zero") 
-color("background ltbluishgray" "foreground black" "backsymbol gs8" 
-"heading dknavy" "box bluishgray" "textbox bluishgray" 
-"mat_label_box bluishgray" "text_option_line black" 
-"text_option_fill bluishgray" "filled bluishgray" "bylabel_outline bluishgray" 
-"reverse_big navy" "reverse_big_line navy" "grid ltbluishgray" 
-"major_grid ltbluishgray" "minor_grid gs5" "matrix navy" "matrixmarkline navy" 
-"histback gold" "legend_line black" "clegend white" "clegend_line black" 
-"pboxlabelfill bluishgray" "plabelfill bluishgray") 
-linepattern("foreground solid" "background solid" "grid solid" 
-"major_grid solid" "minor_grid dot" "text_option solid") 
-linesty("textbox foreground" "grid grid" "major_grid major_grid" 
-"minor_grid minor_grid" "legend legend") linewidth("p medium" "foreground thin" 
-"background thin" "grid medium" "major_grid medium" "minor_grid thin" 
-"tick thin" "minortick thin" "ci_area medium" "ci2_area medium" 
-"histogram medium" "dendrogram medium" "xyline medium" "refmarker medium" 
-"matrixmark medium" "dots vvthin" "dot_area medium" "dotmark thin" 
-"plotregion thin" "legend thin" "clegend thin" "pie medium" "sunflower medium" 
-"text_option thin" "pbar vvvthin") textboxsty("note small_body" 
-"leg_caption body") axissty("bar_super horizontal_nolinetick" 
-"dot_super horizontal_nolinetick" "bar_scale_horiz horizontal_withgrid" 
-"bar_scale_vert vertical_withgrid" "box_scale_horiz horizontal_withgrid" 
-"box_scale_vert vertical_withgrid") clockdir("caption_position 7" 
-"legend_position 6" "by_legend_position 6" "p 3" "legend_caption_position 7")  
-gridringsty("caption_ring 5" "legend_caption_ring 5") 
-anglesty("vertical_tick vertical") yesno("extend_axes_low no" 
-"extend_axes_high no" "draw_major_vgrid yes" "use_labels_on_ticks no" 
-"title_span no" "subtitle_span no" "caption_span no" 
-"note_span no" "legend_span no") barlabelsty("bar none");
-```
-
-# Additional information
-In addition to generating the user specified scheme, as of commit cd5cd84e83b513ef824ef61ca5e5b9124650076b, the `brewtheme` and `brewscheme` programs now automatically generate color vision impaired clones of themselves: 
-
-```
-theme-ggplot2.theme
-theme-ggplot2_achromatopsia.theme
-theme-ggplot2_protanopia.theme
-theme-ggplot2_deuteranopia.theme
-theme-ggplot2_tritanopia.theme
-scheme-ggtest2.scheme
-scheme-ggtest2_achromatopsia.scheme
-scheme-ggtest2_protanopia.scheme
-scheme-ggtest2_deuteranopia.scheme
-scheme-ggtest2_tritanopia.scheme
-```
-
-<hr>
-<a href="#top">back to the top</a>
-<hr>

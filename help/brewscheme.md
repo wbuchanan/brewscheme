@@ -8,12 +8,31 @@ permalink: /help/brewscheme/
 <hr>
 Command to generate customized scheme files.
 <hr>
- 
+<br>
 __brewscheme__ -- A program for easy generation of customized graph scheme files.
 
 ## Syntax
 
-brewscheme , <u>scheme</u>name(scheme name) [ <u>rep</u>lace <u>allsty</u>le(string) <u>allc</u>olors(real 3) <u>allsat</u>uration(real 100) <u>somesty</u>le(string) <u>somec</u>olors(real 3) <u>somesat</u>uration(real 100) <u>barsty</u>le(string) <u>barc</u>olors(real 3) <u>barsat</u>uration(real 100) <u>scatsty</u>le(string) <u>scatc</u>olors(real 3) <u>scatsat</u>uration(real 100) <u>areasty</u>le(string) <u>areac</u>olors(real 3) <u>areasat</u>uration(real 100) <u>linesty</u>le(string) <u>linec</u>olors(real 3) <u>linesat</u>uration(real 100) <u>boxsty</u>le(string) <u>boxc</u>olors(real 3) <u>boxsat</u>uration(real 100) <u>dotsty</u>le(string) <u>dotc</u>olors(real 3) <u>dotsat</u>uration(real 100) <u>piesty</u>le(string) <u>piec</u>olors(real 3) <u>piesat</u>uration(real 100) <u>sunsty</u>le(string) <u>sunc</u>olors(real 4) <u>sunsat</u>uration(real 100) <u>histsty</u>le(string) <u>histc</u>olors(real 3) <u>histsat</u>uration(real 100) <u>cisty</u>le(string) <u>cic</u>olors(real 3) <u>cisat</u>uration(real 100) <u>matsty</u>le(string) <u>matc</u>olors(real 3) <u>matsat</u>uration(real 100) <u>reflsty</u>le(string) <u>reflc</u>olors(real 3) <u>reflsat</u>uration(real 100) <u>refmsty</u>le(string) <u>refmc</u>olors(real 3) <u>refmsat</u>uration(real 100) <u>const</u>art(string) <u>cone</u>nd(string) <u>consat</u>uration(real 100) <u>themef</u>ile(string)]
+<table style="width:100%">
+<tr><td>brewscheme , <u>scheme</u>name(scheme name) </td><td colspan="3">[ <u>rep</u>lace</td></tr> 
+<tr><td> </td><td><u>allsty</u>le(string)</td><td><u>allc</u>olors(real 3)</td><td><u>allsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><u>somesty</u>le(string)</td><td><u>somec</u>olors(real 3)</td><td><u>somesat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#bar"><u>barsty</u>le(string)</a></td><td><u>barc</u>olors(real 3)</td><td><u>barsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#scatter"><u>scatsty</u>le(string)</a></td><td><u>scatc</u>olors(real 3)</td><td><u>scatsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#area"><u>areasty</u>le(string)</a></td><td><u>areac</u>olors(real 3)</td><td><u>areasat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#line"><u>linesty</u>le(string)</a></td><td><u>linec</u>olors(real 3)</td><td><u>linesat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#box"><u>boxsty</u>le(string)</a></td><td><u>boxc</u>olors(real 3)</td><td><u>boxsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#dot"><u>dotsty</u>le(string)</a></td><td><u>dotc</u>olors(real 3)</td><td><u>dotsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#pie"><u>piesty</u>le(string)</a></td><td><u>piec</u>olors(real 3)</td><td><u>piesat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#sun"><u>sunsty</u>le(string)</a></td><td><u>sunc</u>olors(real 4)</td><td><u>sunsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#histo"><u>histsty</u>le(string)</a></td><td><u>histc</u>olors(real 3)</td><td><u>histsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#ci"><u>cisty</u>le(string)</a></td><td><u>cic</u>olors(real 3)</td><td><u>cisat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#splom"><u>matsty</u>le(string)</a></td><td><u>matc</u>olors(real 3)</td><td><u>matsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#refline"><u>reflsty</u>le(string)</a></td><td><u>reflc</u>olors(real 3)</td><td><u>reflsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#refmark"><u>refmsty</u>le(string)</a></td><td><u>refmc</u>olors(real 3)</td><td><u>refmsat</u>uration(real 100)</td></tr>
+<tr><td> </td><td><a href="#contour"><u>const</u>art(string)</a></td><td><u>cone</u>nd(string)</td><td><u>consat</u>uration(real 100)</td></tr>
+<tr><td> </td><td colspan="3"><u>themef</u>ile(string)]</td></tr>
+</table>
  
 ## Description
  
@@ -29,7 +48,7 @@ To view information about the available palettes as well as to view previews of 
  
 <u>rep</u>lace if the source dataset containing the color palettes is not found or the user specifies the refresh option, colorbrewscheme will rebuild the source data set to generate the scheme files.
  
-<div><h3>Single Color Palettes and Default Color Palettes</h3>
+<h3>Single Color Palettes and Default Color Palettes</h3>
 
 <u>allsty</u>le The lower-cased name of a color palette to be used for all graph types.
  
@@ -43,14 +62,12 @@ To view information about the available palettes as well as to view previews of 
 
 <u>somesat</u>uration Used to set the color intensity for graph types without specified color palettes.
  
-<u>themef</u>ile Is an optional argument used to supply brewscheme with a theme file created by brewtheme.  Theme files are used to control global aesthetic properties (e.g., background/foreground colors, text sizes, symbol sizes, etc...) that are typically independent of the data being visualized.
-</div>
+<u>themef</u>ile Is an optional argument used to supply brewscheme with a theme file created by brewtheme.  Theme files are used to control global aesthetic properties (e.g., background/foreground colors, text sizes, symbol sizes, etc...) that are typically independent of the data being visualized. See <a href="../brewtheme/">brewtheme</a> for additional information.
 
-<div>
+<h3>Individual Graph Types</h3>
 
-<span><h3>Individual Graph Types</h3></span>
-
-<span><h4>Bar Graphs</h4></span>
+<a name="bar"></a>
+<h4>Bar Graphs</h4>
  
 <u>barsty</u>le The lower-cased name of a color palette that will be used to define colors for bar graphs.
  
@@ -58,7 +75,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>barsat</u>uration Used to set the color intensity for bar graphs.
  
-<span><h4>Scatterplots</h4></span>
+<a name="scatter"></a>
+<h4>Scatterplots</h4>
  
 <u>scatsty</u>le The lower-cased name of a color palette that will be used for scatter plots.
  
@@ -66,7 +84,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>scatsat</u>uration Used to set the color intensity for scatterplots.
  
-<span><h4>Area Graphs</h4></span>
+<a name="area"></a>
+<h4>Area Graphs</h4>
  
 <u>areasty</u>le The lower-cased name of a color palette to be used for area graphs
  
@@ -74,7 +93,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>areasat</u>uration Used to set the color intensity for area graphs.
  
-<span><h4>Line Graphs</h4></span>
+<a name="line"></a>
+<h4>Line Graphs</h4>
  
 <u>linesty</u>le The lower-cased name of a color palette to be used for line graphs.
  
@@ -82,7 +102,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>linesat</u>uration Used to set the color intensity for line graphs.
  
-<span><h4>Box Plots</h4></span>
+<a name="box"></a>
+<h4>Box Plots</h4>
  
 <u>boxsty</u>le The lower-cased name of a color palette to be used for box plots.
  
@@ -90,7 +111,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>boxsat</u>uration Used to set the color intensity for box plots.
  
-<span><h4>Dot Plots</h4></span>
+<a name="dot"></a>
+<h4>Dot Plots</h4>
  
 <u>dotsty</u>le The lower-cased name of a color palette to be used for dot plots.
  
@@ -98,7 +120,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>dotsat</u>uration Used to set the color intensity for dot plots.
  
-<span><h4>Pie Graphs</h4></span>
+<a name="pie"></a>
+<h4>Pie Graphs</h4>
  
 <u>piesty</u>le The lower-cased name of a color palette to be used for pie graphs.
  
@@ -106,7 +129,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>piesat</u>uration Used to set the color intensity for pie graphs.
  
-<span><h4>Sunflower Plots</h4></span>
+<a name="sun"></a>
+<h4>Sunflower Plots</h4>
  
 <u>sunsty</u>le The lower-cased name of a color palette to be used for sunflower plots.  Note, only the first four colors will be used.
  
@@ -114,15 +138,17 @@ To view information about the available palettes as well as to view previews of 
  
 <u>sunsat</u>uration Used to set the color intensity for sunflower plots.
  
-<span><h4>Histograms</h4></span>
+<a name="histo"></a>
+<h4>Histograms</h4>
  
 <u>histsty</u>le The lower-cased name of a color palette to be used for histograms.
  
 <u>histcol</u>ors The maximum number of colors to use from the palette specifed by the histstyle option.
  
 <u>histsat</u>uration Used to set the color intensity for histograms.
- 
-<span><h4>Confidence Intervals</h4></span>
+
+<a name="ci"></a>
+<h4>Confidence Intervals</h4>
  
 <u>cisty</u>le The lower-cased name of a color palette to be used for graphs containing confidence intervals.
  
@@ -130,7 +156,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>cisat</u>uration Used to set the color intensity for confidence intervals.
  
-<span><h4>Scatterplot Matrices</h4></span>
+<a name="splom"></a>
+<h4>Scatterplot Matrices</h4>
  
 <u>matsty</u>le The lower-cased name of a color palette to be used for scatter plot matrices.
  
@@ -138,7 +165,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>matsat</u>uration Used to set the color intensity for scatterplot matrices.
  
-<span><h4>Reference Lines</h4></span>
+<a name="refline"></a> 
+<h4>Reference Lines</h4>
  
 <u>reflsty</u>le The lower-cased name of a color palette to be used for reference lines.
  
@@ -146,7 +174,8 @@ To view information about the available palettes as well as to view previews of 
  
 <u>reflsat</u>uration Used to set the color intensity for reference lines.
  
-<span><h4>Reference Markers</h4></span>
+<a name="refmark"></a> 
+<h4>Reference Markers</h4>
  
 <u>refmsty</u>le The lower-cased name of a color palette to use for reference markers.
  
@@ -154,14 +183,15 @@ To view information about the available palettes as well as to view previews of 
  
 <u>refmsat</u>uration Used to set the color intensity for reference markers.
  
-<span><h4>Contour Plots</h4></span>
+<a name="contour"></a> 
+<h4>Contour Plots</h4>
  
-constart Defines the starting color to be used for contour plots using standard colorstyles from Stata.
+<u>const</u>art Defines the starting color to be used for contour plots using standard colorstyles from Stata.
  
-conend Defines the ending color to be used for contour plots using standard colorstyles from Stata.
+<u>cone</u>nd Defines the ending color to be used for contour plots using standard colorstyles from Stata.
 
-</div>
- 
+<br>
+
 ## Examples
 
 ### Ex 1. 
@@ -219,7 +249,7 @@ brewscheme, scheme(onecolorex1) allsty(ggplot2)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx1](../img/brewscheme_onecolorex1.png)
+![brewschemeEx1](../../img/brewscheme_onecolorex1.png)
 
 
 ### Ex 6.
@@ -230,7 +260,7 @@ brewscheme, scheme(onecolorex2) allsty(ggplot2) allc(4) themef(s2theme)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx2](../img/brewscheme_onecolorex2.png)
+![brewschemeEx2](../../img/brewscheme_onecolorex2.png)
 
 ### Ex 7.
 Now five colors from same palette using the ggplot2 inspired theme
@@ -240,7 +270,7 @@ brewscheme, scheme(ggplot2ex1) allsty(ggplot2) allc(5) themef(ggtheme)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx3](../img/brewscheme_ggplot2ex1.png)
+![brewschemeEx3](../../img/brewscheme_ggplot2ex1.png)
 
 ### Ex 8.
 An Example showing the use of the some parameters
@@ -251,7 +281,7 @@ linec(3) cist(pastel2) cic(6) scatsty(category10) scatc(10)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx4](../img/brewscheme_somecolorex1.png)
+![brewschemeEx4](../../img/brewscheme_somecolorex1.png)
 
 ### Ex 9.
 An example showing a different color palette/number of colors for each graph type
@@ -265,7 +295,7 @@ cone(puor)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx5](../img/brewscheme_manycolorex1.png)
+![brewschemeEx5](../../img/brewscheme_manycolorex1.png)
 
 ### Ex 10.
 Using different numbers of colors from the same scheme to highlight differences and showing the use of the symbols parameter
@@ -278,7 +308,7 @@ cist(ggplot2) cic(3) themef(ggtheme) symbols(diamond triangle square)
 ```
 
 _Graph created with the scheme defined above.  Code for graph production is available in Example 11._
-![brewschemeEx6](../img/brewscheme_ggplot2ex2.png)
+![brewschemeEx6](../../img/brewscheme_ggplot2ex2.png)
 
 ### Ex 11.
 Show output of the same graph with different schemes created by `brewscheme` and `brewtheme`.

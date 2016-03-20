@@ -1,6 +1,6 @@
 ---
 layout: page
-title: more
+title: Additional Information
 permalink: /more/
 ---
 

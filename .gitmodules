@@ -10,3 +10,6 @@
 
 
 
+[submodule "_vendor/--force"]
+	path = _vendor/--force
+	url = https://github.com/shdev/jekyll-menu.git

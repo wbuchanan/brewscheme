@@ -4,11 +4,11 @@ title: brewsearch
 permalink: /help/brewsearch/
 ---
 
-
 <hr>
 Query color sight impairment values that were previously computed and return in macros.
 <hr>
-  
+<br>
+
 __brewsearch__ -- is a program used to query brewscheme data sources to retrieve RGB values and/or simulated RGB values for different forms of color sight impairment.
  
 ## Syntax
@@ -21,15 +21,15 @@ __brewsearch__ is a simple program used to search for a color by RGB value or th
 
 ## Returned Values
 
-<table>
-<th>Macro Name</th><th>Value</th>
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th>
 <tr><td>r(rgb)</td><td>RGB value looked up by command</td></tr>
 <tr><td>r(achromatopsia)</td><td>Achromatopsia simulated RGB value</td></tr>
 <tr><td>r(protanopia)</td><td>Protanopia simulated RGB value</td></tr>
 <tr><td>r(deuteranopia)</td><td>Deuteranopia simulated RGB value</td></tr>
-<tr><td>r(tritanopia)</td><td>Tritanopia simulated RGB value</td></tr>
+<tr><td style="border-bottom: 1px solid black">r(tritanopia)</td><td style="border-bottom: 1px solid black">Tritanopia simulated RGB value</td></tr>
 </table>
- 
+<br>
 
 ## Examples
 

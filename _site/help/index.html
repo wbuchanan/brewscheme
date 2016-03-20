@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>brewcolors</title>
+    <title>help</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewcolors/">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/">
 </head>
 
   <body>
@@ -68,75 +68,27 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">brewcolors</h1>
+    <h1 class="post-title">help</h1>
   </header>
 
   <article class="post-content">
-    <hr />
+    <h1 id="brewscheme-documentation">brewscheme documentation</h1>
+<p>The links below will direct you to specific command/program helpfiles and examples.</p>
 
-<p>Command to create new named color styles and add to existing color dataset.</p>
-<hr />
-
-<p><br />  <br />
-<strong>brewcolors</strong> – is a program used to create new named color styles and/or add colors to the color dataset.  The program includes sub-commands to create these colors manually or to add colors from the XKCD color survey.</p>
-
-<h2 id="syntax">Syntax</h2>
-
-<table>
-  <tbody>
-    <tr>
-      <td><strong>brewcolors</strong> <em>xkcd</em></td>
-      <td><em>new</em> [, <u>ma</u>ke <u>inst</u>all <u>col</u>ors(string) <u>rep</u>lace <u>over</u>ride ]</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="description">Description</h2>
-
-<p><strong>brewcolors</strong> builds a local database of named RGB colors on the user’s system.  It also includes transformed RGB values for different forms of color sight impairments.</p>
-
-<h2 id="options">Options</h2>
-
-<p><u>ma</u>ke is an optional argument used to append the resulting color dataset to the master colordata set used by brewscheme.</p>
-
-<p><u>inst</u>all is an optional argument used to create each of the named color style files and place them on the ADOPATH to be accessible in Stata.</p>
-
-<p><u>col</u>ors is an optional argument used to pass the color name and RGB values when using the new subcommand.</p>
-
-<p><u>rep</u>lace is an optional argument used to overwrite an existing version of the color dataset being created.</p>
-
-<p><u>over</u>ride is an optional argument used to suppress the warning message printed to the console by brewcolordb.</p>
-
-<h2 id="examples">Examples</h2>
-
-<h3 id="ex-1">Ex 1.</h3>
-<p>Creates the dataset with all of the XKCD colors and installs them as named color styles for Stata to use.</p>
-
-<pre><code class="language-Stata">brewcolors xkcd, mk inst over rep
-</code></pre>
-
-<p>You should then be able to access the named color styles from XKCD in the graph menus:</p>
-
-<p><img src="http://wbuchanan.github.io/brewscheme/img/brewcolorsex1.png" alt="brewcolorsEx1" /></p>
-
-<p>And will also have access to versions of the colors that simulate their appearance under different forms of color sight impairments:</p>
-
-<p><img src="http://wbuchanan.github.io/brewscheme/img/brewcolorsex2.png" alt="brewcolorsEx2" /></p>
-
-<p>Once you’ve done this you should be all set.  If the look up database is not present when <code>brewscheme</code> is called it will build the file automatically for you, but before you can create a scheme/theme file you’ll need to have the data set and modified named color styles created by <code>brewcolordb</code>.</p>
-
-<h3 id="ex-2">Ex 2.</h3>
-<p>Add a new color style to the color database and make it available in Stata using the default name constructor</p>
-
-<pre><code class="language-Stata">brewcolors new, ma inst colors("117 200 47")
-</code></pre>
-
-<h3 id="ex-3">Ex 3.</h3>
-<p>Add a new named color style to the color database using a user specified name</p>
-
-<pre><code class="language-Stata">brewcolors new, ma inst colors(`""mycolor 117 200 47""')
-</code></pre>
-
+<p><a href="../help/brewcbsim/">brewcbsim</a><br />
+<a href="../help/brewcolordb/">brewcolordb</a><br />
+<a href="../help/brewcolors/">brewcolors</a><br />
+<a href="../help/brewextra/">brewextra</a><br />
+<a href="../help/brewmeta/">brewmeta</a><br />
+<a href="../help/brewproof/">brewproof</a><br />
+<a href="../help/brewscheme/">brewscheme</a><br />
+<a href="../help/brewsearch/">brewsearch</a><br />
+<a href="../help/brewterpolate/">brewterpolate</a><br />
+<a href="../help/brewtheme/">brewtheme</a><br />
+<a href="../help/brewviewer/">brewviewer</a><br />
+<a href="../help/filesys/">filesys</a><br />
+<a href="../help/hextorgb/">hextorgb</a><br />
+<a href="../help/libbrewscheme/">libbrewscheme</a></p>
 
   </article>
 

@@ -20,3 +20,13 @@ gems:
 - jekyll-sitemap
 - jekyll-feed
 
+menu_generator:
+  css:
+    current: "current"
+    current_parent: "current-parent"
+  delete_content_hash: "false"
+  hash_name_in_site_config: "menu"
+  menu_root: "main"
+  parent_match_hash: "path"
+
+

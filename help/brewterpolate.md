@@ -4,17 +4,16 @@ title: brewterpolate
 permalink: /help/brewterpolate/
 ---
 
-
+<a name="top"></a>
 <hr>
 Interpolation of colors between starting and ending color values.
 <hr>
- 
+<br>
 __brewterpolate__ -- Stata program to interpolate an arbitrary number of colors between a starting and ending color.
  
 ## Syntax
  
-brewterpolate, scolor(string) ecolor(string) colors(int) [cmod(string)
-icspace(string) rcspace(string) inverse grayscale ]
+brewterpolate, <u>sc</u>olor(string) <u>ec</u>olor(string) <u>c</u>olors(int) [ <u>cm</u>od(string) <u>ics</u>pace(string) <u>rcs</u>pace(string) <u>inv</u>erse <u>g</u>rayscale ]
  
 ## Description
  
@@ -22,45 +21,23 @@ __brewterpolate__ is a program used to interpolate color values between the star
  
 ## Options
  
-scolor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.
+<u>sc</u>olor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.
  
-scolor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.
+<u>ec</u>olor is a required argument that takes a value conforming to one of the formats listed in Input Color Spaces.
  
-colors is a required argument that takes a value to define the number of points between the starting and ending colors to interpolate.
+<u>c</u>olors is a required argument that takes a value to define the number of points between the starting and ending colors to interpolate.
  
-cmod is an optional argument that can take one of the following values: brighter, darker, saturated, desaturated, or nothing and is used to modify the interpolated colors.  A value of "brighter" will return colors that are arbitrarily brighter than the normal interpolated value, "darker" will return colors that are arbitrarily darker than the normal interpolated colors,  "saturated" will return arbitrarily more saturated colors, and "desaturated" will return arbitrarily less saturated colors.  If no argument is passed to this parameter, the colors are interpolated without modification.
+<u>cm</u>od is an optional argument that can take one of the following values: brighter, darker, saturated, desaturated, or nothing and is used to modify the interpolated colors.  A value of "brighter" will return colors that are arbitrarily brighter than the normal interpolated value, "darker" will return colors that are arbitrarily darker than the normal interpolated colors,  "saturated" will return arbitrarily more saturated colors, and "desaturated" will return arbitrarily less saturated colors.  If no argument is passed to this parameter, the colors are interpolated without modification.
  
-icspace is an optional argument used to specify the input color space used for the starting and ending colors.  If no argument is passed, RGB is assumed.
+<u>ics</u>pace is an optional argument used to specify the input color space used for the starting and ending colors.  If no argument is passed, RGB is assumed.
  
-rcspace is an optional argument used to specify the return color space used for passing the interpolated colors back to Stata.  This can be any of the values listed in Input Color Spaces except for the web-based formats.
+<u>rcs</u>pace is an optional argument used to specify the return color space used for passing the interpolated colors back to Stata.  This can be any of the values listed in <a href="#cspaceTable">Input Color Spaces</a> except for the web-based formats.
  
-inverse is an optional argument used to return the inverse of the interpolated colors.  This is implemented after any of the luminance modifications have been made to the colors.
+<u>inv</u>erse is an optional argument used to return the inverse of the interpolated colors.  This is implemented after any of the luminance modifications have been made to the colors.
  
-grayscale is an optional argument used to force the returned color values into a grayscale.  This is the last transformation that is applied to the colors. In other words, if you requested the inverse of the colors that are arbitrarily less saturated, the method would first get the less saturated interpolated color, invert it, and then transform it to a gray scale value.
+<u>g</u>rayscale is an optional argument used to force the returned color values into a grayscale.  This is the last transformation that is applied to the colors. In other words, if you requested the inverse of the colors that are arbitrarily less saturated, the method would first get the less saturated interpolated color, invert it, and then transform it to a gray scale value.
  
-<table>
-<th>Argument</th><th>Color Space</th> 
-<tr><td>rgb</td><td>Red, Green, Blue (ex., 0 0 255).</td></tr>
-<tr><td>rgba</td><td>Red, Green, Blue, Alpha (ex., 0 0 255 0.5)</td></tr>
-<tr><td>srgb</td><td>RGB Decimal (ex., 0.0 0.0 1.0).</td></tr>
-<tr><td>srgba</td><td>RGB Decimal (ex., 0.0 0.0 1.0 0.5).</td></tr>
-<tr><td>hsb</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0)</td></tr>
-<tr><td>hsba</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0 0.5)</td></tr>
-<tr><td>web</td><td>Hex string (ex., 0000FF) [returned with leading # added]</td></tr>
-<tr><td>weba</td><td>Hex string w/Decimal Alpha (ex., 0000FF .27) [returned with leading # added]</td></tr>
-<tr><td>weba</td><td>Hex string w/Hex Alpha (ex., 0000FF00)  [returned with leading # added]</td></tr>
-<tr><td>hex</td><td>Hexadecimal (ex., 0000FF)</td></tr>
-<tr><td>hexa</td><td>Hexadecimal w/Alpha (ex., 0000FF 0.5)</td></tr>
-<tr><td>hexa</td><td>Hex w/Alpha scaled as RGB Integer (e.g., 0000FFFF)</td></tr>
-<tr><td>hexa web</td><td>Web Hexadecimal w/Alpha (ex., )</td></tr>
-<tr><td>rgb web</td><td>Web RGB (ex., )</td></tr>
-<tr><td>rgba web</td><td>Web RGB w/Alpha (ex., )</td></tr>
-<tr><td>srgb</td><td>Web sRGB (ex., )</td></tr>
-<tr><td>srgba</td><td>Web sRGB w/Alpha (ex., )</td></tr>
-<tr><td>hsl</td><td>Hue, Saturation, Lightness (ex., hex, rgb, hsl)</td></tr>
-<tr><td>hsla</td><td>Hue, Saturation, Lightness w/Alpha (ex., hex, rgb, hsl)</td></tr>
-</table>
- 
+
 ## Examples
 
 ### Ex 1. 
@@ -338,6 +315,35 @@ Color 5   56.658594   .78071837   .82980394
 Color 6   52.131148        .976   .98039216
 ```
 
+## Available Color Spaces
+
+<a name="cspaceTable"></a> 
+
+<table style="width:100%">
+<th style="border-top: 1px solid black; border-bottom: 1px solid black">Argument</th><th style="border-top: 1px solid black; border-bottom: 1px solid black">Color Space</th> 
+<tr><td>rgb</td><td>Red, Green, Blue (ex., 0 0 255).</td></tr>
+<tr><td>rgba</td><td>Red, Green, Blue, Alpha (ex., 0 0 255 0.5)</td></tr>
+<tr><td>srgb</td><td>RGB Decimal (ex., 0.0 0.0 1.0).</td></tr>
+<tr><td>srgba</td><td>RGB Decimal (ex., 0.0 0.0 1.0 0.5).</td></tr>
+<tr><td>hsb</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0)</td></tr>
+<tr><td>hsba</td><td>Hue, Saturation, Brightness (ex., 270.0 1.0 1.0 0.5)</td></tr>
+<tr><td>web</td><td>Hex string (ex., 0000FF) [returned with leading # added]</td></tr>
+<tr><td>weba</td><td>Hex string w/Decimal Alpha (ex., 0000FF .27) [returned with leading # added]</td></tr>
+<tr><td>weba</td><td>Hex string w/Hex Alpha (ex., 0000FF00)  [returned with leading # added]</td></tr>
+<tr><td>hex</td><td>Hexadecimal (ex., 0000FF)</td></tr>
+<tr><td>hexa</td><td>Hexadecimal w/Alpha (ex., 0000FF 0.5)</td></tr>
+<tr><td>hexa</td><td>Hex w/Alpha scaled as RGB Integer (e.g., 0000FFFF)</td></tr>
+<tr><td>hexa web</td><td>Web Hexadecimal w/Alpha (ex., )</td></tr>
+<tr><td>rgb web</td><td>Web RGB (ex., )</td></tr>
+<tr><td>rgba web</td><td>Web RGB w/Alpha (ex., )</td></tr>
+<tr><td>srgb</td><td>Web sRGB (ex., )</td></tr>
+<tr><td>srgba</td><td>Web sRGB w/Alpha (ex., )</td></tr>
+<tr><td>hsl</td><td>Hue, Saturation, Lightness (ex., hex, rgb, hsl)</td></tr>
+<tr><td style="border-bottom: 1px solid black">hsla</td><td style="border-bottom: 1px solid black">Hue, Saturation, Lightness w/Alpha (ex., hex, rgb, hsl)</td></tr>
+</table>
+<br>
+
+<a href="#top">back to the top</a>
  
 ## References
 [Java Color Documentation](https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html)
