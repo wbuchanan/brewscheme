@@ -45,7 +45,6 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        overflow: hidden;
         background-color: $background-color;
     }
 
@@ -75,6 +74,12 @@
         text-decoration: none;
         display: block;
         text-align: left;
+    }
+
+    #navid ul ul{
+        max-height: 25px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .dropdown-content a:hover {background-color: rgba(0,0,0,0.1)}

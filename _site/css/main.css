@@ -91,9 +91,9 @@ blockquote {
 pre,
 code {
   font-size: 15px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #C9CED2;
   border-radius: 3px;
-  background-color: #EFEFEF; }
+  background-color: #EEEEEE; }
 
 code {
   padding: 1px 5px; }
@@ -174,7 +174,6 @@ pre {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #fdfdfd; }
   .site-nav li {
     float: left; }
@@ -196,6 +195,10 @@ pre {
     text-decoration: none;
     display: block;
     text-align: left; }
+  .site-nav #navid ul ul {
+    max-height: 25px;
+    overflow-x: hidden;
+    overflow-y: auto; }
   .site-nav .dropdown-content a:hover {
     background-color: rgba(0, 0, 0, 0.1); }
   .site-nav .dropdown:hover .dropdown-content {
