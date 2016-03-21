@@ -58,12 +58,38 @@ Add a new color style to the color database and make it available in Stata using
 brewcolors new, ma inst colors("117 200 47")
 ```
 
+The result of the command above is the file `color-udc117_200_47.style` stored in \`"`c(sysdir_personal)'/style/"'.  The file contents are:
+
+```
+*! v 0.0.0 21 Mar 2016 05:35:24
+*! Color defined by the user: billy
+sequence udc117_200_4711
+label "User Defined Color - udc117_200_47"
+
+set rgb "117 200 47"
+
+```
+
+
 ### Ex 3.
 Add a new named color style to the color database using a user specified name
 
 ```Stata
 brewcolors new, ma inst colors(`""mycolor 117 200 47""')
 ```
+
+The result of the last command is the creation of the file `color-mycolor.style` which will be saved in \`"`c(sysdir_personal)'/style/"'.  The contents of the file are:
+
+```
+*! v 0.0.0 21 Mar 2016 04:57:25
+*! Color defined by the user: billy
+sequence mycolor11
+label "User Defined Color - mycolor"
+
+set rgb "117 200 47"
+
+```
+
 
 
 

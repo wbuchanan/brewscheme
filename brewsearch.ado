@@ -1,7 +1,7 @@
 
 *! brewsearch
-*! 07JAN2016
-*! v 0.0.2
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop program from memory if previously loaded
 cap prog drop brewsearch

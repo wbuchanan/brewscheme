@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.7 15MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 {center:{back:back to brewtheme help}}
@@ -23,7 +23,7 @@
 {p2colset 8 50 50 8}{p2col:{help scheme_shared_plots:p}}{help markersizestyle:size options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':parrow (line 182)*}}{help markersizestyle:size options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':parrowbarb (line 183)*}}{help markersizestyle:size options}{p_end}
-{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':pback (line )*}}{help markersizestyle:size options}{p_end}
+{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':pback (line 181)*}}{help markersizestyle:size options}{p_end}
 {p2colset 8 50 50 8}{p2col:{help scheme_refmarker_plots:refmarker}}{help markersizestyle:size options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':smallsymbol (line 166)*}}{help markersizestyle:size options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':star (line 168)*}}{help markersizestyle:size options}{p_end}

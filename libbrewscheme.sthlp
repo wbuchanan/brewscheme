@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  29NOV2015}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Mata library for {help brewscheme}

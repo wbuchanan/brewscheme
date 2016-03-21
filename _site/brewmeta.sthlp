@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.4 14MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Command to look up meta characteristics for colors/palettes available to {help brewscheme}

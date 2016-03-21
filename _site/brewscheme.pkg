@@ -1,12 +1,21 @@
-d 'BREWSCHEME': a suite of programs, mata classes/methods/functions, and Java 
-d plugins to make it easier to make better looking graphs in Stata.
+d 'BREWSCHEME': a toolkit for data visualizations in Stata.
 d
-d brewscheme is a collection of tools to make it easier for users to 
-d generate customized scheme files, interpolate points in colorspace, 
-d simulate/proof the appearance of data visualizations to individuals 
-d with color sight impairments, and more.  This is release is a beta and 
-d any/all testing, comments, bugs, feature requests, etc... should be 
-d submitted to http://github.com/wbuchanan/brewscheme/issues/new.
+d brewscheme is a suite of programs, mata classes/methods/functions, and Java 
+d plugins to make it easier to improve and standardize the aesthetics of your 
+d data visualizations in Stata.  It includes tools to help end users install and 
+d define new named color styles, interpolate an arbitrary number of colors 
+d between a given starting and ending color and color space, create .theme 
+d files that set general aesthetic properties in graphs, convert hexadecimal 
+d RGB values to Stata formatted RGB color strings, transform RGB values to 
+d simulate different forms of color sight impairment, create proof copies of 
+d visualizations that show how the image may be percieved by individuals with 
+d different forms of color sight impairments, search and look up meta attributes 
+d of color palettes when known/available, preview combinations of colors with or 
+d without simulated color sight impairment transformations, and generate user 
+d defined scheme files that can consume .theme files. 
+d
+d If you notice any issues with the programs, please submit an issue at 
+d https://github.com/wbuchanan/brewscheme/issues/.
 d
 d KW: Data Visualization
 d KW: Graphs
@@ -15,7 +24,7 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20160318
+d Distribution-Date: 20160321
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -70,7 +79,7 @@ f btcompass2dir.sthlp
 f btcompass3dir.sthlp
 f btconnectstyle.sthlp
 f dirfile.ado
-f dottypestyle.sthlp
+f btdottypestyle.sthlp
 f extraColors.do
 f filesys.ado
 f filesys.jar
@@ -117,4 +126,7 @@ f btverticaltext.sthlp
 f btyesno.sthlp
 f btzyx2rule.sthlp
 f btzyx2style.sthlp
-f brewscheme-main.pdf
+
+
+
+

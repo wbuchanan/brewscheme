@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.4 16MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Command to generate customized scheme files.

@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.7 15MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 {center:{back:back to brewtheme help}}

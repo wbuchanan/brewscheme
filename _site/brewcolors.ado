@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 0.0.6
-*! 16MAR2016
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -108,41 +108,31 @@ prog def colorinstaller, rclass
 	// Create palette and RGB string variables
 	qui: g palette = ""
 	qui: g str11 rgb = ""
-
+	
 	// Loop over arguments passed in the color string
 	forv i = 1/`: word count `colors'' {
-	
+		
 		// Get the word string
-		loc wrd `"`: word `i' of `colors''"'
+		loc wrd `: word `i' of `colors''
 		
-		// If single word, assume it is RGB string
-		if `: word count "`wrd'"' == 1 {
-				
-			// Get the palette name
-			loc palname "uc`: subinstr loc wrd `" "' "", all'"
+		// Tokenizes the color string argument
+		gettoken palname rgb : wrd
 		
-			// Get the color string
-			loc colorstring : list retoken wrd
-			
-			// Create a meta string
-			loc metastring "User Defined Color - "
-			
-		} // End IF Block for single word color definition
+		// If 4 total tokens assume the rgb token contains the rgb color string
+		if `: word count `rgb'' == 3 loc colorstring `rgb'
 		
-		// If user specifies color name
-		else {
+		// If only 3 tokens in total, assume no name and construct palette name/
+		// color string macros
+		else if `: word count `rgb'' == 2 {
+			
+			loc colorstring `palname' `: word 1 of `rgb'' `: word 2 of `rgb''
+			loc palname udc`palname'_`: word 1 of `rgb''_`: word 2 of `rgb''
+			
+		} // End ELSEIF Block for no user specified name
 		
-			// Get the palette name
-			gettoken palname colorstring : wrd  
-			
-			// Clean up the quotation marks around the color string
-			loc colorstring : list retoken colorstring
-			
-			// Create a meta string
-			loc metastring "User Defined Color - "
-			
-		} // End ELSE Block for colors with user specified names
-				
+		// Create a meta string
+		loc metastring "User Defined Color - "
+		
 		// Generate the palette name
 		qui: replace palette = "`palname'"'
 		
@@ -200,7 +190,7 @@ prog def colorinstaller, rclass
 		ret loc colorpath `"`c(sysdir_personal)'brewcolors/colorsBy`c(username)'.dta"'
 
 	} // End IF Block to make the color file	
-		
+	
 // End of subroutine definition	
 end	
 	

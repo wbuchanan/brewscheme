@@ -2,4 +2,5 @@
 v 3
 d The brewscheme package
 
-p brewscheme A suite of programs, mata classes/functions, and Java plugins to build better graphs in Stata.
+p brewscheme A toolkit for data visualization in Stata.
+

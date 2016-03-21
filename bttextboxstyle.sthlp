@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.7 15MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 {center:{back:back to brewtheme help}}
@@ -22,7 +22,7 @@
 {p2colset 8 50 50 8}{p2col:{help scheme_captions:caption}}{help textboxstyle:text box styles}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':cleg_caption (line 1095)*}}{help textboxstyle:text box styles}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':cleg_note (line 1096)*}}{help textboxstyle:text box styles}{p_end}
-{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':cleg_subtitle (line )*}}{help textboxstyle:text box styles}{p_end}
+{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':cleg_subtitle (line 1094)*}}{help textboxstyle:text box styles}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':cleg_title (line 1093)*}}{help textboxstyle:text box styles}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':editor (line 1131)*}}{help textboxstyle:text box styles}{p_end}
 {p2colset 8 50 50 8}{p2col:{help scheme_other:heading}}{help textboxstyle:text box styles}{p_end}

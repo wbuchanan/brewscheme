@@ -1453,7 +1453,7 @@ scheme-ggtest2_tritanopia.scheme
 <a name="symbolsize"></a>
 
 <h3><u>symbolsi</u>ze -- is an optional argument for brewtheme.</h3>
-
+<br>
 <table style="width:100%">
 <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
 <tr><td>backsymbol (line 178)*</td><td>size options</td><td>large</td></tr>
@@ -1467,7 +1467,7 @@ scheme-ggtest2_tritanopia.scheme
 <tr><td>p</td><td>size options</td><td>medium</td></tr>
 <tr><td>parrow (line 182)*</td><td>size options</td><td>medium</td></tr>
 <tr><td>parrowbarb (line 183)*</td><td>size options</td><td>medsmall</td></tr>
-<tr><td>pback (line 181)*<tr><td>size</td><td>options</td><td>zero</td></tr>
+<tr><td>pback (line 181)*</td><td>size options</td><td>zero</td></tr>
 <tr><td>refmarker</td><td>size options</td><td>medium</td></tr>
 <tr><td>smallsymbol (line 166)*</td><td>size options</td><td>medsmall</td></tr>
 <tr><td>star (line 168)*</td><td>size options</td><td>vlarge</td></tr>
@@ -1566,24 +1566,24 @@ scheme-ggtest2_tritanopia.scheme
 
 <table style="width:100%">
 <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
-<tr><td>major_clegend (line 1437)*</td><td>tick set styles</td><td>major_clegend (line 1437)*</td></tr>
-<tr><td>major_horiz_default</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_horiz_nolabel</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_horiz_notick</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_horiz_notickbig (line 1434)*</td><td>tick set styles</td><td>major_horiz_notickbig (line 1434)*</td></tr>
-<tr><td>major_horiz_withgrid</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_vert_default</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_vert_nolabel</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_vert_notick</td><td>tick set styles</td><td></td></tr>
-<tr><td>major_vert_notickbig (line 1435)*</td><td>tick set styles</td><td>major_vert_notickbig (line 1435)*</td></tr>
-<tr><td>major_vert_withgrid</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_horiz_default</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_horiz_nolabel</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_horiz_notick</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_vert_default</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_vert_nolabel</td><td>tick set styles</td><td></td></tr>
-<tr><td>minor_vert_notick</td><td>tick set styles</td><td></td></tr>
-<tr><td style="border-bottom: 1px solid black;">sts_risktable (line 1436)*</td><td style="border-bottom: 1px solid black;">tick set styles</td><td style="border-bottom: 1px solid black;">sts_risktable (line 1436)*</td></tr>
+<tr><td>major_clegend (line 1437)*</td><td>tick set styles</td><td>major_clegend</td></tr>
+<tr><td>major_horiz_default</td><td>tick set styles</td><td>major_horiz_default</td></tr>
+<tr><td>major_horiz_nolabel</td><td>tick set styles</td><td>major_horiz_nolabel</td></tr>
+<tr><td>major_horiz_notick</td><td>tick set styles</td><td>major_horiz_notick</td></tr>
+<tr><td>major_horiz_notickbig (line 1434)*</td><td>tick set styles</td><td>major_horiz_notickbig</td></tr>
+<tr><td>major_horiz_withgrid</td><td>tick set styles</td><td>major_horiz_default</td></tr>
+<tr><td>major_vert_default</td><td>tick set styles</td><td>major_vert_default</td></tr>
+<tr><td>major_vert_nolabel</td><td>tick set styles</td><td>major_vert_nolabel</td></tr>
+<tr><td>major_vert_notick</td><td>tick set styles</td><td>major_vert_notick</td></tr>
+<tr><td>major_vert_notickbig (line 1435)*</td><td>tick set styles</td><td>major_vert_notickbig</td></tr>
+<tr><td>major_vert_withgrid</td><td>tick set styles</td><td>major_vert_default</td></tr>
+<tr><td>minor_horiz_default</td><td>tick set styles</td><td>minor_horiz_default</td></tr>
+<tr><td>minor_horiz_nolabel</td><td>tick set styles</td><td>minor_horiz_nolabel</td></tr>
+<tr><td>minor_horiz_notick</td><td>tick set styles</td><td>minor_horiz_notick</td></tr>
+<tr><td>minor_vert_default</td><td>tick set styles</td><td>minor_vert_default</td></tr>
+<tr><td>minor_vert_nolabel</td><td>tick set styles</td><td>minor_vert_nolabel</td></tr>
+<tr><td>minor_vert_notick (line 1436)*</td><td>tick set styles</td><td>minor_vert_notick</td></tr>
+<tr><td style="border-bottom: 1px solid black;">sts_risktable (line 1436)*</td><td style="border-bottom: 1px solid black;">tick set styles</td><td style="border-bottom: 1px solid black;">sts_risktable</td></tr>
 </table>
 
 <br>
@@ -1792,8 +1792,8 @@ scheme-ggtest2_tritanopia.scheme
 
 <table style="width:100%">
 <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Key(s)</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Valid Values</th><th style="border-top: 1px solid black; border-bottom: 1px solid black;">Default Values</th>
-<tr><td>contour (line 1758)*</td><td>zyx2 rule styles</td><td>intensity</td></tr>
-<tr><td style="border-bottom: 1px solid black;"></td><td style="border-bottom: 1px solid black;"></td><td style="border-bottom: 1px solid black;">hue</td></tr>
+<tr><td rowspan="2" style="border-bottom: 1px solid black;">contour (line 1758)*</td><td rowspan="2" style="border-bottom: 1px solid black;">zyx2 rule styles</td><td>intensity</td></tr>
+<tr><td style="border-bottom: 1px solid black;">hue</td></tr>
 </table>
 
 <br>

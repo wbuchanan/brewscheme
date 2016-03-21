@@ -15,8 +15,8 @@
 ********************************************************************************
 
 *! filesys
-*! 20jan2016
-*! v 0.0.3
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop the program if it exists in memory
 cap prog drop filesys

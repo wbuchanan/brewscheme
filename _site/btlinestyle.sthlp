@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.7 15MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 {center:{back:back to brewtheme help}}
@@ -42,7 +42,7 @@
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':matrix (line 733)*}}{help linestyle:line style options}{p_end}
 {p2colset 8 50 50 8}{p2col:{help scheme_graph_matrix##remarks4:matrix_plotregion}}{help linestyle:line style options}{p_end}
 {p2colset 8 50 50 8}{p2col:{help scheme_graph_matrix##remarks1:matrixmark}}{help linestyle:line style options}{p_end}
-{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':minor_grid (line )*}}{help linestyle:line style options}{p_end}
+{p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':minor_grid (line 733)*}}{help linestyle:line style options}{p_end}
 {p2colset 8 50 50 8}{p2col:{help scheme_axes##remarks1:minortick}}{help linestyle:line style options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':pboxlabel (line 977)*}}{help linestyle:line style options}{p_end}
 {p2colset 8 50 50 8}{p2col:{stata view `"`c(sysdir_base)'/s/scheme-s2color.scheme"':pboxmarkback (line 974)*}}{help linestyle:line style options}{p_end}

@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  15MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 A command to preview one or more brewscheme color palettes

@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.7
-*! 16MAR2016
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewdb

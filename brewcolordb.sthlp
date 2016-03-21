@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.4  17MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Command to build local dataset of named colors and simulated color values

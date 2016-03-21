@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  17MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Command to create new named color styles and add to existing color dataset.

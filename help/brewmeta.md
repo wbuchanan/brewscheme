@@ -14,8 +14,7 @@ __brewmeta__ -- A Stata interface to color property palettes developed by Cynthi
  
 ## Syntax
  
-brewmeta palette name, colorid(integer) [ colors(integer) <u>prop</u>erties("", "all",
- "colorblind", "lcd", "print", "photocopy", "meta") ]
+brewmeta palette name, colorid(integer) [ colors(integer) <u>prop</u>erties("", "all", "colorblind", "lcd", "print", "photocopy", "meta") ]
  
 ## Description
  

@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewproof
-*! v 0.0.1
-*! 01DEC2015
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop program from memory if already loaded
 cap prog drop brewproof
