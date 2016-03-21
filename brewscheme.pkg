@@ -1,12 +1,21 @@
-d 'BREWSCHEME': a suite of programs, mata classes/methods/functions, and Java 
-d plugins to make it easier to make better looking graphs in Stata.
+d 'BREWSCHEME': a toolkit for data visualizations in Stata.
 d
-d brewscheme is a collection of tools to make it easier for users to 
-d generate customized scheme files, interpolate points in colorspace, 
-d simulate/proof the appearance of data visualizations to individuals 
-d with color sight impairments, and more.  This is release is a beta and 
-d any/all testing, comments, bugs, feature requests, etc... should be 
-d submitted to http://github.com/wbuchanan/brewscheme/issues/new.
+d brewscheme is a suite of programs, mata classes/methods/functions, and Java 
+d plugins to make it easier to improve and standardize the aesthetics of your 
+d data visualizations in Stata.  It includes tools to help end users install and 
+d define new named color styles, interpolate an arbitrary number of colors 
+d between a given starting and ending color and color space, create .theme 
+d files that set general aesthetic properties in graphs, convert hexadecimal 
+d RGB values to Stata formatted RGB color strings, transform RGB values to 
+d simulate different forms of color sight impairment, create proof copies of 
+d visualizations that show how the image may be percieved by individuals with 
+d different forms of color sight impairments, search and look up meta attributes 
+d of color palettes when known/available, preview combinations of colors with or 
+d without simulated color sight impairment transformations, and generate user 
+d defined scheme files that can consume .theme files. 
+d
+d If you notice any issues with the programs, please submit an issue at 
+d https://github.com/wbuchanan/brewscheme/issues/.
 d
 d KW: Data Visualization
 d KW: Graphs
@@ -15,7 +24,7 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20160317
+d Distribution-Date: 20160321
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -25,14 +34,14 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
-f abovebelow.sthlp
-f anglestyle.sthlp
-f areastyle.sthlp
-f arrowstyle.sthlp
-f axisstyle.sthlp
-f barlabelpos.sthlp
-f barlabelstyle.sthlp
-f barstyle.sthlp
+f btabovebelow.sthlp
+f btanglestyle.sthlp
+f btareastyle.sthlp
+f btarrowstyle.sthlp
+f btaxisstyle.sthlp
+f btbarlabelpos.sthlp
+f btbarlabelstyle.sthlp
+f btbarstyle.sthlp
 f brewcbsim.ado
 f brewcbsim.sthlp
 f brewcolordb.ado
@@ -62,59 +71,59 @@ f brewtransform.sthlp
 f brewviewer.ado
 f brewviewer.sthlp
 f btmargin.sthlp
-f bygraphstyle.sthlp
-f clegendstyle.sthlp
-f clockdir.sthlp
-f color.sthlp
-f compass2dir.sthlp
-f compass3dir.sthlp
-f connectstyle.sthlp
+f btbygraphstyle.sthlp
+f btclegendstyle.sthlp
+f btclockdir.sthlp
+f btcolor.sthlp
+f btcompass2dir.sthlp
+f btcompass3dir.sthlp
+f btconnectstyle.sthlp
 f dirfile.ado
-f dottypestyle.sthlp
+f btdottypestyle.sthlp
 f extraColors.do
 f filesys.ado
 f filesys.jar
 f filesys.sthlp
-f graphsize.sthlp
-f graphstyle.sthlp
-f gridlinestyle.sthlp
-f gridringstyle.sthlp
-f gridstyle.sthlp
-f gsize.sthlp
+f btgraphsize.sthlp
+f btgraphstyle.sthlp
+f btgridlinestyle.sthlp
+f btgridringstyle.sthlp
+f btgridstyle.sthlp
+f btgsize.sthlp
 f hextorgb.ado
 f hextorgb.sthlp
-f horizontal.sthlp
-f labelstyle.sthlp
-f legendstyle.sthlp
+f bthorizontal.sthlp
+f btlabelstyle.sthlp
+f btlegendstyle.sthlp
 f libbrewscheme.ado
 f libbrewscheme.mata
 f libbrewscheme.sthlp
 f librecycle.mlib
-f linepattern.sthlp
-f linestyle.sthlp
-f linewidth.sthlp
-f medtypestyle.sthlp
-f numstyle.sthlp
-f numticks.sthlp
-f orientstyle.sthlp
-f piegraphstyle.sthlp
-f pielabelstyle.sthlp
-f plotregionstyle.sthlp
+f btlinepattern.sthlp
+f btlinestyle.sthlp
+f btlinewidth.sthlp
+f btmedtypestyle.sthlp
+f btnumstyle.sthlp
+f btnumticks.sthlp
+f btorientstyle.sthlp
+f btpiegraphstyle.sthlp
+f btpielabelstyle.sthlp
+f btplotregionstyle.sthlp
 f recycle.mata
 f recycle.mo
-f relativepos.sthlp
-f relsize.sthlp
-f special.sthlp
-f starstyle.sthlp
-f symbol.sthlp
-f symbolsize.sthlp
-f textboxstyle.sthlp
-f tickposition.sthlp
-f ticksetstyle.sthlp
-f tickstyle.sthlp
-f vertical.sthlp
-f verticaltext.sthlp
-f yesno.sthlp
-f zyx2rule.sthlp
-f zyx2style.sthlp
+f btrelativepos.sthlp
+f btrelsize.sthlp
+f btspecial.sthlp
+f btstarstyle.sthlp
+f btsymbol.sthlp
+f btsymbolsize.sthlp
+f bttextboxstyle.sthlp
+f bttickposition.sthlp
+f btticksetstyle.sthlp
+f bttickstyle.sthlp
+f btvertical.sthlp
+f btverticaltext.sthlp
+f btyesno.sthlp
+f btzyx2rule.sthlp
+f btzyx2style.sthlp
 

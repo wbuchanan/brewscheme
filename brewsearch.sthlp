@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.2  14MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Query color sight impairment values that were previously computed and return in macros.

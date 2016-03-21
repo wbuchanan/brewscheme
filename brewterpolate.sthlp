@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.3  14MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Interpolation of colors between starting and ending color values.

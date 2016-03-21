@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 0.0.3  17MAR2016}{...}
+{* *! version 1.0.0 21MAR2016}{...}
 
 {hline}
 Simulating color sight impairments on one or more colors

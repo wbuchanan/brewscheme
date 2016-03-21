@@ -9,8 +9,8 @@
 ********************************************************************************
 		
 *! brewviewer
-*! v 0.0.4
-*! 08JAN2016
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop program if already loaded in memory
 cap prog drop brewviewer
