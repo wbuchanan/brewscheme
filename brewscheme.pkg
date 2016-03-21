@@ -34,14 +34,6 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
-f btabovebelow.sthlp
-f btanglestyle.sthlp
-f btareastyle.sthlp
-f btarrowstyle.sthlp
-f btaxisstyle.sthlp
-f btbarlabelpos.sthlp
-f btbarlabelstyle.sthlp
-f btbarstyle.sthlp
 f brewcbsim.ado
 f brewcbsim.sthlp
 f brewcolordb.ado
@@ -70,7 +62,27 @@ f brewtransform.ado
 f brewtransform.sthlp
 f brewviewer.ado
 f brewviewer.sthlp
-f btmargin.sthlp
+f dirfile.ado
+f extraColors.do
+f filesys.ado
+f filesys.jar
+f filesys.sthlp
+f hextorgb.ado
+f hextorgb.sthlp
+f libbrewscheme.ado
+f libbrewscheme.mata
+f libbrewscheme.sthlp
+f librecycle.mlib
+f recycle.mata
+f recycle.mo
+f btabovebelow.sthlp
+f btanglestyle.sthlp
+f btareastyle.sthlp
+f btarrowstyle.sthlp
+f btaxisstyle.sthlp
+f btbarlabelpos.sthlp
+f btbarlabelstyle.sthlp
+f btbarstyle.sthlp
 f btbygraphstyle.sthlp
 f btclegendstyle.sthlp
 f btclockdir.sthlp
@@ -78,55 +90,40 @@ f btcolor.sthlp
 f btcompass2dir.sthlp
 f btcompass3dir.sthlp
 f btconnectstyle.sthlp
-f dirfile.ado
 f btdottypestyle.sthlp
-f extraColors.do
-f filesys.ado
-f filesys.jar
-f filesys.sthlp
 f btgraphsize.sthlp
 f btgraphstyle.sthlp
 f btgridlinestyle.sthlp
 f btgridringstyle.sthlp
 f btgridstyle.sthlp
 f btgsize.sthlp
-f hextorgb.ado
-f hextorgb.sthlp
 f bthorizontal.sthlp
 f btlabelstyle.sthlp
 f btlegendstyle.sthlp
-f libbrewscheme.ado
-f libbrewscheme.mata
-f libbrewscheme.sthlp
-f librecycle.mlib
 f btlinepattern.sthlp
 f btlinestyle.sthlp
 f btlinewidth.sthlp
+f btmargin.sthlp
 f btmedtypestyle.sthlp
 f btnumstyle.sthlp
 f btnumticks.sthlp
-f btorientstyle.sthlp
 f btpiegraphstyle.sthlp
 f btpielabelstyle.sthlp
 f btplotregionstyle.sthlp
-f recycle.mata
-f recycle.mo
 f btrelativepos.sthlp
 f btrelsize.sthlp
 f btspecial.sthlp
 f btstarstyle.sthlp
+f btsunflowerstyle.sthlp
 f btsymbol.sthlp
 f btsymbolsize.sthlp
 f bttextboxstyle.sthlp
 f bttickposition.sthlp
 f btticksetstyle.sthlp
 f bttickstyle.sthlp
-f btvertical.sthlp
 f btverticaltext.sthlp
 f btyesno.sthlp
 f btzyx2rule.sthlp
 f btzyx2style.sthlp
-
-
 
 
