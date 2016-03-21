@@ -1,24 +1,30 @@
-d 'BREWSCHEME': a program for generating customized graph scheme files
+d 'BREWSCHEME': a toolkit for data visualizations in Stata.
 d
-d brewscheme is a program to facilitate Stata users developing graph schemes    
-d using research-based color palettes.  Unlike other uses of the color 		   
-d palettes developed by Brewer, this program allows users to specify the number 
-d of colors from any of the 35 color palettes they would like to use and allows 
-d users to mix/combine different palettes for the various graph types.  
-d Additionally, the program also contains color palettes from other researchers 
-d as well as color palettes commonly used in graphs in the education community.
-d The newest version also includes a submodule to preview combinations of color
-d palettes, a Hexadecimal to Decimal RGB converter, and a Java-based program to
-d interpolate a given number of colors between a starting and ending color.
+d brewscheme is a suite of programs, mata classes/methods/functions, and Java 
+d plugins to make it easier to improve and standardize the aesthetics of your 
+d data visualizations in Stata.  It includes tools to help end users install and 
+d define new named color styles, interpolate an arbitrary number of colors 
+d between a given starting and ending color and color space, create .theme 
+d files that set general aesthetic properties in graphs, convert hexadecimal 
+d RGB values to Stata formatted RGB color strings, transform RGB values to 
+d simulate different forms of color sight impairment, create proof copies of 
+d visualizations that show how the image may be percieved by individuals with 
+d different forms of color sight impairments, search and look up meta attributes 
+d of color palettes when known/available, preview combinations of colors with or 
+d without simulated color sight impairment transformations, and generate user 
+d defined scheme files that can consume .theme files. 
+d
+d If you notice any issues with the programs, please submit an issue at 
+d https://github.com/wbuchanan/brewscheme/issues/.
 d
 d KW: Data Visualization
 d KW: Graphs
 d KW: Scheme files
 d KW: Color
 d
-d Requires: Stata version 13
+d Requires: Stata version 13.1
 d
-d Distribution-Date: 20151108
+d Distribution-Date: 20160321
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -28,22 +34,96 @@ d Notes:  Originally developed as Strategic Data Fellow at the
 d		  Mississippi Department of Education
 d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
+f btabovebelow.sthlp
+f btanglestyle.sthlp
+f btareastyle.sthlp
+f btarrowstyle.sthlp
+f btaxisstyle.sthlp
+f btbarlabelpos.sthlp
+f btbarlabelstyle.sthlp
+f btbarstyle.sthlp
+f brewcbsim.ado
+f brewcbsim.sthlp
+f brewcolordb.ado
+f brewcolordb.sthlp
+f brewcolors.ado
+f brewcolors.sthlp
 f brewdb.ado
 f brewextra.ado
 f brewextra.sthlp
+f brewlibcheck.ado
 f brewmeta.ado
 f brewmeta.sthlp
+f brewproof.ado
+f brewproof.sthlp
 f brewscheme.ado
 f brewscheme.sthlp
+f brewsearch.ado
+f brewsearch.sthlp
 f brewterpolate.ado
-f brewterpolate.sthlp
 f brewterpolate.jar
+f brewterpolate.sthlp
+f brewtheme.ado
+f brewtheme.sthlp
+f brewthemedata.do
+f brewtransform.ado
+f brewtransform.sthlp
 f brewviewer.ado
 f brewviewer.sthlp
+f btmargin.sthlp
+f btbygraphstyle.sthlp
+f btclegendstyle.sthlp
+f btclockdir.sthlp
+f btcolor.sthlp
+f btcompass2dir.sthlp
+f btcompass3dir.sthlp
+f btconnectstyle.sthlp
 f dirfile.ado
+f btdottypestyle.sthlp
+f extraColors.do
+f filesys.ado
+f filesys.jar
+f filesys.sthlp
+f btgraphsize.sthlp
+f btgraphstyle.sthlp
+f btgridlinestyle.sthlp
+f btgridringstyle.sthlp
+f btgridstyle.sthlp
+f btgsize.sthlp
 f hextorgb.ado
 f hextorgb.sthlp
+f bthorizontal.sthlp
+f btlabelstyle.sthlp
+f btlegendstyle.sthlp
+f libbrewscheme.ado
+f libbrewscheme.mata
+f libbrewscheme.sthlp
 f librecycle.mlib
+f btlinepattern.sthlp
+f btlinestyle.sthlp
+f btlinewidth.sthlp
+f btmedtypestyle.sthlp
+f btnumstyle.sthlp
+f btnumticks.sthlp
+f btorientstyle.sthlp
+f btpiegraphstyle.sthlp
+f btpielabelstyle.sthlp
+f btplotregionstyle.sthlp
 f recycle.mata
 f recycle.mo
+f btrelativepos.sthlp
+f btrelsize.sthlp
+f btspecial.sthlp
+f btstarstyle.sthlp
+f btsymbol.sthlp
+f btsymbolsize.sthlp
+f bttextboxstyle.sthlp
+f bttickposition.sthlp
+f btticksetstyle.sthlp
+f bttickstyle.sthlp
+f btvertical.sthlp
+f btverticaltext.sthlp
+f btyesno.sthlp
+f btzyx2rule.sthlp
+f btzyx2style.sthlp
 

@@ -1,16 +1,18 @@
 {smcl}
-{* *! version 0.0.0  08nov2015}{...}
-{cmd:help brewviewer}
+{* *! version 1.0.0 21MAR2016}{...}
+
+{hline}
+A command to preview one or more brewscheme color palettes
 {hline}
 
-{title:Title}
+{title:help for brewviewer}
 
-{hi:brewviewer {hline 2}} A utility for {help brewscheme} to preview color palettes available.
+{p 4 4 8}{hi:brewviewer {hline 2}} A utility for {help brewscheme} to preview color palettes available.{p_end}
 
 {title:Syntax}
 
-{p 4 4 4}{cmd:brewviewer} {it:palette names} [, 
-{cmdab:c:olors(}{it:numlist}{opt )} {cmdab:comb:ine} {cmdab:s:eq} ] {p_end}
+{p 4 4 4}{cmd:brewviewer} {it:palette names} [, {cmdab:c:olors(}{it:numlist}{opt )} 
+{cmdab:comb:ine} {cmdab:s:eq} {cmdab:im:paired} ] {p_end}
 
 {title:Description}
 
@@ -19,6 +21,7 @@ provides you with a way to preview different combinations of palettes and number
 colors.{p_end}
 
 {title:Options}
+
 {p 4 4 8}{cmdab:c:olors} is a required argument and is used to specify the number 
 of colors to preview.  If a single argument is passed it is used for all palettes.  
 If the number of color values passed is the same as the number of palettes the 
@@ -38,19 +41,22 @@ For example, if a value of 5 is passed to {cmdab:c:olors} and {cmdab:s:eq} is se
 the resulting graph will contain columns showing colors 1-3, 1-4, and 1-5.  If this 
 option is not selected, it will only show a single column of colors from 1-5.{p_end}
 
-{marker examples}{title:Examples}{break}
+{p 4 4 8}{cmdab:im:paired} is an optional argument to display the palette(s) along with 
+color sight impaired transformations of the colors. {p_end}
+
+{marker examples}{title:Examples}
 
 {p 4 4 4} See the {browse "http://github.com/wbuchanan/brewscheme":GitHub Repository} for 
 brewscheme for examples of this program.{p_end}
 
 
-{marker acknowledgements}{title:Acknowledgements}{break}
-This subroutine for {help brewscheme} was inspired and influenced by {browse "http://github.com/matthieugomez/stata-colorscheme":Mattieu Gomez's} program stata-colorscheme.
+{marker acknowledgements}{title:Acknowledgements}
 
+{p 4 4 8}This subroutine for {help brewscheme} was inspired and influenced by {browse "http://github.com/matthieugomez/stata-colorscheme":Mattieu Gomez's} program stata-colorscheme.{p_end}
 
-{title: Author}{break}
-{p 1 1 1} William R. Buchanan, Ph.D. {break}
-Data Scientist {break}
-{browse "http://mpls.k12.mn.us":Minneapolis Public Schools} {break}
-William.Buchanan at mpls [dot] k12 [dot] mn [dot] us
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
 

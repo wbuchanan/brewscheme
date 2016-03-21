@@ -1,20 +1,32 @@
-/*
-Code adopted from:
-
-Wickline, M. (????). Color.Vision.Simulate. version 0.1.  Retrieved from:
-http://galacticmilk.com/labs/Color-Vision/Chrome/Color.Vision.Simulate.js
-Retrieved on: 24nov2015
-
-Code also references work of:
-
-Meyer, G. W., & Greenberg, D. P. (1988). Color-Defective Vision and Computer Graphics Displays. Computer Graphics and Applications, IEEE 8(5), pp. 28-40.
-
-Smith, V. C., & Pokorny, J. (2005).  Spectral sensitivity of the foveal cone photopigments between 400 and 500nm.  Journal of the Optical Society of America A, 22(10) pp. 2060-2071.
-
-Lindbloom, B. ().  RGB working space information. Retrieved from: 
-http://www.brucelindbloom.com.  Retrieved on 24nov2015.
-
-*/
+/*******************************************************************************
+*																			   *
+* 				  				libbrewscheme								   *
+*																			   *
+* A collection of Mata classes, methods, functions, and wrappers used by 	   *
+* programs in the brewscheme package.  This includes classes/methods used to   *
+* provide simulated RGB values for different forms of color blindness, and 	   * 
+* utility programs used to search for/look up RGB values used in the different *
+* programs in the package/toolkit/suite of programs.						   *
+*																			   *
+* Code adopted from:														   *
+*																			   *
+* Wickline, M. (2014). Color.Vision.Simulate. version 0.1.  Retrieved from:	   *	
+* galacticmilk.com/labs/Color-Vision/Javascript/Color.Vision.Simulate.js	   *
+* Retrieved on: 24nov2015													   *
+*																			   *
+* Code also references work of:												   *
+*																			   *
+* Meyer, G. W., & Greenberg, D. P. (1988). Color-Defective Vision and Computer *
+* Graphics Displays. Computer Graphics and Applications, IEEE 8(5), pp. 28-40. *
+*																			   *
+* Smith, V. C., & Pokorny, J. (2005).  Spectral sensitivity of the foveal cone *
+* photopigments between 400 and 500nm.  Journal of the Optical Society of 	   *
+* America A, 22(10) pp. 2060-2071.											   *
+*																			   *
+* Lindbloom, B. ().  RGB working space information. Retrieved from: 		   *
+* http://www.brucelindbloom.com.  Retrieved on 24nov2015.					   *
+*																			   *
+*******************************************************************************/
 
 // Change to Mata interpreter/compiler
 mata:
@@ -226,8 +238,7 @@ class colorblind {
 	public:
 	
 	// Setter methods, class constructor, and simulation method
-	void 								new(), achromatopsia(), protanope(), 
-										deuteranope(), tritanope(), setR(), 
+	void 								new(), achromatopsia(), setR(), 
 										setG(), setB(), setAmount(), setRGB(), 
 										simulate()
 
@@ -697,8 +708,8 @@ void colorblind::achromatopsia() {
 	
 	// Anomylize colors
 	dr = (getR() * (1.0 - getAmount())) + dr * getAmount()
-	dg = (getG() * (1.0 - getAmount())) + dg * getAmount()
-	db = (getB() * (1.0 - getAmount())) + db * getAmount()
+	dg = (getR() * (1.0 - getAmount())) + dr * getAmount()
+	db = (getR() * (1.0 - getAmount())) + dr * getAmount()
 	
 	// Pass the values and check that they are in [0, 255]
 	nrgb = checkRange((dr, dg, db))
@@ -984,14 +995,200 @@ void translateColor(real scalar red, real scalar green, real scalar blue) {
 	
 } // End of Mata wrapper for simple color transforms
 
-// Function for simple color transform for multiple colors
-//void translateColors(string rowvector colors) {
+/*******************************************************************************
+*																			   *
+* 				  Additional Utilities for brewscheme						   *
+*																			   *
+*																			   *
+*	brewNameSearch() - searches for named colors by palette name and meta 	   * 
+*						variable values.									   *
+*																			   *
+*	brewColorSearch() - searches for color sight impairment RGB values given   *
+*						a Stata formatted RGB string.						   *
+*																			   *
+*																			   *
+*******************************************************************************/
 
+// Create class for brew colors
+class brewcolors {
 
-
-//} // End of Mata wrapper for multiple color transformations	
+	// Private members
+	private:
 	
+	// String matrices containing color matrices
+	string		matrix		meta, color
+	
+	// Public members
+	public:
 
+	// Methods to construct the class, search for colors by name, and search by 
+	// RGB string(s)
+	void					new(), brewNameSearch(), brewColorSearch(), 
+							getNames()
+	
+} // End Class definition
+
+// Class constructor method
+void brewcolors::new() {
+
+	// Declares variables used in the function
+	string matrix results
+	
+	// String scalar to store file path
+	string scalar cdb, metadb
+	
+	// Stores the file path to the color data base
+	cdb = st_macroexpand("`" + "c(sysdir_personal)" + "'") + "brewcolors/colordb.dta"
+	
+	// Stores the file path for the meta database
+	metadb = st_macroexpand("`" + "c(sysdir_personal)" + "'") + "b/brewmeta.dta"
+
+	// Load the color palette data base
+	stata(`"use ""' + cdb + `"", clear"')
+
+	// Create a copy of the color data base
+	this.color = st_sdata(., ("palette", "meta", "rgb", "achromatopsia", 
+						  "protanopia", "deuteranopia", "tritanopia"))
+
+	// Load the metadatabase
+	stata(`"use ""' + metadb + `"", clear"')
+	
+	// Create a copy of the meta database
+	this.meta = st_sdata(., ("palette", "meta", "rgb", "achromatopsia", 
+						  "protanopia", "deuteranopia", "tritanopia"))
+	
+} // End Class constructor definition
+
+
+// Method used to search for RGB values based on named style definitions
+void brewcolors::brewNameSearch(string scalar name) {
+
+	// Declare matrix for results
+	string matrix results
+
+	// First pass search on the palette name
+	results = select(this.color, this.color[., 1] :== name)
+	
+	// If there are results
+	if (rows(results) != 0) {
+	
+		// Return the results in Stata macros
+		st_local("rgb", results[1, 3])
+		st_local("achromatopsia", results[1, 4])
+		st_local("protanopia", results[1, 5])
+		st_local("deuteranopia", results[1, 6])
+		st_local("tritanopia", results[1, 7])
+		
+	} // End IF Block for success on palette names
+	
+	// If palette name search not successful
+	else {
+	
+		// Search the meta data variable (helpful for XKCD variables)
+		results = select(this.color, this.color[., 2] :== name)
+		
+		// If results are found
+		if (rows(results) != 0) {
+	
+			// Return the results in Stata macros
+			st_local("rgb", results[1, 3])
+			st_local("achromatopsia", results[1, 4])
+			st_local("protanopia", results[1, 5])
+			st_local("deuteranopia", results[1, 6])
+			st_local("tritanopia", results[1, 7])
+		
+		} // End IF Block for success on meta variable search
+		
+		// If no success
+		else {
+		
+			// Return the argument passed to the method
+			st_local("rgb", name)
+			st_local("achromatopsia", name)
+			st_local("protanopia", name)
+			st_local("deuteranopia", name)
+			st_local("tritanopia", name)
+				
+		} // End ELSE Block for no success
+		
+	} // End ELSE Block for search on meta variable 
+
+} // End function definition
+
+// Search for colorblind values given an RGB string
+void brewcolors::brewColorSearch(string scalar rgbstring) {
+
+	// Declares variables used in the function
+	string matrix results
+		
+	// First pass search on the palette name
+	results = select(this.color, this.color[., 3] :== rgbstring)
+	
+	// If there are results
+	if (rows(results) != 0) {
+	
+		// Return the results in Stata macros
+		st_local("rgb", results[1, 3])
+		st_local("achromatopsia", results[1, 4])
+		st_local("protanopia", results[1, 5])
+		st_local("deuteranopia", results[1, 6])
+		st_local("tritanopia", results[1, 7])
+		
+	} // End IF Block for success on palette names
+
+	// First pass search on the palette name
+	results = select(this.meta, this.meta[., 3] :== rgbstring)
+	
+	// If there are results
+	if (rows(results) != 0) {
+	
+		// Return the results in Stata macros
+		st_local("rgb", results[1, 3])
+		st_local("achromatopsia", results[1, 4])
+		st_local("protanopia", results[1, 5])
+		st_local("deuteranopia", results[1, 6])
+		st_local("tritanopia", results[1, 7])
+		
+	} // End IF Block for success on palette names
+
+	// If no success
+	else {
+	
+		// Return the argument originally passed 
+		st_local("rgb", rgbstring)
+		st_local("achromatopsia", rgbstring)
+		st_local("protanopia", rgbstring)
+		st_local("deuteranopia", rgbstring)
+		st_local("tritanopia", rgbstring)
+
+	} // End ELSE Block for no success
+
+} // End Function definition for RGB color search
+
+// Method to retrieve defined colornames 
+void brewcolors::getNames(| real scalar metaOrNames, real scalar stataonly) {
+
+	// Check argument 
+	if (args() == 0) metaOrNames = 1
+	else if (metaOrNames < 1 | metaOrNames > 2) metaOrNames = 1
+
+	// Declare string column vector for the names
+	string rowvector names
+	
+	string matrix statacols
+	
+	statacols = (this.color \ this.meta)
+	
+	if (stataonly == 1) names = uniqrows(select(statacols[., 1], statacols[., 2] :== "Stata"))'
+	
+	// Get all unique color names based on the palette variable
+	else names = uniqrows((this.color[., metaOrNames] \ this.meta[., metaOrNames]))'
+	
+	// Return the names in a Stata macro
+	st_local("colornames", invtokens(names))
+	
+} // End of Method declaration
+	
 // Exit mata and return to Stata prompt
 end 
 

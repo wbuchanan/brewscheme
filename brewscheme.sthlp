@@ -1,14 +1,16 @@
 {smcl}
-{* *! version 0.0.3 17NOV2015}{...}
-{cmd:help brewscheme}
+{* *! version 1.0.0 21MAR2016}{...}
+
+{hline}
+Command to generate customized scheme files.
 {hline}
 
-{marker brewtitle}{p 2 2 2}{title:BREWSCHEME}{p_end}
+{marker brewtitle}{title:help for brewscheme}
 
 {p 4 4 4}{hi:brewscheme {hline 2}} A program for easy generation of customized graph 
 scheme files. {p_end}
 
-{marker brewsyn}{p 2 2 2}{title:Syntax}{p_end}
+{marker brewsyn}{title:Syntax}
 
 {p 4 4 4}{cmd:brewscheme} , {cmdab:scheme:name(}{it:scheme name}{opt )} 
 [ {cmdab:refr:esh} {break} {cmdab:allst:yle(}{it:string}{cmd:)} {cmdab:allc:olors(}{it:real 3}{cmd:)} 
@@ -37,7 +39,7 @@ scheme files. {p_end}
 {cmdab:cone:nd(}{it:string}{cmd:)} {cmdab:consat:uration(}{it:real 100}{cmd:)} 
 {cmdab:themef:ile(}{it:string}{cmd:)}] {p_end}
 
-{marker brewdesc}{p 2 2 2}{title:Description}{p_end}
+{marker brewdesc}{title:Description}
 
 {p 4 4 4}{cmd:brewscheme} is a tool to facilitate Stata users developing 
 graph schemes using research-based color palettes.  Unlike other uses of the 
@@ -49,7 +51,8 @@ as a way of creating a centralized source for the Stata community to work from,
 palettes from outside of ColorBrewer are being added to boost the capabilities 
 of the program.  {p_end}
 
-{marker palettes}{p 2 2 2}{title:Available Palettes}{p_end}{break}
+{marker palettes}{title:Available Palettes}
+
 {col 5}{hline 75}
 {col 5}{hi:Qualitative} {col 55}{hi: Divergent}
 {col 5}{hline 75}
@@ -85,15 +88,14 @@ of the program.  {p_end}
 {col 5}{hi:ylorrd}{col 18}{help brewscheme##brewer: Brewer (2002)}{col 40}{hi:mdebar}{col 55}{browse "http://www.mde.k12.ms.us"} 
 {col 40}{hi:mdepoint}{col 55}{browse "http://www.mde.k12.ms.us"} 
 {col 5}{hline 75}
-
-{col 5}{hline 75}
 {col 5}{hi:Ordinal}{col 55}{hi:{help brewscheme##bostock: D3js}}
 {col 5}{hline 75}
 {col 5}{hi:category10}{col 18}{help brewscheme##bostock: D3}{col 40}{hi:category20}{col 55}{help brewscheme##bostock: D3} 
 {col 5}{hi:category20b}{col 18}{help brewscheme##bostock: D3}{col 40}{hi:category20c}{col 55}{help brewscheme##bostock: D3} 
 {col 5}{hline 75}
 
-{marker brewopts}{p 2 2 2}{title:Options}{p_end}{break}
+{marker brewopts}{title:Options}
+
 {p 4 4 8}{cmdab:scheme:name} is used to name the scheme that will be created by 
 the program.  {it:Unless absolutely necessary, I highly recommend avoiding embedded spaces in these file names.}{p_end}
  
@@ -247,25 +249,27 @@ plots using standard {help colorstyle:colorstyles} from Stata.{p_end}
 {p 14 14 14}{cmdab:cone:nd} Defines the ending color to be used for contour 
 plots using standard {help colorstyle:colorstyles} from Stata.{p_end}
 
-{marker ex}{p 4 4 4}{title:{ul:Examples}}{p_end}{break}
+{marker ex}{title:Examples}
+
 {p 8 8 8} Generate a graph scheme using the set1 color brewer palette for all 
 graphs.  Use the first five colors of the palette and set the color intensity to 
 80 for each of the graphs.{p_end}
 
-{p 10 10 10}{stata brewscheme, scheme(set1) allst(set1) allc(5) allsat(80):brewscheme, scheme(set1) allst(set1) allc(5) allsat(80)}{p_end}{break}
+{p 10 10 10}{stata brewscheme, scheme(set1) allst(set1) allc(5) allsat(80):brewscheme, scheme(set1) allst(set1) allc(5) allsat(80)}{p_end}
 
 {p 8 8 8} Generate a graph scheme using the set1 color brewer palette for 
 scatterplots, pastel1 for bar graphs, and brown to blue-green for all other 
 graph types.  Use the default values of colors and intensity for each.{p_end}
 
-{p 10 10 10}{stata brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg):brewscheme, scheme(mixed1)  scatst(set1) barst(pastel1) somest(brbg)}{p_end}{break}
+{p 10 10 10}{stata brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg):brewscheme, scheme(mixed1)  scatst(set1) barst(pastel1) somest(brbg)}{p_end}
 
 {p 8 8 8}{hi: Note, this program only creates the scheme file.  To achieve the intended effect, you must use the scheme file in your subsequent graph commands:}{p_end}
 
 {p 10 10 10}{stata sysuse auto.dta, clear}{p_end}
 {p 10 10 10}{stata gr box mpg, over(rep78) scheme(mixed1)}{p_end}
 
-{marker refs}{p 4 4 4}{title:{ul:References}}{p_end}{break}
+{marker refs}{title:References}
+
 {marker bostock}{p 4 8 8}Bostock, M., Ogievetsky, V., & Heer, J. (2011).  D3: data driven documents. {it: IEEE Transactions on Visualization & Computer Graphics. 17(12)} pp 2301 - 2309. Retrieved from 
 {browse "http://vis.stanford.edu/papers/d3":Stanford Vis Group}.{p_end}  
 
@@ -274,15 +278,18 @@ graph types.  Use the default values of colors and intensity for each.{p_end}
 {marker linetal}{p 4 8 8}Lin, S., Fortuna, J., Kulkarni, C., Stone, M., {c 38} Heer, J. (2013).{browse "http://vis.stanford.edu/files/2013-SemanticColor-EuroVis.pdf":  Selecting Semantically-Resonant Colors for Data Visualization}. In 
 {it:Computer Graphics Forum} (Vol. 32, No. 3pt4, pp. 401-410).  Blackwell Publishing Ltd.{p_end}
 
-{marker license}{p 4 4 4}{title:{ul:License}}{p_end}{break}
+{marker license}{title:License}
+
 {p 4 4 4}Please view {browse "http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html": section 4} 
 of the ColorBrewer copyright notice for additional information pertaining to the licensing and redistribution of ColorBrew intellectual property.{p_end}
 
-{marker contact}{p 4 4 4}{title:{ul:Author}}{p_end}{break}
-{p 4 4 4}William R. Buchanan, Ph.D. {p_end}
-{p 4 4 4}Data Scientist{p_end}
-{p 4 4 4}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{title:Author}{break}
+{p 4 4 8}William R. Buchanan, Ph.D.{p_end}
+{p 4 4 8}Data Scientist{p_end}
+{p 4 4 8}{browse "http://mpls.k12.mn.us":Minneapolis Public Schools}{p_end}
+{p 4 4 8}William.Buchanan at mpls [dot] k12 [dot] mn [dot] us{p_end}
 
-{marker notes}{p 4 4 4}{title:{ul:Notes}}{p_end}{break}
+{marker notes}{title:Notes}
+
 {p 4 4 4}Development of this program began while I was a Strategic Data Fellow at the {browse "http://mde.k12.ms.us":Mississippi Department of Education}.{p_end}
 

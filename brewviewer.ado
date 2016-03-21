@@ -4,13 +4,13 @@
 * combinations created by different numbers of colors.						   *
 *                                                                              *
 * Lines -                                                                      *
-*     342                                                                      *
+*     461                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewviewer
-*! v 0.0.0
-*! 08nov2015
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop program if already loaded in memory
 cap prog drop brewviewer
@@ -23,7 +23,7 @@ prog def brewviewer
 	
 	// Syntax structure for the program
 	syntax anything(name=pal id="BrewScheme Color Palette") 				 ///   
-	[, Colors(numlist min = 1 max = 20 integer) COMBine Seq ]
+	[, Colors(numlist min = 1 max = 24 integer) COMBine Seq IMpaired ]
 	
 	// Check colors argument
 	if "`colors'" == "" {
@@ -36,6 +36,9 @@ prog def brewviewer
 		
 	} // End IF Block for invalid number of color arguments
 	
+	// Check impairment option to add subtitle to graph
+	if `"`impaired'"' != "" loc xtralab `""with simulated total, red, green, and blue colorblindness""'
+	
 	// Preserve the current state of the data
 	preserve
 	
@@ -46,7 +49,7 @@ prog def brewviewer
 		if `: word count `colors'' == 1 {
 		
 			// Get maximum number of colors 
-			loc maxcol `= `colors' + 0.25'
+			loc maxcol `= `colors''
 						
 			// If sequence switch is enabled
 			if "`seq'" != "" {
@@ -56,6 +59,9 @@ prog def brewviewer
 				
 				// Get minimum number of colors 
 				loc mincol 3
+				
+				// sets of xaxis values
+				loc simvals `= ((`colors' - 3) + 1)'
 
 			} // End IF Block for sequence loop
 			
@@ -67,6 +73,9 @@ prog def brewviewer
 				
 				// Get minimum number of colors 
 				loc mincol `colors'
+				
+				// Sets of xaxis values
+				loc simvals = 1
 							
 			} // End ELSE Block for color loop syntax
 			
@@ -76,7 +85,7 @@ prog def brewviewer
 		else if `: word count `colors'' < `: word count `pal'' {
 		
 			// Get maximum number of colors 
-			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')' + 0.25'
+			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')''
 						
 			// If sequence switch is enabled
 			if "`seq'" != "" {
@@ -86,6 +95,9 @@ prog def brewviewer
 				
 				// Get minimum number of colors 
 				loc mincol 3
+
+				// sets of xaxis values
+				loc simvals `= ((`maxcol' - 3) + 1)'
 
 			} // End IF Block for sequence loop
 			
@@ -97,7 +109,10 @@ prog def brewviewer
 				
 				// Get minimum number of colors 
 				loc mincol `: di min(`: subinstr loc colors `" "' `", "', all')'
-						
+				
+				// Sets of xaxis values
+				loc simvals = 1
+													
 			} // End ELSE Block for color loop syntax
 									
 		} // End ELSEIF Block for fewer colors than palettes
@@ -128,8 +143,11 @@ prog def brewviewer
 			} // End ELSE Block for color loop syntax
 									
 			// Get maximum number of colors 
-			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')' + 0.25'
+			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')''
 						
+			// sets of xaxis values
+			loc simvals `= ((`maxcol' - 3) + 1)'
+
 		} // End ELSEIF Block for more colors than palettes
 		
 		// If there are more colors than palettes
@@ -139,12 +157,18 @@ prog def brewviewer
 			loc colloop foreach i in `colors'
 			
 			// Get maximum number of colors 
-			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')' + 0.25'
+			loc maxcol `= `: di max(`: subinstr loc colors `" "' `", "', all')''
 						
 			// Get minimum number of colors 
 			loc mincol `: di min(`: subinstr loc colors `" "' `", "', all')'
 						
+			// sets of xaxis values
+			loc simvals `= ((`maxcol' - 3) + 1)'
+
 		} // End ELSE Block for more colors than palettes
+		
+		// Create counter for simulated values
+		loc simcount = 1
 		
 		// Loop over the number of palettes passed to the main argument
 		forv w = 1/`: word count `pal'' {
@@ -157,9 +181,12 @@ prog def brewviewer
 			
 			// Set a local for maximum number of colors
 			loc bkupmax `r(max)'
-				
+			
+			// Check for colorblindness simulation option
+			if `"`simcb'"' != "" loc sze `= 1.5 + `= 1/(`maxcol' * 5)''
+			
 			// Set the size of the boxes based on the log of 3 times n colors
-			loc sze `= 3 * (1 + `= 1/`maxcol'')'
+			else loc sze `= 2 + `= 1/`maxcol'''
 			
 			// Local to build xaxis labeling rules
 			loc xax 
@@ -178,9 +205,6 @@ prog def brewviewer
 					
 					// Initialize a null macro to use like a StringBuilder class in Java
 					loc scat`i' 
-					
-					// Append values to x axis macro
-					loc xax `xax' `i'
 					
 					// Loop over the number of unique colors based on the palette color id
 					forv j = 1/`i' {
@@ -214,13 +238,69 @@ prog def brewviewer
 						// Get the individual RGB value for this iteration
 						loc col "`: word 1 of `xrgb''"
 						
-						// 2 less than i times 8 defines the x axis positioning
-						// loc xpos `= `= `i' - 2' * 8'
+						// If color blind impairment simulation get the RGB values
+						if `"`impaired'"' != "" {
 						
-						// Build the command for graphing this individual color/label
-						loc scat`i' `scat`i'' (scatteri `j' `i', mc("`col'") ///   
-						mlabc(black) msize(`sze' `sze') mlc(black) ms(S))
+							// Get simulated colors
+							mata: translateColor(`: subinstr loc col `" "' `", "', all')
+						
+							// Sets the xaxis position for the baseline palette
+							loc basex `= (`simcount' * 5) - 4'
+							
+							// Sets xaxis label for the baseline palette
+							loc baselab `basex' "`i' "
+						
+							// Sets the xaxis position for the achromatopsia transformed palette
+							loc achromx `= (`simcount' * 5) - 3'
+						
+							// Sets the xaxis label for the achromatopsia transformed palette
+							loc achromlab `achromx' " a "
+						
+							// Sets the xaxis position for the protanopia transformed palette
+							loc protanx `= (`simcount' * 5) - 2'
+						
+							// Sets the xaxis label for the protanopia transformed palette
+							loc protanlab `protanx' " p "
+						
+							// Sets the xaxis position for the deuteranopia transformed palette
+							loc deuterx `= (`simcount' * 5) - 1'
+						
+							// Sets the xaxis label for the deuteranopia transformed palette
+							loc deuteranlab `deuterx' " d "
+						
+							// Sets the xaxis position for the tritanopia transformed palette
+							loc tritanx `= (`simcount' * 5) - 0'
+						
+							// Sets the xaxis label for the tritanopia transformed palette
+							loc tritanlab `tritanx' " t "
+							
+							// Build the command for graphing this individual color/label
+							loc scat`i' `scat`i''							 ///   
+							(scatteri `j' `basex', mc("`col'") mlabc(black) ///   
+									/*msize(`sze' `sze')*/ mlc(black) ms(S))	 ///   
+							(scatteri `j' `achromx', mlc(black) ms(S)		 ///   
+								mc("`achromatopsia'") /*msize(`sze' `sze')*/)	 ///   
+							(scatteri `j' `protanx', ms(S) mlc(black)		 ///   
+								mc("`protanopia'") /*msize(`sze' `sze')*/)		 ///   
+							(scatteri `j' `deuterx', ms(S) mlc(black)		 ///   
+								mc("`deuteranopia'") /*msize(`sze' `sze')*/)	 ///    
+							(scatteri `j' `tritanx', ms(S) mlc(black) 		 ///   
+								mc("`tritanopia'") /*msize(`sze' `sze')*/)
+							
+							// Add to existing x-axis label macros
+							loc xax `xax' `baselab' `achromlab' `protanlab' `deuteranlab' `tritanlab'
+							
+						} // End IF Block for impairment simulation
+						
+						// If not
+						else { 
+						
+							// Build the command for graphing this individual color/label
+							loc scat`i' `scat`i'' (scatteri `j' `i', mc("`col'") ///   
+							mlabc(black) msize(`sze' `sze') mlc(black) ms(S))
 
+						} // End ELSE Block for no color impairment simulation
+						
 					} // End Loop over colors within a given palette color id
 					
 					// Add these to a container macro used to build the full graph syntax
@@ -236,23 +316,55 @@ prog def brewviewer
 									
 				} // For cases when the colors value is > max colors
 				
+				// Increment simvalue counter
+				loc simcount = `simcount' + 1
+				
 			} // End Loop over the number of palette color ids to use
 			
-			// Sort the x axis values
-			loc xax : list sort xax
+			// Check for simulation option
+			if `"`impaired'"' != "" {
 			
-			// Remove any duplicate values
-			loc xax : list uniq xax
+				// Adjust label angle and size 
+				loc xax `xax', angle(0)
+				
+				// Remove x-axis title to make room for the additional labeling
+				loc xaxti ""
+				
+			} // End IF Block for impairment option
+
+			// If option not selected
+			else {
+			
+				// Sort the x axis values
+				loc xax : list sort xax
+				
+				// Remove any duplicate values
+				loc xax : list uniq xax
+			
+				loc xax `xax', angle(0)
+			
+				// Set the x-axis title
+				loc xaxti "# Colors"
+
+			} // End ELSE Block for graph w/o simulated colorblindness option
 			
 			// Get minimum value
-			loc scales r(`= `mincol' - 0.25'(0.1)`maxcol')
+			loc scales r(`= `mincol' - 0.25'(0.5)`= `maxcol' + 0.25')
+			
+			if `"`impaired'"' != "" {
+				loc note1 "a = Achromatopsia    p = Protanopia" 
+				loc note2 "    d = Deuteranopia     t = Tritanopia" 
+				loc note note(`note1' `note2', size(medsmall) c(black) pos(7))
+			}
 			
 			// Graph the color palette
 			tw `cmd', ysca(r(1 `maxcol') off) xsca(`scales') xlab(`xax') 	 ///   
-			yti("") ylab(none, nogrid) legend(nodraw) xti("# Colors") 		 ///   
-			graphr(margin(medlarge) fc(white) lc(white) ic(white)) 			 ///   
-			plotr(lc(white) fc(white) ic(white)) name(`palnm'`color', 		 /// 
-			replace) ti("BrewScheme palette:"  "`palnm' colors", size(medsmall) span)
+			yti("") ylab(none, nogrid) legend(nodraw) `note'				 ///   
+			xti(`"`xaxti'"') graphr(margin(medlarge) fc(white) lc(white) 	 ///   
+			ic(white)) plotr(lc(white) fc(white) ic(white)) 				 ///   
+			name(`palnm'`color', replace) xsize(17) ysize(11) 				 ///   
+			ti("BrewScheme palette: `palnm' colors" `xtralab', 				 ///   
+			size(medsmall) span)
 			
 			// Store the name of the graph
 			loc grnames `grnames' `palnm'`color'
@@ -340,4 +452,3 @@ prog def brewviewer
 	
 // End the program
 end
-

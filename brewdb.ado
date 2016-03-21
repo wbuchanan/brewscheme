@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 0.0.5
-*! 07NOV2015
+*! v 1.0.0
+*! 21MAR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -34,7 +34,7 @@ prog def brewdb
 	version 13.1
 
 	// Define the syntax structure of the program
-	syntax, [REFresh]
+	syntax, [REPlace]
 		
 	// Preserve the data in memory
 	preserve
@@ -46,7 +46,7 @@ prog def brewdb
 		cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
 
 		// If the file doesn't exist
-		if _rc == 0 | `"`refresh'"' != "" {
+		if _rc == 0 | `"`replace'"' != "" {
 			
 			// Create a tempfile to read the JS into
 			tempfile brewjs
@@ -56,7 +56,7 @@ prog def brewdb
 			loc time `"`c(current_time)'"'
 						
 			// Read the javascript into memory
-			qui: copy "http://www.colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
+			qui: copy "http://colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
 			`brewjs'.js
 			
 			// Read the data into memory
@@ -451,6 +451,9 @@ prog def brewdb
 			qui: replace rgb = "0 104 55" if palette == "rdylgn" & pcolor == 10 & colorid == 10 
 			qui: replace rgb = "94 79 162" if palette == "spectral" & pcolor == 10 & colorid == 10 
 			
+			// Add transformed values to the data set
+			qui: brewtransform rgb
+			
 			// Attach a checksum to the file
 			qui: datasignature set 
 			
@@ -458,11 +461,11 @@ prog def brewdb
 			qui: save `"`c(sysdir_personal)'b/brewmeta.dta"', replace
 			
 			// Call brewextras to add additional color palettes to the data set
-			qui: brewextra, ref 
+			qui: brewextra, replace
 			
 		} // End IF Block to build new look up database
 		
-		// If the file exists and refresh was not called
+		// If the file exists and replace was not called
 		else {
 		
 			// Print status message to screen
@@ -471,7 +474,7 @@ prog def brewdb
 			`"already exists and will not be rebuilt."'
 			
 			// Print help message to screen
-			di `"To rebuild the database pass the refresh option to brewscheme."'
+			di `"To rebuild the database pass the replace option to brewscheme."'
 			
 		} // End ELSE Block for non over write
 		
@@ -480,4 +483,3 @@ prog def brewdb
 	
 // End of function definition
 end
-
