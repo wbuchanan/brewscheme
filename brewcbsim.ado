@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewcbsim
-*! v 0.0.3
-*! 07JAN2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim

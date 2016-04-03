@@ -1,7 +1,29 @@
+********************************************************************************
+* Description of the Program -												   *
+* This is an ado wrapper around the brewColorSearch and brewNameSearch methods * 
+* of the brewsearch class.  The program returns RGB values in returned macros. *
+*                                                                              *
+* Data Requirements -														   *
+*     none                                                                     *
+*																			   *
+* System Requirements -														   *
+*     none                                                                     *
+*                                                                              *
+* Program Output -                                                             *
+*	r(rgb) 				-	The normal color vision RGB value				   *
+*	r(achromatopsia)	-	The complete color loss RGB value				   *
+*	r(protanopia)		-	The RGB value for red color sight impairment	   *
+*	r(deuteranopia)		-	The RGB value for green color sight impairment	   *
+*	r(tritanopia)		-	The RGB value for blue color sight impairment	   *
+*                                                                              *
+* Lines -                                                                      *
+*     109                                                                      *
+*                                                                              *
+********************************************************************************
 
 *! brewsearch
-*! 07JAN2016
-*! v 0.0.2
+*! v 1.0.1
+*! 03APR2016
 
 // Drop program from memory if previously loaded
 cap prog drop brewsearch

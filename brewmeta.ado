@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewmeta
-*! v 0.0.6
-*! 14OCT2015
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta

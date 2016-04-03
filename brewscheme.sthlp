@@ -13,7 +13,7 @@ scheme files. {p_end}
 {marker brewsyn}{title:Syntax}
 
 {p 4 4 4}{cmd:brewscheme} , {cmdab:scheme:name(}{it:scheme name}{opt )} 
-[ {cmdab:refr:esh} {break} {cmdab:allst:yle(}{it:string}{cmd:)} {cmdab:allc:olors(}{it:real 3}{cmd:)} 
+[ {cmdab:rep:lace} {break} {cmdab:allst:yle(}{it:string}{cmd:)} {cmdab:allc:olors(}{it:real 3}{cmd:)} 
 {cmdab:allsat:uration(}{it:real 100}{cmd:)} {break} {cmdab:somest:yle(}{it:string}{cmd:)} 
 {cmdab:somec:olors(}{it:real 3}{cmd:)} {cmdab:somesat:uration(}{it:real 100}{cmd:)} {break} 
 {cmdab:barst:yle(}{it:string}{cmd:)} {cmdab:barc:olors(}{it:real 3}{cmd:)} 
@@ -37,7 +37,7 @@ scheme files. {p_end}
 {cmdab:refmst:yle(}{it:string}{cmd:)} {cmdab:refmc:olors(}{it:real 3}{cmd:)} 
 {cmdab:refmsat:uration(}{it:real 100}{cmd:)} {break} {cmdab:const:art(}{it:string}{cmd:)} 
 {cmdab:cone:nd(}{it:string}{cmd:)} {cmdab:consat:uration(}{it:real 100}{cmd:)} 
-{cmdab:themef:ile(}{it:string}{cmd:)}] {p_end}
+{cmdab:themef:ile(}{it:string}{cmd:)} {break} {cmdab:symb:ols(}{it:string}{cmd:)}] {p_end}
 
 {marker brewdesc}{title:Description}
 
@@ -99,9 +99,15 @@ of the program.  {p_end}
 {p 4 4 8}{cmdab:scheme:name} is used to name the scheme that will be created by 
 the program.  {it:Unless absolutely necessary, I highly recommend avoiding embedded spaces in these file names.}{p_end}
  
-{p 4 4 8}{cmdab:refr:esh} if the source dataset containing the color palettes 
+{p 4 4 8}{cmdab:rep:lace} if the source dataset containing the color palettes 
 is not found or the user specifies the {cmdab:refr:esh} option, {cmd: colorbrewscheme} 
 will rebuild the source data set to generate the scheme files.{p_end}
+
+{p 4 4 8}{cmdab:symb:ols} an optional argument used to define the type of 
+{help symbolstyle:marks} to use - and the order in which to use them - for graphs 
+that include individual points.  For a quick list of available options use  
+{stata graph query symbolstyle}. {p_end}
+
 {marker brewdefaults}
 {dlgtab 4 8:Single Color Palettes and Default Color Palettes}{break}
 

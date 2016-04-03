@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 0.0.14
-*! 14MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -1168,6 +1168,9 @@ prog def brewextra, rclass
 			// Create a sequence ID for the Data set 
 			qui: egen seqid = concat(palette pcolor colorid)
 			
+			// Drop any cases where the value of rgb is missing
+			qui: drop if mi(rgb)
+			
 			// Local macros w/palette names
 			loc sem1 "carsa, carse, foodsa, foodse, featuresa, featurese"
 			loc sem2 "activitiesa, activitiese, fruita, fruite, veggiesa"
@@ -1299,7 +1302,7 @@ prog def checkfilespec, rclass
 			else {
 			
 				// For id variables they must be non-null
-				if inlist("`v'", "colorid", "pcolor") == 1  {
+				if inlist("`v'", "colorid", "pcolor", "maxcolors") == 1  {
 				
 					// See if any values are missing 
 					qui: count if mi(`v')
