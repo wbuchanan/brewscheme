@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewproof
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop program from memory if already loaded
 cap prog drop brewproof
@@ -177,9 +177,3 @@ void brewproofCleaner(string scalar graphcmd) {
 // End Mata session
 end
 
-/*
-Example:
-
-brewproof, scheme(ggtest2) : tw lowess mpg weight, || scatter mpg weight if rep78 == 1 || scatter mpg weight if rep78 == 2 || scatter mpg weight if rep78 == 3 || scatter mpg weight if rep78 == 4 || scatter mpg weight if rep78 == 5, scheme(ggtest2) legend(order(2 "1978 Repair Record = 1" 3 "1978 Repair Record = 2" 4 "1978 Repair Record = 3" 5 "1978 Repair Record = 4" 6 "1978 Repair Record = 5")) name(baseline, replace)
-
-*/

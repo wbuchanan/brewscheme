@@ -25,8 +25,8 @@
 ********************************************************************************
 		
 *! brewtheme
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme

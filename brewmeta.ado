@@ -16,13 +16,13 @@
 *     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     160                                                                      *
+*     158                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewmeta
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewmeta

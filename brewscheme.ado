@@ -17,13 +17,13 @@
 *     scheme-`schemename'.scheme                                               *
 *                                                                              *
 * Lines -                                                                      *
-*     1561                                                                     *
+*     1548                                                                     *
 *                                                                              *
 ********************************************************************************
 		
 *! brewscheme
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewscheme
@@ -454,15 +454,14 @@ prog def brewscheme, rclass
 				// Get version of palette w/minimum number of colors
 				qui: su pcolor if palette == `"`constart'"'
 				
-				// Get the first value from the palette as the start of the contour
-				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
-				pcolor == `r(min)', loc(cstart)
+				// Get the RGB values for the given palette and number of colors
+				mata: brewc.getPalette(`"`constart'"', `r(min)')
 				
 				// Overwrite the local macro with the RGB value
-				loc constart `: word 1 of `cstart''
+				loc constart `: word 1 of `rgbs''
 
 				// Overwrite the local macro with the RGB value
-				loc conend `: word 2 of `cstart''
+				loc conend `: word 2 of `rgbs''
 				
 			} // End IF Block for case where contour start/end use same palette	
 
@@ -472,23 +471,22 @@ prog def brewscheme, rclass
 				// Get version of palette with minimum number of colors for start
 				qui: su pcolor if palette == `"`constart'"'
 				
-				// Get the first value from the palette as the start of the contour
-				qui: levelsof rgb if palette == `"`constart'"' & 			 ///   
-				pcolor == `r(min)', loc(cstart)
+				// Get the RGB values for the given palette and number of colors
+				mata: brewc.getPalette(`"`constart'"', `r(min)')
 				
 				// Overwrite the local macro with the RGB value
-				loc constart `: word 1 of `cstart''
+				loc constart `: word 1 of `rgbs''
 
 				// Get version of palette with minimum number of colors for start
 				qui: su pcolor if palette == `"`conend'"'
+
+				// Get the RGB values for the ending color for contour plots for 
+				// the given color palette
+				mata: brewc.getPalette(`"`conend'"', `r(min)')
 				
-				// Get the first value from the palette as the end of the contour
-				qui: levelsof rgb if palette == `"`conend'"' & 				 ///   
-				pcolor == `r(min)', loc(cend)
-							
 				// Overwrite the local macro with the RGB value second word used here 
 				// to prevent same color issue if the allstyle option is used.
-				loc conend `: word 2 of `cend''			
+				loc conend `: word 2 of `rgbs''			
 
 			} // End ELSE Block for separate start/end contour palettes
 			
@@ -502,21 +500,10 @@ prog def brewscheme, rclass
 				
 				// Assign the id sequence to a local with seq as suffix
 				loc `color'seq = `"`sequence'"'
-				
-				// Get RGB values for a given palette and max colors
-				qui: levelsof rgb if palette == "``color'style'" & 			 ///   
-				pcolor == ``color'colors', loc(rgbs)
-				
-				// If the RGB value macro is null get the values for the maxmimum
-				// number of colors available for the palette
-				if `"`rgbs'"' == "" {
-				
-					// Gets the same palette but with the maximum number of colors
-					qui: levelsof rgb if palette == "``color'style'" &		 ///   
-					pcolor == ```color'style'c', loc(rgbs)
-					
-				} // End IF Block for palettes that only have a single set of colors	
 
+				// Get the colors for the specified palette and number of colors
+				mata: brewc.getPalette("``color'style'", ``color'colors')
+				
 				// Developer option to print debug messages
 				if "`dbug'" != "" {
 					
