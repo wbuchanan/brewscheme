@@ -3,4 +3,5 @@ bystd.pkg
 *.dta
 *.log
 *.smcl
+./examples
 
