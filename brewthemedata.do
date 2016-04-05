@@ -991,7 +991,7 @@ qui: replace classname = 	cond(classname == "above_below", "abovebelow", 	 ///
 la var classnm "Scheme File Class Name"
 la var argnm "Scheme File Argument Name"
 la var value "Scheme File Parameter Value"
-la var newline "Scheme File Lines to Insert Following This Line"
+la var newlines "Scheme File Lines to Insert Following This Line"
 la var classname "Scheme File Class Name w/o Spaces"
 la var argname "Argument Name w/o Spaces"
 

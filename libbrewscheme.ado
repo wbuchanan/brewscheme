@@ -8,13 +8,13 @@
 *						 used by programs in the brewscheme package.		   *
 *                                                                              *
 * Lines -                                                                      *
-*     56                                                                       *
+*     75                                                                       *
 *                                                                              *
 ********************************************************************************
 		
 *! libbrewscheme
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop program if loaded in memory
 cap prog drop libbrewscheme
@@ -31,14 +31,33 @@ prog def libbrewscheme
 	// Clear all objects, classes, methods, and functions from Mata's cache
 	mata: mata clear
 	
-	// Run the mata file from the current working directory (programmer's option)
-	if `"`locpath'"' != "" qui: do libbrewscheme.mata
+	// Find the file location for libbrewscheme
+	qui: findfile libbrewscheme.mata
 
+	// Run the mata file from the current working directory (programmer's option)
+	if `"`locpath'"' != "" {
+	
+		// Compile the mata classes/methods/functions
+		qui: do libbrewscheme.mata
+		
+		// Compile in place
+		loc dir 
+		
+	} // End IF Block for local build	
+	
 	// Run the mata file from the ADO path location
-	else qui: do `"`c(sysdir_plus)'l/libbrewscheme.mata"'
+	else {
+	
+		// Otherwise compile the source that was found with findfile
+		qui: do `"`r(fn)'"'
+		
+		// Specifies where to build the compiled library
+		loc dir dir(`"`c(sysdir_plus)'l/"')
+	
+	} // End ELSE Block
 	
 	// Create libbrewscheme.mlib
-	qui: mata: mata mlib create libbrewscheme, `replace' `size'
+	qui: mata: mata mlib create libbrewscheme, `replace' `size' `dir'
 
 	// Add the classes, methods, and functions defined in libbrewscheme.mata to 
 	// the mata library file

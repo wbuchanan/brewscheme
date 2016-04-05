@@ -4,13 +4,13 @@
 * combinations created by different numbers of colors.						   *
 *                                                                              *
 * Lines -                                                                      *
-*     461                                                                      *
+*     454                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewviewer
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop program if already loaded in memory
 cap prog drop brewviewer

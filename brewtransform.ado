@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewtransform
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program if already loaded in memory
 cap prog drop brewtransform

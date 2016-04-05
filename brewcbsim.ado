@@ -10,13 +10,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     176                                                                      *
+*     179                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcbsim
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim
