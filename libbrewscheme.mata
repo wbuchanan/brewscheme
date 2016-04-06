@@ -1292,6 +1292,129 @@ void brewcolors::getPalette(string scalar paletteName, real scalar pcolors) {
 	st_local("tritan", `"""' + invtokens(this.meta[selector, 7]', `"" ""') + `"""')
 	
 } // End of Method declaration
+
+// W3C Color Contrast Checker
+void brewContrastChecker(string scalar c1, string scalar c2) {
+
+	// lum1 & lum2 are used to store luminance values that create the ratio
+	// i is an iterator for adjusting the RGB elements, and ratio is the contrast ratio
+	real scalar lum1, lum2, i, ratio
+	
+	// These matrices store the numeric values of the c1 and c2 parameters
+	real matrix col1, col2
+	
+	// WCAG 2.0 level AA requires a contrast ratio of 4.5:1 for normal text 
+	// and 3:1 for large text (14 point and bold or larger, or 18 point or 
+	// larger). Level AAA requires a contrast ratio of 7:1 for normal text 
+	// and 4.5:1 for large text. 
+	// From: http://webaim.org/resources/contrastchecker/
+	// On: 06apr2016
+	// normal aa, normal aaa, large aa, large aaa
+	string rowvector normaa, normaaa, bigaa, bigaaa, ratiolab
+	
+	// Stores pass fail indicator for level AA normal text contrast
+	normaa = "pass"
+	
+	// Stores pass fail indicator for level AAA normal text contrast
+	normaaa = "pass"
+	
+	// Stores pass fail indicator for level AA large text contrast
+	// Large is defined as (>= 14pt & bold) | (>= 18pt)
+	bigaa = "pass"
+	
+	// Stores pass fail indicator for level AAA large text contrast
+	// Large is defined as (>= 14pt & bold) | (>= 18pt)
+	bigaaa = "pass"
+	
+	// Makes decimal RGB values from the character string passed in c1
+	col1 = strtoreal(tokens(c1, " ")) :/ 255
+	
+	// Makes decimal RGB values from the character string passed in c2
+	col2 = strtoreal(tokens(c2, " ")) :/ 255
+	
+	// Loop over the RGB elements
+	for(i = 1; i <=3; i++) {
+		
+		// Adjustment to each of the RGB values in col 1
+		if (col1[1, i] <= 0.03928) col1[1, i] = col1[1, i] / 12.92
+		else col1[1, i] = (((col1[1, i] + 0.055) / 1.055)^2.4)
+				
+		// Adjustment to each of the RGB values in col 1
+		if (col2[1, i] <= 0.03928) col2[1, i] = col2[1, i] / 12.92
+		else col2[1, i] = (((col2[1, i] + 0.055) / 1.055)^2.4)
+		
+	} // End Loop over RGB elements
+	
+	// Luminance value for the first RGB value
+	lum1 = (0.2126 * col1[1, 1] + 0.7152 * col1[1, 2] + 0.0722 * col1[1, 3])
+	
+	// Luminance value for the second RGB value
+	lum2 = (0.2126 * col2[1, 1] + 0.7152 * col2[1, 2] + 0.0722 * col2[1, 3])
+	
+	// The contrast ratio
+	ratio = (max((lum1, lum2)) + 0.05) / (min((lum1, lum2)) + 0.05)
+
+	// The string representation of the contrast ratio
+	ratiolab = strofreal(round(ratio, 0.01)) + ":1"
+	
+	// If the contrast ratio is in [0, 3.0)
+	if (ratio < 3.0) {
+	
+		// Large text at level AA fails
+		bigaa = "fail"
+	
+		// Large text at level AAA fails
+		bigaaa = "fail"
+	
+		// Normal sized text at level AA fails
+		normaa = "fail"
+	
+		// Normal sized text at level AAA fails
+		normaaa = "fail"
+		
+	} // End IF Block for contrast ratios in  [0, 3.0)
+	
+	// If the ratio is [3.0, 4.5)
+	else if (ratio < 4.5) {
+		
+		// Large text at level AAA fails
+		bigaaa = "fail"
+	
+		// Normal sized text at level AA fails
+		normaa = "fail"
+	
+		// Normal sized text at level AAA fails
+		normaaa = "fail"
+
+	} // End ELSEIF Block for contrast ratios in [3.0, 4.5)
+	
+	// If the contrast ratio is in [4.5, 7.0)
+	else if (ratio < 7.0) {
+		
+		// Normal sized text at level AAA fails
+		normaaa = "fail"
+	
+	} // End ELSE IF Block for contrast ratios in [4.5, 7.0)
+	
+	// Returns the normal sized text level AA pass/fail indicator
+	st_local("normaa", normaa)
+	
+	// Returns the normal sized text level AA pass/fail indicator
+	st_local("normaaa", normaaa)
+	
+	// Returns the normal sized text level AA pass/fail indicator
+	st_local("bigaa", bigaa)
+	
+	// Returns the normal sized text level AA pass/fail indicator
+	st_local("bigaaa", bigaaa)
+
+	// Returns the numeric contrast ratio value
+	st_numscalar("rationum", ratio)
+	
+	// Returns the contrast ratio string
+	st_local("ratiolab", ratiolab)
+	
+} // End brewContrastChecker function definition
 		
 // Exit mata and return to Stata prompt
 end 
