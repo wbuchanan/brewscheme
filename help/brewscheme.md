@@ -31,7 +31,7 @@ __brewscheme__ -- A program for easy generation of customized graph scheme files
 <tr><td> </td><td><a href="#refline"><u>reflsty</u>le(string)</a></td><td><u>reflc</u>olors(real 3)</td><td><u>reflsat</u>uration(real 100)</td></tr>
 <tr><td> </td><td><a href="#refmark"><u>refmsty</u>le(string)</a></td><td><u>refmc</u>olors(real 3)</td><td><u>refmsat</u>uration(real 100)</td></tr>
 <tr><td> </td><td><a href="#contour"><u>const</u>art(string)</a></td><td><u>cone</u>nd(string)</td><td><u>consat</u>uration(real 100)</td></tr>
-<tr><td> </td><td colspan="3"><u>themef</u>ile(string)]</td></tr>
+<tr><td> </td><td><u>themef</u>ile(string)</td><td colspan="2"><u>symb</u>ols(string)</td>]</tr>
 </table>
  
 ## Description
@@ -47,6 +47,8 @@ To view information about the available palettes as well as to view previews of 
 <u>scheme</u>name is used to name the scheme that will be created by the program. Unless absolutely necessary, I highly recommend avoiding embedded spaces in these file names.
  
 <u>rep</u>lace if the source dataset containing the color palettes is not found or the user specifies the refresh option, colorbrewscheme will rebuild the source data set to generate the scheme files.
+
+<u>symb</u>ols is an optional argument used to define the type of marks to use - and the order in which to use them - for graphs that include individual points.  For a quick list of available options use `graph query symbolstyle`.
  
 <h3>Single Color Palettes and Default Color Palettes</h3>
 
@@ -209,15 +211,13 @@ brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg)
 ```
 
 ### Ex 3. 
-Distinct Color Palette for Bar Graphs and Scatter Plots with Default Color Palette for All Other Graphs
+Uses a combination of [D3js](https://www.d3js.org) palettes, combined with [ggplot2](https://github.com/hadley/ggplot2) default palettes and themefile.
 
 
 ```Stata
-// Generate a graph scheme using the set1 color brewer palette for          ///   
-// scatterplots, pastel1 for bar graphs, and brown to blue-green for all    ///   
-// other graph types.  Use the default values of colors and intensity for   ///   
-// each.
-brewscheme, scheme(mixed1) scatst(set1) barst(pastel1) somest(brbg)
+// Shows combination of D3js color palettes
+brewscheme, scheme(mixed2) scatst(category10) scatc(5) barst(category20) 	///   
+barc(15) boxsty(category20b) boxc(13) somesty(ggplot2) somec(7) themef(ggtheme)
 ```
 
 ### Ex 4. 

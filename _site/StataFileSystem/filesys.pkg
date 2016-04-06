@@ -17,7 +17,7 @@ d KW: OS
 d
 d Requires: Stata version 13.1, Java 8 or later
 d
-d Distribution-Date: 20160321
+d Distribution-Date: 20160405
 d
 d Author: Billy Buchanan
 d         Data Scientist
@@ -28,5 +28,6 @@ d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
 d
 f filesys.ado
 f filesys.sthlp
-f StataFileSys-jar-with-dependencies.jar
+f filesys.jar
+
 

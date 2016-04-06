@@ -17,13 +17,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     785                                                                      *
+*     479                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolors
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.2
+*! 05APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors

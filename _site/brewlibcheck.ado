@@ -10,13 +10,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     62                                                                       *
+*     59                                                                       *
 *                                                                              *
 ********************************************************************************
 		
 *! brewlibcheck
-*! v 1.0.0
-*! 21MAR2016
+*! v 1.0.1
+*! 03APR2016
 
 // Drop the program if already loaded in memory
 cap prog drop brewlibcheck
@@ -28,10 +28,10 @@ prog def brewlibcheck
 	version 13.1
 	
 	// Check to see if Mata library file exists
-	cap confirm new file `"`c(sysdir_plus)'l/libbrewscheme.mlib"'
+	cap findfile libbrewscheme.mlib
 	
 	// If the file does not currently exist
-	if _rc == 0 {
+	if `"`r(fn)'"' == "" {
 	
 		// Compile the file for the first time
 		qui: libbrewscheme, replace size(2048)
@@ -42,11 +42,11 @@ prog def brewlibcheck
 	else {
 	
 		// Get the file system properties related to the Mata library
-		filesys `c(sysdir_plus)'l/libbrewscheme.mlib, attr
+		filesys `r(fn)', attr
 		
 		// If the existing version of the library is lower than the distro date
 		// recompile the library
-		if `r(creatednum)' < clock("21mar2016 00:00:00", "YMDhms") {
+		if `r(creatednum)' < clock("03apr2016 00:00:00", "DMYhms") {
 			
 			// Recompile the library
 			qui: libbrewscheme, replace size(2048)

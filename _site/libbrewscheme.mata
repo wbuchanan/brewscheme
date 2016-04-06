@@ -26,6 +26,9 @@
 * Lindbloom, B. ().  RGB working space information. Retrieved from: 		   *
 * http://www.brucelindbloom.com.  Retrieved on 24nov2015.					   *
 *																			   *
+* Version: 1.0.1															   *
+* Distribution Date: 03APR2016												   *
+*																			   *
 *******************************************************************************/
 
 // Change to Mata interpreter/compiler
@@ -1018,14 +1021,23 @@ class brewcolors {
 	// String matrices containing color matrices
 	string		matrix		meta, color
 	
+	// Member used to store the colorid, pcolor, and maxcolors from brewmeta.dta
+	real 	matrix		colorData
+
 	// Public members
 	public:
 
 	// Methods to construct the class, search for colors by name, and search by 
 	// RGB string(s)
 	void					new(), brewNameSearch(), brewColorSearch(), 
-							getNames()
+							getNames(), getPalette()
 	
+	// Declares method used to access a safe copy of the palette data
+	string	matrix		getPaletteData()
+	
+	// Declares method used to access a safe copy of the color data
+	real	matrix		getColorData()
+
 } // End Class definition
 
 // Class constructor method
@@ -1047,7 +1059,7 @@ void brewcolors::new() {
 	stata(`"use ""' + cdb + `"", clear"')
 
 	// Create a copy of the color data base
-	this.color = st_sdata(., ("palette", "meta", "rgb", "achromatopsia", 
+	this.color = st_sdata( ., ("palette", "meta", "rgb", "achromatopsia", 
 						  "protanopia", "deuteranopia", "tritanopia"))
 
 	// Load the metadatabase
@@ -1056,9 +1068,34 @@ void brewcolors::new() {
 	// Create a copy of the meta database
 	this.meta = st_sdata(., ("palette", "meta", "rgb", "achromatopsia", 
 						  "protanopia", "deuteranopia", "tritanopia"))
-	
+						  
+	// Sets the color data member which contains the numeric values 								
+	st_view(this.colorData, ., ("colorid", "pcolor", "maxcolors"))
+
 } // End Class constructor definition
 
+/*
+ * Accessor method used to return a protected copy of the palette data (e.g., 
+ * values can be manipulated without affecting the source data)
+ */
+string matrix brewcolors::getPaletteData() {
+
+	// Returns a copy of the data used to construct the paletteData member
+	return(st_sdata(., ("palette", "rgb", "achromatopsia", "protanopia", "deuteranopia", "tritanopia")))
+
+} // End of getPaletteData method declaration
+
+
+/*
+ * Accessor method used to return a protected copy of the color data (e.g., 
+ * values can be manipulated without affecting the source data)
+ */
+real matrix brewcolors::getColorData() {
+
+	// Returns a copy of the data used to construct the colorData member
+	return(st_data(., ("colorid", "pcolor", "maxcolors")))
+
+} // End of getColorData method declaration
 
 // Method used to search for RGB values based on named style definitions
 void brewcolors::brewNameSearch(string scalar name) {
@@ -1189,6 +1226,73 @@ void brewcolors::getNames(| real scalar metaOrNames, real scalar stataonly) {
 	
 } // End of Method declaration
 	
+/*
+ * Method used to look up/return RGB values for a given palette and number of 
+ * colors for a given palette
+ * @param paletteName The name of the palette for which RGB values should be 
+ *						looked up
+ * @param pcolors The version of the palette with pcolors number of colors
+ */
+void brewcolors::getPalette(string scalar paletteName, real scalar pcolors) {
+					
+	// Declares column vectors used by the method to extract the appropriate 
+	// row indices 
+	real 			colvector 		paletteIDs, colorIDs, selector, isColors
+	
+	// Used to store the sorted unique values of the pcolor variable
+	transmorphic 	matrix 			ncolors
+	
+	// Used for logic related to number of colors not matching the number available
+	real 			scalar			userColors
+		
+	// Gets the indices for the color palette of interest
+	paletteIDs = selectindex(this.meta[., 1] :== paletteName)
+	
+	// Gets all the unique combinations of the number of colors
+	ncolors = uniqrows(this.colorData[paletteIDs, 2])
+	
+	// Determine if the number of colors requested is available for the palette
+	isColors = selectindex(ncolors[., 1] :== pcolors)
+		
+	// Extra check to make sure the number of colors is one of the available 
+	// palette color options
+	if (rows(isColors) == 0 | cols(isColors) == 0) {
+	
+		if (pcolors < max(ncolors)) userColors = pcolors
+		else userColors = max(ncolors) 
+
+		pcolors = max(ncolors)
+	
+	} // End IF Block for available number of colors by palette
+	
+	// Tests if the number of requested colors is in the unique values
+	// This is used to select the subset of paletteIDs that yields the 
+	// RGB values of interest
+	colorIDs = selectindex(this.colorData[paletteIDs, 2] :== pcolors)
+
+	// Selects the indices used to access the RGB values
+	selector = paletteIDs[colorIDs, 1]
+	
+	// Trims the selection indices to only the number requested
+	selector = selector[(1..userColors), 1]
+	
+	// Returns the RGB values for the specified color palette	
+	st_local("rgbs", `"""' + invtokens(this.meta[selector, 3]', `"" ""') + `"""')
+
+	// Returns the RGB values for the specified color palette w/achromatopsia transform	
+	st_local("achrom", `"""' + invtokens(this.meta[selector, 4]', `"" ""') + `"""')
+
+	// Returns the RGB values for the specified color palette w/protanopia transform	
+	st_local("protan", `"""' + invtokens(this.meta[selector, 5]', `"" ""') + `"""')
+
+	// Returns the RGB values for the specified color palette w/deuteranopia transform	
+	st_local("deuter", `"""' + invtokens(this.meta[selector, 6]', `"" ""') + `"""')
+
+	// Returns the RGB values for the specified color palette w/tritanopia transform	
+	st_local("tritan", `"""' + invtokens(this.meta[selector, 7]', `"" ""') + `"""')
+	
+} // End of Method declaration
+		
 // Exit mata and return to Stata prompt
 end 
 

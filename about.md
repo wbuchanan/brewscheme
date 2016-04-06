@@ -14,18 +14,18 @@ If you already installed a previous version of brewscheme, there are a few quick
 
 ```
 // Next build out the color database (which also creates color blind translations of the Stata named color styles)
-brewcolordb, ref
+brewcolordb, replace
 
 // If you also wanted to install all of the named colors available from the XKCD you can skip the step above and use:
-brewcolors xkcd, make install ref
+brewcolors xkcd, make install replace
 
 // If you've previously installed brewscheme, you'll also need to rebuild the look up data set used by brewscheme
 // to build the scheme files (the difference is that this file will now also include the color sight impairment simulation values)
 // You can also accomplish the step above this by passing the refresh option to brewscheme
-brewdb, ref
+brewdb, replace
 ```
 
-If you used the second option above `brewcolors xkcd, make install ref`, you should see something like:
+If you used the second option above `brewcolors xkcd, make install replace`, you should see something like:
 
 ![brewcolors Example 1.](http://wbuchanan.github.io/brewscheme/img/brewcolorsex1.png)
 
@@ -34,6 +34,17 @@ when you look for named color styles in Stata.  Additionally, you should also ha
 ![brewcolors Example 2.](http://wbuchanan.github.io/brewscheme/img/brewcolorsex2.png)
 
 Once you've done this you should be all set.  If the look up database is not present when `brewscheme` is called it will build the file automatically for you, but before you can create a scheme/theme file you'll need to have the data set and modified named color styles created by `brewcolordb`.
+
+### Things to check when uninstalling/reinstalling `brewscheme`
+There are a few files that may not be uninstalled if you use the `ado uninstall [#]` command to uninstall `brewscheme`.  The following snippet should help to make sure that these files get removed for you:
+
+```Stata
+loc files libbrewscheme.mlib brewterpolate.jar filesys.jar 
+foreach v of loc files {
+	cap findfile `v'
+	if !mi(`"`r(fn)'"') qui: erase "`r(fn)'"
+}
+```
 
 
 # References
