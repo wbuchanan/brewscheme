@@ -123,7 +123,7 @@ This help file defines the objects and methods defined in the library.{p_end}
 {p 14 14 14}{hi:translateColor()} a wrapper around the {help libbrewscheme##co:colorblind} 
 object that simulates the RGB arguments under all conditions of color sightedness impairment. {p_end}
 
-{marker brewcolor}{dlgtab 4 8:brewcolor class}{break}
+{marker brewcolor}{dlgtab 4 8:brewcolors class}{break}
 {p 4 4 8}This class loads the meta and colordb files to enable faster searching of 
 local databases for specified RGB values and existing transformed values. The 
 intended use here is in the internals of {help brewscheme} and {help brewtheme} 
@@ -133,14 +133,14 @@ files with simulated values for different forms of color sight impairment using
 the same stub name with an additional identifier in the file name for the type 
 of color sight impairment. {p_end}
 
-{marker bcmembers}{dlgtab 8 8:brewcolor members}{break}
+{marker bcmembers}{dlgtab 8 8:brewcolors members}{break}
 {p 14 14 14}{hi:color} A private string matrix containing the required data from 
 the database created by {help brewcolordb}.{p_end}
 
 {p 14 14 14}{hi:meta} A private string matrix containing the required data from 
 the database created by brewdb and {help brewextra}. {p_end}
 
-{marker bcmethods}{dlgtab 8 8:brewcolor methods}{break}
+{marker bcmethods}{dlgtab 8 8:brewcolors methods}{break}
 {p 14 14 14}{hi:brewNameSearch()} a method used to search for {help libbrewscheme##co:colorblind} 
 transformed RGB values given the color's name or meta property. This method searches the 
 palette and meta variables in the color member of the brewcolor class.{p_end}
@@ -151,6 +151,12 @@ variable in the color and meta members of the brewcolor class.{p_end}
 
 {p 14 14 14}{hi:getNames()} a method used to retrieve the full list of all values 
 in the palette or meta variables of the color and meta databases. {p_end}
+
+{p 14 14 14}{hi:getPalette(string, real)} a method used to access the RGB values 
+of the palette specified in the first parameter with the number of colors specified 
+in the second parameter.  This method is used by {help brewscheme} in place of 
+the {help levelsof} command to make sure the RGB values are retrieved in the 
+correct order. {p_end} 
 
 {marker refs}{title:{ul:References}}{break}
 {marker wickline}{p 4 8 8}Wickline, M. (2014). {it:Color.Vision.Simulate, Version 0.1}.  Retrieved from: 
