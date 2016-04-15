@@ -1,58 +1,3 @@
-<<<<<<< HEAD
-# BREWTHEME HELP
-This submodule contains parameter specific Stata help files for the `brewtheme` command.  Due to the number of optional parameters and valid arguments within each of the parameters, it should make it easier for end users to navigate the helpfile with each parameter having it's own sub-help page.  
-
-# Help File TODO List
-- [x] btabovebelow  
-- [x] btanglestyle  
-- [x] btareastyle  
-- [x] btarrowstyle  
-- [x] btaxisstyle  
-- [x] btbarlabelpos  
-- [x] btbarlabelstyle  
-- [x] btbarstyle  
-- [x] btbygraphstyle  
-- [x] btclegendstyle  
-- [x] btclockdir  
-- [x] btcolor  
-- [x] btcompass2dir  
-- [x] btcompass3dir  
-- [x] btconnectstyle  
-- [x] btdottypestyle  
-- [x] btgraphsize  
-- [x] btgridlinestyle  
-- [x] btgridringstyle  
-- [x] btgridstyle  
-- [x] btgsize  
-- [x] bthorizontal  
-- [x] btlabelstyle  
-- [x] btlegendstyle  
-- [x] btlinepatternstyle  
-- [x] btlinestyle  
-- [x] btlinewidthstyle  
-- [x] btmargin  
-- [x] btmedtypestyle  
-- [x] btnumstyle  
-- [x] btnumticks  
-- [x] btpiegraphstyle  
-- [x] btpielabelstyle  
-- [x] btplotregionstyle  
-- [x] btrelativepos  
-- [x] btrelsize  
-- [x] btspecial  
-- [x] btstarstyle  
-- [x] btsymbol  
-- [x] btsymbolsize  
-- [x] btsunflowerstyle  
-- [x] bttextboxstyle  
-- [x] bttickposition  
-- [x] btticksetstyle  
-- [x] bttickstyle  
-- [x] btverticaltext  
-- [x] btyesno  
-- [x] btzyx2rule  
-- [x] btzyx2style  
-=======
 # NEWS
 A help file was added for the `brewcolors` command and all `brewtheme` specific and `brewscheme` documentation has been updated.  There have been some minor refactorings implemented to change instances of the option `refresh` to the more typical Stata syntax `replace`.  
 
@@ -90,5 +35,3 @@ Please view  section 4 of the [ColorBrewer](http://www.colorbrewer2.org) copyrig
 
 ## Additional Info
 For additional information/examples about the brewscheme package see [Buchanan, W. R. (2015). Brewing color schemes in Stata: Making it easier for end users to customize Stata graphs.  Presented 31jul2015 at the  2015 Stata North American Users' Group Meeting.  Columbus, OH.](http://www.stata.com/meeting/columbus15/abstracts/materials/columbus15_buchanan.pdf)
-
->>>>>>> be98667559504771da835a9b64d38e9458b8755e

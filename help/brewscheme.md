@@ -227,8 +227,8 @@ Distinct Color Palette for Each Graph Type.
 ```Stata
 // Create a graph scheme with a distinct color palette for each graph type
 brewscheme, scheme(myriadColorPalettes) barst(paired) barc(12) dotst(prgn)  ///   
-dotc(7) scatstyle(set1) scatc(9) linest(pastel2) linec(8) boxstyle(accent)  ///   
-boxc(8) areast(dark2) areac(8) piest(mdepoint) sunst(greys)                 ///   
+dotc(7) scatstyle(set1) scatc(7) linest(pastel2) linec(5) boxstyle(accent)  ///   
+boxc(7) areast(dark2) areac(6) piest(mdepoint) sunst(greys)                 ///   
 histst(veggiese) cist(activitiesa) matst(spectral) reflst(purd)             ///   
 refmst(set3) const(ylgn) cone(puor)
 ```
