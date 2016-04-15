@@ -31,7 +31,7 @@ __brewscheme__ -- A program for easy generation of customized graph scheme files
 <tr><td> </td><td><a href="#refline"><u>reflsty</u>le(string)</a></td><td><u>reflc</u>olors(real 3)</td><td><u>reflsat</u>uration(real 100)</td></tr>
 <tr><td> </td><td><a href="#refmark"><u>refmsty</u>le(string)</a></td><td><u>refmc</u>olors(real 3)</td><td><u>refmsat</u>uration(real 100)</td></tr>
 <tr><td> </td><td><a href="#contour"><u>const</u>art(string)</a></td><td><u>cone</u>nd(string)</td><td><u>consat</u>uration(real 100)</td></tr>
-<tr><td> </td><td><u>themef</u>ile(string)</td><td colspan="2"><u>symb</u>ols(string)</td>]</tr>
+<tr><td> </td><td><u>themef</u>ile(string)</td><td><u>symb</u>ols(string)</td><td>]</td></tr>
 </table>
  
 ## Description

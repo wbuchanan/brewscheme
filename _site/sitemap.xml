@@ -1,89 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/news/2016/03/21/Version-1-Available.html</loc>
-    <lastmod>2016-03-21T01:00:00-05:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed%20copy.html</loc>
-    <lastmod>2016-01-13T21:40:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</loc>
-    <lastmod>2016-01-13T21:40:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</loc>
-    <lastmod>2015-12-18T03:00:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</loc>
-    <lastmod>2015-12-11T00:10:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</loc>
-    <lastmod>2015-12-01T22:50:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html</loc>
-    <lastmod>2015-11-24T23:30:00-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</loc>
-    <lastmod>2015-11-17T23:30:31-06:00</lastmod>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/about/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewcbsim/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewcolordb/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewcolors/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewextra/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewmeta/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewproof/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewscheme/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewsearch/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewterpolate/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewtheme/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/brewviewer/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/filesys/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/hextorgb/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/help/libbrewscheme/</loc>
-  </url>
-  <url>
-    <loc>https://wbuchanan.github.io/brewscheme/more/</loc>
-  </url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/news/2016/04/14/Important-Bug-Fix.html</loc>
+<lastmod>2016-04-14T23:15:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/news/2016/03/21/Version-1-Available.html</loc>
+<lastmod>2016-03-21T01:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</loc>
+<lastmod>2016-01-13T21:40:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed-copy.html</loc>
+<lastmod>2016-01-13T21:40:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</loc>
+<lastmod>2015-12-18T03:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</loc>
+<lastmod>2015-12-11T00:10:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</loc>
+<lastmod>2015-12-01T22:50:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html</loc>
+<lastmod>2015-11-24T23:30:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</loc>
+<lastmod>2015-11-17T23:30:31-06:00</lastmod>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/about/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewcbsim/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewcolordb/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewcolors/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewextra/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewmeta/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewproof/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewscheme/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewsearch/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewterpolate/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewtheme/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/brewviewer/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/filesys/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/hextorgb/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/help/libbrewscheme/</loc>
+</url>
+<url>
+<loc>https://wbuchanan.github.io/brewscheme/more/</loc>
+</url>
 </urlset>

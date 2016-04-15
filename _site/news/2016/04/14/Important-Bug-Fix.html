@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>brewsearch</title>
+    <title>Important Bug Fix</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/help/brewsearch/">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2016/04/14/Important-Bug-Fix.html">
 </head>
 
   <body>
@@ -69,123 +69,33 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">brewsearch</h1>
+    <h1 class="post-title">Important Bug Fix</h1>
+    <p class="post-meta">Apr 14, 2016</p>
   </header>
 
   <article class="post-content">
-    <hr>
+    <p>In the past few weeks a few small bugs have been found and eliminated.  There are four minor fixes that will likely not affect most users.</p>
 
-<p>Query color sight impairment values that were previously computed and return in macros.</p>
-<hr>
+<ol>
+  <li>
+    <p>These fixes force <code>brewcolordb</code> to create the PERSONAL directory on the ADOPATH if it does not exist before trying to build out the color dataset (see <a href="https://github.com/wbuchanan/brewscheme/issues/45">issue #45</a> and <a href="https://github.com/wbuchanan/brewscheme/issues/46">issue #46</a> for additional information).</p>
+  </li>
+  <li>
+    <p>The <code>brewcolors</code> command was not correctly parsing/naming user defined colors that did not include a name (see <a href="https://github.com/wbuchanan/brewscheme/issues/44">issue #44</a>)</p>
+  </li>
+  <li>
+    <p>Network installations to other directories on the ADOPATH caused <code>brewlibcheck</code> to fail to find the libbrewscheme Mata library (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
+  </li>
+  <li>
+    <p>If the system was set up with the <code>set varabbrev off</code> preference the <code>brewscheme</code> command would fail when calling <code>brewtheme</code> due to the newlines variable being referenced as ‘newline’ one one of the lines of code in the .do file (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
+  </li>
+</ol>
 
-<p><br></p>
+<p>A more important bug that affects how <code>brewscheme</code> generates the scheme files was also identified and any/all users should plan to update their installations ASAP.</p>
 
-<p><strong>brewsearch</strong> – is a program used to query brewscheme data sources to retrieve RGB values and/or simulated RGB values for different forms of color sight impairment.</p>
+<p>While the bug was identified in relation to the <a href="https://www.d3js.org">D3js</a> category10 palette, the issue is likely to have impacted other palettes as well (see <a href="https://github.com/wbuchanan/brewscheme/issues/42">issue #42</a>).  In short, <code>brewscheme</code> relied on the <code>levelsof</code> command internally to access the RGB values for a given palette, which automatically sorted the returned values.  This caused palettes like category10 to display the colors incorrectly.  The reliance on <code>levelsof</code> has been removed and a new method has been added to the <code>brewcolors</code> class to handle accessing the palettes in the correct order.</p>
 
-<h2 id="syntax">Syntax</h2>
-
-<p>brewsearch RGB_varname</p>
-
-<h2 id="description">Description</h2>
-
-<p><strong>brewsearch</strong> is a simple program used to search for a color by RGB value or the name of the color and will return the local macros: rgb, achromatopsia, protanopia, deuteranopia, and tritanopia.</p>
-
-<h2 id="returned-values">Returned Values</h2>
-
-<table style="width:100%">
-<th style="border-top: 1px solid black; border-bottom: 1px solid black">Macro Name</th>
-<th style="border-top: 1px solid black; border-bottom: 1px solid black">Value</th>
-<tr>
-<td>r(rgb)</td>
-<td>RGB value looked up by command</td>
-</tr>
-<tr>
-<td>r(achromatopsia)</td>
-<td>Achromatopsia simulated RGB value</td>
-</tr>
-<tr>
-<td>r(protanopia)</td>
-<td>Protanopia simulated RGB value</td>
-</tr>
-<tr>
-<td>r(deuteranopia)</td>
-<td>Deuteranopia simulated RGB value</td>
-</tr>
-<tr>
-<td style="border-bottom: 1px solid black">r(tritanopia)</td>
-<td style="border-bottom: 1px solid black">Tritanopia simulated RGB value</td>
-</tr>
-</table>
-<p><br></p>
-
-<h2 id="examples">Examples</h2>
-
-<h3 id="ex-1">Ex 1.</h3>
-<p>Search for a color using RGB values</p>
-
-<pre><code class="language-Stata">// Search an RGB color string
-brewsearch "255 127 14"
-
-// Display the returned values
-ret li
-
-macros:
-         r(tritanopia) : "255 117 126"
-       r(deuteranopia) : "206 153 0"
-         r(protanopia) : "183 162 25"
-      r(achromatopsia) : "146 146 146"
-                r(rgb) : "255 127 14"
-</code></pre>
-
-<h3 id="ex-2">Ex 2.</h3>
-<p>Example of how errors (e.g., unfound colors) are handled</p>
-
-<pre><code class="language-Stata">// Search a named color style that does not exist on the system
-brewsearch "xkcd7327"
-
-// Display the returned values
-ret li
-
-macros:
-         r(tritanopia) : "xkcd7327"
-       r(deuteranopia) : "xkcd7327"
-         r(protanopia) : "xkcd7327"
-      r(achromatopsia) : "xkcd7327"
-                r(rgb) : "xkcd7327"
-</code></pre>
-
-<h3 id="ex-3">Ex 3.</h3>
-<p>Search for an xkcd named color style</p>
-
-<pre><code class="language-Stata">// Search a named color style that does exist if the user installed the XKCD colors
-brewsearch "xkcd327"
-
-// Display the returned values
-ret li
-
-macros:
-         r(tritanopia) : "198 236 255"
-       r(deuteranopia) : "255 218 50"
-         r(protanopia) : "255 231 0"
-      r(achromatopsia) : "218 218 218"
-                r(rgb) : "168 255 4"
-</code></pre>
-
-<h3 id="ex-4">Ex 4.</h3>
-<p>Search for a Stata named color style</p>
-
-<pre><code class="language-Stata">// Display a known color style
-brewsearch "ltbluishgray"
-
-// Display the returned values
-ret li
-
-macros:
-         r(tritanopia) : "236 239 255"
-       r(deuteranopia) : "255 232 245"
-         r(protanopia) : "244 239 241"
-      r(achromatopsia) : "240 240 240"
-                r(rgb) : "234 242 243"
+<pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
 </code></pre>
 
 
