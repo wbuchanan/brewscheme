@@ -1059,14 +1059,14 @@ void brewcolors::new() {
 	stata(`"use ""' + cdb + `"", clear"')
 
 	// Create a copy of the color data base
-	st_sview(this.color, ., ("palette", "meta", "rgb", "achromatopsia", 
+	this.color = st_sdata( ., ("palette", "meta", "rgb", "achromatopsia", 
 						  "protanopia", "deuteranopia", "tritanopia"))
 
 	// Load the metadatabase
 	stata(`"use ""' + metadb + `"", clear"')
 	
 	// Create a copy of the meta database
-	st_sview(this.meta, ., ("palette", "meta", "rgb", "achromatopsia", 
+	this.meta = st_sdata(., ("palette", "meta", "rgb", "achromatopsia", 
 						  "protanopia", "deuteranopia", "tritanopia"))
 						  
 	// Sets the color data member which contains the numeric values 								

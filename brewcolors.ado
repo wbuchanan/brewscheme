@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 1.0.1
-*! 03APR2016
+*! v 1.0.2
+*! 05APR2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -125,8 +125,8 @@ prog def colorinstaller, rclass
 		// color string macros
 		else if `: word count `rgb'' == 2 {
 			
-			loc palname udc`palname'_`: word 1 of `rgb''_`: word 2 of `rgb''
 			loc colorstring `palname' `: word 1 of `rgb'' `: word 2 of `rgb''
+			loc palname udc`palname'_`: word 1 of `rgb''_`: word 2 of `rgb''
 			
 		} // End ELSEIF Block for no user specified name
 		
