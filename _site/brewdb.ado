@@ -16,13 +16,13 @@
 *     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     485                                                                      *
+*     424                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewdb
-*! v 1.0.1
-*! 03APR2016
+*! v 1.0.2
+*! 11MAY2016
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -73,68 +73,18 @@ prog def brewdb
 			
 			// This parses the data into the individual sets of colors
 			qui: split z1, g(w) parse(`":  {"')
+
+			// Defines local containing regular expression for color codes
+			loc color 'rgb\([0-9]+ ?, ?[0-9]+ ?, ?[0-9]+\)'
 			
 			// Loop over the maximum colors for each subpalette
 			forv i = 3/12 {
+			
+				// Stores the regex for this number of colors in the palette
+				loc c`i' (.*)(`i': \[(`color' ?,? ?)+\])(.*)
 				
-				// Value of 9 requires special handling
-				if !inlist(`i', 9, 12) {
-				
-					// Return only the rgb values for the # of colors
-					qui: g v`i' = regexs(1) if regexm(w2,					 ///   
-											 `"(`i': \[.*\], `= `i' + 1')"')
-					
-				} // End IF Block for # of colors within subpalette
-				
-				// For the case of the value of 9
-				else if `i' == 9 {
-				
-					// Parse the string, hardcoding the next value
-					qui: g v9 = regexs(1) if regexm(w2, `"(9: \[.*\'], 10:)"')
-					
-					// Get rid of left overs from regex
-					qui: replace v9 = subinstr(v9, "9:", "", .)
-					
-					// Get rid of left overs from regex
-					qui: replace v9 = subinstr(v9, "10:", "", .)
-					
-				} // End ELSE Block for the special case for value 9
-				
-				// For the case of the value of 10
-				else if `i' == 10 {
-				
-					// Parse the string, hardcoding the next value
-					qui: g v10 = regexs(1) if regexm(w2, `"(10: \[.*\'], 11:)"')
-					
-					// Get rid of left overs from regex
-					qui: replace v10 = subinstr(v10, "10:", "", .)
-					
-					// Get rid of left overs from regex
-					qui: replace v10 = subinstr(v10, "11:", "", .)
-					
-				} // End ELSE Block for the special case for value 9
-				
-				// For the case of the value of 11
-				else if `i' == 11 {
-				
-					// Parse the string, hardcoding the next value
-					qui: g v11 = regexs(1) if regexm(w2, `"(11: \[.*\'], 12:)"')
-					
-					// Get rid of left overs from regex
-					qui: replace v11 = subinstr(v11, "11:", "", .)
-					
-					// Get rid of left overs from regex
-					qui: replace v11 = subinstr(v11, "12:", "", .)
-					
-				} // End ELSE Block for the special case for value 9
-				
-				// Need to handle case of 12 color palettes since the end differs
-				else {
-				
-					// This regex makes sure the 12th color element isn't dropped
-					qui: g v12 = regexs(1) if regexm(w2, `"(12: \[.*)"')
-
-				} // End ELSE Block for parsing the RGB strings by # colors 
+				// Gets the string based on the regular expression
+				qui: g v`i' = regexs(2) if regexm(v1, `"`c`i''"')
 				
 				// Parse out only the rgb parts of the strings
 				qui: replace v`i' = regexr(v`i', "(`i': \[')|(, [0-9])|(  [0-9])", "")
@@ -440,17 +390,6 @@ prog def brewdb
 			qui: char def _dta[brew3] "Development branch available at: "
 			qui: char def _dta[brew4] "https://github.com/wbuchanan/brewscheme"
 			
-			// Apply parser corrections
-			qui: replace rgb = "0 60 48" if palette == "brbg" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "106 61 154" if palette == "paired" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "0 68 27" if palette == "prgn" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "45 0 75" if palette == "puor" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "5 48 97" if palette == "rdbu" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "26 26 26" if palette == "rdgy" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "49 54 149" if palette == "rdylbu" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "0 104 55" if palette == "rdylgn" & pcolor == 10 & colorid == 10 
-			qui: replace rgb = "94 79 162" if palette == "spectral" & pcolor == 10 & colorid == 10 
-			
 			// Add transformed values to the data set
 			qui: brewtransform rgb
 			
@@ -483,3 +422,4 @@ prog def brewdb
 	
 // End of function definition
 end
+
