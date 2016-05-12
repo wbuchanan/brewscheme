@@ -16,13 +16,13 @@
 *     r(paletteName[#Max][#C]_colorblind) - Colorblindness friendliness		   *
 *                                                                              *
 * Lines -                                                                      *
-*     424                                                                      *
+*     437                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewdb
-*! v 1.0.2
-*! 11MAY2016
+*! v 1.0.3
+*! 12MAY2016
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -77,6 +77,8 @@ prog def brewdb
 			// Defines local containing regular expression for color codes
 			loc color 'rgb\([0-9]+ ?, ?[0-9]+ ?, ?[0-9]+\)'
 			
+			loc rgb ([0-9][0-9]?[0-9]?)
+			
 			// Loop over the maximum colors for each subpalette
 			forv i = 3/12 {
 			
@@ -98,32 +100,9 @@ prog def brewdb
 				// Loop over the returned list of variables
 				foreach x in `r(varlist)' {
 				
-					// Remove any extra space in the variables
-					qui: replace `x' = trim(itrim(`x'))
-					
-					// Remove punctuation and 'rgb(' from the start of the value string
-					qui: replace `x' = regexr(`x', "(rgb\()|(\))", "")
-					
-					// Remove the commas between the values
-					qui: replace `x' = subinstr(`x', ",", " ", .)
-
-					// Remove any trailing/closing parenthesis
-					qui: replace `x' = subinstr(`x', `")"', "", .)
-
-					// Remove any trailing/closing square brackets
-					qui: replace `x' = subinstr(`x', `"]"', "", .)
-
-					// Remove any leading/opening square brackets
-					qui: replace `x' = subinstr(`x', `"["', "", .)
-
-					// Remove any remaining apostrophes 
-					qui: replace `x' = subinstr(`x', `"'"', "", .)
-
-					// Remove IDs for next color/palette combination
-					qui: replace `x' = regexr(`x', "(  [0-9])", "")
-					
-					// Remove erroneous spaces
-					qui: replace `x' = trim(itrim(`x'))
+					// Extracts the RGB value strings from the rgb functions
+					qui: replace `x' = regexs(1) + " " + regexs(3) + " " + 	///   
+					regexs(5) if regexm(`x', "`rgb'( ?, ?)`rgb'( ?, ?)`rgb'")
 
 				} // End Loop over individual color variables
 				
@@ -144,7 +123,7 @@ prog def brewdb
 			// Keep only the variables needed to build out the RGB values or properties
 			qui: keep palette v*color* v1
 
-			// Parse the JS
+			// Parse the properties from the JavaScript variable
 			qui: g x = regexs(0) if regexm(v1, 								 ///   
 			`"'blind':\[[0-2].*\],'print':\[[0-2].*\],'copy':\[[0-2].*\],'screen':\[[0-2].*\]"')
 
@@ -180,9 +159,30 @@ prog def brewdb
 
 			// Split lcd indicator string into element/color wise indicators
 			qui: split y4, gen(lcd) parse(",")
-
+			
 			// Drop some unnecessary junk to reduce memory usage
 			qui: drop x y1 y2 y3 y4 
+			
+			// Loop over the meta data properties
+			forv i = 2/10 {
+			
+				// copies property to later values if missing
+				qui: replace colorblind`i' = colorblind`= `i' - 1' if 		///  
+				!mi(colorblind`= `i' - 1') & mi(colorblind`i')
+							
+				// copies property to later values if missing
+				qui: replace print`i' = print`= `i' - 1' if 				 ///  
+				!mi(print`= `i' - 1') & mi(print`i')
+							
+				// copies property to later values if missing
+				qui: replace photocopy`i' = photocopy`= `i' - 1' if 		 ///  
+				!mi(photocopy`= `i' - 1') & mi(photocopy`i')
+				
+				// copies property to later values if missing
+				qui: replace lcd`i' = lcd`= `i' - 1' if !mi(lcd`= `i' - 1')  ///   
+				& mi(lcd`i')
+				
+			} // End Loop over metadata variables
 			
 			/* Brewer only created palettes with 3 - 12 colors, but the JS is 
 			stored in such a way as to only include a maximum of 10 elements.  
@@ -200,6 +200,19 @@ prog def brewdb
 				lcd`= `i' + 2')
 				
 			} // End Loop over the color metadata properties
+			
+			// Loop over metadata variables
+			foreach v in colorblind photocopy lcd print {
+				
+				// Creates metadata variable for color 1 based on values of the 
+				// metadata for the min number of colors ID'd in colorbrewer
+				qui: g `v'1 = `v'3
+
+				// Creates metadata variable for color 1 based on values of the 
+				// metadata for the min number of colors ID'd in colorbrewer
+				qui: g `v'2 = `v'3
+				
+			} // End Loop over metadata property stems
 			
 			// Additional garbage collection to reduce memory usage
 			qui: keep palette v*color* colorblind* print* photocopy* lcd*
