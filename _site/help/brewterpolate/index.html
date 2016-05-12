@@ -114,7 +114,7 @@
 <h3 id="ex-1">Ex 1.</h3>
 <p>Interpolating four points between start and end in RGB color space</p>
 
-<pre><code>// Interpolate four points between `rgb(197, 115, 47)` and `rgb(5, 37, 249)`.  
+<pre><code class="language-Stata">// Interpolate four points between `rgb(197, 115, 47)` and `rgb(5, 37, 249)`.  
 // Note that the program is set up to automatically handle parsing commas for 
 // rgb values.
 brewterpolate, sc("197 115 47") ec("5, 37, 249") c(4)
@@ -134,7 +134,7 @@ ret li
 <h3 id="ex-2">Ex 2.</h3>
 <p>Inverse interpolation with 9 colors in rgb color space</p>
 
-<pre><code>// Same as the example above, except we pass the value `9` to the `colors()` 
+<pre><code class="language-Stata">// Same as the example above, except we pass the value `9` to the `colors()` 
 // parameter and specify the `inverse` option with the abbreviation `inv`.
 brewterpolate, sc("197 115 47") ec("5, 37, 249") c(9) inv
 
@@ -158,7 +158,7 @@ ret li
 <h3 id="ex-3">Ex 3.</h3>
 <p>Interpolate 18 colors in RGB color space and return the interpolated values in HSB colorspace</p>
 
-<pre><code>// Here, we use the `rcspace()` parameter with a value of `"hsb"` to denote the
+<pre><code class="language-Stata">// Here, we use the `rcspace()` parameter with a value of `"hsb"` to denote the
 // desired color space in which to return the interpolated colors.
 brewterpolate, sc("197 115 47") ec("5, 37, 249") c(18) rcs("hsb")
 

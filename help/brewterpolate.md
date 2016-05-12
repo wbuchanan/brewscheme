@@ -43,7 +43,7 @@ __brewterpolate__ is a program used to interpolate color values between the star
 ### Ex 1. 
 Interpolating four points between start and end in RGB color space
   
-```
+```Stata
 // Interpolate four points between `rgb(197, 115, 47)` and `rgb(5, 37, 249)`.  
 // Note that the program is set up to automatically handle parsing commas for 
 // rgb values.
@@ -65,7 +65,7 @@ ret li
 Inverse interpolation with 9 colors in rgb color space
 
 
-```
+```Stata
 // Same as the example above, except we pass the value `9` to the `colors()` 
 // parameter and specify the `inverse` option with the abbreviation `inv`.
 brewterpolate, sc("197 115 47") ec("5, 37, 249") c(9) inv
@@ -90,7 +90,7 @@ ret li
 ### Ex 3. 
 Interpolate 18 colors in RGB color space and return the interpolated values in HSB colorspace
 
-```
+```Stata
 // Here, we use the `rcspace()` parameter with a value of `"hsb"` to denote the
 // desired color space in which to return the interpolated colors.
 brewterpolate, sc("197 115 47") ec("5, 37, 249") c(18) rcs("hsb")
