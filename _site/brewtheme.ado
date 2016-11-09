@@ -25,8 +25,8 @@
 ********************************************************************************
 		
 *! brewtheme
-*! v 1.0.1
-*! 03APR2016
+*! v 1.0.2
+*! 09NOV2016
 
 // Drop the program from memory if loaded
 cap prog drop brewtheme
@@ -229,7 +229,7 @@ prog def brewtheme
 		if `"`themefile'"' != "" {
 
 			// Check for directory and if not build it	
-			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
+			dirfile `c(sysdir_personal)'b, p(theme) 
 			
 			// Write the scheme file to a location on the path
 			qui: file open theme using `"`themeroot'-`themefile'.theme"', w replace
@@ -252,7 +252,7 @@ prog def brewtheme
 		else {
 		
 			// Check for directory and if not build it	
-			dirfile, p(`"`c(sysdir_personal)'b/theme"') 
+			dirfile `c(sysdir_personal)'b, p(theme) 
 			
 			// Write the scheme file to a location on the path
 			qui: file open theme using `"`themeroot'-default.theme"', w replace

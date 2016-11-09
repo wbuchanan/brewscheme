@@ -5,9 +5,29 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 12 May 2016 04:26:02 -0500</pubDate>
-    <lastBuildDate>Thu, 12 May 2016 04:26:02 -0500</lastBuildDate>
+    <pubDate>Wed, 09 Nov 2016 06:19:36 -0500</pubDate>
+    <lastBuildDate>Wed, 09 Nov 2016 06:19:36 -0500</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Bug Fixes</title>
+        <description>&lt;h1 id=&quot;updates&quot;&gt;Updates&lt;/h1&gt;
+&lt;p&gt;Just pushed changes to a related utility project called &lt;a href=&quot;https://github.com/wbuchanan/dirfile&quot;&gt;dirfile&lt;/a&gt;.  The command now uses a recursive descent pattern to traverse the file system from a given root node and provides options that allow the end-user to select which files in the directory tree are retained/deleted when specifying the rebuild option.  This also meant updating the API for the command, hence the changes to &lt;code&gt;brewscheme&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;These changes are primarily intended to help fix some of the outstanding bugs identified in &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/53&quot;&gt;issue #53&lt;/a&gt; and &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/52&quot;&gt;issue #52&lt;/a&gt;.  This update can be considered a test and there may be new bugs related to the calls to dirfile used internally in the commands included with &lt;code&gt;brewscheme&lt;/code&gt;.  All of the calls were updated/modified, but any end-users that can assist in testing this on their systems would be greatly appreciated (particularly users working on Windows platforms since this seems to be the root cause for many of the issues related to the bug reported in &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues/53&quot;&gt;issue #53&lt;/a&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Stata&quot;&gt;net inst brewscheme, from(&quot;https://wbuchanan.github.io/brewscheme/&quot;) replace
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Wed, 09 Nov 2016 01:15:00 -0500</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/news/2016/11/09/Bug-Fixes.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/11/09/Bug-Fixes.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
     
       <item>
         <title>Important Bug Fix</title>
@@ -36,9 +56,9 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 </description>
-        <pubDate>Thu, 14 Apr 2016 23:15:00 -0500</pubDate>
-        <link>https://wbuchanan.github.io/brewscheme/news/2016/04/14/Important-Bug-Fix.html</link>
-        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/04/14/Important-Bug-Fix.html</guid>
+        <pubDate>Fri, 15 Apr 2016 00:15:00 -0400</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/news/2016/04/15/Important-Bug-Fix.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/04/15/Important-Bug-Fix.html</guid>
         
         
         <category>news</category>
@@ -55,7 +75,7 @@
 &lt;p&gt;In addition to taking care of known bugs, the stable release also includes much more comprehensive documentation (particularly for &lt;code&gt;brewtheme&lt;/code&gt;).  I’ll also be submitting an article to the StataJournal in the next few days.  As always, if you run into any bugs/issues please &lt;a href=&quot;https://github.com/wbuchanan/brewscheme/issues&quot;&gt;submit an issue&lt;/a&gt;.  Additionally, if you find the program useful, feel free to share the code you use to generate scheme files and they can be included in the project Wiki to give others access to a starting point for customizing scheme files for themselves a bit easier.&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 21 Mar 2016 01:00:00 -0500</pubDate>
+        <pubDate>Mon, 21 Mar 2016 02:00:00 -0400</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/news/2016/03/21/Version-1-Available.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/03/21/Version-1-Available.html</guid>
         
@@ -110,7 +130,7 @@ tw contour depth northing easting, scheme(ggplot2ex1)
 &lt;p&gt;&lt;img src=&quot;../../../../img/contourExample1.png&quot; alt=&quot;contour plot example&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 13 Jan 2016 21:40:00 -0600</pubDate>
+        <pubDate>Wed, 13 Jan 2016 22:40:00 -0500</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed.html</guid>
         
@@ -165,7 +185,7 @@ tw contour depth northing easting, scheme(ggplot2ex1)
 &lt;p&gt;&lt;img src=&quot;../../../../img/contourExample1.png&quot; alt=&quot;contour plot example&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 13 Jan 2016 21:40:00 -0600</pubDate>
+        <pubDate>Wed, 13 Jan 2016 22:40:00 -0500</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed-copy.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/news/2016/01/13/countour-plots-fixed-copy.html</guid>
         
@@ -193,7 +213,7 @@ tw contour depth northing easting, scheme(ggplot2ex1)
 &lt;p&gt;The other updates that have been made are intended to make it easier for the end user to install/maintain the software.  &lt;code&gt;brewlibcheck&lt;/code&gt; leverages &lt;code&gt;filesys.ado&lt;/code&gt; and the associated Java plugin to test whether or not the &lt;code&gt;libbrewscheme&lt;/code&gt; Mata library is up to date - and if not to compile the Mata source code into the library for you.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 18 Dec 2015 03:00:00 -0600</pubDate>
+        <pubDate>Fri, 18 Dec 2015 04:00:00 -0500</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/18/version-1-release-candidate.html</guid>
         
@@ -258,7 +278,7 @@ log c _all
 &lt;p&gt;That should provide a fair amount of information that I can use to trace issues and replicate problems that you may have.  In some cases, I may not have access to the operating system you use, but there generally shouldn’t be too many issues caused by the OS at this point.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 11 Dec 2015 00:10:00 -0600</pubDate>
+        <pubDate>Fri, 11 Dec 2015 01:10:00 -0500</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/11/minor-features-and-bug-fixes.html</guid>
         
@@ -282,7 +302,7 @@ log c _all
 &lt;/ol&gt;
 
 </description>
-        <pubDate>Tue, 01 Dec 2015 22:50:00 -0600</pubDate>
+        <pubDate>Tue, 01 Dec 2015 23:50:00 -0500</pubDate>
         <link>https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</link>
         <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/12/01/getting-ready-for-version-1-release.html</guid>
         
@@ -298,9 +318,9 @@ log c _all
 &lt;p&gt;As always, comments, requests, and collaborators are always welcome.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 24 Nov 2015 23:30:00 -0600</pubDate>
-        <link>https://wbuchanan.github.io/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html</link>
-        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html</guid>
+        <pubDate>Wed, 25 Nov 2015 00:30:00 -0500</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/11/25/new-addition-to-brewscheme-family.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/11/25/new-addition-to-brewscheme-family.html</guid>
         
         
         <category>update</category>
@@ -313,9 +333,9 @@ log c _all
 find the same content that was previously located in the README, but it should be easier to navigate back and forth between 
 the subroutines in the package now.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 17 Nov 2015 23:30:31 -0600</pubDate>
-        <link>https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</link>
-        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/11/17/new-site.html</guid>
+        <pubDate>Wed, 18 Nov 2015 00:30:31 -0500</pubDate>
+        <link>https://wbuchanan.github.io/brewscheme/update/2015/11/18/new-site.html</link>
+        <guid isPermaLink="true">https://wbuchanan.github.io/brewscheme/update/2015/11/18/new-site.html</guid>
         
         
         <category>update</category>

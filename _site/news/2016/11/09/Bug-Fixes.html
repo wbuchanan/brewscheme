@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>New addition to the brewscheme family</title>
+    <title>Bug Fixes</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/update/2015/11/24/new-addition-to-brewscheme-family.html">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2016/11/09/Bug-Fixes.html">
 </head>
 
   <body>
@@ -70,14 +70,18 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">New addition to the brewscheme family</h1>
-    <p class="post-meta">Nov 24, 2015</p>
+    <h1 class="post-title">Bug Fixes</h1>
+    <p class="post-meta">Nov 9, 2016</p>
   </header>
 
   <article class="post-content">
-    <p><code>brewscheme</code> now includes new Mata classes/methods to simulate the color that would be perceived by individuals with varying types of color sightedness impairments.  Additionally, similar to <a href="https://wbuchanan.github.io/brewscheme/brewviewer/">brewviewer</a> there is also an analogous program available to show how the simulated color values would appear called <a href="https://wbuchanan.github.io/brewscheme/brewcbsim/">brewcbsim</a>.  Future development will exapand the options of both brewcbview (e.g., to handle multiple color tuples and display them in a single graph), brewviewer (e.g., to show a preview of specific palette combinations under varying forms of color sightedness impairment), to add the simulated colors to lookup tables used by <a href="https://wbuchanan.github.io/brewscheme/brewscheme/">brewscheme</a> and <a href="https://wbuchanan.github.io/brewscheme/brewtheme/">brewtheme</a>, and to create a proofer for Stata graphs that would show how they would appear under different forms of color sight impairment.</p>
+    <h1 id="updates">Updates</h1>
+<p>Just pushed changes to a related utility project called <a href="https://github.com/wbuchanan/dirfile">dirfile</a>.  The command now uses a recursive descent pattern to traverse the file system from a given root node and provides options that allow the end-user to select which files in the directory tree are retained/deleted when specifying the rebuild option.  This also meant updating the API for the command, hence the changes to <code>brewscheme</code>.</p>
 
-<p>As always, comments, requests, and collaborators are always welcome.</p>
+<p>These changes are primarily intended to help fix some of the outstanding bugs identified in <a href="https://github.com/wbuchanan/brewscheme/issues/53">issue #53</a> and <a href="https://github.com/wbuchanan/brewscheme/issues/52">issue #52</a>.  This update can be considered a test and there may be new bugs related to the calls to dirfile used internally in the commands included with <code>brewscheme</code>.  All of the calls were updated/modified, but any end-users that can assist in testing this on their systems would be greatly appreciated (particularly users working on Windows platforms since this seems to be the root cause for many of the issues related to the bug reported in <a href="https://github.com/wbuchanan/brewscheme/issues/53">issue #53</a>).</p>
+
+<pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
+</code></pre>
 
 
   </article>
