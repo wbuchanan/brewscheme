@@ -21,7 +21,7 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 1.0.4
+*! v 1.0.5
 *! 09NOV2016
 
 // Drop the program from memory if loaded
@@ -39,8 +39,8 @@ prog def brewdb
 	// Preserve the data in memory
 	preserve
 			
-		// Check for directory and if not build it	
-		dirfile `c(sysdir_personal)', p(b) rebuild
+		// Check for directory.  If non existent, rebuild it.
+		dirfile `c(sysdir_personal)', p(b) 
 
 		// Check for the metadata dataset
 		cap confirm new file `"`c(sysdir_personal)'b/brewmeta.dta"'
