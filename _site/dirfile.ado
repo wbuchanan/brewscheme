@@ -18,7 +18,7 @@
 ********************************************************************************
 		
 *! dirfile
-*! v 0.0.4
+*! v 0.0.5
 *! 09NOV2016
 
 // Drop the program from memory if loaded
@@ -31,7 +31,10 @@ prog def dirfile
 	version 13
 	
 	// Syntax for calling the program
-	syntax [anything(name = root id = "Root directory")] , Path(string) [ REBuild ]
+	syntax [anything(name = root id = "Root directory")], [ Path(string) REBuild ]
+	
+	// Default value for path parameter
+	if `"`path'"' == "" loc path "*"
 	
 	// Check for file path existence
 	qui: loc newfile : dir "`root'" dirs "`path'", respectcase

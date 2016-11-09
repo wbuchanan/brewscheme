@@ -8,7 +8,7 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     339                                                                      *
+*     333                                                                      *
 *                                                                              *
 ********************************************************************************
 		
@@ -38,19 +38,16 @@ prog def brewcolordb, rclass
 		// Check response
 		if lower(`"`perm'"') == "n" exit 
 		
-	}
+		// Or clear data from memory
+		else clear
+		
+	} // End IF BLOCK for no override option
 		
 	// Clear data from memory
-	clear
-	
-	// Store personal directory
-	loc personal `"`c(sysdir_personal)'"'
+	else clear
 	
 	// Check to see if the personal ADOPATH directory exists
-	cap confirm file `"`personal'"'
-	
-	// If it does not exist create the directory
-	if _rc != 0 mkdir `"`personal'"'
+	qui: dirfile `c(sysdir_personal)'
 	
 	// Set the rebuild parameter conditional on the replace argument
 	if `"`replace'"' != "" loc rebuild rebuild
