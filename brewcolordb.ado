@@ -46,8 +46,11 @@ prog def brewcolordb, rclass
 	// Clear data from memory
 	else clear
 	
+	// Store the name of the personal subdirectory
+	loc personal `c(sysdir_personal)'
+	
 	// Check to see if the personal ADOPATH directory exists
-	qui: dirfile `c(sysdir_personal)'
+	qui: dirfile `: subinstr loc personal "personal/" "", all', p(personal)
 	
 	// Set the rebuild parameter conditional on the replace argument
 	if `"`replace'"' != "" loc rebuild rebuild
