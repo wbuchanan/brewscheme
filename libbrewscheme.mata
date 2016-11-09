@@ -26,8 +26,8 @@
 * Lindbloom, B. ().  RGB working space information. Retrieved from: 		   *
 * http://www.brucelindbloom.com.  Retrieved on 24nov2015.					   *
 *																			   *
-* Version: 1.0.1															   *
-* Distribution Date: 03APR2016												   *
+* Version: 1.1.0															   *
+* Distribution Date: 09NOV2016												   *
 *																			   *
 *******************************************************************************/
 

@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 1.0.2
-*! 05APR2016
+*! v 1.0.3
+*! 09NOV2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -55,10 +55,10 @@ prog def brewcolors, rclass
 		clear
 	
 		// Check for/build directory
-		dirfile, p(`"`c(sysdir_personal)'style"')
+		dirfile `c(sysdir_personal)', p(style)
 
 		// Check for/build directory
-		dirfile, p(`"`c(sysdir_personal)'brewcolors"')
+		dirfile `c(sysdir_personal)', p(brewcolors)
 
 		// Make sure source is valid
 		if `"`source'"' == "xkcd" {
