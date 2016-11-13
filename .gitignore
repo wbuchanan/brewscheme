@@ -4,4 +4,4 @@ bystd.pkg
 *.log
 *.smcl
 ./examples
-
+brewschemeExtras/*
