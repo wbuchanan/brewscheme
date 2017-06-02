@@ -9,7 +9,7 @@
 	url = https://github.com/wbuchanan/StataFileSystem.git
 [submodule "brewschemeExtras"]
 	path = brewschemeExtras
-	url = https://github.com/wbuchanan/brewschemeExtra.git
+	url = https://github.com/wbuchanan/brewschemeExtras.git
 [submodule "_vendor/--force"]
 	path = _vendor/--force
 	url = https://github.com/shdev/jekyll-menu.git
