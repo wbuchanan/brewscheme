@@ -7,9 +7,9 @@
 [submodule "StataFileSystem"]
 	path = StataFileSystem
 	url = https://github.com/wbuchanan/StataFileSystem.git
-
-
-
+[submodule "brewschemeExtras"]
+	path = brewschemeExtras
+	url = https://github.com/wbuchanan/brewschemeExtra.git
 [submodule "_vendor/--force"]
 	path = _vendor/--force
 	url = https://github.com/shdev/jekyll-menu.git
