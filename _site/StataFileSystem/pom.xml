@@ -127,7 +127,7 @@
 		<dependency>
 			<groupId>org.paces-consulting</groupId>
 			<artifactId>stata-java</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.3-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

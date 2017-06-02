@@ -1,0 +1,49 @@
+d 'BREWSCHEME EXTRAS': Example Scheme files generated with the brewscheme toolkit for Stata
+d
+d brewschemeExtras is hosted in GitHub to facilitate user contributions to the repository.  
+d The files currently included in the repository are to demonstrate and share pre-made / 
+d existing scheme files with other users in the hopes it will make it easier for them 
+d to get used to using the programs in the brewscheme package.
+d
+d Please send any/all bug reports, enhancement/feature requests, and other feedback to:
+d https://github.com/wbuchanan/brewschemeExtras/issues/.
+d
+d KW: Data Visualization
+d KW: Graphs
+d KW: Scheme files
+d KW: Color
+d
+d Requires: Stata version 13.1
+d
+d Distribution-Date: 20161113
+d
+d Author: Billy Buchanan
+d         Director, Office of Data, Research, and Accountability
+d         Fayette County Public Schools
+d         Lexington, KY
+d
+d Support: email Billy.Buchanan@fayette.kyschools.us
+d
+f scheme-sdp2016a.scheme
+f scheme-sdp2016a2.scheme
+f scheme-sdp2016a2_achromatopsia.scheme
+f scheme-sdp2016a2_deuteranopia.scheme
+f scheme-sdp2016a2_protanopia.scheme
+f scheme-sdp2016a2_tritanopia.scheme
+f scheme-sdp2016a_achromatopsia.scheme
+f scheme-sdp2016a_deuteranopia.scheme
+f scheme-sdp2016a_protanopia.scheme
+f scheme-sdp2016a_tritanopia.scheme
+f scheme-sdp2016b.scheme
+f scheme-sdp2016b2.scheme
+f scheme-sdp2016b2_achromatopsia.scheme
+f scheme-sdp2016b2_deuteranopia.scheme
+f scheme-sdp2016b2_protanopia.scheme
+f scheme-sdp2016b2_tritanopia.scheme
+f scheme-sdp2016b_achromatopsia.scheme
+f scheme-sdp2016b_deuteranopia.scheme
+f scheme-sdp2016b_protanopia.scheme
+f scheme-sdp2016b_tritanopia.scheme
+
+
+

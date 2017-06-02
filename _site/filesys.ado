@@ -10,13 +10,13 @@
 *   Optionally prints properties to the Stata console.                         *
 *                                                                              *
 * Lines -                                                                      *
-* 	198	                                                                       *
+* 	190	                                                                       *
 *                                                                              *
 ********************************************************************************
 
 *! filesys
-*! 20jan2016
-*! v 0.0.3
+*! 05apr2016
+*! v 1.0.1
 
 // Drop the program if it exists in memory
 cap prog drop filesys
@@ -50,29 +50,21 @@ prog def filesys, rclass
 	if !inlist(`"`xecutable'"', "on", "off", "") loc x ""
 	else loc x "`xecutable'"
 	
-    // Check for a tilde in the first character on OSX
-    if substr(`"`file'"', 1, 1) == "~" & `"`c(os)'"' == "MacOSX" {
+    // Check for a tilde in the first character 
+    if substr(`"`file'"', 1, 1) == "~" {
 
         // Replace the tilde with the standard expansion
         loc file `"`: subinstr loc file `"~"' `"`: environment HOME'"', all'"'
 
     } // End IF Block for tilde expansion on OSX
 
-    // Check for the tilde character on Unix-based systems
-    else if substr(`"`file'"', 1, 1) == "~" {
+    // Check for the current directory abbreviation
+    else if substr(`"`file'"', 1, 1) == "." {
 
         // Replace the tilde with the standard expansion
-        loc file `"`: subinstr loc file `"~"' `"`: environment HOME'"', all'"'
+        loc file `"`: subinstr loc file `"."' `"`c(pwd)'"''"'
 
     } // End IF Block for tilde expansion on Unix-based systems
-
-    // For the Windoze case
-    else {
-
-        // Replace the tilde with a standard Windoze expansion
-        loc file `"`: subinstr loc file `"~"' `"`: environment HOME'"', all'"'
-
-    } // End IF Block for tilde expansion on OSX
 
     // IF Block for file creation properties
     if `"`attributes'"' != "" {

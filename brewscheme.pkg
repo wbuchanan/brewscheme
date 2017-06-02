@@ -24,15 +24,15 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20160911
+d Distribution-Date: 20170602
 d
 d Author: Billy Buchanan 
-d		  Data Scientist
-d		  Office of Research, Evaluation, and Assessment
-d		  Minneapolis Public Schools
+d         Director
+d         Office of Data, Research, and Accountability
+d         Fayette County Public Schools
 d Notes:  Originally developed as Strategic Data Fellow at the 
 d		  Mississippi Department of Education
-d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
+d Support: email Billy [dot] Buchanan @t fayette [dot] kyschools [dot] us
 d
 f brewcbsim.ado
 f brewcbsim.sthlp
