@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewcbsim
-*! v 1.0.1
-*! 03APR2016
+*! v 1.0.2
+*! 10MAY2017
 
 // Drops program if loaded in memory
 cap prog drop brewcbsim
@@ -65,23 +65,23 @@ prog def brewcbsim, rclass
 			
 			// Define baseline points
 			loc cbbase (scatteri 10 `i' (12) "`rgb'", mlc(black) ms(S)		 ///   
-			mc("`rgb'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`rgb'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 
 			// Define point for Achromatopsia
 			loc achrom (scatteri 8 `i' (12) "`achromatopsia'", mlc(black) 	 ///   
-			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						
 			// Define point for protanopia			
 			loc protan (scatteri 6 `i' (12) "`protanopia'", mlc(black) ms(S) ///   
-			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						
 			// Define point for deuteranopia			
 			loc deuteran (scatteri 4 `i' (12) "`deuteranopia'", mlc(black) 	 ///   
-			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						  
 			// Define point for tritanopia			  
 			loc tritan (scatteri 2 `i' (12) "`tritanopia'", mlc(black) ms(S) ///    
-			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 			
 			// Add the RGB value to a macro to store all the RGB values
 			loc thebaseline "`rgb'"
@@ -109,23 +109,23 @@ prog def brewcbsim, rclass
 		
 			// Define baseline points
 			loc cbbase (scatteri 10 `i' (12) "`baseline'", mlc(black) ms(S)	 ///   
-			mc("`baseline'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`baseline'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 
 			// Define point for Achromatopsia
 			loc achrom (scatteri 8 `i' (12) "`achromatopsia'", mlc(black) 	 ///   
-			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			ms(S) mc("`achromatopsia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						
 			// Define point for protanopia			
 			loc protan (scatteri 6 `i' (12) "`protanopia'", mlc(black) ms(S) ///   
-			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`protanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						
 			// Define point for deuteranopia			
 			loc deuteran (scatteri 4 `i' (12) "`deuteranopia'", mlc(black) 	 ///   
-			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			ms(S) mc("`deuteranopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 						  
 			// Define point for tritanopia			  
 			loc tritan (scatteri 2 `i' (12) "`tritanopia'", mlc(black) ms(S) ///    
-			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(small))
+			mc("`tritanopia'") mlabc(black) msize(5) mlabgap(3) mlabs(vsmall))
 			
 			// Gets the baseline color passed to the program
 			loc thebaseline "`baseline'"
@@ -171,8 +171,8 @@ prog def brewcbsim, rclass
 	size(large) c(black) margin(l = 10 r = 10 b = 10 t = 5) span)			 ///   
 	graphr(ic(white) fc(white) lc(white)) yti("Vision Type") 				 ///   
 	plotr(ic(white) fc(white) lc(white)) legend(off)						 ///   
-	xlab(`xlabels', labs(small)) ylab(`ylabs', angle(0) labs(small) nogrid)  ///    
-	xsca(range(0.5(0.1)`= 0.5 + `: word count `colors''')) 					 ///   
+	xlab(`xlabels', labs(vsmall)) ylab(`ylabs', angle(0) labs(small) nogrid) ///    
+	xsca(range(0.5 `= 0.5 + `: word count `colors''')) 						 ///   
 	ysca(range(1.5(1)10.5))	xti("User Specified Colors", margin(t=2))
 
 // End of program definition

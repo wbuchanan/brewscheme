@@ -8,13 +8,13 @@
 * Program Output -                                                             *
 *                                                                              *
 * Lines -                                                                      *
-*     339                                                                      *
+*     333                                                                      *
 *                                                                              *
 ********************************************************************************
 		
 *! brewcolordb
-*! v 1.0.2
-*! 15APR2016
+*! v 1.0.3
+*! 09NOV2016
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -38,28 +38,28 @@ prog def brewcolordb, rclass
 		// Check response
 		if lower(`"`perm'"') == "n" exit 
 		
-	}
+		// Or clear data from memory
+		else clear
+		
+	} // End IF BLOCK for no override option
 		
 	// Clear data from memory
-	clear
+	else clear
 	
-	// Store personal directory
-	loc personal `"`c(sysdir_personal)'"'
+	// Store the name of the personal subdirectory
+	loc personal `c(sysdir_personal)'
 	
 	// Check to see if the personal ADOPATH directory exists
-	cap confirm file `"`personal'"'
-	
-	// If it does not exist create the directory
-	if _rc != 0 mkdir `"`personal'"'
+	qui: dirfile `: subinstr loc personal "personal/" "", all', p(personal)
 	
 	// Set the rebuild parameter conditional on the replace argument
 	if `"`replace'"' != "" loc rebuild rebuild
 	
 	// Remove tilde and replace with HOME environmental variable for color db subdirectory
-	qui: dirfile, p(`"`: subinstr loc personal `"~"' `"`:environment HOME'"', all'brewcolors"') `rebuild'
+	qui: dirfile `c(sysdir_personal)', p(brewcolors) `rebuild'
 	
 	// Remove tilde and replace with HOME environmental variable for color db subdirectory
-	qui: dirfile, p(`"`: subinstr loc personal `"~"' `"`:environment HOME'"', all'style"') `rebuild'
+	qui: dirfile `c(sysdir_personal)', p(style) `rebuild'
 
 	// Check for file
 	cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'

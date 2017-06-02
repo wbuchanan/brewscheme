@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewextra
-*! v 1.0.1
-*! 03APR2016
+*! v 1.0.2
+*! 09NOV2016
 
 // Drop the program from memory if loaded
 cap prog drop brewextra
@@ -41,7 +41,7 @@ prog def brewextra, rclass
 	preserve
 	
 		// Check for/build directory
-		dirfile, p(`"`c(sysdir_personal)'brewuser"')
+		dirfile `c(sysdir_personal)', p(brewuser)
 		
 		// Check for replace option
 		cap confirm new file `"`c(sysdir_personal)'brewuser/extras.dta"'
