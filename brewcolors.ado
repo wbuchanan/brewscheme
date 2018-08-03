@@ -22,8 +22,8 @@
 ********************************************************************************
 		
 *! brewcolors
-*! v 1.0.3
-*! 09NOV2016
+*! v 1.0.4
+*! 03AUG2018
 
 // Drop the program from memory if loaded
 cap prog drop brewcolors
@@ -204,7 +204,7 @@ prog def xkcd, rclass
 	syntax [, make install colors(string asis) replace cmd(passthru) override ]
 	
 	// For the xkcd colors
-	import delimited using "http://xkcd.com/color/rgb.txt", delim("#") clear
+	import delimited using "https://xkcd.com/color/rgb.txt", delim("#") clear
 
 	// Get the licensing attribution
 	loc license "`: di v2[1]'" 
