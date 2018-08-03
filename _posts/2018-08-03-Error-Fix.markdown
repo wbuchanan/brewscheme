@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "Error Fix"
+date:   2018-08-03 05:55:00
+categories: news
+---
+
+# Updates
+A user on twitter (@graykimbrough) recently made me aware of an issue with the `brewcolors` command.  While the `mk` option issue is not resolved in this specific patch, the more important issue (e.g., xkcd no longer automatically redirecting traffic to https) should be resolved by this issue.  One important thing to note is that [Stata](http://www.stata.com) uses Java to make requests over HTTPS. This means that when the `brewcolors` command attempts to contact the xkcd page it will spin up an instance of the JVM and likely lock the classpath.  
+
+Since this is likely to potentially cause some errors for some users, if anyone does run into a problem the first step that I would suggest is to close and then restart your Stata instance.  If the problem persists, then by all means submit an issue to [brewscheme](https://github.com/wbuchanan/brewscheme).  If the problem doesn't persist it would likely be safe to assume that it was an issue related to the locking of the classpath by the JVM that prevented some other Java binary from getting loaded.
+
+```Stata
+net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
+```
+

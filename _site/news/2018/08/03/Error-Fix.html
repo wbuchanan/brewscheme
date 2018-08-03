@@ -2,16 +2,15 @@
 <html>
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Significant bug fixed prior to V 1.0.0 Release</title>
+    <title>Error Fix</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2016/01/14/countour-plots-fixed.html">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2018/08/03/Error-Fix.html">
 </head>
 
   <body>
@@ -70,56 +69,18 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Significant bug fixed prior to V 1.0.0 Release</h1>
-    <p class="post-meta">Jan 14, 2016</p>
+    <h1 class="post-title">Error Fix</h1>
+    <p class="post-meta">Aug 3, 2018</p>
   </header>
 
   <article class="post-content">
-    <p>In the most recent push to the repository I was finally able to fix an issue that had gone unresolved for quite some time.  Although contour plots may not be used with much regularity, users of brewscheme may have noticed that contour plots created with schemes generated using <code class="highlighter-rouge">brewscheme</code> returned blank plot regions (e.g., everything but the data would be displayed).  With the most recent patch, this functionality has been corrected.  Additionally, the handling of the palettes passed to the <code class="highlighter-rouge">constart()</code> and <code class="highlighter-rouge">conend()</code> options has been improved.  Previously, the program would select the first two values from the version of the palette containing the maximum number of colors (e.g., it would select the first two values from the palette of ggplot2 that contained 24 values).  Because Stata uses a color interpolator for the values of the contourplots, this could lead to cases where the starting and ending colors were too proximal in the color space to be easily perceived (e.g., trying to differentiate between slightly different shades of blue).  Now, <code class="highlighter-rouge">brewscheme</code> uses the opposite behavior (e.g., selects the version of the palette with the fewest number of colors) as a way to potentially safe guard against this proximity issue.  The example below shows the new functionality using a theme created to emulate the aesthetics of the ggplot2 package in R.</p>
+    <h1 id="updates">Updates</h1>
+<p>A user on twitter (<a href="https://github.com/graykimbrough" class="user-mention">@graykimbrough</a>) recently made me aware of an issue with the <code class="highlighter-rouge">brewcolors</code> command.  While the <code class="highlighter-rouge">mk</code> option issue is not resolved in this specific patch, the more important issue (e.g., xkcd no longer automatically redirecting traffic to https) should be resolved by this issue.  One important thing to note is that <a href="http://www.stata.com">Stata</a> uses Java to make requests over HTTPS. This means that when the <code class="highlighter-rouge">brewcolors</code> command attempts to contact the xkcd page it will spin up an instance of the JVM and likely lock the classpath.</p>
 
-<h2 id="example-1-contour-plot-example-with-brewscheme">Example 1. <em>Contour plot example with <code class="highlighter-rouge">brewscheme</code>.</em>
-</h2>
+<p>Since this is likely to potentially cause some errors for some users, if anyone does run into a problem the first step that I would suggest is to close and then restart your Stata instance.  If the problem persists, then by all means submit an issue to <a href="https://github.com/wbuchanan/brewscheme">brewscheme</a>.  If the problem doesn’t persist it would likely be safe to assume that it was an issue related to the locking of the classpath by the JVM that prevented some other Java binary from getting loaded.</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>// Change the end of line delimiter 
-#d ;
-
-// Generate the theme file used to simulate ggplot2 aesthetics
-brewtheme ggtheme, numticks("major 5" "horizontal_major 5" "vertical_major 5"     
-"horizontal_minor 10" "vertical_minor 10") color("plotregion gs15" 			    
-"matrix_plotregion gs15" "background gs15" "textbox gs15" "legend gs15" 	    
-"box gs15" "mat_label_box gs15" "text_option_fill gs15" "clegend gs15" 		    
-"histback gs15" "pboxlabelfill gs15" "plabelfill gs15" "pmarkbkfill gs15"	     
-"pmarkback gs15") linew("major_grid medthick" "minor_grid thin" "legend medium"    
-"clegend medium") clockdir("legend_position 3") yesno("draw_major_grid yes"     
-"draw_minor_grid yes" "legend_force_draw yes" "legend_force_nodraw no" 		    
-"draw_minor_vgrid yes" "draw_minor_hgrid yes" "extend_grid_low yes" 		    
-"extend_grid_high yes" "extend_axes_low no" "extend_axes_high no") 			    
-gridsty("minor minor") axissty("horizontal_default horizontal_withgrid" 	    
-"vertical_default vertical_withgrid") linepattern("major_grid solid" 		    
-"minor_grid solid") linesty("major_grid major_grid" "minor_grid minor_grid")     
-ticksty("minor minor_notick" "minor_notick minor_notick") 					    
-ticksetsty("minor_vert_default minor_vert_wgridnolab") gsize("minortick_label minuscule" 		    
-"minortick tiny") numsty("legend_cols 1" "legend_rows 0" "zyx2rows 0" "zyx2cols 1") 					    
-verticaltext("legend top");
-
-// Change end of line delimiter back to carriage return
-#d cr
-
-// Now five colors from same palette using the ggplot2 inspired theme
-brewscheme, scheme(ggplot2ex1) allsty(ggplot2) allc(3)  ///   
-themef(ggtheme)
-
-// Load example data
-sysuse sandstone.dta, clear
-
-// Create contour plot with brewscheme generated scheme file
-tw contour depth northing easting, scheme(ggplot2ex1)
-
+<pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
 </code></pre>
-</div>
-
-<p><img src="../../../../img/contourExample1.png" alt="contour plot example"></p>
 
 
   </article>
@@ -139,7 +100,7 @@ tw contour depth northing easting, scheme(ggplot2ex1)
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li>brewscheme</li>
-          <li><a href="mailto:William.Buchanan@mpls.k12.mn.us">William.Buchanan@mpls.k12.mn.us</a></li>
+          <li><a href="mailto:william@williambuchanan.net">william@williambuchanan.net</a></li>
         </ul>
       </div>
 

@@ -1,11 +1,12 @@
 # Site settings
 title: brewscheme
-email: William.Buchanan@mpls.k12.mn.us
+email: william@williambuchanan.net
 description: Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.
 baseurl: "/brewscheme" # the subpath of your site, e.g. /blog/
 url: "https://wbuchanan.github.io" # the base hostname & protocol for your site
 twitter_username: PACESconsulting
 github_username:  wbuchanan
+encoding: utf-8
 
 # Build settings
 markdown: kramdown
@@ -13,7 +14,7 @@ kramdown:
   input: GFM
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
-gems:
+plugins:
 - jekyll-mentions
 - jemoji
 - jekyll-redirect-from

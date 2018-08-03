@@ -15,8 +15,8 @@
 ********************************************************************************
 		
 *! brewcontrastratio
-*! v 0.0.1
-*! 06APR2016
+*! v 0.0.2
+*! 13APR2017
 
 // Drop the program from memory if loaded
 cap prog drop brewcontrastratio
@@ -74,8 +74,9 @@ prog def brewcontrastratio, rclass
 		"{p2colset 8 50 50 8}{p2col:Normal Text Level AA}`normaa'{p_end}"	 ///   
 		"{p2colset 8 50 50 8}{p2col:Normal Text Level AAA}`normaaa'{p_end}"	 ///   
 		"{p2colset 8 50 50 8}{p2col:Large Text Level AA}`bigaa'{p_end}"		 ///   
-		"{p2colset 8 50 50 8}{p2col:Large Text Level AAA}`bigaaa'{p_end}"	 ///   
-		"{hline 80}{break}{p 7 8 8}{hi:Contrast Ratio `ratiolab'}{p_end}"
+		"{p2colset 8 50 50 8}{p2col:Large Text Level AAA}`bigaaa'{p_end}{hline 80}"	 ///   
+		"{p2colset 8 50 50 8}{p2col: Color 1 - `col1'}Color 2 - `col2'{p_end}" ///   
+		"{break}{p 7 8 8}{hi:Contrast Ratio `ratiolab'}{p_end}"	 ///   
 
 	} // End IF Block for display
 

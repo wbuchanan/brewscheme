@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Important Update</title>
+    <title>Stata Recycler</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2017/06/02/Important-Updates.html">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/recycle/">
 </head>
 
   <body>
@@ -69,16 +69,13 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Important Update</h1>
-    <p class="post-meta">Jun 2, 2017</p>
+    <h1 class="post-title">Stata Recycler</h1>
   </header>
 
   <article class="post-content">
-    <h1 id="updates">Updates</h1>
-<p>A <a href="http://www.statalist.org">StataList</a> user recently alerted me to a problem with a <a href="https://wbuchanan.github.io/StataJSON">different program</a> that ended up being related to <a href="https://wbuchanan.github.io/brewscheme">brewscheme</a>.  I will be working to package up an update to submit to the SSC archives, but recommend all users to update/upgrade their copy of brewscheme to avoid any potential issues if you use other programs that rely on the Java API that I’ve developed.</p>
+    <h1 id="stata-recycler">Stata Recycler</h1>
 
-<pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
-</code></pre>
+<p>Working on mata library to provide functionality similar to recycling in R.  Currently works only with two scalar values to create sequences of equal lengths given the number of values to generate in each vector.  Used to recycle color values in brewscheme.</p>
 
 
   </article>

@@ -26,8 +26,8 @@
 * Lindbloom, B. ().  RGB working space information. Retrieved from: 		   *
 * http://www.brucelindbloom.com.  Retrieved on 24nov2015.					   *
 *																			   *
-* Version: 1.1.0															   *
-* Distribution Date: 09NOV2016												   *
+* Version: 1.1.1															   *
+* Distribution Date: 03JUN2017												   *
 *																			   *
 *******************************************************************************/
 
@@ -981,20 +981,57 @@ void translateColor(real scalar red, real scalar green, real scalar blue) {
 	// Declare a colorblind type member variable
 	class colorblind scalar x
 	
-	// Initialize the object
-	x = colorblind()
+	// Stores vector with names of color sight impairments
+	string rowvector cbtypes 
 	
-	// Set the RGB values
-	x.setRGB(red, green, blue)
+	// Used to store RGB strings for these two constants
+	string scalar black, white
 	
-	// Simulate for all types of color blindness
-	x.simulate()
+	// Used for loops and to sum the RGB values
+	real scalar i, j
 	
-	// Return the results to the end user
-	x.getRgbStrings()
+	// Sum of the RGB values to translate
+	j = red + green + blue
 	
-	// Destroy the variable
-	x = J(0, 0, .)
+	// RGB constant for the color black
+	black = "0 0 0"
+	
+	// RGB constant for the color white
+	white = "255 255 255"
+	
+	// Types of color sight impairment
+	cbtypes = ("baseline", "achromatopsia", "protanopia", "deuteranopia", "tritanopia")
+	
+	// If RGB values passed to function are black or white
+	if (j == 0 | j == 765) {
+	
+		// If black, loop over indices for cbtypes and set RGB string value
+		if (j == 0) for (i = 1; i <= 5; i++) st_local(cbtypes[1, i], black)
+
+		// If white, loop over indices for cbtypes and set RGB string value
+		else for (i = 1; i <= 5; i++) st_local(cbtypes[1, i], white)
+		
+	} // End of IF Block to handle black and white constants
+	
+	// If RGB value is not pure black or white
+	else {
+	
+		// Initialize the object
+		x = colorblind()
+		
+		// Set the RGB values
+		x.setRGB(red, green, blue)
+		
+		// Simulate for all types of color blindness
+		x.simulate()
+		
+		// Return the results to the end user
+		x.getRgbStrings()
+		
+		// Destroy the variable
+		x = J(0, 0, .)
+		
+	} // End of ELSE Block for colors other than pure black/white
 	
 } // End of Mata wrapper for simple color transforms
 
