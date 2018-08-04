@@ -1,0 +1,25 @@
+DIALOG refmopts, tabtitle("Reference Markers Styling")
+BEGIN
+	TEXT	_sty		_lft	_top 	_lw195		_ht0, 					 ///   
+			label("Style to apply to all other graphs: ")
+			
+	EDIT	style		_vs21	@		_ht17			_ht0, 				 ///   
+			tooltip("This should refer to a color palette") option(somestyle)
+	
+	TEXT	_col		_lft	_vs0		_lw195 		_ht0, 				 ///   
+			label("Number of colors to use for all other graphs: ")
+			
+	EDIT	color		_vs21	@		_ht17 		_ht0, 					 ///   
+			numonly option(somecolors)										 ///   
+			tooltip("The total number of colors to use from the palette")
+	
+	TEXT	_lab 		_lft 	_vs0 	_lw195 		_ht0, 					 ///   
+			label("Color saturation for all other graphs: ")
+			
+	COMBOBOX sat	 	_vs21 	@ 		_ht17 		_ht0, 					 ///   
+			val(intensity) default("100") dropdown contents(list intensity)  ///    
+			tooltip("How intense do you want the colors to appear?")		 ///   
+			option(somesaturation)
+			
+END
+

@@ -1,0 +1,19 @@
+DIALOG sepopts, tabtitle("Styling for Individual Graph Types")
+BEGIN
+INCLUDE _brew_bar
+INCLUDE _brew_scat
+INCLUDE _brew_area
+INCLUDE _brew_line
+INCLUDE _brew_box
+INCLUDE _brew_dot
+INCLUDE _brew_pie
+INCLUDE _brew_sun
+INCLUDE _brew_hist
+INCLUDE _brew_ci
+INCLUDE _brew_mat
+INCLUDE _brew_refl
+INCLUDE _brew_refm
+INCLUDE _brew_con
+			
+END
+
