@@ -5,9 +5,9 @@
     <description>Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.</description>
     <link>https://wbuchanan.github.io/brewscheme/</link>
     <atom:link href="https://wbuchanan.github.io/brewscheme/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 03 Aug 2018 05:56:59 -0400</pubDate>
-    <lastBuildDate>Fri, 03 Aug 2018 05:56:59 -0400</lastBuildDate>
-    <generator>Jekyll v3.7.3</generator>
+    <pubDate>Thu, 05 Sep 2019 13:35:20 -0400</pubDate>
+    <lastBuildDate>Thu, 05 Sep 2019 13:35:20 -0400</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>Error Fix</title>

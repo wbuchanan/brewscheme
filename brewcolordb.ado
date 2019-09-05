@@ -13,8 +13,8 @@
 ********************************************************************************
 		
 *! brewcolordb
-*! v 1.0.3
-*! 09NOV2016
+*! v 1.0.4
+*! 05SEP2019
 
 // Drop the program from memory if loaded
 cap prog drop brewcolordb
@@ -50,16 +50,16 @@ prog def brewcolordb, rclass
 	loc personal `c(sysdir_personal)'
 	
 	// Check to see if the personal ADOPATH directory exists
-	qui: dirfile `: subinstr loc personal "personal/" "", all', p(personal)
+	dirfile `: subinstr loc personal "personal/" "", all', p(personal)
 	
 	// Set the rebuild parameter conditional on the replace argument
 	if `"`replace'"' != "" loc rebuild rebuild
 	
 	// Remove tilde and replace with HOME environmental variable for color db subdirectory
-	qui: dirfile `c(sysdir_personal)', p(brewcolors) `rebuild'
+	dirfile `c(sysdir_personal)', p(brewcolors) `rebuild'
 	
 	// Remove tilde and replace with HOME environmental variable for color db subdirectory
-	qui: dirfile `c(sysdir_personal)', p(style) `rebuild'
+	dirfile `c(sysdir_personal)', p(style) `rebuild'
 
 	// Check for file
 	cap confirm new file `"`c(sysdir_personal)'brewcolors/colordb.dta"'
