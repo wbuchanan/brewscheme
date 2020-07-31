@@ -21,8 +21,8 @@
 ********************************************************************************
 		
 *! brewdb
-*! v 1.0.5
-*! 09NOV2016
+*! v 1.0.6
+*! 31JUL2020
 
 // Drop the program from memory if loaded
 cap prog drop brewdb
@@ -56,7 +56,7 @@ prog def brewdb
 			loc time `"`c(current_time)'"'
 						
 			// Read the javascript into memory
-			qui: copy "http://colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
+			qui: copy "https://colorbrewer2.org/colorbrewer_schemes.js" 	 ///   
 			`brewjs'.js
 			
 			// Read the data into memory
