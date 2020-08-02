@@ -86,13 +86,13 @@
 </ol>
 
 <h2 id="requirements">Requirements</h2>
-<p>Plugin is compiled under Java 8.  Should not be a problem for most installations of Stata, but if you have an older JVM you can alter the JVM used by setting the appropriate properties.  To see the java property names use <code class="highlighter-rouge">query java</code>.</p>
+<p>Plugin is compiled under Java 8.  Should not be a problem for most installations of Stata, but if you have an older JVM you can alter the JVM used by setting the appropriate properties.  To see the java property names use <code class="language-plaintext highlighter-rouge">query java</code>.</p>
 
 <h1 id="examples">Examples</h1>
 
 <h2 id="get-file-attributes-for-the-autodta-data-set-and-print-them-to-the-stata-console">Get file attributes for the auto.dta data set and print them to the Stata console</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, attr dis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, attr dis
 
 ----------------------------------------------------------------------------------------------------
     Attribute                File Attribute Value
@@ -116,7 +116,7 @@
 
 <h3 id="you-can-display-the-returned-results-afterwards-as-well">You can display the returned results afterwards as well</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ret li
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ret li
 
 macros:
          r(iswritable) : "true"
@@ -140,7 +140,7 @@ macros:
 
 <h2 id="make-the-autodta-file-executable-and-print-the-attributes-to-the-console">Make the auto.dta file executable and print the attributes to the console</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, x(on) glo dis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, x(on) glo dis
 
 ----------------------------------------------------------------------------------------------------
     Attribute                File Attribute Value
@@ -184,7 +184,7 @@ macros:
 
 <h2 id="remove-the-executable-property-from-the-autodta-file">Remove the executable property from the auto.dta file.</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, x(off) glo dis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. filesys `c(sysdir_base)'a/auto.dta, x(off) glo dis
 
 ----------------------------------------------------------------------------------------------------
     Attribute                File Attribute Value

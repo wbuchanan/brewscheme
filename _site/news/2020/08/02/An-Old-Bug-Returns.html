@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Version 1.0.0 Available</title>
+    <title>An Old Bug Returns</title>
     <meta name="description" content="Making it easier for you to generate the data visualizations you want from Stata less verbose, easier to reproduce, and more flexible for inclusion in production environments.">
 
     <link rel="stylesheet" href="/brewscheme/css/main.css">
-    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2016/03/21/Version-1-Available.html">
+    <link rel="canonical" href="https://wbuchanan.github.io/brewscheme/news/2020/08/02/An-Old-Bug-Returns.html">
 </head>
 
   <body>
@@ -69,17 +69,13 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Version 1.0.0 Available</h1>
-    <p class="post-meta">Mar 21, 2016</p>
+    <h1 class="post-title">An Old Bug Returns</h1>
+    <p class="post-meta">Aug 2, 2020</p>
   </header>
 
   <article class="post-content">
-    <p>It’s been a long time coming, but the version 1.0.0 release of <code class="language-plaintext highlighter-rouge">brewscheme</code> is now available.  The package should be available from the SSC archives in the not too distant future as well, but for now you can install the stable release using:</p>
-
-<pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
-</code></pre>
-
-<p>In addition to taking care of known bugs, the stable release also includes much more comprehensive documentation (particularly for <code class="language-plaintext highlighter-rouge">brewtheme</code>).  I’ll also be submitting an article to the StataJournal in the next few days.  As always, if you run into any bugs/issues please <a href="https://github.com/wbuchanan/brewscheme/issues">submit an issue</a>.  Additionally, if you find the program useful, feel free to share the code you use to generate scheme files and they can be included in the project Wiki to give others access to a starting point for customizing scheme files for themselves a bit easier.</p>
+    <h1 id="updates">Updates</h1>
+<p>Thanks to Github user aarondwolf and Fernando Rios-Avila an issue that I thought was previously resolved resurfaced and was brought back to my attention.  The issue at hand is the URL for ColorBrewer.  I thought I had previously adjusted the URL to use HTTPS, but they both pointed out the error to me and it should now be fixed.</p>
 
 
   </article>

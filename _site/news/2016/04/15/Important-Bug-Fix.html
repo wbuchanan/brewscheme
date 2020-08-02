@@ -78,22 +78,22 @@
 
 <ol>
   <li>
-    <p>These fixes force <code class="highlighter-rouge">brewcolordb</code> to create the PERSONAL directory on the ADOPATH if it does not exist before trying to build out the color dataset (see <a href="https://github.com/wbuchanan/brewscheme/issues/45">issue #45</a> and <a href="https://github.com/wbuchanan/brewscheme/issues/46">issue #46</a> for additional information).</p>
+    <p>These fixes force <code class="language-plaintext highlighter-rouge">brewcolordb</code> to create the PERSONAL directory on the ADOPATH if it does not exist before trying to build out the color dataset (see <a href="https://github.com/wbuchanan/brewscheme/issues/45">issue #45</a> and <a href="https://github.com/wbuchanan/brewscheme/issues/46">issue #46</a> for additional information).</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">brewcolors</code> command was not correctly parsing/naming user defined colors that did not include a name (see <a href="https://github.com/wbuchanan/brewscheme/issues/44">issue #44</a>)</p>
+    <p>The <code class="language-plaintext highlighter-rouge">brewcolors</code> command was not correctly parsing/naming user defined colors that did not include a name (see <a href="https://github.com/wbuchanan/brewscheme/issues/44">issue #44</a>)</p>
   </li>
   <li>
-    <p>Network installations to other directories on the ADOPATH caused <code class="highlighter-rouge">brewlibcheck</code> to fail to find the libbrewscheme Mata library (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
+    <p>Network installations to other directories on the ADOPATH caused <code class="language-plaintext highlighter-rouge">brewlibcheck</code> to fail to find the libbrewscheme Mata library (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
   </li>
   <li>
-    <p>If the system was set up with the <code class="highlighter-rouge">set varabbrev off</code> preference the <code class="highlighter-rouge">brewscheme</code> command would fail when calling <code class="highlighter-rouge">brewtheme</code> due to the newlines variable being referenced as ‘newline’ one one of the lines of code in the .do file (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
+    <p>If the system was set up with the <code class="language-plaintext highlighter-rouge">set varabbrev off</code> preference the <code class="language-plaintext highlighter-rouge">brewscheme</code> command would fail when calling <code class="language-plaintext highlighter-rouge">brewtheme</code> due to the newlines variable being referenced as ‘newline’ one one of the lines of code in the .do file (see <a href="https://github.com/wbuchanan/brewscheme/issues/4">issue #43</a>)</p>
   </li>
 </ol>
 
-<p>A more important bug that affects how <code class="highlighter-rouge">brewscheme</code> generates the scheme files was also identified and any/all users should plan to update their installations ASAP.</p>
+<p>A more important bug that affects how <code class="language-plaintext highlighter-rouge">brewscheme</code> generates the scheme files was also identified and any/all users should plan to update their installations ASAP.</p>
 
-<p>While the bug was identified in relation to the <a href="https://www.d3js.org">D3js</a> category10 palette, the issue is likely to have impacted other palettes as well (see <a href="https://github.com/wbuchanan/brewscheme/issues/42">issue #42</a>).  In short, <code class="highlighter-rouge">brewscheme</code> relied on the <code class="highlighter-rouge">levelsof</code> command internally to access the RGB values for a given palette, which automatically sorted the returned values.  This caused palettes like category10 to display the colors incorrectly.  The reliance on <code class="highlighter-rouge">levelsof</code> has been removed and a new method has been added to the <code class="highlighter-rouge">brewcolors</code> class to handle accessing the palettes in the correct order.</p>
+<p>While the bug was identified in relation to the <a href="https://www.d3js.org">D3js</a> category10 palette, the issue is likely to have impacted other palettes as well (see <a href="https://github.com/wbuchanan/brewscheme/issues/42">issue #42</a>).  In short, <code class="language-plaintext highlighter-rouge">brewscheme</code> relied on the <code class="language-plaintext highlighter-rouge">levelsof</code> command internally to access the RGB values for a given palette, which automatically sorted the returned values.  This caused palettes like category10 to display the colors incorrectly.  The reliance on <code class="language-plaintext highlighter-rouge">levelsof</code> has been removed and a new method has been added to the <code class="language-plaintext highlighter-rouge">brewcolors</code> class to handle accessing the palettes in the correct order.</p>
 
 <pre><code class="language-Stata">net inst brewscheme, from("https://wbuchanan.github.io/brewscheme/") replace
 </code></pre>
