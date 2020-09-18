@@ -24,15 +24,15 @@ d KW: Color
 d
 d Requires: Stata version 13.1
 d
-d Distribution-Date: 20190905
+d Distribution-Date: 20200918
 d
 d Author: Billy Buchanan 
-d         Director
-d         Office of Grants, Research, Accountability, & Data
-d         Fayette County Public Schools
+d		  Director
+d		  Office of Grants, Research, Accountability, & Data
+d		  Fayette County Public Schools
 d Notes:  Originally developed as Strategic Data Fellow at the 
 d		  Mississippi Department of Education
-d Support: email Billy [dot] Buchanan @t fayette [dot] kyschools [dot] us
+d Support: email william @t williambuchanan [dot] net
 d
 f brewcbsim.ado
 f brewcbsim.sthlp
